@@ -8,6 +8,7 @@ using std::shared_ptr;
 
 
 shared_ptr<std::istream> MPIUtils::broadcastStream(
+<<<<<<< HEAD
 	shared_ptr<std::istream> stream, int master) {
 	// Local declarations
 	int rank;
@@ -15,6 +16,15 @@ shared_ptr<std::istream> MPIUtils::broadcastStream(
 	auto bufferSS = std::make_shared<std::stringstream>();
 	int bufferSize = 0;
 	char *buffer = NULL;
+=======
+	shared_ptr<std::istream> stream, int master, MPI_Comm comm) {
+	
+	int rank;
+	int tasks;
+	auto bufferSS = std::make_shared<std::stringstream>();
+	int bufferSize;
+	char *buffer;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	// Get the rank and number of tasks
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -45,7 +55,11 @@ shared_ptr<std::istream> MPIUtils::broadcastStream(
 	// Broadcast the buffer
 	MPI_Bcast(buffer, bufferSize, MPI_CHAR, master, MPI_COMM_WORLD);
 	
+<<<<<<< HEAD
 	// Create the string from the buffer on the nodes
+=======
+	// Creat the string from the buffer on the nodes
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 	if (rank != master) {
 		std::string bufferString(buffer, bufferSize);
 		bufferSS->str(bufferString);
@@ -55,7 +69,11 @@ shared_ptr<std::istream> MPIUtils::broadcastStream(
 	bufferSS->seekg(0);
 
 	// Clean up the buffer memory and return it
+<<<<<<< HEAD
 	delete[] buffer;
+=======
+	delete buffer;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 	
 	return bufferSS;
 }

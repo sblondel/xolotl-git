@@ -81,7 +81,11 @@ BOOST_AUTO_TEST_CASE(checkDataProvider) {
 	auto dataPoints = myScatterPlot->getDataProvider()->getDataPoints();
 
 	// Loop on all the points in dataPoints
+<<<<<<< HEAD
 	for (unsigned int i = 0; i < dataPoints->size(); i++) {
+=======
+	for (int i = 0; i < dataPoints->size(); i++) {
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 		// Check that all the fields are the same
 		BOOST_REQUIRE_EQUAL(dataPoints->at(i).value, myPoints->at(i).value);

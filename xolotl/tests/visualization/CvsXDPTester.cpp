@@ -16,18 +16,29 @@ BOOST_AUTO_TEST_SUITE(CvsXDataProvider_testSuite)
  * Method checking the ability to use a name.
  */
 BOOST_AUTO_TEST_CASE(checkName) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 	// Create myCvsXDataProvider
 	auto myCvsXDataProvider = make_shared<CvsXDataProvider>("myCvsXDataProvider");
 
 	BOOST_REQUIRE_EQUAL("myCvsXDataProvider", myCvsXDataProvider->getName());
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 }
 
 /**
  * Method checking you can get the axis vectors.
  */
 BOOST_AUTO_TEST_CASE(checkGetVector) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 	// Create myCvsXDataProvider
 	auto myCvsXDataProvider = make_shared<CvsXDataProvider>("myCvsXDataProvider");
 
@@ -61,7 +72,11 @@ BOOST_AUTO_TEST_CASE(checkGetVector) {
 	BOOST_REQUIRE_EQUAL(axis2Vector.size(), myPoints->size());
 
 	// Loop on all the points in myPoints
+<<<<<<< HEAD
 	for (unsigned int i = 0; i < myPoints->size() - 2; i++) {
+=======
+	for (int i = 0; i < myPoints->size()-2; i++) {
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 		BOOST_REQUIRE_EQUAL(axis1Vector.at(i), myPoints->at(i).x);
 		BOOST_REQUIRE_EQUAL(axis2Vector.at(i), myPoints->at(i).value);
 	}
@@ -72,8 +87,11 @@ BOOST_AUTO_TEST_CASE(checkGetVector) {
 	BOOST_REQUIRE_EQUAL(axis2Vector.at(4), 1.0e-16);
 	BOOST_REQUIRE_EQUAL(axis1Vector.at(5), myPoints->at(5).x);
 	BOOST_REQUIRE_EQUAL(axis2Vector.at(5), 1.0e-16);
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 }
 
 BOOST_AUTO_TEST_SUITE_END()

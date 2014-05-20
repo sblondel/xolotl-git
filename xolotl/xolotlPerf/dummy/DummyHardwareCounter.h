@@ -4,21 +4,36 @@
 #include <string>
 #include <vector>
 #include <memory>
+<<<<<<< HEAD
 #include "xolotlCore/Identifiable.h"
 #include "xolotlPerf/IHardwareCounter.h"
 
 namespace xolotlPerf {
+=======
+#include "Identifiable.h"
+#include "IHardwareCounter.h"
+#include "HardwareQuantities.h"
+
+
+namespace xolotlPerf{
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 /**
  * The DummyHardwareCounter class is instantiated by the DummyHandlerRegistry class
  * and realizes the DummyHardwareCounter interface.
  */
+<<<<<<< HEAD
 class DummyHardwareCounter: public IHardwareCounter,
 		public xolotlCore::Identifiable {
+=======
+class DummyHardwareCounter : public IHardwareCounter, public xolotlCore::Identifiable
+{
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 private:
 
 	/**
+<<<<<<< HEAD
 	 * An empty collection of values, used by getValues to avoid
 	 * returning a reference to a temporary.
 	 */
@@ -31,13 +46,21 @@ private:
 	static IHardwareCounter::SpecType dummySpec;
 
 	/**
+=======
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 	 * The default constructor is private because HardwareCounters
 	 * must always be given a name and a vector of quantities to
 	 * be monitored.
 	 */
+<<<<<<< HEAD
 	DummyHardwareCounter() :
 			xolotlCore::Identifiable("unused") {
 	}
+=======
+	DummyHardwareCounter()
+		: xolotlCore::Identifiable("unused")
+	{ }
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 public:
 
@@ -48,14 +71,22 @@ public:
 	 * @param counterName The DummyHardwareCounter's name
 	 * @param counterQuantities The vector of quantities the DummyHardwareCounter will monitor
 	 */
+<<<<<<< HEAD
 	DummyHardwareCounter(const std::string& counterName,
 			const IHardwareCounter::SpecType& ctrSpec) :
 			xolotlCore::Identifiable("unused") {
 	}
+=======
+	DummyHardwareCounter(std::string counterName,
+			const std::vector<HardwareQuantities> &counterQuantities)
+		: xolotlCore::Identifiable("unused")
+	{ }
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * The destructor
 	 */
+<<<<<<< HEAD
 	virtual ~DummyHardwareCounter() {
 	}
 
@@ -106,6 +137,24 @@ public:
 		return std::string();
 	}
 };
+=======
+	virtual ~DummyHardwareCounter() { }
+
+    /**
+     * This operation returns a list of values of the, initially specified,
+     * hardware quantities monitored by the DummyHardwareCounter.
+     */
+    std::vector<double> getValues(void) const;
+
+
+	/**
+	 * This operation returns the list of hardware
+	 * quantities monitored by the GPTLHardwareCounter.
+	 */
+	virtual std::vector<std::string> getHardwareQuantities() const;
+
+};  //end class DummyHardwareCounter
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 }  //end namespace xolotlPerf
 

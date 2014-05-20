@@ -2,6 +2,7 @@
 #define REACTION_NETWORK_H
 
 // Includes
+<<<<<<< HEAD
 #include "IReactionNetwork.h"
 #include <Constants.h>
 #include <set>
@@ -21,10 +22,35 @@ namespace xolotlCore {
  *  that describe both.
  */
 class ReactionNetwork: public IReactionNetwork {
+=======
+#include <string>
+#include <vector>
+#include <memory>
+#include <map>
+
+// #include "xolotlPerf/IEventCounter.h"
+
+namespace xolotlPerf {
+	class IHandlerRegistry;
+    class IEventCounter;
+};
+
+namespace xolotlCore {
+
+class Reactant;
+
+/**
+ *  This class manages the set of reactants and compound reactants (
+ *  combinations of normal reactants). It also manages a set of properties
+ *  that describe both.
+ */
+class ReactionNetwork {
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 protected:
 
 	/**
+<<<<<<< HEAD
 	 * A functor useful for identifying a set of reactants by their
 	 * composition from a container, e.g., when removing a collection
 	 * of doomed reactants from a vector of reactants.
@@ -210,6 +236,26 @@ protected:
 
 	/**
 	 * The default constructor. It initializes the properties and reactants vector.
+=======
+	 * The properties of this network. The exact configuration of the map is
+	 * specified by the class that loaded the network.
+	 */
+	std::shared_ptr<std::map<std::string, std::string>> properties;
+
+    /**
+     * The performance handler registry that will be used with
+     * this class.
+     */
+    std::shared_ptr<xolotlPerf::IHandlerRegistry> handlerRegistry;
+
+    /**
+     * Counter for the number of times the network concentration is updated.
+     */
+    std::shared_ptr<xolotlPerf::IEventCounter> concUpdateCounter;
+
+	/**
+	 * The default constructor. It initializes the properties map and reactants vector.
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 	 */
 	ReactionNetwork();
 
@@ -217,6 +263,7 @@ public:
 
 	/**
 	 * The constructor that takes the performance handler registry.
+<<<<<<< HEAD
 	 * It initializes the properties and reactants vector.
 	 *
 	 * @param registry The performance handler registry
@@ -226,11 +273,21 @@ public:
 	/**
 	 * The copy constructor.
 	 *
+=======
+	 * It initializes the properties map and reactants vector.
+	 */
+	ReactionNetwork(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
+
+
+	/**
+	 * The copy constructor
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 	 * @param other The ReactionNetwork to copy
 	 */
 	ReactionNetwork(const ReactionNetwork &other);
 
 	/**
+<<<<<<< HEAD
 	 * The destructor.
 	 */
 	virtual ~ReactionNetwork() {
@@ -273,11 +330,35 @@ public:
 	 */
 	virtual IReactant * getCompound(const std::string& type,
 			const std::vector<int>& sizes) const;
+=======
+	 * The destructor
+	 */
+	virtual ~ReactionNetwork();
+
+	/**
+	 * This operation returns a reactant with the given name and size if it
+	 * exists in the network or null if not.
+	 * @param name the name of the reactant
+	 * @param size the size of the reactant
+	 * @return A shared pointer to the reactant
+	 */
+	virtual std::shared_ptr<Reactant> get(const std::string rName, const int size) const = 0;
+
+	/**
+	 * This operation returns a compound reactant with the given name and size if it
+	 * exists in the network or null if not.
+	 * @param name the name of the compound reactant
+	 * @param sizes an array containing the sizes of each piece of the reactant
+	 * @return A shared pointer to the compound reactant
+	 */
+	virtual std::shared_ptr<Reactant> getCompound(const std::string rName, const std::vector<int> sizes) const = 0;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * This operation returns all reactants in the network without regard for
 	 * their composition or whether they are compound reactants. The list may
 	 * or may not be ordered and the decision is left to implementers.
+<<<<<<< HEAD
 	 *
 	 * @return The list of all of the reactants in the network
 	 */
@@ -293,6 +374,21 @@ public:
 	 * type is invalid
 	 */
 	virtual std::vector<IReactant *> getAll(const std::string& type) const;
+=======
+	 * @return The list of all of the reactants in the network
+	 */
+	virtual std::shared_ptr<std::vector<std::shared_ptr<Reactant> > > getAll() const = 0;
+
+	/**
+	 * This operation returns all reactants in the network with the given name.
+	 * The list may or may not be ordered and the decision is left to
+	 * implementers.
+	 * @param name The reactant or compound reactant name
+	 * @return The list of all of the reactants in the network or null if the
+	 * name is invalid.
+	 */
+	virtual std::shared_ptr<std::vector<std::shared_ptr<Reactant> > > getAll(std::string name) const = 0;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * This operation adds a reactant or a compound reactant to the network.
@@ -300,6 +396,7 @@ public:
 	 * reaction network for the reactant. This step must be performed
 	 * separately to allow for the scenario where the network is generated
 	 * entirely before running.
+<<<<<<< HEAD
 	 *
 	 * @param reactant The reactant that should be added to the network
 	 */
@@ -342,10 +439,23 @@ public:
 	 * in the network
 	 */
 	const std::vector<std::string> & getNames() const;
+=======
+	 * @param reactant The reactant that should be added to the network.
+	 */
+	virtual void add(std::shared_ptr<Reactant> reactant) = 0;
+
+	/**
+	 * This operation returns the names of the reactants in the network.
+	 * @return A vector with one entry for each of the distinct reactant types
+	 * in the network.
+	 */
+	virtual const std::vector<std::string> & getNames() const = 0;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * This operation returns the names of the compound reactants in the
 	 * network.
+<<<<<<< HEAD
 	 *
 	 * @return A vector with one each for each of the distinct compound
 	 * reactant types in the network
@@ -395,19 +505,61 @@ public:
 	 * @param concentrations The array that will be filled with the
 	 * concentrations. This operation does NOT create, destroy or resize the
 	 * array. If the array is too small to hold the concentrations, SIGSEGV will
+=======
+	 * @return A vector with one each for each of the distinct compound
+	 * reactant types in the network.
+	 */
+	virtual const std::vector<std::string> & getCompoundNames() const = 0;
+
+	/**
+	 * This operation returns a map of the properties of this reaction network.
+	 * @return The map of properties that has been configured for this
+	 * ReactionNetwork.
+	 */
+	virtual const std::map<std::string,std::string> & getProperties() = 0;
+
+	/**
+	 * This operation sets a property with the given key to the specified value
+	 * for the network. ReactionNetworks may reserve the right to ignore this
+	 * operation for special key types, most especially those that they manage
+	 * on their own.
+	 * @param key The key for the property
+	 * @param value The value to which the key should be set.
+	 */
+	virtual void setProperty(std::string key, std::string value) = 0;
+
+	/**
+	 * This operation returns the size or number of reactants in the network.
+	 * @return The number of reactants in the network
+	 */
+	virtual int size() = 0;
+
+	/**
+	 * This operation fills an array of doubles with the concentrations of all
+	 * of the Reactants in the network.
+	 * @param concentrations The array that will be filled with the
+	 * concentrations. This operation does NOT create, destroy or resize the
+	 * array. If the array is to small to hold the concentrations, SIGSEGV will
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 	 * be thrown.
 	 */
 	void fillConcentrationsArray(double * concentrations);
 
 	/**
+<<<<<<< HEAD
 	 * This operation updates the concentrations for all reactants in the
 	 * network from an array.
 	 *
+=======
+	 * This operation updates the concentrations for all Reactants in the
+	 * network from an array.
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 	 * @param concentrations The array of doubles that will be for the
 	 * concentrations. This operation does NOT create, destroy or resize the
 	 * array. Properly aligning the array in memory so that this operation
 	 * does not overrun is up to the caller.
 	 */
+<<<<<<< HEAD
 	virtual void updateConcentrationsFromArray(double * concentrations);
 
 	/**
@@ -589,6 +741,9 @@ public:
 	int getMaxIClusterSize() const {
 		return maxIClusterSize;
 	}
+=======
+	void updateConcentrationsFromArray(double * concentrations);
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 };
 

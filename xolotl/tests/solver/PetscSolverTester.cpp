@@ -6,11 +6,15 @@
 #include <memory>
 #include <typeinfo>
 #include <limits>
+<<<<<<< HEAD
 #include <string.h>
+=======
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 #include <PSIClusterNetworkLoader.h>
 #include <PSIClusterReactionNetwork.h>
 #include <PetscSolver.h>
 #include <XolotlConfig.h>
+<<<<<<< HEAD
 #include <xolotlPerf.h>
 #include <DummyHandlerRegistry.h>
 #include <HDF5NetworkLoader.h>
@@ -24,12 +28,16 @@
 #include <IReactionHandlerFactory.h>
 #include <VizHandlerRegistryFactory.h>
 #include <cassert>
+=======
+#include <DummyHandlerRegistry.h>
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 using namespace std;
 using namespace xolotlCore;
 
 /**
  * The test suite configuration
+<<<<<<< HEAD
  */
 BOOST_AUTO_TEST_SUITE (PetscSolverTester_testSuite)
 
@@ -616,4 +624,35 @@ BOOST_AUTO_TEST_CASE(checkPetscSolver2DHandler) {
 //	std::remove(tempFile.c_str());
 //}
 
+=======
+ */BOOST_AUTO_TEST_SUITE (PetscSolverTester_testSuite)
+
+/**
+ * This operation checks the fluxs from the reactant as best as is possible
+ * given that it requires external data.
+ */
+BOOST_AUTO_TEST_CASE(checkDOFConversion) {
+
+	// Local Declarations
+	string sourceDir(XolotlSourceDirectory);
+	string pathToFile("/tests/reactants/testfiles/tungsten.txt");
+	string networkFilename = sourceDir + pathToFile;
+
+	BOOST_TEST_MESSAGE(
+			"PetscSolverTester Message: Network filename is: " << networkFilename);
+
+	// Load the input file from the master task
+	shared_ptr<istream> networkStream = make_shared<ifstream>(networkFilename);
+
+	// Create a network loader and set the istream on every MPI task
+	shared_ptr<PSIClusterNetworkLoader> networkLoader = make_shared<
+			PSIClusterNetworkLoader>(
+			std::make_shared<xolotlPerf::DummyHandlerRegistry>());
+	networkLoader->setInputstream(networkStream);
+	// Load the network
+	shared_ptr<ReactionNetwork> network = networkLoader->load();
+
+	BOOST_TEST_MESSAGE("PetscSolverTester Message: Network loaded");
+}
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 BOOST_AUTO_TEST_SUITE_END()

@@ -2,7 +2,10 @@
 #define TOKENIZEDLINEREADER_H
 
 // Includes
+<<<<<<< HEAD
 #include <vector>
+=======
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 #include <memory>
 #include <iostream>
 #include <sstream>
@@ -38,6 +41,7 @@ private:
 	//!The inputstream from which data should be read.
 	std::shared_ptr<std::istream> inputstream;
 
+<<<<<<< HEAD
 	/**
 	 * This operation load the subline into the data when the dataType is a string.
 	 * This function is different from the other ones that overriding it for it to work
@@ -112,6 +116,8 @@ private:
 		return;
 	}
 
+=======
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 public:
 
 	//!The constructor
@@ -120,12 +126,19 @@ public:
 	}
 
 	/**
+<<<<<<< HEAD
 	 * This operation sets the string (delimiter) that represents the delimiter
 	 * separating the different data elements in the line.
 	 *
 	 * @param delimiter The delimiter
 	 */
 	void setDelimiter(const std::string& delimiter) {
+=======
+	 * This operation sets the string (delimiter) that represents the delimiter separating the different data elements in the line.
+	 *
+	 */
+	void setDelimiter(std::string delimiter) {
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 		dataDelimiter = delimiter;
 
@@ -133,12 +146,19 @@ public:
 	}
 
 	/**
+<<<<<<< HEAD
 	 * This operation sets the character that represents the comment character.
 	 *
 	 * @param cdelimiter The comment delimiter
 	 *
 	 */
 	void setCommentDelimiter(const std::string& cdelimiter) {
+=======
+	 * This operation sets the character (delimiter) that represents the comment character.
+	 *
+	 */
+	void setCommentDelimiter(std::string cdelimiter) {
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 		commentDelimiter = cdelimiter;
 
@@ -147,8 +167,11 @@ public:
 
 	/**
 	 * This operation sets the input stream that should be parsed.
+<<<<<<< HEAD
 	 *
 	 * @param stream The input stream
+=======
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 	 */
 	void setInputStream(std::shared_ptr<std::istream> stream) {
 		inputstream = stream;
@@ -161,6 +184,10 @@ public:
 	 * if there are no more lines in the stream.
 	 */
 	std::vector<dataType> loadLine() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 		// Local Declarations
 		size_t lastDelimiterPos = 0, nextDelimiterPos = 0, finalDelimiterPos =
 				std::string::npos;
@@ -174,12 +201,15 @@ public:
 			// Get the line
 			std::string line;
 			std::getline(*inputstream, line);
+<<<<<<< HEAD
 
 			// Handle the case where there is a carriage return (\r) before
 			// the newline (\n)
 			if (line[line.size() - 1] == '\r')
 				line.resize(line.size() - 1);
 
+=======
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 			// Split it if it is not empty and does not start with the comment
 			// character
 			if (!line.empty()) {
@@ -188,18 +218,27 @@ public:
 				// std::string.front()!
 				if (line.find(commentDelimiter) == 0)
 					return loadLine();
+<<<<<<< HEAD
 
 				// Remove delimiters at the beginning of the string
 				if (line.find(dataDelimiter) == 0)
 					line = line.substr(1);
 
+=======
+				// Remove delimiters at the beginning of the string
+				if (line.find(dataDelimiter) == 0)
+					line = line.substr(1);
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 				// Remove delimiters at the end of the string
 				if (line.find(dataDelimiter, line.size() - 2)
 						== line.size() - 1)
 					line = line.erase(line.size() - 1);
 				// Find the first instance of the delimiter
 				nextDelimiterPos = line.find(dataDelimiter);
+<<<<<<< HEAD
 
+=======
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 				// Only split the line if it contains the delimiter
 				if (nextDelimiterPos != finalDelimiterPos) {
 					// Walk across each piece of data in the line stopping only
@@ -209,10 +248,17 @@ public:
 						// data between the delimiters
 						subLine = line.substr(lastDelimiterPos,
 								nextDelimiterPos - lastDelimiterPos);
+<<<<<<< HEAD
 						// Load the subLine in the data
 						// This function is defined only for string, bool, char, int double
 						loadData(subLine, data);
 						// Add it to the vector
+=======
+						// Clear the stream, reset the substring, load the data
+						dataStream.clear();
+						dataStream.str(subLine);
+						dataStream >> data;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 						dataVector.push_back(data);
 						// Switch the delimiter positions and find the next
 						lastDelimiterPos =
@@ -221,12 +267,18 @@ public:
 						nextDelimiterPos = line.find(dataDelimiter,
 								lastDelimiterPos);
 					}
+<<<<<<< HEAD
 				}
 				// Otherwise just put the whole line in the array
 				else {
 					// Load the line in the data
 					// This function is defined only for string, bool, char, int double
 					loadData(line, data);
+=======
+				} else {
+					// Otherwise just put the whole line in the array
+					dataStream >> data;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 					dataVector.push_back(data);
 				}
 			}

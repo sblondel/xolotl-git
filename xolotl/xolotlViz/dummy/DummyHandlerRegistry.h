@@ -12,6 +12,7 @@ namespace xolotlViz {
  * the code can be written to use the visualization infrastructure without
  * regard to whether visualization is active or disabled.
  */
+<<<<<<< HEAD
 class DummyHandlerRegistry: public IVizHandlerRegistry {
 public:
 
@@ -36,6 +37,31 @@ public:
 
 };
 //end class DummyHandlerRegistry
+=======
+class DummyHandlerRegistry : public IVizHandlerRegistry
+{
+public:
+
+    /**
+     * Construct a DummyHandlerRegistry.
+     */
+    DummyHandlerRegistry();
+
+    /**
+     * Clean up a DummyHandlerRegistry.
+     */
+    virtual ~DummyHandlerRegistry();
+
+    /**
+     * Obtain a Plot by name.
+     *
+     * @param name The name of the Plot.
+     * @return A shared pointer to the newly-created Plot.
+     */
+    virtual std::shared_ptr<IPlot> getPlot(std::string name, PlotType type);
+
+};  //end class DummyHandlerRegistry
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 }//end namespace xolotlViz
 

@@ -8,7 +8,12 @@
 #include "ITimer.h"
 #include "IEventCounter.h"
 #include "IHardwareCounter.h"
+<<<<<<< HEAD
 #include "PerfObjStatistics.h"
+=======
+#include "HardwareQuantities.h"
+
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 namespace xolotlPerf {
 
@@ -20,6 +25,7 @@ class IHandlerRegistry {
 
 public:
 
+<<<<<<< HEAD
 	/// Possible types of performance handler registries.
 	enum RegistryType {
 		dummy,     //< Use stub classes that do not collect any performance data
@@ -33,21 +39,36 @@ public:
 	 */
 	virtual ~IHandlerRegistry() {
 	}
+=======
+	/**
+	 * The destructor
+	 */
+	virtual ~IHandlerRegistry(){}
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * This operation returns the ITimer specified by the parameter.
 	 */
+<<<<<<< HEAD
 	virtual std::shared_ptr<ITimer> getTimer(const std::string& name) = 0;
+=======
+	virtual std::shared_ptr<ITimer> getTimer(std::string name) = 0;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * This operation returns the IEventCounter specified by the parameter.
 	 */
+<<<<<<< HEAD
 	virtual std::shared_ptr<IEventCounter> getEventCounter(
 			const std::string& name) = 0;
+=======
+	virtual std::shared_ptr<IEventCounter> getEventCounter( std::string name) = 0;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * This operation returns the specified IHardwareCounter.
 	 */
+<<<<<<< HEAD
 	virtual std::shared_ptr<IHardwareCounter> getHardwareCounter(
 			const std::string& name,
 			const IHardwareCounter::SpecType& ctrSpec) = 0;
@@ -80,6 +101,24 @@ public:
 			const PerfObjStatsMap<IHardwareCounter::CounterType>& hwCounterStats) const = 0;
 
 };
+=======
+	virtual std::shared_ptr<IHardwareCounter> getHardwareCounter( std::string name,
+			            std::vector<HardwareQuantities> quantities) = 0;
+
+	/**
+	 * This operation outputs the information gathered to the given
+	 * output stream.
+	 */
+	virtual void dump(std::ostream& os) const = 0;
+
+	/**
+	 * This operation outputs the information gathered to the given
+	 * output stream.
+	 */
+	virtual void dump(int rank) const = 0;
+
+}; //end class IHandlerRegistry
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 } //end namespace xolotlPerf
 

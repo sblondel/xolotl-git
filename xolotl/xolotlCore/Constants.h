@@ -23,6 +23,7 @@ static const double pi = 3.1415926535897932;
 
 //! Lattice Parameter. Equal to 3.17 Angstroms, taken from Becquart et. al.
 //! Journal of Nuclear Materials 403 (2010) 75–88. Given in units here of nm.
+<<<<<<< HEAD
 static const double tungstenLatticeConstant = 0.31700000000000000;
 
 //! Lattice Parameter. Given in units here of nm.
@@ -50,6 +51,9 @@ static const std::string xeVType = "XeV";
 static const std::string xeIType = "XeI";
 static const std::string NESuperType = "NESuper";
 static const std::string PSISuperType = "PSISuper";
+=======
+static const double latticeConstant = 0.31700000000000000;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 } /* end namespace xolotlCore */
 #endif /* CONSTANTS_H_ */

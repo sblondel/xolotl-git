@@ -17,11 +17,17 @@ class Plot: public IPlot, public xolotlCore::Identifiable {
 protected:
 
 	/**
+<<<<<<< HEAD
 	 * Declare the constructor as private to force the use of a name
 	 */
 	Plot() :
 			xolotlCore::Identifiable("unused") {
 	}
+=======
+     * Declare the constructor as private to force the use of a name
+	 */
+    Plot() : xolotlCore::Identifiable("unused") {}
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * Choice of PlottingStyle.
@@ -48,7 +54,11 @@ public:
 	/**
 	 * The default constructor
 	 */
+<<<<<<< HEAD
 	Plot(const std::string& name);
+=======
+	Plot(std::string name);
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * The destructor.
@@ -59,13 +69,21 @@ public:
 	 * Method managing everything that is related to the rendering of a plot.
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	void render(const std::string& fileName = "fileName");
+=======
+	void render(std::string fileName = "fileName");
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * Method that will save the plotted plot in a file.
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	void write(const std::string& fileName);
+=======
+	void write(std::string fileName);
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * Method allowing the user to set the PlottingStyle.
@@ -95,19 +113,31 @@ public:
 	 * Gets the data provider used.
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	std::shared_ptr<IDataProvider> getDataProvider() const;
+=======
+	std::shared_ptr<IDataProvider> getDataProvider() const ;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * Method getting the i-th data provider for SeriesPlot
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	std::shared_ptr<IDataProvider> getDataProvider(int i) const;
+=======
+	std::shared_ptr<IDataProvider> getDataProvider(int i) const ;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * Method getting the total number of data providers
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	int getDataProviderNumber() const;
+=======
+	int getDataProviderNumber() const ;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * Sets the label provider used for the plots.
@@ -119,7 +149,11 @@ public:
 	 * Gets the label provider used.
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	std::shared_ptr<LabelProvider> getLabelProvider() const;
+=======
+	std::shared_ptr<LabelProvider> getLabelProvider() const ;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * Method that enables the rendering of the legend.
@@ -131,7 +165,11 @@ public:
 	 * Method getting the legend.
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	std::string getLegend() const;
+=======
+	std::string getLegend() const ;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * Method that enables the log scale.

@@ -18,7 +18,11 @@ private:
 
 public:
 
+<<<<<<< HEAD
     Identifiable( const std::string& _name )
+=======
+    Identifiable( std::string _name )
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
       : name( _name )
     { }
 

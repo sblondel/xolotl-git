@@ -12,6 +12,7 @@ file(GLOB HEADERS *.h)
 #Grab all of the source files
 file(GLOB SRC *.cpp)
 
+<<<<<<< HEAD
 #Include the MPI directories
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants)
@@ -21,6 +22,24 @@ include_directories(${HDF5_INCLUDE_DIR})
 
 #Add a library to hold the IO code (mostly MPI)
 add_library(${LIBRARY_NAME} STATIC ${SRC})
+=======
+# Find HDF5
+FIND_PACKAGE(HDF5 REQUIRED)
+IF (HDF5_FOUND)
+    IF (NOT HDF5_IS_PARALLEL)
+        message(STATUS "WARNING! HDF5 is not supporting parallel IO")
+    ENDIF()
+    INCLUDE_DIRECTORIES(${HDF5_INCLUDE_DIR})
+ENDIF()
+
+#Include the MPI directories
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants)
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants/psiclusters)
+include_directories(${MPI_INCLUDE_PATH})
+
+#Add a library to hold the IO code (mostly MPI)
+add_library(${LIBRARY_NAME} SHARED ${SRC})
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 target_link_libraries(${LIBRARY_NAME} ${MPI_LIBRARIES} ${HDF5_LIBRARIES})
 
 #Install the xolotl header files

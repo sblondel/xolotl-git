@@ -2,9 +2,14 @@
 #define SIMPLEREACTIONNETWORK_H_
 
 #include <PSIClusterReactionNetwork.h>
+<<<<<<< HEAD
 #include <NEClusterReactionNetwork.h>
 #include <xolotlPerf.h>
 #include <DummyHandlerRegistry.h>
+=======
+#include "../../xolotlPerf/HandlerRegistryFactory.h"
+#include "../../xolotlPerf/dummy/DummyHandlerRegistry.h"
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 namespace testUtils {
 
@@ -15,14 +20,22 @@ namespace testUtils {
  *
  * It does not register itself as the ReactionNetwork for its clusters because
  * of limitations with shared_ptrs and "this." So, the
+<<<<<<< HEAD
  * TestUtils::getSimplePSIReactionNetwork() operation should always be called to
  * insure that it is properly initialized.
  */
 class SimplePSIReactionNetwork: public xolotlCore::PSIClusterReactionNetwork {
+=======
+ * TestUtils::getSimpleReactionNetwork() operation should always be called to
+ * insure that it is properly initialized.
+ */
+class SimpleReactionNetwork: public xolotlCore::PSIClusterReactionNetwork {
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 public:
 	/**
 	 * Constructor
+<<<<<<< HEAD
 	 *
 	 * @param maxClusterSize the maximal size of the clusters that will be in
 	 * the network. Set to 10 by default.
@@ -35,10 +48,21 @@ public:
 	//! Destructor
 	virtual ~SimplePSIReactionNetwork() {
 	}
+=======
+	 * @param maxClusterSize the maximal size of the clusters that will be in
+	 * the network. Set to 10 by default.
+	 */
+	SimpleReactionNetwork(const int maxClusterSize = 10,
+			std::shared_ptr<xolotlPerf::IHandlerRegistry> registry = std::make_shared<xolotlPerf::DummyHandlerRegistry>());
+
+	//! Destructor
+	virtual ~SimpleReactionNetwork();
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 };
 
 /**
+<<<<<<< HEAD
  * This class creates a simple reaction network used for testing. It contains
  * 10 Xe.
  *
@@ -96,6 +120,17 @@ std::shared_ptr<xolotlCore::NEClusterReactionNetwork> getSimpleNEReactionNetwork
 		const int maxClusterSize = 10,
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> registry =
 				std::make_shared<xolotlPerf::DummyHandlerRegistry>());
+=======
+ * This operation creates a SimpleReactionNetwork and makes sure that it is
+ * properly registered with the clusters it contains. This operation should
+ * always be called instead of constructing a SimpleReactionNetwork manually.
+ * @param maxClusterSize the maximal size of the clusters that will be in
+ * the network. Set to 10 by default.
+ * @return The reaction network.
+ */
+std::shared_ptr<xolotlCore::ReactionNetwork> getSimpleReactionNetwork(const int maxClusterSize = 10,
+		std::shared_ptr<xolotlPerf::IHandlerRegistry> registry = std::make_shared<xolotlPerf::DummyHandlerRegistry>());
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 } /* end namespace testUtils */
 #endif

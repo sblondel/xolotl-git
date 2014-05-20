@@ -1,5 +1,6 @@
 #include "DummyHandlerRegistry.h"
 
+<<<<<<< HEAD
 namespace xolotlPerf {
 
 // Obtain a Timer by name.
@@ -18,10 +19,35 @@ std::shared_ptr<IEventCounter> DummyHandlerRegistry::getEventCounter(
 	// TODO do we need to check whether client has already created
 	// an object with this name and return that object?
 	return std::make_shared < DummyEventCounter > (name);
+=======
+namespace xolotlPerf
+{
+
+// Obtain a Timer by name.
+std::shared_ptr<ITimer>
+DummyHandlerRegistry::getTimer( std::string name )
+{
+    // TODO is there a need for us to retain access to this Timer?
+    // TODO do we need to check whether client has already created
+    // an object with this name and return that object?
+    return std::make_shared<DummyTimer>( name );
+}
+
+
+// Obtain an EventCounter by name.
+std::shared_ptr<IEventCounter>
+DummyHandlerRegistry::getEventCounter( std::string name )
+{
+    // TODO is there a need for us to retain access to this Timer?
+    // TODO do we need to check whether client has already created
+    // an object with this name and return that object?
+    return std::make_shared<DummyEventCounter>( name );
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 }
 
 // Obtain a HardwareCounter object by name and by the
 // counter data it collects.
+<<<<<<< HEAD
 std::shared_ptr<IHardwareCounter> DummyHandlerRegistry::getHardwareCounter(
 		const std::string& name, const IHardwareCounter::SpecType& ctrSpec) {
 	// TODO is there a need for us to retain access to this Timer?
@@ -47,4 +73,28 @@ void DummyHandlerRegistry::reportStatistics(std::ostream&,
 }
 
 } // namespace xolotlPerf
+=======
+std::shared_ptr<IHardwareCounter>
+DummyHandlerRegistry::getHardwareCounter( std::string name, 
+                                        std::vector<HardwareQuantities> hwq )
+{
+    // TODO is there a need for us to retain access to this Timer?
+    // TODO do we need to check whether client has already created
+    // an object with this name and return that object?
+    return std::make_shared<DummyHardwareCounter>( name, hwq );
+}
+
+// Output any collected performance data to the given output stream.
+void DummyHandlerRegistry::dump( std::ostream& /* os */ ) const
+{
+    // do nothing
+}
+
+void DummyHandlerRegistry::dump( int rank) const
+{
+    // do nothing
+}
+
+};  // end namespace xolotlPerf
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 

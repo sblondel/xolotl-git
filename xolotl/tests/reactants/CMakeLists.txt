@@ -6,11 +6,16 @@ SET(PACKAGE_DESCRIPTION "Tests for the Xolotl reactants package")
 
 #Include directories from the source and boost binaries
 include_directories(${CMAKE_SOURCE_DIR})
+<<<<<<< HEAD
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/io)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/commandline)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants/psiclusters)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants/neclusters)
+=======
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants)
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants/psiclusters)
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlPerf)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlPerf/dummy)
@@ -24,8 +29,12 @@ link_directories(${CMAKE_SOURCE_DIR}/src/xolotlCore/reactants)
 file(GLOB tests *Tester.cpp)
 
 #Create the utility library
+<<<<<<< HEAD
 add_library(testUtils STATIC SimpleReactionNetwork.cpp)
 target_link_libraries(testUtils xolotlReactants)
+=======
+add_library(testUtils SimpleReactionNetwork.cpp)
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 #If boost was found, create tests
 if(Boost_FOUND)
@@ -34,7 +43,11 @@ if(Boost_FOUND)
         message(STATUS "Making test ${test}")
         get_filename_component(testName ${test} NAME_WE)
         add_executable(${testName} ${test})
+<<<<<<< HEAD
         target_link_libraries(${testName} xolotlReactants xolotlCL xolotlPerf testUtils)
+=======
+        target_link_libraries(${testName} xolotlReactants testUtils xolotlPerf)
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
         add_test(${testName} ${testName}) 
         #add a label so the tests can be run separately
         set_property(TEST ${testName} PROPERTY LABELS ${PACKAGE_NAME})   

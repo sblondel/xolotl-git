@@ -1,9 +1,15 @@
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE Regression
 
+<<<<<<< HEAD
 #include <string>
 #include <boost/test/included/unit_test.hpp>
 #include "xolotlPerf/dummy/DummyTimer.h"
+=======
+#include <boost/test/included/unit_test.hpp>
+#include <DummyTimer.h>
+#include <string>
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 using namespace std;
 using namespace xolotlPerf;
@@ -42,5 +48,14 @@ BOOST_AUTO_TEST_CASE(checkTiming) {
 
 }
 
+<<<<<<< HEAD
 BOOST_AUTO_TEST_SUITE_END()
 
+=======
+
+BOOST_AUTO_TEST_SUITE_END()
+
+
+
+
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520

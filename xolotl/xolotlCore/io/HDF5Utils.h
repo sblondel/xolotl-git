@@ -1,7 +1,11 @@
 #ifndef HDF5UTILS_H
 #define HDF5UTILS_H
 
+<<<<<<< HEAD
 #include <IReactionNetwork.h>
+=======
+#include <PSIClusterReactionNetwork.h>
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 #include <memory>
 
 namespace xolotlCore {
@@ -10,6 +14,7 @@ namespace HDF5Utils {
 
 	/**
 	 * Create the HDF5 file with the needed structure.
+<<<<<<< HEAD
 	 *
 	 * @param fileName The name of the file to create
 	 */
@@ -115,10 +120,42 @@ namespace HDF5Utils {
 
 	/**
 	 * Close the file for the first time after creating it.
+=======
+	 * @param timeStep The number of the time step.
+	 * @param networkSize The total number of cluster in the network.
+	 */
+	void initializeFile(int timeStep, int networkSize);
+
+	/**
+	 * Fill the header.
+	 * @param physicalDim The physical lenght of the material on which one is solving the ADR equation.
+	 * @param refinement The refinement of the grid.
+	 * @param time The physical time at this time step.
+	 * @param deltaTime The physical length of the time step.
+	 */
+	void fillHeader(int physicalDim, int refinement, double time, double deltaTime);
+
+	/**
+	 * Fill the network dataset.
+	 * @param network The network of clusters.
+	 */
+	void fillNetwork(std::shared_ptr<PSIClusterReactionNetwork> network);
+
+	/**
+	 * Fill the concentration dataset at a specific grid point.
+	 * @param concArray The vector of concentration at a grid point.
+	 * @param position The physical position on the grid.
+	 */
+	void fillConcentrations(double * concArray, int index, double position);
+
+	/**
+	 * Add the data to the file and close it.
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 	 */
 	void finalizeFile();
 
 	/**
+<<<<<<< HEAD
 	 * Close the file when it had been opened by openFile().
 	 */
 	void closeFile();
@@ -264,10 +301,13 @@ namespace HDF5Utils {
 			int lastTimeStep);
 
 	/**
+=======
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 	 * Read the network from a HDF5 file.
 	 * @param fileName The name of the file to read from.
 	 * @return The vector of vector which contain the network dataset.
 	 */
+<<<<<<< HEAD
 	std::vector< std::vector <double> > readNetwork(const std::string& fileName);
 
 	/**
@@ -284,6 +324,20 @@ namespace HDF5Utils {
 			int lastTimeStep, int i, int j = -1, int k = -1);
 
 }
+=======
+	std::vector< std::vector <double> > readNetwork(std::string fileName);
+
+	/**
+	 * Read the i-th grid point concentrations from a HDF5 file.
+	 * @param fileName The name of the file to read from.
+	 * @param networkSize The size of the network.
+	 * @param i The index of the grid point.
+	 * @param concentrations The array of concentrations.
+	 */
+	void readGridPoint(std::string fileName, int networkSize, int i, double * concentrations);
+
+};
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 } /* namespace xolotlCore */
 #endif

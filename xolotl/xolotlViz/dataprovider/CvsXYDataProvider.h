@@ -25,7 +25,11 @@ public:
 	/**
 	 * The default constructor
 	 */
+<<<<<<< HEAD
 	CvsXYDataProvider(const std::string& name);
+=======
+	CvsXYDataProvider(std::string name);
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * The destructor

@@ -57,7 +57,11 @@ BOOST_AUTO_TEST_CASE(checkData) {
 	BOOST_REQUIRE_EQUAL(dataPoints->size(), myPoints->size());
 
 	// Loop on all the points in dataPoints
+<<<<<<< HEAD
 	for (unsigned int i = 0; i < dataPoints->size(); i++) {
+=======
+	for (int i = 0; i < dataPoints->size(); i++) {
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 		// Check that all the fields are the same
 		BOOST_REQUIRE_EQUAL(dataPoints->at(i).value, myPoints->at(i).value);
@@ -68,7 +72,11 @@ BOOST_AUTO_TEST_CASE(checkData) {
 	}
 
 	// Get the mean value of the data
+<<<<<<< HEAD
 	double mean = myDataProvider->getDataMean();
+=======
+	auto mean = myDataProvider->getDataMean();
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	// Check it is the right mean value:
 	// (3 + 2 + 5 - 8 + 7) / 5

@@ -11,6 +11,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/dataprovider)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/labelprovider)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/dummy)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+<<<<<<< HEAD
+=======
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 # Find EAVL
 FIND_PACKAGE(EAVL)
@@ -29,6 +33,11 @@ if(EAVL_FOUND AND MESA_FOUND)
     message(STATUS "Mesa includes = ${MESA_INCLUDE_DIRS}")
     message(STATUS "Mesa libraries = ${MESA_LIBRARIES}")
     
+<<<<<<< HEAD
+=======
+    
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/standard)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/standard/plot)
     include_directories(${EAVL_INCLUDE_DIRS})
@@ -56,7 +65,11 @@ if(EAVL_FOUND AND MESA_FOUND)
 endif(EAVL_FOUND AND MESA_FOUND)
 
 #Add the library
+<<<<<<< HEAD
 add_library(${LIBRARY_NAME} STATIC ${SRC})
+=======
+add_library(${LIBRARY_NAME} SHARED ${SRC})
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 message('${SRC}')
 message('${HEADERS}')
 target_link_libraries(${LIBRARY_NAME} ${MAYBE_EAVL_MESA})
@@ -68,7 +81,11 @@ install(TARGETS ${LIBRARY_NAME} DESTINATION lib)
 # Configure file for the performance library.
 # Note: must do this after all the other checks, or else the 
 # contents of the generated file won't take the check results into account.
+<<<<<<< HEAD
 configure_file( "${CMAKE_SOURCE_DIR}/xolotlFactory/vizHandler/XolotlConfigViz.h.in" "${CMAKE_BINARY_DIR}/xolotlFactory/XolotlConfigViz.h" )
+=======
+configure_file( "${CMAKE_CURRENT_SOURCE_DIR}/XolotlConfigViz.h.in" "${CMAKE_CURRENT_BINARY_DIR}/XolotlConfigViz.h" )
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 
 

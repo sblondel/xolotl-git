@@ -35,7 +35,11 @@ public:
 	/**
 	 * The default constructor.
 	 */
+<<<<<<< HEAD
 	DataProvider(const std::string& name);
+=======
+	DataProvider(std::string name);
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * The destructor.
@@ -112,7 +116,11 @@ public:
  	 * This operation sets the name of the data.
  	 * @param name the name of the data
  	 */ 
+<<<<<<< HEAD
 	virtual void setDataName(const std::string& name) {
+=======
+	virtual void setDataName(std::string name) {
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
                 dataName = name;
         }
 

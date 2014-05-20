@@ -3,18 +3,30 @@
 
 using namespace xolotlViz;
 
+<<<<<<< HEAD
 Plot::Plot(const std::string& name) :
 		xolotlCore::Identifiable(name), plotStyle(PlottingStyle::LINE) {
+=======
+Plot::Plot(std::string name) : xolotlCore::Identifiable(name) {
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 }
 
 Plot::~Plot() {
 }
 
+<<<<<<< HEAD
 void Plot::render(const std::string&) {
 	return;
 }
 
 void Plot::write(const std::string& fileName) {
+=======
+void Plot::render(std::string fileName) {
+	return;
+}
+
+void Plot::write(std::string fileName) {
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 	render(fileName);
 	return;
 }
@@ -60,11 +72,19 @@ void Plot::setLogScale(bool logScale) {
 	return;
 }
 
+<<<<<<< HEAD
 void Plot::addDataProvider(std::shared_ptr<IDataProvider>) {
 	return;
 }
 
 std::shared_ptr<IDataProvider> Plot::getDataProvider(int) const {
+=======
+void Plot::addDataProvider(std::shared_ptr<IDataProvider> dataProvider) {
+	return;
+}
+
+std::shared_ptr<IDataProvider> Plot::getDataProvider(int i) const {
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 	return plotDataProvider;
 }
 

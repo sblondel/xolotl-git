@@ -1,13 +1,17 @@
 #ifndef IHARDWARECOUNTER_H
 #define IHARDWARECOUNTER_H
 
+<<<<<<< HEAD
 #include "mpi.h"
 #include <vector>
 #include <limits.h>
+=======
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 #include "../xolotlCore/IIdentifiable.h"
 
 using namespace std;
 
+<<<<<<< HEAD
 namespace xolotlPerf {
 
 /**
@@ -92,6 +96,36 @@ public:
 	virtual std::string getCounterName(
 			IHardwareCounter::CounterSpec cs) const = 0;
 };
+=======
+namespace xolotlPerf{
+
+/**
+ * Realizations of this interface are responsible for the
+ * collection of hardware performance counter data.
+ */
+class IHardwareCounter : public virtual xolotlCore::IIdentifiable {
+
+public:
+
+	/**
+	 * The destructor
+	 */
+	virtual ~IHardwareCounter() { }
+
+    /**
+     * This operation returns a list of values of the, initially specified,
+     * hardware quantities monitored by the IHardwareCounter.
+     */
+    virtual std::vector<double> getValues() const = 0;
+
+	/**
+	 * This operation returns the list of hardware
+	 * quantities monitored by the IHardwareCounter.
+	 */
+	virtual std::vector<std::string> getHardwareQuantities() const = 0;
+
+};  //end class IHardwareCounter
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 }  //end namespace xolotlPerf
 

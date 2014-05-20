@@ -2,9 +2,16 @@
 #define ISOLVER_H
 
 // Includes
+<<<<<<< HEAD
 #include <map>
 #include <ISolverHandler.h>
 #include <Options.h>
+=======
+#include <PSIClusterNetworkLoader.h>
+#include <map>
+#include "FitFluxHandler.h"
+#include "TemperatureHandler.h"
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 using namespace xolotlCore;
 
@@ -39,6 +46,17 @@ public:
 	virtual void setCommandLineOptions(int argc, char **argv) = 0;
 
 	/**
+<<<<<<< HEAD
+=======
+	 * This operation sets the PSIClusterNetworkLoader that should be used by
+	 * the ISolver to load the ReactionNetwork.
+	 * @param networkLoader The PSIClusterNetworkLoader that will load the
+	 * network.
+	 */
+	virtual void setNetworkLoader(std::shared_ptr<PSIClusterNetworkLoader> networkLoader) = 0;
+
+	/**
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 	 * This operation sets the run-time options of the solver. The map is a set
 	 * of key-value std::string pairs that are interpreted by the solver. These
 	 * options may change during execution, but it is up to Solvers to monitor
@@ -47,7 +65,11 @@ public:
 	 * for keys and associated values mapped to those keys. A relevant example
 	 * is "startTime" and "0.01" where both are of type std::string.
 	 */
+<<<<<<< HEAD
 	virtual void setOptions(const std::map<std::string, std::string>& options) = 0;
+=======
+	virtual void setOptions(std::map<std::string,std::string> options) = 0;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * This operation sets up the mesh that will be used by the solver and
@@ -61,15 +83,28 @@ public:
 	 * possibly including but not limited to setting up MPI and loading initial
 	 * conditions. If the solver can not be initialized, this operation will
 	 * throw an exception of type std::string.
+<<<<<<< HEAD
 	 * @param solverHandler The solver handler
 	 */
 	virtual void initialize(std::shared_ptr<ISolverHandler> solverHandler) = 0;
+=======
+	 */
+	virtual void initialize() = 0;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * This operation directs the Solver to perform the solve. If the solve
 	 * fails, it will throw an exception of type std::string.
+<<<<<<< HEAD
 	 */
 	virtual void solve() = 0;
+=======
+	 * @param fluxHandler The flux handler that will be used when performing
+	 * the solve
+	 */
+	virtual void solve(std::shared_ptr<IFluxHandler> fluxHandler,
+			std::shared_ptr<ITemperatureHandler> temperatureHandler) = 0;
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
 	/**
 	 * This operation performs all necessary finalization for the solver
