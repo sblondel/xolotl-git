@@ -7,6 +7,9 @@ SET(PACKAGE_DESCRIPTION "Xolotl I/O tests")
 #include directories from the source and boost binaries
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Updating the input file used in the HDF5UtilsTester. Adding HDF5NetworkLoaderTester that might need more complete tests. SB 20140521
 include_directories(${CMAKE_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/io)

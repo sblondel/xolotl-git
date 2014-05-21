@@ -11,7 +11,11 @@
 #include <mpi.h>
 =======
 #include <PSIClusterNetworkLoader.h>
+<<<<<<< HEAD
 >>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
+=======
+#include <XolotlConfig.h>
+>>>>>>> Updating the input file used in the HDF5UtilsTester. Adding HDF5NetworkLoaderTester that might need more complete tests. SB 20140521
 #include <memory>
 
 using namespace std;
@@ -19,10 +23,14 @@ using namespace xolotlCore;
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This suite is responsible for testing the HDF5Utils
 =======
  * This suite is responsible for testing the DataProvider.
 >>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
+=======
+ * This suite is responsible for testing the HDF5Utils
+>>>>>>> Updating the input file used in the HDF5UtilsTester. Adding HDF5NetworkLoaderTester that might need more complete tests. SB 20140521
  */
 BOOST_AUTO_TEST_SUITE(HDF5Utils_testSuite)
 
@@ -53,8 +61,11 @@ BOOST_AUTO_TEST_CASE(checkOI) {
 	// Create the network loader
 	PSIClusterNetworkLoader loader =
 			PSIClusterNetworkLoader(make_shared<xolotlPerf::DummyHandlerRegistry>());
+	// Define the filename to load the network from
+	string sourceDir(XolotlSourceDirectory);
+	string pathToFile("/tests/reactants/testfiles/tungsten.txt");
+	string filename = sourceDir + pathToFile;
 	// Create the network stream
-	string filename = "../benchmarks/tungsten.txt";
 	shared_ptr<istream> networkStream;
 	networkStream = make_shared<ifstream>(filename);
 	// Read the buffer of the stream

@@ -7,7 +7,10 @@
 #include <DummyHandlerRegistry.h>
 #include <HDF5NetworkLoader.h>
 #include <XolotlConfig.h>
+<<<<<<< HEAD
 #include <mpi.h>
+=======
+>>>>>>> Updating the input file used in the HDF5UtilsTester. Adding HDF5NetworkLoaderTester that might need more complete tests. SB 20140521
 #include <memory>
 
 using namespace std;
@@ -22,6 +25,7 @@ BOOST_AUTO_TEST_SUITE(HDF5NetworkLoader_testSuite)
  * Method checking the loading of the network from the HDF5 file.
  */
 BOOST_AUTO_TEST_CASE(checkLoad) {
+<<<<<<< HEAD
 	// Initialize MPI for HDF5
 	int argc = 0;
 	char **argv;
@@ -33,6 +37,14 @@ BOOST_AUTO_TEST_CASE(checkLoad) {
 	// Define the filename to load the network from
 	string sourceDir(XolotlSourceDirectory);
 	string pathToFile("/tests/testfiles/tungsten_diminutive.h5");
+=======
+	// Create the network loader
+	HDF5NetworkLoader loader =
+			HDF5NetworkLoader(make_shared<xolotlPerf::DummyHandlerRegistry>());
+	// Define the filename to load the network from
+	string sourceDir(XolotlSourceDirectory);
+	string pathToFile("/tests/reactants/testfiles/tungsten_small.h5");
+>>>>>>> Updating the input file used in the HDF5UtilsTester. Adding HDF5NetworkLoaderTester that might need more complete tests. SB 20140521
 	string filename = sourceDir + pathToFile;
 	// Give the filename to the network loader
 	loader.setFilename(filename);
@@ -43,6 +55,7 @@ BOOST_AUTO_TEST_CASE(checkLoad) {
 	// Get the size of the network
 	int networkSize = network->size();
 	// Check the value
+<<<<<<< HEAD
 	BOOST_REQUIRE_EQUAL(networkSize, 9);
 
 	// Check the properties
@@ -148,6 +161,9 @@ BOOST_AUTO_TEST_CASE(checkApplySectional) {
 	MPI_Finalize();
 
 	return;
+=======
+	BOOST_REQUIRE_EQUAL(networkSize, 100);
+>>>>>>> Updating the input file used in the HDF5UtilsTester. Adding HDF5NetworkLoaderTester that might need more complete tests. SB 20140521
 }
 
 BOOST_AUTO_TEST_SUITE_END()
