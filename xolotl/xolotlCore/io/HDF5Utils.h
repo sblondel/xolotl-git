@@ -128,7 +128,7 @@ namespace HDF5Utils {
 
 	/**
 	 * Fill the header.
-	 * @param physicalDim The physical lenght of the material on which one is solving the ADR equation.
+	 * @param physicalDim The physical length of the material on which one is solving the ADR equation.
 	 * @param refinement The refinement of the grid.
 	 * @param time The physical time at this time step.
 	 * @param deltaTime The physical length of the time step.
@@ -155,6 +155,7 @@ namespace HDF5Utils {
 	void finalizeFile();
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Close the file when it had been opened by openFile().
 	 */
@@ -303,6 +304,17 @@ namespace HDF5Utils {
 	/**
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	 * Read the header of a HDF5 file.
+	 * @param fileName The name of the file to read from.
+	 * @param physicalDim The physical length of the material to be changed.
+	 * @param time The physical time to be changed.
+	 * @param deltaTime The time step length to be changed.
+	 */
+	void readHeader(std::string fileName, int & physicalDim, double & time, double & deltaTime);
+
+	/**
+>>>>>>> Xolotl starts with the HDF5 file named xolotlStart.h5. Fixing of number of clusters plotted for seriesPlot. SB 20140521
 	 * Read the network from a HDF5 file.
 	 * @param fileName The name of the file to read from.
 	 * @return The vector of vector which contain the network dataset.

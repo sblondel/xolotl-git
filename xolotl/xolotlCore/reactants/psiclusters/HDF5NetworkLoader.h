@@ -17,7 +17,13 @@ private:
  * This class overwrites load() for HDF5 files
  */
 class HDF5NetworkLoader: public PSIClusterNetworkLoader {
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+private:
+
+	std::string fileName;
+>>>>>>> Xolotl starts with the HDF5 file named xolotlStart.h5. Fixing of number of clusters plotted for seriesPlot. SB 20140521
 
 	/**
 	 * Private nullary constructor.
@@ -73,9 +79,21 @@ public:
 	 * This operation will load the reaction network from the HDF5 file xolotlStart.h5 in
 	 * the format specified previously. The network will be empty if it can not
 	 * be loaded.
-	 * @return The reaction network
+	 * @return The reaction network.
 	 */
 	std::shared_ptr<PSIClusterReactionNetwork> load();
+
+	/**
+	 * This operation will set the name of the file where to take the network from.
+	 * @param name The name of the file.
+	 */
+	void setFilename (std::string name);
+
+	/**
+	 * This operation will get the name of the file where to take the network from.
+	 * @return The name of the file.
+	 */
+	std::string getFilename () const;
 };
 
 } /* namespace xolotlCore */
