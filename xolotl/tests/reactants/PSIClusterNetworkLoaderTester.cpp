@@ -17,11 +17,14 @@
 #include <typeinfo>
 #include <limits>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <DummyHandlerRegistry.h>
 #include <PSIClusterReactionNetwork.h>
 #include <Options.h>
 =======
 #include <PSIClusterNetworkLoader.h>
+=======
+>>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
 #include <PSIClusterReactionNetwork.h>
 #include <DummyHandlerRegistry.h>
 

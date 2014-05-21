@@ -6,10 +6,15 @@ SET(PACKAGE_DESCRIPTION "Xolotl I/O tests")
 
 #include directories from the source and boost binaries
 <<<<<<< HEAD
+<<<<<<< HEAD
 include_directories(${CMAKE_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/io)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/commandline)
+=======
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore)
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/io)
+>>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants/psiclusters)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlPerf)
@@ -35,9 +40,13 @@ if(Boost_FOUND)
         get_filename_component(testName ${test} NAME_WE)
         add_executable(${testName} ${test})
 <<<<<<< HEAD
+<<<<<<< HEAD
         target_link_libraries(${testName} xolotlReactants ${HDF5_LIBRARIES} ${MPI_LIBRARIES})
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+        target_link_libraries(${testName} xolotlReactants testUtils xolotlPerf)
+>>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
         add_test(${testName} ${testName}) 
         #add a label so the tests can be run separately
         set_property(TEST ${testName} PROPERTY LABELS ${PACKAGE_NAME})   

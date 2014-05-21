@@ -5,22 +5,31 @@
 #include <HDF5Utils.h>
 #include <PSIClusterReactionNetwork.h>
 #include <DummyHandlerRegistry.h>
+<<<<<<< HEAD
 #include <HDF5NetworkLoader.h>
 #include <XolotlConfig.h>
 #include <mpi.h>
+=======
+#include <PSIClusterNetworkLoader.h>
+>>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
 #include <memory>
 
 using namespace std;
 using namespace xolotlCore;
 
 /**
+<<<<<<< HEAD
  * This suite is responsible for testing the HDF5Utils
+=======
+ * This suite is responsible for testing the DataProvider.
+>>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
  */
 BOOST_AUTO_TEST_SUITE(HDF5Utils_testSuite)
 
 /**
  * Method checking the writing and reading of the HDF5 file.
  */
+<<<<<<< HEAD
 BOOST_AUTO_TEST_CASE(checkIO) {
 	// Initialize MPI for HDF5
 	int argc = 0;
@@ -39,12 +48,31 @@ BOOST_AUTO_TEST_CASE(checkIO) {
 
 	// Load the network
 	auto network = (PSIClusterReactionNetwork *) loader.load().get();
+=======
+BOOST_AUTO_TEST_CASE(checkOI) {
+	// Create the network loader
+	PSIClusterNetworkLoader loader =
+			PSIClusterNetworkLoader(make_shared<xolotlPerf::DummyHandlerRegistry>());
+	// Create the network stream
+	string filename = "../benchmarks/tungsten.txt";
+	shared_ptr<istream> networkStream;
+	networkStream = make_shared<ifstream>(filename);
+	// Read the buffer of the stream
+	auto bufferSS = make_shared<stringstream>();
+	(*bufferSS) << networkStream->rdbuf();
+	// Give the network stream to the network loader
+	loader.setInputstream(bufferSS);
+
+	// Load the network
+	auto network = loader.load();
+>>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
 
 	// Get the size of the network
 	int networkSize = network->size();
 	// Set the time step number
 	int timeStep = 0;
 	// Initialize the HDF5 file
+<<<<<<< HEAD
 	HDF5Utils::initializeFile("test.h5");
 
 	// Set the number of grid points and step size
@@ -129,12 +157,59 @@ BOOST_AUTO_TEST_CASE(checkIO) {
 
 	// Read the network of the written file
 	auto networkVector = HDF5Utils::readNetwork("test.h5");
+=======
+	HDF5Utils::initializeFile(timeStep, networkSize);
+
+	// Set the physical dimension of the grid and the refinement
+	int dimension = 5;
+	int refinement = 0;
+	// Set the time information
+	double currentTime = 0.0001;
+	double currentTimeStep = 0.000001;
+	// Write the header in the HDF5 file
+	HDF5Utils::fillHeader(dimension, refinement, currentTime, currentTimeStep);
+
+	// Write the network in the HDF5 file
+	HDF5Utils::fillNetwork(network);
+
+	// Create an array of concentration for one grid point
+	double concentrations[networkSize];
+	// Fill it
+	for (int i = 0; i < networkSize; i++) {
+		concentrations[i] = (double) i / 5.0;
+	}
+	double * conc = &concentrations[0];
+	// Set the position at this grid point
+	int gridPoint = 0;
+	double position = 1.5;
+	// Write the concentrations in the HDF5 file
+	HDF5Utils::fillConcentrations(conc, gridPoint, position);
+
+	// Finalize the HDF5 file
+	xolotlCore::HDF5Utils::finalizeFile();
+
+	// Read the header of the written file
+	int dim = 0;
+	double t = 0.0, dt = 0.0;
+	HDF5Utils::readHeader("xolotlStop_0.h5", dim, t, dt);
+	// Check the obtained values
+	BOOST_REQUIRE_EQUAL(dim, dimension);
+	BOOST_REQUIRE_EQUAL(t, currentTime);
+	BOOST_REQUIRE_EQUAL(dt, currentTimeStep);
+
+	// Read the network of the written file
+	auto networkVector = HDF5Utils::readNetwork("xolotlStop_0.h5");
+>>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
 	// Get all the reactants
 	auto reactants = network->getAll();
 	// Check the network vector
 	for (int i = 0; i < networkSize; i++) {
 		// Get the i-th reactant in the network
+<<<<<<< HEAD
 		auto reactant = (PSICluster *) reactants->at(i);
+=======
+		shared_ptr<PSICluster> reactant = static_pointer_cast<PSICluster>(reactants->at(i));
+>>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
 		int id = reactant->getId() - 1;
 		// Get the corresponding line from the HDF5 file
 		auto line = networkVector.at(id);
@@ -145,6 +220,7 @@ BOOST_AUTO_TEST_CASE(checkIO) {
 		BOOST_REQUIRE_EQUAL((int) line[1], composition["V"]);
 		BOOST_REQUIRE_EQUAL((int) line[2], composition["I"]);
 
+<<<<<<< HEAD
 		// Check the formation energy
 		auto formationEnergy = reactant->getFormationEnergy();
 		BOOST_REQUIRE_EQUAL(line[3], formationEnergy);
@@ -301,6 +377,30 @@ BOOST_AUTO_TEST_CASE(checkSurface3D) {
 		for (int j = 0; j < previousIFlux[0].size(); j++) {
 			BOOST_REQUIRE_CLOSE(previousIFlux[i][j], previousFlux[i][j], 0.0001);
 		}
+=======
+		// Check the binding energies
+		auto bindingEnergies = reactant->getBindingEnergies();
+		BOOST_REQUIRE_EQUAL(line[3], bindingEnergies.at(0)); // Helium binding energy
+		BOOST_REQUIRE_EQUAL(line[4], bindingEnergies.at(1)); // Vacancy binding energy
+		BOOST_REQUIRE_EQUAL(line[5], bindingEnergies.at(2)); // Interstitial binding energy
+
+		// Check the migration energy
+		double migrationEnergy = reactant->getMigrationEnergy();
+		BOOST_REQUIRE_EQUAL(line[6], migrationEnergy);
+
+		// Check the diffusion factor
+		double diffusionFactor = reactant->getDiffusionFactor();
+		BOOST_REQUIRE_EQUAL(line[7], diffusionFactor);
+	}
+
+	// Read the concentrations at the given grid point
+	double newConcentrations[networkSize];
+	double * newConc = &newConcentrations[0];
+	HDF5Utils::readGridPoint("xolotlStop_0.h5", networkSize, gridPoint, newConc);
+	// Check them
+	for (int i = 0; i < networkSize; i++) {
+		BOOST_REQUIRE_EQUAL(newConcentrations[i], concentrations[i]);
+>>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
 	}
 }
 
