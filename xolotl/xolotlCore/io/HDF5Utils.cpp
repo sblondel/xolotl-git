@@ -137,23 +137,33 @@ void HDF5Utils::fillNetwork(const std::string& fileName) {
 
 using namespace xolotlCore;
 
-hid_t fileId, concGroupId, concSId, networkGroupId, networkSId, headerGroupId;
+hid_t plistId, fileId, concGroupId, concSId, networkGroupId, networkSId,
+		headerGroupId;
 herr_t status;
 
-void HDF5Utils::initializeFile(int timeStep, int networkSize) {
+void HDF5Utils::initializeFile(int timeStep, int networkSize, int gridSize) {
 	// Set the name of the file
 	std::stringstream fileName;
 	fileName << "xolotlStop_" << timeStep << ".h5";
 
+	// Set up file access property list with parallel I/O access
+	plistId = H5Pcreate(H5P_FILE_ACCESS);
+	H5Pset_fapl_mpio(plistId, MPI_COMM_WORLD, MPI_INFO_NULL);
+
 	// Create the file
 	fileId = H5Fcreate(fileName.str().c_str(), H5F_ACC_TRUNC, H5P_DEFAULT,
-			H5P_DEFAULT);
+			plistId);
+
+	// Close the property list
+	status = H5Pclose(plistId);
 
 	// Create the group where the header will be stored
-	headerGroupId = H5Gcreate2(fileId, "headerGroup", H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+	headerGroupId = H5Gcreate2(fileId, "headerGroup", H5P_DEFAULT, H5P_DEFAULT,
+			H5P_DEFAULT);
 
 	// Create the group where the network will be stored
-	networkGroupId = H5Gcreate2(fileId, "networkGroup", H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+	networkGroupId = H5Gcreate2(fileId, "networkGroup", H5P_DEFAULT,
+			H5P_DEFAULT, H5P_DEFAULT);
 
 	// Create the dataspace for the network with dimension dims
 	hsize_t dims[2];
@@ -162,7 +172,8 @@ void HDF5Utils::initializeFile(int timeStep, int networkSize) {
 	networkSId = H5Screate_simple(2, dims, NULL);
 
 	// Create the group where the concentrations will be stored
-	concGroupId = H5Gcreate2(fileId, "concentrationsGroup", H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+	concGroupId = H5Gcreate2(fileId, "concentrationsGroup", H5P_DEFAULT,
+			H5P_DEFAULT, H5P_DEFAULT);
 
 	// Create the dataspace for the concentrations with dimension dim
 	hsize_t dim[1];
@@ -170,9 +181,37 @@ void HDF5Utils::initializeFile(int timeStep, int networkSize) {
 	concSId = H5Screate_simple(1, dim, NULL);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
+	// Prepare the datasets for the concentrations
+	// (even if each dataset will be filled by only one process in parallel,
+	// each process has to create all the datasets,
+	// see http://www.hdfgroup.org/HDF5/faq/parallel.html )
+	for (int i = 0; i < gridSize; i++) {
+		// Set the dataset name
+		std::stringstream datasetName;
+		datasetName << "position_" << i;
+
+		// Create the dataset of concentrations for this position
+		hid_t datasetId = H5Dcreate2(concGroupId, datasetName.str().c_str(),
+				H5T_IEEE_F64LE, concSId,
+				H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+
+		// Create property list for independent dataset write.
+		plistId = H5Pcreate(H5P_DATASET_XFER);
+		status = H5Pset_dxpl_mpio(plistId, H5FD_MPIO_INDEPENDENT);
+
+		// Close it
+		status = H5Dclose(datasetId);
+		status = H5Pclose(plistId);
+	}
+
+	// Create property list for independent dataset write.
+	plistId = H5Pcreate(H5P_DATASET_XFER);
+	status = H5Pset_dxpl_mpio(plistId, H5FD_MPIO_INDEPENDENT);
+
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void HDF5Utils::addConcentrationSubGroup(int timeStep, double time,
 		double previousTime, double deltaTime) {
@@ -215,31 +254,39 @@ void HDF5Utils::addConcentrationSubGroup(int timeStep, double time,
 	status = H5Aclose(attributeId);
 =======
 void HDF5Utils::fillHeader(int physicalDim, int refinement, double time, double deltaTime) {
+=======
+void HDF5Utils::fillHeader(int physicalDim, int refinement, double time,
+		double deltaTime) {
+>>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
 	// Create, write, and close the physicalDim attribute
 	hid_t dimSId = H5Screate(H5S_SCALAR);
-	hid_t dimAId = H5Acreate2 (headerGroupId, "physicalDim", H5T_STD_I32LE, dimSId,
-	                             H5P_DEFAULT, H5P_DEFAULT);
+	hid_t dimAId = H5Acreate2(headerGroupId, "physicalDim", H5T_STD_I32LE,
+			dimSId,
+			H5P_DEFAULT, H5P_DEFAULT);
 	status = H5Awrite(dimAId, H5T_STD_I32LE, &physicalDim);
 	status = H5Aclose(dimAId);
 
 	// Create, write, and close the refinement attribute
 	hid_t refineSId = H5Screate(H5S_SCALAR);
-	hid_t refineAId = H5Acreate2 (headerGroupId, "refinement", H5T_STD_I32LE, refineSId,
-	                             H5P_DEFAULT, H5P_DEFAULT);
+	hid_t refineAId = H5Acreate2(headerGroupId, "refinement", H5T_STD_I32LE,
+			refineSId,
+			H5P_DEFAULT, H5P_DEFAULT);
 	status = H5Awrite(refineAId, H5T_STD_I32LE, &refinement);
 	status = H5Aclose(refineAId);
 
 	// Create, write, and close the absolute time attribute
 	hid_t timeSId = H5Screate(H5S_SCALAR);
-	hid_t timeAId = H5Acreate2 (headerGroupId, "absoluteTime", H5T_IEEE_F64LE, timeSId,
-	                             H5P_DEFAULT, H5P_DEFAULT);
+	hid_t timeAId = H5Acreate2(headerGroupId, "absoluteTime", H5T_IEEE_F64LE,
+			timeSId,
+			H5P_DEFAULT, H5P_DEFAULT);
 	status = H5Awrite(timeAId, H5T_IEEE_F64LE, &time);
 	status = H5Aclose(timeAId);
 
 	// Create, write, and close the timestep time attribute
 	hid_t deltaSId = H5Screate(H5S_SCALAR);
-	hid_t deltaAId = H5Acreate2 (headerGroupId, "deltaTime", H5T_IEEE_F64LE, deltaSId,
-	                             H5P_DEFAULT, H5P_DEFAULT);
+	hid_t deltaAId = H5Acreate2(headerGroupId, "deltaTime", H5T_IEEE_F64LE,
+			deltaSId,
+			H5P_DEFAULT, H5P_DEFAULT);
 	status = H5Awrite(deltaAId, H5T_IEEE_F64LE, &deltaTime);
 	status = H5Aclose(deltaAId);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
@@ -247,6 +294,7 @@ void HDF5Utils::fillHeader(int physicalDim, int refinement, double time, double 
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void HDF5Utils::writeSurface1D(int timeStep, int iSurface, double nInter,
 		double previousFlux) {
@@ -335,9 +383,13 @@ void HDF5Utils::writeSurface2D(int timeStep, std::vector<int> iSurface,
 	status = H5Sclose(dataspaceId);
 =======
 void HDF5Utils::fillNetwork(std::shared_ptr<PSIClusterReactionNetwork> network) {
+=======
+void HDF5Utils::fillNetwork(
+		std::shared_ptr<PSIClusterReactionNetwork> network) {
+>>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
 	// Create the array that will store the network
 	int networkSize = network->size();
-	double networkArray [networkSize][8];
+	double networkArray[networkSize][8];
 
 	// Get all the reactants
 	auto reactants = network->getAll();
@@ -345,8 +397,8 @@ void HDF5Utils::fillNetwork(std::shared_ptr<PSIClusterReactionNetwork> network) 
 	// Loop on them
 	for (int i = 0; i < networkSize; i++) {
 		// Get the i-th reactant
-		std::shared_ptr<PSICluster> reactant =
-				std::static_pointer_cast<PSICluster>(reactants->at(i));
+		std::shared_ptr<PSICluster> reactant = std::static_pointer_cast
+				< PSICluster > (reactants->at(i));
 
 		// Get the reactant Id to keep the same order as the input file
 		int id = reactant->getId() - 1;
@@ -373,7 +425,8 @@ void HDF5Utils::fillNetwork(std::shared_ptr<PSIClusterReactionNetwork> network) 
 	}
 
 	// Create the dataset for the network
-	hid_t datasetId = H5Dcreate2(networkGroupId, "network", H5T_IEEE_F64LE, networkSId,
+	hid_t datasetId = H5Dcreate2(networkGroupId, "network", H5T_IEEE_F64LE,
+			networkSId,
 			H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
 
 	// Write networkArray in the dataset
@@ -382,8 +435,9 @@ void HDF5Utils::fillNetwork(std::shared_ptr<PSIClusterReactionNetwork> network) 
 
 	// Create the attribute for the network size
 	hid_t networkSizeSId = H5Screate(H5S_SCALAR);
-	hid_t networkSizeAId = H5Acreate2 (datasetId, "networkSize", H5T_STD_I32LE, networkSizeSId,
-	                             H5P_DEFAULT, H5P_DEFAULT);
+	hid_t networkSizeAId = H5Acreate2(datasetId, "networkSize", H5T_STD_I32LE,
+			networkSizeSId,
+			H5P_DEFAULT, H5P_DEFAULT);
 
 	// Write it
 	status = H5Awrite(networkSizeAId, H5T_STD_I32LE, &networkSize);
@@ -488,6 +542,7 @@ void HDF5Utils::addConcentrationDataset(int size, int i, int j, int k) {
 	return;
 }
 
+<<<<<<< HEAD
 void HDF5Utils::fillConcentrations(
 		const std::vector<std::vector<double> >& concVector, int i, int j,
 		int k) {
@@ -515,22 +570,25 @@ void HDF5Utils::fillConcentrations(
 	// Close everything
 =======
 void HDF5Utils::fillConcentrations(double * concArray, int index, double position) {
+=======
+void HDF5Utils::fillConcentrations(double * concArray, int index,
+		double position) {
+>>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
 	// Set the dataset name
 	std::stringstream datasetName;
 	datasetName << "position_" << index;
 
-	// Create the dataset of concentrations for this position
-	hid_t datasetId = H5Dcreate2(concGroupId, datasetName.str().c_str(), H5T_IEEE_F64LE, concSId,
-			H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+	// Open the already created dataset of concentrations for this position
+	hid_t datasetId = H5Dopen(concGroupId, datasetName.str().c_str(), H5P_DEFAULT);
 
 	// Write concArray in the dataset
-	status = H5Dwrite(datasetId, H5T_IEEE_F64LE, H5S_ALL, H5S_ALL,
-	H5P_DEFAULT, concArray);
+	status = H5Dwrite(datasetId, H5T_IEEE_F64LE, H5S_ALL, H5S_ALL, plistId,
+			concArray);
 
 	// Create the attribute for the physical position
 	hid_t posSId = H5Screate(H5S_SCALAR);
-	hid_t posAId = H5Acreate2 (datasetId, "physicalPos", H5T_IEEE_F64LE, posSId,
-	                             H5P_DEFAULT, H5P_DEFAULT);
+	hid_t posAId = H5Acreate2(datasetId, "physicalPos", H5T_IEEE_F64LE, posSId,
+	H5P_DEFAULT, H5P_DEFAULT);
 
 	// Write it
 	status = H5Awrite(posAId, H5T_IEEE_F64LE, &position);
@@ -557,6 +615,7 @@ void HDF5Utils::finalizeFile() {
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void HDF5Utils::closeFile() {
 	// Close everything
@@ -1181,6 +1240,10 @@ std::vector<std::vector<double> > HDF5Utils::readNetwork(
 =======
 =======
 void HDF5Utils::readHeader(std::string fileName, int & physicalDim, double & time, double & deltaTime) {
+=======
+void HDF5Utils::readHeader(std::string fileName, int & physicalDim,
+		double & time, double & deltaTime) {
+>>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
 	// Open the given HDF5 file with read only access
 	fileId = H5Fopen(fileName.c_str(), H5F_ACC_RDONLY, H5P_DEFAULT);
 
@@ -1209,8 +1272,12 @@ void HDF5Utils::readHeader(std::string fileName, int & physicalDim, double & tim
 	return;
 }
 
+<<<<<<< HEAD
 >>>>>>> Xolotl starts with the HDF5 file named xolotlStart.h5. Fixing of number of clusters plotted for seriesPlot. SB 20140521
 std::vector< std::vector <double> > HDF5Utils::readNetwork(std::string fileName) {
+=======
+std::vector<std::vector<double> > HDF5Utils::readNetwork(std::string fileName) {
+>>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
 	// Open the given HDF5 file with read only access
 	fileId = H5Fopen(fileName.c_str(), H5F_ACC_RDONLY, H5P_DEFAULT);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
@@ -1251,14 +1318,15 @@ std::vector< std::vector <double> > HDF5Utils::readNetwork(std::string fileName)
 	double networkArray[networkSize][8];
 
 	// Read the data set
-	status = H5Dread(datasetId, H5T_IEEE_F64LE, H5S_ALL, H5S_ALL, H5P_DEFAULT, &networkArray);
+	status = H5Dread(datasetId, H5T_IEEE_F64LE, H5S_ALL, H5S_ALL, H5P_DEFAULT,
+			&networkArray);
 
 	// Fill the vector to return with the dataset
-	std::vector< std::vector <double> > networkVector;
+	std::vector<std::vector<double> > networkVector;
 	// Loop on the size of the network
 	for (int i = 0; i < networkSize; i++) {
 		// Create the line to give to the vector
-		std::vector <double> line;
+		std::vector<double> line;
 		for (int j = 0; j < 8; j++) {
 			line.push_back(networkArray[i][j]);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
@@ -1277,6 +1345,7 @@ std::vector< std::vector <double> > HDF5Utils::readNetwork(std::string fileName)
 	return networkVector;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 std::vector<std::vector<double> > HDF5Utils::readGridPoint(
 		const std::string& fileName, int lastTimeStep, int i, int j, int k) {
@@ -1343,6 +1412,10 @@ std::vector<std::vector<double> > HDF5Utils::readGridPoint(
 	return toReturn;
 =======
 void HDF5Utils::readGridPoint(std::string fileName, int networkSize, int i, double * concentrations) {
+=======
+void HDF5Utils::readGridPoint(std::string fileName, int networkSize, int i,
+		double * concentrations) {
+>>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
 	// Open the given HDF5 file with read only access
 	fileId = H5Fopen(fileName.c_str(), H5F_ACC_RDONLY, H5P_DEFAULT);
 
@@ -1357,7 +1430,8 @@ void HDF5Utils::readGridPoint(std::string fileName, int networkSize, int i, doub
 	double conc[networkSize];
 
 	// Read the data set
-	status = H5Dread(datasetId, H5T_IEEE_F64LE, H5S_ALL, H5S_ALL, H5P_DEFAULT, &conc);
+	status = H5Dread(datasetId, H5T_IEEE_F64LE, H5S_ALL, H5S_ALL, H5P_DEFAULT,
+			&conc);
 
 	// Loop on the size of the network
 	for (int i = 0; i < networkSize; i++) {

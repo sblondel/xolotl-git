@@ -15,7 +15,11 @@
 >>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
 =======
 #include <XolotlConfig.h>
+<<<<<<< HEAD
 >>>>>>> Updating the input file used in the HDF5UtilsTester. Adding HDF5NetworkLoaderTester that might need more complete tests. SB 20140521
+=======
+#include <mpi.h>
+>>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
 #include <memory>
 
 using namespace std;
@@ -58,6 +62,11 @@ BOOST_AUTO_TEST_CASE(checkIO) {
 	auto network = (PSIClusterReactionNetwork *) loader.load().get();
 =======
 BOOST_AUTO_TEST_CASE(checkOI) {
+	// Initialize MPI for HDF5
+	int argc;
+	char **argv;
+	MPI_Init(&argc, &argv);
+
 	// Create the network loader
 	PSIClusterNetworkLoader loader =
 			PSIClusterNetworkLoader(make_shared<xolotlPerf::DummyHandlerRegistry>());
@@ -83,6 +92,7 @@ BOOST_AUTO_TEST_CASE(checkOI) {
 	// Set the time step number
 	int timeStep = 0;
 	// Initialize the HDF5 file
+<<<<<<< HEAD
 <<<<<<< HEAD
 	HDF5Utils::initializeFile("test.h5");
 
@@ -170,6 +180,9 @@ BOOST_AUTO_TEST_CASE(checkOI) {
 	auto networkVector = HDF5Utils::readNetwork("test.h5");
 =======
 	HDF5Utils::initializeFile(timeStep, networkSize);
+=======
+	HDF5Utils::initializeFile(timeStep, networkSize, 1);
+>>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
 
 	// Set the physical dimension of the grid and the refinement
 	int dimension = 5;
@@ -413,6 +426,9 @@ BOOST_AUTO_TEST_CASE(checkSurface3D) {
 		BOOST_REQUIRE_EQUAL(newConcentrations[i], concentrations[i]);
 >>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
 	}
+
+	// Finalize MPI
+	MPI_Finalize();
 }
 
 BOOST_AUTO_TEST_SUITE_END()
