@@ -1243,9 +1243,19 @@ void HDF5Utils::readHeader(std::string fileName, int & physicalDim, double & tim
 =======
 void HDF5Utils::readHeader(std::string fileName, int & physicalDim,
 		double & time, double & deltaTime) {
+<<<<<<< HEAD
 >>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
+=======
+	// Set up file access property list with parallel I/O access
+	plistId = H5Pcreate(H5P_FILE_ACCESS);
+	H5Pset_fapl_mpio(plistId, MPI_COMM_WORLD, MPI_INFO_NULL);
+
+>>>>>>> Adding the property list to read HDF5 files in parallel. SB 20140602
 	// Open the given HDF5 file with read only access
-	fileId = H5Fopen(fileName.c_str(), H5F_ACC_RDONLY, H5P_DEFAULT);
+	fileId = H5Fopen(fileName.c_str(), H5F_ACC_RDONLY, plistId);
+
+	// Close the property list
+	status = H5Pclose(plistId);
 
 	// Open the header group
 	hid_t groupId = H5Gopen(fileId, "/headerGroup", H5P_DEFAULT);
@@ -1277,10 +1287,22 @@ void HDF5Utils::readHeader(std::string fileName, int & physicalDim,
 std::vector< std::vector <double> > HDF5Utils::readNetwork(std::string fileName) {
 =======
 std::vector<std::vector<double> > HDF5Utils::readNetwork(std::string fileName) {
+<<<<<<< HEAD
 >>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
 	// Open the given HDF5 file with read only access
 	fileId = H5Fopen(fileName.c_str(), H5F_ACC_RDONLY, H5P_DEFAULT);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	// Set up file access property list with parallel I/O access
+	plistId = H5Pcreate(H5P_FILE_ACCESS);
+	H5Pset_fapl_mpio(plistId, MPI_COMM_WORLD, MPI_INFO_NULL);
+
+	// Open the given HDF5 file with read only access
+	fileId = H5Fopen(fileName.c_str(), H5F_ACC_RDONLY, plistId);
+
+	// Close the property list
+	status = H5Pclose(plistId);
+>>>>>>> Adding the property list to read HDF5 files in parallel. SB 20140602
 
 	// Open the dataset
 	hid_t datasetId = H5Dopen(fileId, "/networkGroup/network", H5P_DEFAULT);
@@ -1415,9 +1437,19 @@ void HDF5Utils::readGridPoint(std::string fileName, int networkSize, int i, doub
 =======
 void HDF5Utils::readGridPoint(std::string fileName, int networkSize, int i,
 		double * concentrations) {
+<<<<<<< HEAD
 >>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
+=======
+	// Set up file access property list with parallel I/O access
+	plistId = H5Pcreate(H5P_FILE_ACCESS);
+	H5Pset_fapl_mpio(plistId, MPI_COMM_WORLD, MPI_INFO_NULL);
+
+>>>>>>> Adding the property list to read HDF5 files in parallel. SB 20140602
 	// Open the given HDF5 file with read only access
-	fileId = H5Fopen(fileName.c_str(), H5F_ACC_RDONLY, H5P_DEFAULT);
+	fileId = H5Fopen(fileName.c_str(), H5F_ACC_RDONLY, plistId);
+
+	// Close the property list
+	status = H5Pclose(plistId);
 
 	// Set the dataset name
 	std::stringstream datasetName;
