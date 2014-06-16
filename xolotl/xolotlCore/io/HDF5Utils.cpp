@@ -137,21 +137,17 @@ void HDF5Utils::fillNetwork(const std::string& fileName) {
 
 using namespace xolotlCore;
 
-hid_t plistId, fileId, concGroupId, concSId, networkGroupId, networkSId,
+hid_t plistId, fileId, concGroupId, subConcGroupId, concSId, networkGroupId, networkSId,
 		headerGroupId;
 herr_t status;
 
-void HDF5Utils::initializeFile(int timeStep, int networkSize, int gridSize) {
-	// Set the name of the file
-	std::stringstream fileName;
-	fileName << "xolotlStop_" << timeStep << ".h5";
-
+void HDF5Utils::initializeFile(int networkSize, int gridSize) {
 	// Set up file access property list with parallel I/O access
 	plistId = H5Pcreate(H5P_FILE_ACCESS);
 	H5Pset_fapl_mpio(plistId, MPI_COMM_WORLD, MPI_INFO_NULL);
 
 	// Create the file
-	fileId = H5Fcreate(fileName.str().c_str(), H5F_ACC_TRUNC, H5P_DEFAULT,
+	fileId = H5Fcreate("xolotlStop.h5", H5F_ACC_TRUNC, H5P_DEFAULT,
 			plistId);
 
 	// Close the property list
@@ -175,6 +171,7 @@ void HDF5Utils::initializeFile(int timeStep, int networkSize, int gridSize) {
 	concGroupId = H5Gcreate2(fileId, "concentrationsGroup", H5P_DEFAULT,
 			H5P_DEFAULT, H5P_DEFAULT);
 
+<<<<<<< HEAD
 	// Create the dataspace for the concentrations with dimension dim
 	hsize_t dim[1];
 	dim[0] = networkSize;
@@ -189,28 +186,37 @@ void HDF5Utils::initializeFile(int timeStep, int networkSize, int gridSize) {
 		// Set the dataset name
 		std::stringstream datasetName;
 		datasetName << "position_" << i;
-
-		// Create the dataset of concentrations for this position
-		hid_t datasetId = H5Dcreate2(concGroupId, datasetName.str().c_str(),
-				H5T_IEEE_F64LE, concSId,
-				H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
-
-		// Create property list for independent dataset write.
-		plistId = H5Pcreate(H5P_DATASET_XFER);
-		status = H5Pset_dxpl_mpio(plistId, H5FD_MPIO_COLLECTIVE);
-
-		// Close it
-		status = H5Dclose(datasetId);
-		status = H5Pclose(plistId);
-	}
-
-	// Create property list for independent dataset write.
-	plistId = H5Pcreate(H5P_DATASET_XFER);
-	status = H5Pset_dxpl_mpio(plistId, H5FD_MPIO_COLLECTIVE);
+=======
+	// Create, write, and close the last written time step attribute
+	int lastTimeStep = -1;
+	hid_t lastSId = H5Screate(H5S_SCALAR);
+	hid_t lastAId = H5Acreate2(concGroupId, "lastTimeStep", H5T_STD_I32LE,
+			lastSId,
+			H5P_DEFAULT, H5P_DEFAULT);
+	status = H5Awrite(lastAId, H5T_STD_I32LE, &lastTimeStep);
+	status = H5Aclose(lastAId);
+>>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
 
 	return;
 }
 
+void HDF5Utils::openFile() {
+	// Set up file access property list with parallel I/O access
+	plistId = H5Pcreate(H5P_FILE_ACCESS);
+	H5Pset_fapl_mpio(plistId, MPI_COMM_WORLD, MPI_INFO_NULL);
+
+	// Open the given HDF5 file with read only access
+	fileId = H5Fopen("xolotlStop.h5", H5F_ACC_RDWR, plistId);
+
+	// Close the property list
+	status = H5Pclose(plistId);
+
+	// Open the concentration group
+	concGroupId = H5Gopen(fileId, "concentrationsGroup", H5P_DEFAULT);
+	return;
+}
+
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 void HDF5Utils::addConcentrationSubGroup(int timeStep, double time,
@@ -258,6 +264,9 @@ void HDF5Utils::fillHeader(int physicalDim, int refinement, double time, double 
 void HDF5Utils::fillHeader(int physicalDim, int refinement, double time,
 		double deltaTime) {
 >>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
+=======
+void HDF5Utils::fillHeader(int physicalDim, int refinement) {
+>>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
 	// Create, write, and close the physicalDim attribute
 	hid_t dimSId = H5Screate(H5S_SCALAR);
 	hid_t dimAId = H5Acreate2(headerGroupId, "physicalDim", H5T_STD_I32LE,
@@ -274,6 +283,7 @@ void HDF5Utils::fillHeader(int physicalDim, int refinement, double time,
 	status = H5Awrite(refineAId, H5T_STD_I32LE, &refinement);
 	status = H5Aclose(refineAId);
 
+<<<<<<< HEAD
 	// Create, write, and close the absolute time attribute
 	hid_t timeSId = H5Screate(H5S_SCALAR);
 	hid_t timeAId = H5Acreate2(headerGroupId, "absoluteTime", H5T_IEEE_F64LE,
@@ -320,6 +330,8 @@ void HDF5Utils::writeSurface1D(int timeStep, int iSurface, double nInter,
 	// Close the dataspace
 	status = H5Sclose(dataspaceId);
 
+=======
+>>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
 	return;
 }
 
@@ -451,6 +463,7 @@ void HDF5Utils::fillNetwork(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void HDF5Utils::writeSurface3D(int timeStep,
 		std::vector<std::vector<int> > iSurface,
 		std::vector<std::vector<double> > nInter,
@@ -515,10 +528,78 @@ void HDF5Utils::writeSurface3D(int timeStep,
 
 	// Close the dataspace
 	status = H5Sclose(dataspaceId);
+=======
+void HDF5Utils::addConcentrationSubGroup(int timeStep, int networkSize, int gridSize,
+		double time, double deltaTime) {
+	// Set the name of the sub group
+	std::stringstream subGroupName;
+	subGroupName << "concentration_" << timeStep;
+
+	// Create the subgroup where the concentrations at this time step will be stored
+	subConcGroupId = H5Gcreate2(concGroupId, subGroupName.str().c_str(), H5P_DEFAULT,
+			H5P_DEFAULT, H5P_DEFAULT);
+
+	// Create the dataspace for the concentrations with dimension dim
+	hsize_t dim[1];
+	dim[0] = networkSize;
+	concSId = H5Screate_simple(1, dim, NULL);
+
+	// Prepare the datasets for the concentrations
+	// (even if each dataset will be filled by only one process in parallel,
+	// each process has to create all the datasets,
+	// see http://www.hdfgroup.org/HDF5/faq/parallel.html )
+	for (int i = 0; i < gridSize; i++) {
+		// Set the dataset name
+		std::stringstream datasetName;
+		datasetName << "position_" << i;
+
+		// Create the dataset of concentrations for this position
+		hid_t datasetId = H5Dcreate2(subConcGroupId, datasetName.str().c_str(),
+				H5T_IEEE_F64LE, concSId,
+				H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+
+		// Create property list for collective dataset write.
+		plistId = H5Pcreate(H5P_DATASET_XFER);
+		status = H5Pset_dxpl_mpio(plistId, H5FD_MPIO_COLLECTIVE);
+
+		// Close it
+		status = H5Dclose(datasetId);
+		status = H5Pclose(plistId);
+	}
+
+	// Create, write, and close the absolute time attribute
+	hid_t timeSId = H5Screate(H5S_SCALAR);
+	hid_t timeAId = H5Acreate2(subConcGroupId, "absoluteTime", H5T_IEEE_F64LE,
+			timeSId,
+			H5P_DEFAULT, H5P_DEFAULT);
+	status = H5Awrite(timeAId, H5T_IEEE_F64LE, &time);
+	status = H5Aclose(timeAId);
+
+	// Create, write, and close the timestep time attribute
+	hid_t deltaSId = H5Screate(H5S_SCALAR);
+	hid_t deltaAId = H5Acreate2(subConcGroupId, "deltaTime", H5T_IEEE_F64LE,
+			deltaSId,
+			H5P_DEFAULT, H5P_DEFAULT);
+	status = H5Awrite(deltaAId, H5T_IEEE_F64LE, &deltaTime);
+	status = H5Aclose(deltaAId);
+
+	// Overwrite the last time step attribute of the concentration group
+	hid_t lastSId = H5Screate(H5S_SCALAR);
+	hid_t lastAId = H5Aopen(concGroupId, "lastTimeStep", H5P_DEFAULT);
+	status = H5Awrite(lastAId, H5T_STD_I32LE, &timeStep);
+	status = H5Aclose(lastAId);
+
+	// Create property list for independent dataset write
+	// (needed to be able to write the datasets without having
+	// HDF5 screaming).
+	plistId = H5Pcreate(H5P_DATASET_XFER);
+	status = H5Pset_dxpl_mpio(plistId, H5FD_MPIO_COLLECTIVE);
+>>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
 
 	return;
 }
 
+<<<<<<< HEAD
 void HDF5Utils::addConcentrationDataset(int size, int i, int j, int k) {
 	// Set the dataset name
 	std::stringstream datasetName;
@@ -571,6 +652,8 @@ void HDF5Utils::fillConcentrations(
 =======
 void HDF5Utils::fillConcentrations(double * concArray, int index, double position) {
 =======
+=======
+>>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
 void HDF5Utils::fillConcentrations(double * concArray, int index,
 		double position) {
 >>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
@@ -579,7 +662,7 @@ void HDF5Utils::fillConcentrations(double * concArray, int index,
 	datasetName << "position_" << index;
 
 	// Open the already created dataset of concentrations for this position
-	hid_t datasetId = H5Dopen(concGroupId, datasetName.str().c_str(), H5P_DEFAULT);
+	hid_t datasetId = H5Dopen(subConcGroupId, datasetName.str().c_str(), H5P_DEFAULT);
 
 	// Write concArray in the dataset
 	status = H5Dwrite(datasetId, H5T_IEEE_F64LE, H5S_ALL, H5S_ALL, plistId,
@@ -756,6 +839,7 @@ void HDF5Utils::readTimes(const std::string& fileName, int lastTimeStep,
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 double HDF5Utils::readPreviousTime(const std::string& fileName,
 		int lastTimeStep) {
@@ -1246,6 +1330,19 @@ void HDF5Utils::readHeader(std::string fileName, int & physicalDim,
 <<<<<<< HEAD
 >>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
 =======
+=======
+void HDF5Utils::closeFile() {
+	// Close everything
+	status = H5Gclose(subConcGroupId);
+	status = H5Gclose(concGroupId);
+	status = H5Fclose(fileId);
+
+	return;
+
+}
+
+void HDF5Utils::readHeader(std::string fileName, int & physicalDim) {
+>>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
 	// Set up file access property list with parallel I/O access
 	plistId = H5Pcreate(H5P_FILE_ACCESS);
 	H5Pset_fapl_mpio(plistId, MPI_COMM_WORLD, MPI_INFO_NULL);
@@ -1265,18 +1362,80 @@ void HDF5Utils::readHeader(std::string fileName, int & physicalDim,
 	status = H5Aread(physicalDimAId, H5T_STD_I32LE, &physicalDim);
 	status = H5Aclose(physicalDimAId);
 
+	// Close everything
+	status = H5Gclose(groupId);
+	status = H5Fclose(fileId);
+
+	return;
+}
+
+bool HDF5Utils::hasConcentrationGroup(std::string fileName, int & lastTimeStep) {
+	// Initialize the boolean to return
+	bool hasGroup = true;
+
+	// Set up file access property list with parallel I/O access
+	plistId = H5Pcreate(H5P_FILE_ACCESS);
+	H5Pset_fapl_mpio(plistId, MPI_COMM_WORLD, MPI_INFO_NULL);
+
+	// Open the given HDF5 file with read only access
+	fileId = H5Fopen(fileName.c_str(), H5F_ACC_RDONLY, plistId);
+
+	// Close the property list
+	status = H5Pclose(plistId);
+
+	// Check the group
+	status = H5Gget_objinfo (fileId, "/concentrationsGroup", 0, NULL);
+	// if the group exist
+	if (status == 0) {
+		// Open the concentration group
+		concGroupId = H5Gopen(fileId, "/concentrationsGroup", H5P_DEFAULT);
+
+		// Open and read the lastTimeStep attribute
+		hid_t lastAId = H5Aopen(concGroupId, "lastTimeStep", H5P_DEFAULT);
+		status = H5Aread(lastAId, H5T_STD_I32LE, &lastTimeStep);
+		status = H5Aclose(lastAId);
+
+		status = H5Gclose(concGroupId);
+
+		// if lastTimeStep is still negative the group is not valid
+		if (lastTimeStep < 0) hasGroup = false;
+	}
+	// if not
+	else hasGroup = false;
+
+	return hasGroup;
+}
+
+void HDF5Utils::readTimes(std::string fileName, int lastTimeStep, double & time, double & deltaTime) {
+	// Set up file access property list with parallel I/O access
+	plistId = H5Pcreate(H5P_FILE_ACCESS);
+	H5Pset_fapl_mpio(plistId, MPI_COMM_WORLD, MPI_INFO_NULL);
+
+	// Open the given HDF5 file with read only access
+	fileId = H5Fopen(fileName.c_str(), H5F_ACC_RDONLY, plistId);
+
+	// Close the property list
+	status = H5Pclose(plistId);
+
+	// Set the name of the sub group
+	std::stringstream subGroupName;
+	subGroupName << "concentrationsGroup/concentration_" << lastTimeStep;
+
+	// Open this specific concentration sub group
+	subConcGroupId = H5Gopen(fileId, subGroupName.str().c_str(), H5P_DEFAULT);
+
 	// Open and read the absoluteTime attribute
-	hid_t timeAId = H5Aopen(groupId, "absoluteTime", H5P_DEFAULT);
+	hid_t timeAId = H5Aopen(subConcGroupId, "absoluteTime", H5P_DEFAULT);
 	status = H5Aread(timeAId, H5T_IEEE_F64LE, &time);
 	status = H5Aclose(timeAId);
 
 	// Open and read the deltaTime attribute
-	hid_t deltaTimeAId = H5Aopen(groupId, "deltaTime", H5P_DEFAULT);
+	hid_t deltaTimeAId = H5Aopen(subConcGroupId, "deltaTime", H5P_DEFAULT);
 	status = H5Aread(deltaTimeAId, H5T_IEEE_F64LE, &deltaTime);
 	status = H5Aclose(deltaTimeAId);
 
 	// Close everything
-	status = H5Gclose(groupId);
+	status = H5Gclose(subConcGroupId);
 	status = H5Fclose(fileId);
 
 	return;
@@ -1369,6 +1528,7 @@ std::vector<std::vector<double> > HDF5Utils::readNetwork(std::string fileName) {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 std::vector<std::vector<double> > HDF5Utils::readGridPoint(
 		const std::string& fileName, int lastTimeStep, int i, int j, int k) {
 	// Create the vector to return
@@ -1440,6 +1600,10 @@ void HDF5Utils::readGridPoint(std::string fileName, int networkSize, int i,
 <<<<<<< HEAD
 >>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
 =======
+=======
+void HDF5Utils::readGridPoint(std::string fileName, int lastTimeStep,
+		int networkSize, int i, double * concentrations) {
+>>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
 	// Set up file access property list with parallel I/O access
 	plistId = H5Pcreate(H5P_FILE_ACCESS);
 	H5Pset_fapl_mpio(plistId, MPI_COMM_WORLD, MPI_INFO_NULL);
@@ -1453,7 +1617,8 @@ void HDF5Utils::readGridPoint(std::string fileName, int networkSize, int i,
 
 	// Set the dataset name
 	std::stringstream datasetName;
-	datasetName << "concentrationsGroup/position_" << i;
+	datasetName << "concentrationsGroup/concentration_"
+			<< lastTimeStep << "/position_" << i;
 
 	// Open the dataset
 	hid_t datasetId = H5Dopen(fileId, datasetName.str().c_str(), H5P_DEFAULT);

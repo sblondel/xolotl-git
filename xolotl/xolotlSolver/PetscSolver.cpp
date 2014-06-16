@@ -179,9 +179,9 @@ PetscErrorCode PetscSolver::setupInitialConditions(DM da, Vec C) {
 
 	PetscFunctionBeginUser;
 	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, PETSC_IGNORE, PETSC_IGNORE,
-			PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
-			PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
-			PETSC_IGNORE);
+	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+	PETSC_IGNORE);
 	checkPetscError(ierr);
 
 	/* Name each of the concentrations */
@@ -208,26 +208,26 @@ PetscErrorCode PetscSolver::setupInitialConditions(DM da, Vec C) {
 	ierr = DMDAGetCorners(da, &xs, NULL, NULL, &xm, NULL, NULL);
 	checkPetscError(ierr);
 
-	/*
-	 Compute function over the locally owned part of the grid
-	 */
-	for (i = xs; i < xs + xm; i++) {
-
-		concOffset = concentrations + size * i;
-		// Read the concentrations from the HDF5 file
-		HDF5Utils::readGridPoint("xolotlStart.h5", size, i, concOffset);
-
-//		// For boundary conditions all the concentrations are 0
-//		// at i == 0. Everywhere else, only I1 has a non-zero concentration.
-//		if (i != 0) {
-//			// Set the default interstitial concentrations
-//			auto reactant = network->get("I",1);
-//			reactant->setConcentration(0.0023);
-//		}
-//
-//		// Update the PETSc concentrations array
-//		concOffset = concentrations + size * i;
-//		network->fillConcentrationsArray(concOffset);
+	// If the HDF5 file contains initial concentrations
+	int tempTimeStep = -2;
+	if (HDF5Utils::hasConcentrationGroup("xolotlStart.h5", tempTimeStep)) {
+		// Loop on all the grid points
+		for (i = xs; i < xs + xm; i++) {
+			concOffset = concentrations + size * i;
+			// Read the concentrations from the HDF5 file
+			HDF5Utils::readGridPoint("xolotlStart.h5", tempTimeStep, size, i, concOffset);
+		}
+	}
+	// If not, set all the concentrations to 0.0
+	else {
+		// Loop on all the grid points
+		for (i = xs; i < xs + xm; i++) {
+			concOffset = concentrations + size * i;
+			// Loop on all the clusters
+			for (int k = 0; k < size; k++) {
+				concOffset[k] = 0.0;
+			}
+		}
 	}
 
 	/*
@@ -361,9 +361,9 @@ PetscErrorCode RHSFunction(TS ts, PetscReal ftime, Vec C, Vec F, void *ptr) {
 	ierr = DMGetLocalVector(da, &localC);
 	checkPetscError(ierr);
 	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, PETSC_IGNORE, PETSC_IGNORE,
-			PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
-			PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
-			PETSC_IGNORE);
+	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+	PETSC_IGNORE);
 	checkPetscError(ierr);
 
 	// Get the total number of grid points specified by the command line option
@@ -374,7 +374,7 @@ PetscErrorCode RHSFunction(TS ts, PetscReal ftime, Vec C, Vec F, void *ptr) {
 		numOfxGridPoints = 8.0;
 
 	// Setup some step size variables
-	hx = numOfxGridPoints / (PetscReal)(Mx - 1);
+	hx = numOfxGridPoints / (PetscReal) (Mx - 1);
 	// Display the number of grid points that will be used
 //	std::cout << "\nNumber of x grid points = " << numOfxGridPoints << std::endl;
 //	std::cout << "Number of grid points = " << Mx << std::endl;
@@ -608,7 +608,8 @@ void computePartialsForDiffusion(std::shared_ptr<PSICluster> cluster,
 /*
  Compute the Jacobian entries based on IFuction() and insert them into the matrix
  */
-PetscErrorCode RHSJacobian(TS ts, PetscReal ftime, Vec C, Mat A, Mat J,void *ptr) {
+PetscErrorCode RHSJacobian(TS ts, PetscReal ftime, Vec C, Mat A, Mat J,
+		void *ptr) {
 
 	// increment the event counter monitoring this function
 	RHSJacobianCounter->increment();
@@ -707,9 +708,9 @@ void PetscSolver::initialize(std::shared_ptr<ISolverHandler> solverHandler) {
 	ierr = DMGetLocalVector(da, &localC);
 	checkPetscError(ierr);
 	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, PETSC_IGNORE, PETSC_IGNORE,
-			PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
-			PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
-			PETSC_IGNORE);
+	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+	PETSC_IGNORE);
 	checkPetscError(ierr);
 
 	// Get the total number of grid points specified by the command line option
@@ -720,7 +721,7 @@ void PetscSolver::initialize(std::shared_ptr<ISolverHandler> solverHandler) {
 		numOfxGridPoints = 8.0;
 
 	// Setup some step size variables
-	hx = numOfxGridPoints / (PetscReal)(Mx - 1);
+	hx = numOfxGridPoints / (PetscReal) (Mx - 1);
 	sx = 1.0 / (hx * hx);
 
 	// Get the complete data array
@@ -972,7 +973,8 @@ void PetscSolver::initialize(std::shared_ptr<ISolverHandler> solverHandler) {
 
 }
 
-PetscErrorCode callRHSJacobian(TS ts, PetscReal ftime, Vec C, Mat A, Mat J, void *ptr) {
+PetscErrorCode callRHSJacobian(TS ts, PetscReal ftime, Vec C, Mat A, Mat J,
+		void *ptr) {
 	PetscErrorCode ierr;
 	RHSJacobianTimer->start();
 	ierr = RHSJacobian(ts, ftime, C, A, J, &ptr);
@@ -1203,13 +1205,20 @@ void PetscSolver::solve(std::shared_ptr<IFluxHandler> fluxHandler,
 
 	// Get starting conditions from HDF5 file
 	int gridLength = 0;
-	double time = 0.0, deltaTime = 0.0;
-	HDF5Utils::readHeader("xolotlStart.h5", gridLength, time, deltaTime);
+	double time = 0.0, deltaTime = 1.0e-8;
+	int tempTimeStep = -2;
+	HDF5Utils::readHeader("xolotlStart.h5", gridLength);
+
+	// Read the times if the information is in the HDF5 file
+	if (HDF5Utils::hasConcentrationGroup("xolotlStart.h5", tempTimeStep)) {
+		HDF5Utils::readTimes("xolotlStart.h5", tempTimeStep, time, deltaTime);
+	}
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	 Create distributed array (DMDA) to manage parallel grid and vectors
 	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-	ierr = DMDACreate1d(PETSC_COMM_WORLD, DM_BOUNDARY_MIRROR, gridLength, dof, 1,
+	ierr = DMDACreate1d(PETSC_COMM_WORLD, DM_BOUNDARY_MIRROR, gridLength, dof,
+			1,
 			NULL, &da);
 	checkPetscError(ierr);
 

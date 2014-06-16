@@ -15,6 +15,7 @@ namespace HDF5Utils {
 	/**
 	 * Create the HDF5 file with the needed structure.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *
 	 * @param fileName The name of the file to create
 	 */
@@ -122,25 +123,41 @@ namespace HDF5Utils {
 	 * Close the file for the first time after creating it.
 =======
 	 * @param timeStep The number of the time step.
+=======
+>>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
 	 * @param networkSize The total number of cluster in the network.
 	 * @param gridSize The total number of grid points.
 	 */
-	void initializeFile(int timeStep, int networkSize, int gridSize);
+	void initializeFile(int networkSize, int gridSize);
+
+	/**
+	 * Open the already existing HDF5 file.
+	 */
+	void openFile();
 
 	/**
 	 * Fill the header.
 	 * @param physicalDim The physical length of the material on which one is solving the ADR equation.
 	 * @param refinement The refinement of the grid.
-	 * @param time The physical time at this time step.
-	 * @param deltaTime The physical length of the time step.
 	 */
-	void fillHeader(int physicalDim, int refinement, double time, double deltaTime);
+	void fillHeader(int physicalDim, int refinement);
 
 	/**
 	 * Fill the network dataset.
 	 * @param network The network of clusters.
 	 */
 	void fillNetwork(std::shared_ptr<PSIClusterReactionNetwork> network);
+
+	/**
+	 * Add a concentration subgroup for the given time step to the HDF5 file.
+	 * @param timeStep The number of the time step.
+	 * @param networkSize The total number of cluster in the network.
+	 * @param gridSize The total number of grid points.
+	 * @param time The physical time at this time step.
+	 * @param deltaTime The physical length of the time step.
+	 */
+	void addConcentrationSubGroup(int timeStep, int networkSize, int gridSize,
+			double time, double deltaTime);
 
 	/**
 	 * Fill the concentration dataset at a specific grid point.
@@ -150,19 +167,27 @@ namespace HDF5Utils {
 	void fillConcentrations(double * concArray, int index, double position);
 
 	/**
+<<<<<<< HEAD
 	 * Add the data to the file and close it.
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	 * Close the file for the first time after creating it.
+>>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
 	 */
 	void finalizeFile();
 
 	/**
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
 	 * Close the file when it had been opened by openFile().
 	 */
 	void closeFile();
 
 	/**
+<<<<<<< HEAD
 	 * Read the header of a HDF5 file.
 	 *
 	 * @param fileName The name of the file to read from
@@ -306,13 +331,30 @@ namespace HDF5Utils {
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
+=======
+>>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
 	 * Read the header of a HDF5 file.
 	 * @param fileName The name of the file to read from.
 	 * @param physicalDim The physical length of the material to be changed.
+	 */
+	void readHeader(std::string fileName, int & physicalDim);
+
+	/**
+	 * Check if the file contains a valid concentration group.
+	 * @param fileName The name of the file to read from.
+	 * @param lastTimeStep The value of the last written time step to be changed.
+	 * @return True is the file contains a valid concentration group.
+	 */
+	bool hasConcentrationGroup(std::string fileName, int & lastTimeStep);
+
+	/**
+	 * Read the times from the concentration group of a HDF5 file.
+	 * @param fileName The name of the file to read from.
+	 * @param lastTimeStep The value of the last written time step.
 	 * @param time The physical time to be changed.
 	 * @param deltaTime The time step length to be changed.
 	 */
-	void readHeader(std::string fileName, int & physicalDim, double & time, double & deltaTime);
+	void readTimes(std::string fileName, int lastTimeStep, double & time, double & deltaTime);
 
 	/**
 >>>>>>> Xolotl starts with the HDF5 file named xolotlStart.h5. Fixing of number of clusters plotted for seriesPlot. SB 20140521
@@ -343,11 +385,13 @@ namespace HDF5Utils {
 	/**
 	 * Read the i-th grid point concentrations from a HDF5 file.
 	 * @param fileName The name of the file to read from.
+	 * @param lastTimeStep The value of the last written time step.
 	 * @param networkSize The size of the network.
 	 * @param i The index of the grid point.
 	 * @param concentrations The array of concentrations.
 	 */
-	void readGridPoint(std::string fileName, int networkSize, int i, double * concentrations);
+	void readGridPoint(std::string fileName, int lastTimeStep, int networkSize,
+			int i, double * concentrations);
 
 };
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520

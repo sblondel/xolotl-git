@@ -8,9 +8,13 @@
 #include <HDF5NetworkLoader.h>
 #include <XolotlConfig.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mpi.h>
 =======
 >>>>>>> Updating the input file used in the HDF5UtilsTester. Adding HDF5NetworkLoaderTester that might need more complete tests. SB 20140521
+=======
+#include <mpi.h>
+>>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
 #include <memory>
 
 using namespace std;
@@ -26,11 +30,16 @@ BOOST_AUTO_TEST_SUITE(HDF5NetworkLoader_testSuite)
  */
 BOOST_AUTO_TEST_CASE(checkLoad) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
 	// Initialize MPI for HDF5
 	int argc = 0;
 	char **argv;
 	MPI_Init(&argc, &argv);
 
+<<<<<<< HEAD
 	// Create the network loader
 	HDF5NetworkLoader loader = HDF5NetworkLoader(
 			make_shared<xolotlPerf::DummyHandlerRegistry>());
@@ -38,6 +47,8 @@ BOOST_AUTO_TEST_CASE(checkLoad) {
 	string sourceDir(XolotlSourceDirectory);
 	string pathToFile("/tests/testfiles/tungsten_diminutive.h5");
 =======
+=======
+>>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
 	// Create the network loader
 	HDF5NetworkLoader loader =
 			HDF5NetworkLoader(make_shared<xolotlPerf::DummyHandlerRegistry>());
@@ -281,7 +292,13 @@ BOOST_AUTO_TEST_CASE(checkApplySectional) {
 	// Check the diffusion factor
 	diffusionFactor = reactant->getDiffusionFactor();
 	BOOST_REQUIRE_EQUAL(diffusionFactor, 0.0);
+<<<<<<< HEAD
 >>>>>>> The test for the HDF5NetworkLoader is now more complete, using the tungsten_diminutive benchmark. SB 20140523
+=======
+
+	// Finalize MPI
+	MPI_Finalize();
+>>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
 }
 
 BOOST_AUTO_TEST_SUITE_END()
