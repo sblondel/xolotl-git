@@ -438,6 +438,7 @@ BOOST_AUTO_TEST_CASE(checkSurface3D) {
 		BOOST_REQUIRE_EQUAL(line[7], diffusionFactor);
 	}
 
+<<<<<<< HEAD
 	// Read the concentrations at the given grid point
 	double newConcentrations[networkSize];
 	double * newConc = &newConcentrations[0];
@@ -446,6 +447,19 @@ BOOST_AUTO_TEST_CASE(checkSurface3D) {
 	for (int i = 0; i < networkSize; i++) {
 		BOOST_REQUIRE_EQUAL(newConcentrations[i], concentrations[i]);
 >>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
+=======
+	// If the HDF5 file contains initial concentrations
+	int tempTimeStep = -2;
+	if (HDF5Utils::hasConcentrationGroup("xolotlStop.h5", tempTimeStep)) {
+		// Read the concentrations at the given grid point
+		double newConcentrations[networkSize];
+		double * newConc = &newConcentrations[0];
+		HDF5Utils::readGridPoint("xolotlStop.h5", tempTimeStep, networkSize, gridPoint, newConc);
+		// Check them
+		for (int i = 0; i < networkSize; i++) {
+			BOOST_REQUIRE_EQUAL(newConcentrations[i], concentrations[i]);
+		}
+>>>>>>> Fixing the way to test if the concentration group exist. Using H5Fclose to close the file in the same function. The absence of that function was causing the mpi communication problem. SB 20140617
 	}
 
 	// Finalize MPI
