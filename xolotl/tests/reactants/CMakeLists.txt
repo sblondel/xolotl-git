@@ -28,17 +28,21 @@ include_directories(${Boost_BINARY_DIRS})
 #Link the directories
 link_directories(${CMAKE_SOURCE_DIR}/src/xolotlCore/reactants)
 
-
 #Get the test files
 file(GLOB tests *Tester.cpp)
 
 #Create the utility library
+<<<<<<< HEAD
 <<<<<<< HEAD
 add_library(testUtils STATIC SimpleReactionNetwork.cpp)
 target_link_libraries(testUtils xolotlReactants)
 =======
 add_library(testUtils SimpleReactionNetwork.cpp)
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+add_library(testUtils STATIC SimpleReactionNetwork.cpp)
+target_link_libraries(testUtils xolotlReactants)
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 
 #If boost was found, create tests
 if(Boost_FOUND)

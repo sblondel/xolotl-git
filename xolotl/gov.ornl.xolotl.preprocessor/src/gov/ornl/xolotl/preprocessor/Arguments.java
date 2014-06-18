@@ -1,5 +1,6 @@
 package gov.ornl.xolotl.preprocessor;
 
+<<<<<<< HEAD
 import uk.co.flamingpenguin.jewel.cli.Option;
 
 /**
@@ -713,3 +714,8 @@ public interface Arguments {
 	boolean getHelp();
 
 }
+=======
+public interface Arguments {
+
+}
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618

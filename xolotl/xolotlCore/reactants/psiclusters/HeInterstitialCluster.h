@@ -29,32 +29,33 @@ private:
 	//! The number of interstitial defects in this cluster.
 	int numI;
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 =======
 	 * A pointer to He_1 that is used for the dissociation flux calculation
 	 */
 	std::shared_ptr<PSICluster> heCluster;
+=======
+	//! The helium cluster of size 1
+	PSICluster * heCluster;
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 
-	/**
-	 * A pointer to V_1 that is used for the dissociation flux calculation
-	 */
-	std::shared_ptr<PSICluster> vCluster;
+	//! The vacancy cluster of size 1
+	PSICluster * vCluster;
 
-	/**
-	 * A pointer to I_1 that is used for the dissociation flux calculation
-	 */
-	std::shared_ptr<PSICluster> iCluster;
+	//! The interstitial cluster of size 1
+	PSICluster * iCluster;
 
-	/**
-	 * A pointer to the HeI cluster with one less He than this cluster
-	 */
-	std::shared_ptr<PSICluster> heIClusterLessHe;
+	//! The HeI cluster with one less helium
+	PSICluster * heIClusterLessHe;
 
-	/**
-	 * A pointer to the HeI cluster with one less I than this cluster
-	 */
-	std::shared_ptr<PSICluster> heIClusterLessI;
+	//! The HeI cluster with one less vacancy
+	PSICluster * heIClusterLessI;
+
+	//! The sum of the dissociation constants between this cluster and the
+	//! clusters of size 1.
+	double f4 = 0.0;
 
 	/**
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
@@ -163,16 +164,21 @@ public:
 	 */
 	virtual double getDissociationFlux(double temperature) const;
 
-protected:
+	/**
+	 * This operation returns true to signify that this cluster is a mixture of
+	 * He and I.
+	 */
+	virtual bool isMixed() const { return true; };
 
 	/**
-	 * This operation overrides the base class implementation to provide
-	 * the proper pointer for HeI, which is a compound.
-	 *
-	 * @return The shared_ptr from the network or a null shared_ptr if the
-	 * network does not contain this reactant.
+	 * This operation overrides Reactant's setTemperature operation to
+	 * correctly recompute the diffusion coefficient and other
+	 * temperature-dependent quantities when the temperature is set.
+	 * @param temp
 	 */
-	std::shared_ptr<PSICluster> getThisSharedPtrFromNetwork() const;
+	virtual void setTemperature(double temp);
+
+protected:
 
 	/**
 	 * Computes a row of the reaction connectivity matrix corresponding to

@@ -13,7 +13,11 @@ class ITimer;
 #include <vector>
 #include <set>
 #include <unordered_map>
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+#include <sstream>
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 
 namespace xolotlCore {
 
@@ -28,6 +32,7 @@ namespace xolotlCore {
  *
  * The getComposition() operation is implemented by subclasses and will always
 <<<<<<< HEAD
+<<<<<<< HEAD
  * return a map with the keys He, V, I, HeV or HeI. The operation getTypeName()
  * will always return one of the same values.
  *
@@ -38,6 +43,10 @@ namespace xolotlCore {
 =======
  * return a map with the keys He, V, I, HeV or HeI.
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+ * return a map with the keys He, V, I, HeV or HeI. The operation getTypeName()
+ * will always return one of the same values.
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
  */
 class PSICluster: public Reactant {
 
@@ -179,14 +188,20 @@ public:
 	 */
 	class ReactingPair {
 	public:
+
 		/**
 		 * The first reacting cluster in the pair
 		 */
-		std::shared_ptr<PSICluster> first;
+		PSICluster * first;
+
 		/**
 		 * The second reacting cluster in the pair
 		 */
-		std::shared_ptr<PSICluster> second;
+		PSICluster * second;
+
+		//! The constructor
+		ReactingPair(PSICluster * firstPtr, PSICluster * secondPtr)
+		: first(firstPtr), second(secondPtr) {}
 	};
 
 	/**
@@ -200,6 +215,14 @@ public:
 	 * coefficient for this cluster. The default value is 0 (does not diffuse).
 	 */
 	double diffusionFactor;
+
+	/**
+	 * The diffusion coefficient computed from the diffusion factor using an
+	 * Arrhenius rate equation. It is re-computed every time the temperature is
+	 * updated.
+	 */
+	double diffusionCoefficient;
+
 
 	/**
 	 * The shared pointer to this cluster in the network. It is assigned in
@@ -254,6 +277,7 @@ public:
 	 * lifecycle by subclasses. In the standard Xolotl clusters, this vector is
 	 * filled in createReactionConnectivity.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	std::vector<CombiningCluster> combiningReactants;
 
@@ -350,6 +374,9 @@ public:
 	virtual void optimizeReactions();
 =======
 	std::vector<std::shared_ptr<Reactant> > combiningReactants;
+=======
+	std::vector<Reactant *> combiningReactants;
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 
 	/**
 	 * A vector of clusters that dissociate to form this cluster.
@@ -361,28 +388,18 @@ public:
 	 * clusters that override dissociateClusters() or don't call it should
 	 * make sure that they fill this list.
 	 */
-	std::vector<std::shared_ptr<PSICluster>> dissociatingClusters;
+	std::vector<PSICluster *> dissociatingClusters;
+
+	/**
+	 * A pointer to the cluster of the same type as this one that has
+	 * size equal to 1. The reference is set in setReactionNetwork().
+	 */
+	PSICluster * sameTypeSizeOneCluster;
 
 	/**
 	 * Counter for the number of times getDissociationFlux is called.
 	 */
 	std::shared_ptr<xolotlPerf::IEventCounter> getDissociationFluxCounter;
-
-	/**
-	 * This operation retrieves the shared_ptr for this cluster from the
-	 * network so that the reference count will be maintained.
-	 *
-	 * Simply creating a shared_ptr with the "this" pointer will break
-	 * the reference count, so it is important to have the exact
-	 * shared pointer that the network is storing.
-	 *
-	 * This operation will fail if the network of which the cluster is a
-	 * member has not been set.
-	 *
-	 * @return The shared_ptr from the network or a null shared_ptr if the
-	 * network does not contain this reactant.
-	 */
-	virtual std::shared_ptr<PSICluster> getThisSharedPtrFromNetwork() const;
 
 	/**
 	 * Calculate the reaction constant dependent on the
@@ -450,8 +467,8 @@ public:
 	 * dissociation.
 	 */
 	void dissociateClusters(
-			const std::shared_ptr<Reactant> & firstDissociatedCluster,
-			const std::shared_ptr<Reactant> & secondDissociatedCluster);
+			Reactant * firstDissociatedCluster,
+			Reactant * secondDissociatedCluster);
 
 	/**
 	 * This operation "combines" clusters in the sense that it handles all of
@@ -476,7 +493,7 @@ public:
 	 * @param maxSize The maximum size of the compound produced in the reaction.
 	 * @param productName The name of the product produced in the reaction.
 	 */
-	void combineClusters(std::shared_ptr<std::vector<std::shared_ptr<Reactant>>>clusters,
+	void combineClusters(std::vector<Reactant *> & clusters,
 			int maxSize, std::string productName);
 
 	/**
@@ -497,8 +514,7 @@ public:
 	 * @param newComponentName The name of the component that will replace the old
 	 * component.
 	 */
-	void replaceInCompound(
-			std::shared_ptr<std::vector<std::shared_ptr<Reactant>>>clusters,
+	void replaceInCompound(std::vector<Reactant *> & clusters,
 			std::string oldComponentName, std::string newComponentName);
 
 	/** This operation handles reactions where interstitials fill vacancies,
@@ -530,8 +546,7 @@ public:
 	 * @param clusters The set of clusters of the second type that interact
 	 * with this cluster.
 	 **/
-	void fillVWithI(std::string secondClusterName,
-			std::shared_ptr<std::vector<std::shared_ptr<Reactant> > > clusters);
+	void fillVWithI(std::string secondClusterName, std::vector<Reactant *> & clusters);
 
 	/**
 	 * This operation computes the partial derivatives due to production
@@ -791,7 +806,15 @@ public:
 	 * @return The set of connected reactants. Each entry in the set is the id
 	 * of a connected cluster for dissociation reactions.
 	 */
-	std::set<int> getDissociationConnectivitySet() const;
+	const std::set<int> & getDissociationConnectivitySet() const;
+
+	/**
+	 * This operation recomputes the diffusion coefficient. It is called
+	 * whenever the diffusion factor, migration energy or temperature change.
+	 *
+	 * @param temp the temperature
+	 */
+	void recomputeDiffusionCoefficient(double temp);
 
 	/**
 	 * This constructor is protected because PSIClusters must always be
@@ -950,7 +973,7 @@ public:
 	 * @param temperature The temperature at which to calculate the Diffusion Coefficient
 	 * @return The diffusion coefficient.
 	 */
-	virtual double getDiffusionCoefficient(double temperature) const;
+	virtual double getDiffusionCoefficient() const;
 
 	/**
 	 * This operation sets the migration energy for this cluster.
@@ -1015,7 +1038,40 @@ public:
 	 */
 	virtual std::vector<double> getPartialDerivatives(double temperature) const;
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	/**
+	 * This operation works as getPartialDerivatives above, but instead of
+	 * returning a vector that it creates it fills a vector that is passed to
+	 * it by the caller. This allows the caller to optimize the amount of
+	 * memory allocations to just one if they are accessing the partial
+	 * derivatives many times.
+	 *
+	 * @param the temperature at which the reactions are occurring
+	 * @param the vector that should be filled with the partial derivatives
+	 * for this reactant where index zero corresponds to the first reactant in
+	 * the list returned by the ReactionNetwork::getAll() operation. The size of
+	 * the vector should be equal to ReactionNetwork::size().
+	 *
+	 */
+	virtual void getPartialDerivatives(double temperature, std::vector<double> & partials) const;
+
+	/**
+	 * This operation overrides Reactant's setTemperature operation to
+	 * correctly recompute the diffusion coefficient and other
+	 * temperature-dependent quantities when the temperature is set.
+	 * @param temp
+	 */
+	virtual void setTemperature(double temp);
+
+	/**
+	 * This operation returns true if the cluster is a mixed-species or compound
+	 * cluster and false if it is a single species cluster.
+	 */
+	virtual bool isMixed() const { return false; };
+
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 };
 
 } /* end namespace xolotlCore */

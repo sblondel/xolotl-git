@@ -269,6 +269,7 @@ std::shared_ptr<PSIClusterReactionNetwork> PSIClusterNetworkLoader::load() {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Set the network for all of the reactants. This MUST be done manually.
 		for (auto currCluster : reactants) {
 			currCluster->setReactionNetwork(network);
@@ -283,6 +284,9 @@ std::shared_ptr<PSIClusterReactionNetwork> PSIClusterNetworkLoader::load() {
 		// Apply sectional grouping
 		applySectionalGrouping(network);
 =======
+=======
+		// Set the network for all of the reactants. This MUST be done manually.
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 		for (auto reactantsIt = reactants.begin();
 				reactantsIt != reactants.end(); ++reactantsIt) {
 			(*reactantsIt)->setReactionNetwork(network);

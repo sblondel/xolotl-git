@@ -198,9 +198,20 @@ protected:
 	 */
 	std::string name;
 
+	/**
+	 * The type name of the reactant.
+	 */
+	std::string typeName;
+
 	/** An integer identification number for this reactant.
 	 */
 	int id;
+
+	/**
+	 * The temperature t which the cluster currently exists. The diffusion
+	 * coefficient is recomputed each time the temperature is changed.
+	 */
+	double temperature;
 
 	/** The reaction network that includes this reactant.
 	 */
@@ -579,11 +590,28 @@ public:
     }
 =======
 	 * @param the temperature at which the reactions are occurring
-	 * @return The partial derivatives for this reactant where index zero
+	 * @return the partial derivatives for this reactant where index zero
 	 * corresponds to the first reactant in the list returned by the
 	 * ReactionNetwork::getAll() operation.
 	 */
 	virtual std::vector<double> getPartialDerivatives(double temperature) const;
+
+	/**
+	 * This operation works as getPartialDerivatives above, but instead of
+	 * returning a vector that it creates it fills a vector that is passed to
+	 * it by the caller. This allows the caller to optimize the amount of
+	 * memory allocations to just one if they are accessing the partial
+	 * derivatives many times.
+	 *
+	 * The base class (Reactant) implementation does nothing.
+	 *
+	 * @param the temperature at which the reactions are occurring
+	 * @param the vector that should be filled with the partial derivatives
+	 * for this reactant where index zero corresponds to the first reactant in
+	 * the list returned by the ReactionNetwork::getAll() operation. The size of
+	 * the vector should be equal to ReactionNetwork::size().
+	 */
+	virtual void getPartialDerivatives(double temperature, std::vector<double> & partials) const;
 
 	/**
 	 * This operation writes the contents of the reactant to a string. This
@@ -598,6 +626,13 @@ public:
 	 * @return the name
 	 */
 	const std::string getName() const;
+
+	/**
+	 * This operation returns the reactant's type. It is up to subclasses to
+	 * define exactly what the allowed types may be.
+	 * @return The type of this reactant as a string.
+	 */
+	std::string getType() const;
 
 	/**
 	 * This operation returns the compositon of this reactant. This map is empty
@@ -841,7 +876,37 @@ public:
 	int getId() const {
 		return id;
 	}
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+
+	/**
+	 * This operation sets the temperature at which the reactant currently
+	 * exists. Temperature-dependent quantities are recomputed when this
+	 * operation is called, so the temperature should always be set first.
+	 *
+	 * The simplest way to set the temperature for all reactants is to call the
+	 * ReactionNetwork::setTemperature() operation.
+	 *
+	 * The base class implementation only stores the temperature value.
+	 * Subclasses are responsible for implementing their own update
+	 * calculations and for calling setTemperature() in their copy constructors.
+	 *
+	 * @param temp The new cluster temperature
+	 */
+	virtual void setTemperature(double temp) {
+		temperature = temp;
+	}
+
+	/**
+	 * This operation returns the temperature at which the reactant currently exists.
+	 * @return The temperature.
+	 */
+	double getTemperature() const {
+		return temperature;
+	}
+
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 };
 
 } // end namespace xolotlCore

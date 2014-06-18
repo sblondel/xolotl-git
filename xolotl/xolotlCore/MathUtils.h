@@ -18,11 +18,16 @@ namespace xolotlCore {
 /**
  * This function tests two doubles to see if they are equal.
  * @param a The first double
+<<<<<<< HEAD
  * @param b The second double
+=======
+ * @param b The secound double
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
  * @return True if the doubles are equal to within machine precision, false
  * otherwise.
  */
 inline bool equal(double a, double b) {
+<<<<<<< HEAD
 	return std::fabs(b - a) < std::numeric_limits<double>::epsilon();
 }
 
@@ -110,6 +115,9 @@ inline double compute5thOrderLegendre(double x, std::vector<double> coeffs) {
 	}
 
 	return value;
+=======
+	return std::fabs(b-a) < std::numeric_limits<double>::epsilon();
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 }
 
 }

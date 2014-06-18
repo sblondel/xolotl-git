@@ -259,10 +259,14 @@ BOOST_AUTO_TEST_CASE(checkOI) {
 	for (int i = 0; i < networkSize; i++) {
 		// Get the i-th reactant in the network
 <<<<<<< HEAD
+<<<<<<< HEAD
 		auto reactant = (PSICluster *) reactants->at(i);
 =======
 		shared_ptr<PSICluster> reactant = static_pointer_cast<PSICluster>(reactants->at(i));
 >>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
+=======
+		auto reactant = (PSICluster *) reactants->at(i);
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 		int id = reactant->getId() - 1;
 		// Get the corresponding line from the HDF5 file
 		auto line = networkVector.at(id);

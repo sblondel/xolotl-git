@@ -220,9 +220,13 @@ shared_ptr<xolotlCore::ReactionNetwork> testUtils::getSimpleReactionNetwork(cons
 	// Print the reaction connectivity matrix
 	for (auto reactantIt = reactants->begin();
 			reactantIt != reactants->end(); reactantIt++) {
+<<<<<<< HEAD
 		shared_ptr<PSICluster> cluster = dynamic_pointer_cast<
 				PSICluster>(*reactantIt);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+		auto cluster = (PSICluster *) (*reactantIt);
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 		vector<int> conn = cluster->getConnectivity();
 
 		for (auto connIt = conn.begin(); connIt != conn.end(); connIt++) {

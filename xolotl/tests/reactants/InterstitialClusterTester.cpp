@@ -158,7 +158,6 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
 =======
 	
 	shared_ptr<ReactionNetwork> network = getSimpleReactionNetwork();
-	auto reactants = network->getAll();
 	auto props = network->getProperties();
 	
 	// Prevent dissociation from being added to the connectivity array
@@ -168,8 +167,9 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
 	
 	{
 		// Get the connectivity array from the reactant
-		auto reactant = dynamic_pointer_cast < PSICluster
-				> (network->get("I", 4));
+		auto reactant = (PSICluster *) network->get("I", 4);
+		// Check the type name
+		BOOST_REQUIRE_EQUAL("I",reactant->getType());
 		auto reactionConnectivity = reactant->getConnectivity();
 		
 		// Check the connectivity for He, V, and I
@@ -222,9 +222,9 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
  	shared_ptr<ReactionNetwork> network = getSimpleReactionNetwork();
 
  	// Get an I cluster with compostion 0,0,1.
- 	auto cluster = dynamic_pointer_cast<PSICluster>(network->get("I", 1));
+ 	auto cluster = (PSICluster *) network->get("I", 1);
  	// Get one that it combines with (I2)
- 	auto secondCluster = dynamic_pointer_cast<PSICluster>(network->get("I", 2));
+ 	auto secondCluster = (PSICluster *) network->get("I", 2);
  	// Set the diffusion factor, migration and binding energies based on the
  	// values from the tungsten benchmark for this problem.
  	cluster->setDiffusionFactor(2.13E+10);
@@ -232,12 +232,14 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
  	vector<double> energies = {numeric_limits<double>::infinity(), numeric_limits<double>::infinity(),
  			numeric_limits<double>::infinity(), numeric_limits<double>::infinity()};
  	cluster->setBindingEnergies(energies);
+	cluster->setTemperature(1000.0);
  	cluster->setConcentration(0.5);
 
  	// Set the diffusion factor, migration and binding energies based on the
  	// values from the tungsten benchmark for this problem for the second cluster
  	secondCluster->setDiffusionFactor(1.065E+10);
  	secondCluster->setMigrationEnergy(0.013);
+	secondCluster->setTemperature(1000.0);
  	energies = {numeric_limits<double>::infinity(), numeric_limits<double>::infinity(),
  			2.12, numeric_limits<double>::infinity()};
  	secondCluster->setBindingEnergies(energies);

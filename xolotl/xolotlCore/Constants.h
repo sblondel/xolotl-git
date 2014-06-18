@@ -55,5 +55,17 @@ static const std::string PSISuperType = "PSISuper";
 static const double latticeConstant = 0.31700000000000000;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
+/**
+ * Statically defined type names. This are used to optimize the lookup
+ * calls in the maps so that new strings are not constantly created
+ * dynamically. It accounts for a small but significant amount of
+ * performance.
+ */
+static const std::string heType = "He";
+static const std::string vType = "V";
+static const std::string iType = "I";
+static const std::string heVType = "HeV";
+static const std::string heIType = "HeI";
+
 } /* end namespace xolotlCore */
 #endif /* CONSTANTS_H_ */

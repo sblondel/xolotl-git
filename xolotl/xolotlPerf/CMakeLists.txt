@@ -129,7 +129,7 @@ endif(GPTL_FOUND AND PAPI_FOUND)
 
 
 #Add the library
-add_library(${LIBRARY_NAME} SHARED ${SRC})
+add_library(${LIBRARY_NAME} STATIC ${SRC})
 target_link_libraries(${LIBRARY_NAME} ${MAYBE_GPTL_PAPI})
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 

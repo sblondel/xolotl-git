@@ -33,13 +33,18 @@ IF (HDF5_FOUND)
 ENDIF()
 
 #Include the MPI directories
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants/psiclusters)
 include_directories(${MPI_INCLUDE_PATH})
 
 #Add a library to hold the IO code (mostly MPI)
+<<<<<<< HEAD
 add_library(${LIBRARY_NAME} SHARED ${SRC})
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+add_library(${LIBRARY_NAME} STATIC ${SRC})
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 target_link_libraries(${LIBRARY_NAME} ${MPI_LIBRARIES} ${HDF5_LIBRARIES})
 
 #Install the xolotl header files

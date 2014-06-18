@@ -17,6 +17,7 @@ using namespace xolotlCore;
 
 Reactant::Reactant() :
 <<<<<<< HEAD
+<<<<<<< HEAD
 		concentration(0.0), id(0), xeMomId(0), heMomId(0), vMomId(0), temperature(
 				0.0), typeName(""), network(nullptr), handlerRegistry(nullptr), size(
 				0), formationEnergy(0.0), diffusionFactor(0.0), diffusionCoefficient(
@@ -137,6 +138,9 @@ void Reactant::setMigrationEnergy(const double energy) {
 
 =======
 		concentration(0.0e-16), name(""), id(0) {
+=======
+		concentration(0.0), name(""), id(0), temperature(0.0) {
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 
 	// Temporary definition used to specify the type of performance handler registry
 	// that will be used (standard or dummy).  Currently, the handler registry is set via
@@ -146,13 +150,13 @@ void Reactant::setMigrationEnergy(const double energy) {
 }
 
 Reactant::Reactant(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
-		concentration(0.0e-16), name(""), id(0), handlerRegistry(registry) {
+		concentration(0.0), name(""), id(0), temperature(0.0), handlerRegistry(registry) {
 
 }
 
 Reactant::Reactant(const Reactant &other) :
 		concentration(other.concentration), name(other.name), id(other.id),
-		compositionMap(other.compositionMap), handlerRegistry(other.handlerRegistry) {
+		compositionMap(other.compositionMap), temperature(0.0), handlerRegistry(other.handlerRegistry), typeName(other.typeName)  {
 }
 
 Reactant::~Reactant() {
@@ -188,7 +192,7 @@ void Reactant::setConcentration(double conc) {
 }
 
 void Reactant::zero() {
-	concentration = 0.0e-16;
+	concentration = 0.0;
 	return;
 }
 
@@ -233,12 +237,36 @@ std::vector<double> Reactant::getPartialDerivatives(double temperature) const {
 	return partial_derivatives;
 }
 
+
+/**
+ * This operation works as getPartialDerivatives above, but instead of
+ * returning a vector that it creates it fills a vector that is passed to
+ * it by the caller. This allows the caller to optimize the amount of
+ * memory allocations to just one if they are accessing the partial
+ * derivatives many times.
+ *
+ * @param the temperature at which the reactions are occurring
+ * @param the vector that should be filled with the partial derivatives
+ * for this reactant where index zero corresponds to the first reactant in
+ * the list returned by the ReactionNetwork::getAll() operation. The size of
+ * the vector should be equal to ReactionNetwork::size().
+ *
+ */
+void Reactant::getPartialDerivatives(double temperature, std::vector<double> & partials) const {
+	// Do nothing.
+	return;
+}
+
 /**
  * This operation returns the name of the reactant.
  * @return the name
  */
 const std::string Reactant::getName() const {
 	return name;
+}
+
+std::string Reactant::getType() const {
+	return typeName;
 }
 
 const std::string Reactant::toString() {

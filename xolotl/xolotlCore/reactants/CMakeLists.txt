@@ -40,10 +40,14 @@ include_directories(${CMAKE_SOURCE_DIR}/xolotlPerf/standard)
 
 #Add the library
 <<<<<<< HEAD
+<<<<<<< HEAD
 add_library(${LIBRARY_NAME} STATIC ${SRC})
 =======
 add_library(${LIBRARY_NAME} SHARED ${SRC})
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+add_library(${LIBRARY_NAME} STATIC ${SRC})
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 target_link_libraries(${LIBRARY_NAME} xolotlPerf xolotlIO)
 
 #Install the xolotl header files

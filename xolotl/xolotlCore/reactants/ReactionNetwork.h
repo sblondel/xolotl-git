@@ -336,23 +336,44 @@ public:
 	virtual ~ReactionNetwork();
 
 	/**
+	 * This operation sets the temperature at which the reactants currently
+	 * exists. It calls setTemperature() on each reactant.
+	 *
+	 * This is the simplest way to set the temperature for all reactants is to
+	 * call the ReactionNetwork::setTemperature() operation.
+	 *
+	 * @param temp The new temperature
+	 */
+	virtual void setTemperature(double temp) = 0;
+
+	/**
+	 * This operation returns the temperature at which the cluster currently exists.
+	 * @return The temperature.
+	 */
+	virtual double getTemperature() const = 0;
+
+	/**
 	 * This operation returns a reactant with the given name and size if it
 	 * exists in the network or null if not.
-	 * @param name the name of the reactant
+	 * @param type the type of the reactant
 	 * @param size the size of the reactant
 	 * @return A shared pointer to the reactant
 	 */
-	virtual std::shared_ptr<Reactant> get(const std::string rName, const int size) const = 0;
+	virtual Reactant * get(const std::string type, const int size) const = 0;
 
 	/**
 	 * This operation returns a compound reactant with the given name and size if it
 	 * exists in the network or null if not.
-	 * @param name the name of the compound reactant
+	 * @param type the type of the compound reactant
 	 * @param sizes an array containing the sizes of each piece of the reactant
 	 * @return A shared pointer to the compound reactant
 	 */
+<<<<<<< HEAD
 	virtual std::shared_ptr<Reactant> getCompound(const std::string rName, const std::vector<int> sizes) const = 0;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	virtual Reactant * getCompound(const std::string type, const std::vector<int> sizes) const = 0;
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 
 	/**
 	 * This operation returns all reactants in the network without regard for
@@ -377,7 +398,7 @@ public:
 =======
 	 * @return The list of all of the reactants in the network
 	 */
-	virtual std::shared_ptr<std::vector<std::shared_ptr<Reactant> > > getAll() const = 0;
+	virtual const std::shared_ptr<std::vector<Reactant *>> & getAll() const = 0;
 
 	/**
 	 * This operation returns all reactants in the network with the given name.
@@ -387,8 +408,12 @@ public:
 	 * @return The list of all of the reactants in the network or null if the
 	 * name is invalid.
 	 */
+<<<<<<< HEAD
 	virtual std::shared_ptr<std::vector<std::shared_ptr<Reactant> > > getAll(std::string name) const = 0;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	virtual std::vector<Reactant *> getAll(std::string name) const = 0;
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 
 	/**
 	 * This operation adds a reactant or a compound reactant to the network.

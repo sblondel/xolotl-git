@@ -52,35 +52,50 @@ BOOST_AUTO_TEST_CASE(checkDiffusionCoefficient) {
 	cluster.setMigrationEnergy(0.0);
 	cluster.setDiffusionFactor(1.0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cluster.setTemperature(1.0);
 	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(), exp(0.0), 0.00001);
 	BOOST_REQUIRE_CLOSE(1.0, cluster.getTemperature(), 0.0001);
 =======
 	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(1.0),exp(0.0),0.00001);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	cluster.setTemperature(1.0);
+	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(),exp(0.0),0.00001);
+	BOOST_REQUIRE_CLOSE(1.0,cluster.getTemperature(),0.0001);
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 
 	// Make sure the diffusion coefficient is 0.0 if E_m is infinite
 	cluster.setMigrationEnergy(numeric_limits<double>::infinity());
 	cluster.setDiffusionFactor(1.0);
 <<<<<<< HEAD
-	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(), 0.0, 0.000001);
-=======
-	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(1.0),0.0,0.00000);
->>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
-
-	// Make sure the diffusion coefficient is zero if the diffusion factor is zero
-	cluster.setMigrationEnergy(5.0);
-	cluster.setDiffusionFactor(0.0);
 <<<<<<< HEAD
 	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(), 0.0, 0.000001);
 =======
 	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(1.0),0.0,0.00000);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(),0.0,0.00000);
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+
+	// Make sure the diffusion coefficient is zero if the diffusion factor is zero
+	cluster.setMigrationEnergy(5.0);
+	cluster.setDiffusionFactor(0.0);
+<<<<<<< HEAD
+<<<<<<< HEAD
+	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(), 0.0, 0.000001);
+=======
+	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(1.0),0.0,0.00000);
+>>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(),0.0,0.00000);
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 
 	// Make sure the diffusion coefficient is equal to the diffusion factor
 	// if the temperature is infinite
 	cluster.setMigrationEnergy(5.0);
 	cluster.setDiffusionFactor(1.0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cluster.setTemperature(numeric_limits<double>::infinity());
 	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(), 1.0, 0.000001);
@@ -88,19 +103,29 @@ BOOST_AUTO_TEST_CASE(checkDiffusionCoefficient) {
 	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(
 					numeric_limits<double>::infinity()),1.0,0.00000);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	cluster.setTemperature(numeric_limits<double>::infinity());
+	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(),1.0,0.00000);
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 
 	// Throw something random in there to be certain
 	cluster.setMigrationEnergy(0.013);
 	cluster.setDiffusionFactor(1.08E10);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cluster.setTemperature(1500.0);
 	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(), 9766651101.800613,
 			0.0000001);
+=======
+	cluster.setTemperature(1500.0);
+	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(),9766651101.800613,0.0000001);
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 
 	// Do the same test, but make sure the order of the calls doesn't affect the outcome.
 	cluster.setTemperature(1500.0);
 	cluster.setDiffusionFactor(1.08E10);
 	cluster.setMigrationEnergy(0.013);
+<<<<<<< HEAD
 	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(), 9766651101.800613,
 			0.0000001);
 
@@ -108,6 +133,10 @@ BOOST_AUTO_TEST_CASE(checkDiffusionCoefficient) {
 =======
 	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(1500.0),9766651101.800613,0.0000001);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(),9766651101.800613,0.0000001);
+
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 }
 
 /**
@@ -133,12 +162,17 @@ BOOST_AUTO_TEST_CASE(checkCopying) {
 	BOOST_REQUIRE_CLOSE(cluster.getMigrationEnergy(),
 			copiedCluster.getMigrationEnergy(), 1e-5);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(),
 			copiedCluster.getDiffusionCoefficient(), 1e-5);
 
 	// Modify some values to ensure a deep copy is occurring
 	copiedCluster.setDiffusionFactor(0.5);	// This should not happen!
 =======
+=======
+	BOOST_REQUIRE_CLOSE(cluster.getDiffusionCoefficient(),
+			copiedCluster.getDiffusionCoefficient(), 1e-5);
+>>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 
 	// Modify some values to ensure a deep copy is occurring
 	copiedCluster.setDiffusionFactor(0.5);// This should not happen!
@@ -195,9 +229,6 @@ BOOST_AUTO_TEST_CASE(checkDefaultFluxes) {
 
 	// Local Declarations
 	PSICluster cluster(1, registry);
-//	shared_ptr<PSIClusterReactionNetwork> network(new PSIClusterReactionNetwork());
-
-	shared_ptr<PSIClusterReactionNetwork> network(new PSIClusterReactionNetwork(registry));
 
 	// Check the default values of the fluxes
 	BOOST_REQUIRE_CLOSE(cluster.getProductionFlux(273.0), 0.0, 1e-5);
