@@ -16,6 +16,7 @@ namespace HDF5Utils {
 	 * Create the HDF5 file with the needed structure.
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *
 	 * @param fileName The name of the file to create
 	 */
@@ -125,15 +126,19 @@ namespace HDF5Utils {
 	 * @param timeStep The number of the time step.
 =======
 >>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
+=======
+	 * @param fileName The name of the file to create.
+>>>>>>> Undoing some hard-wiring for the name of the HDF5 file and updating the tests. SB 20140618
 	 * @param networkSize The total number of cluster in the network.
 	 * @param gridSize The total number of grid points.
 	 */
-	void initializeFile(int networkSize, int gridSize);
+	void initializeFile(std::string fileName, int networkSize, int gridSize);
 
 	/**
 	 * Open the already existing HDF5 file.
+	 * @param fileName The name of the file to open.
 	 */
-	void openFile();
+	void openFile(std::string fileName);
 
 	/**
 	 * Fill the header.
