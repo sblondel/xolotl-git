@@ -20,13 +20,20 @@ public class ArgumentsTest {
 	 */
 	@Test
 	public void testDefaultArguments() {
+<<<<<<< HEAD
 		// Local Declarations
 		Arguments args;
+=======
+
+		// Local Declarations
+		final Arguments args;
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 
 		try {
 			// Parse the empty string of arguments
 			args = CliFactory.parseArguments(Arguments.class, new String[] {});
 
+<<<<<<< HEAD
 			// Check that the default maximum Helium cluster size is 8
 			assertEquals(8, args.getMaxHeSize());
 
@@ -91,19 +98,41 @@ public class ArgumentsTest {
 
 			// Check the default flux argument
 			assertEquals("4.0e7", args.getFlux());
+=======
+			// Check if there is a material argument
+			assertEquals(false, args.isMaterial());
+
+			// Check if there is a startTemp argument
+			assertEquals(false, args.isStartTemp());
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 
 			// Check if there is a tempFile argument
 			assertEquals(false, args.isTempFile());
 
+<<<<<<< HEAD
 			// Check if there is a heat equation argument
 			assertEquals(false, args.isHeat());
 
 			// Check if there is an fluxFile argument
 			assertEquals(false, args.isFluxFile());
+=======
+			// Check if there is an heFlux argument
+			assertEquals(false, args.isHeFlux());
+			
+			// Check if there is an heFluence argument
+			assertEquals(false, args.isHeFluence());
+
+			// Check that the default perfHandler is dummy
+			assertEquals("dummy", args.getPerfHandler());
+
+			// Check if there is a vizHandler argument
+			assertEquals(false, args.isVizHandler());
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 
 			// Check if there is a checkpoint argument
 			assertEquals(false, args.isCheckpoint());
 
+<<<<<<< HEAD
 			// Check if there is a initial vacancy concentration argument
 			assertEquals(false, args.isInitialV());
 
@@ -126,15 +155,35 @@ public class ArgumentsTest {
 		}
 
 		return;
+=======
+			// Check that the default networkFile is networkInit.h5
+			assertEquals("networkInit.h5", args.getNetworkFile());
+
+			// Check the default petscArgs
+			assertEquals(
+					"-da_grid_x 10 -ts_final_time 1000 "
+							+ "-ts_max_steps 3 -ts_adapt_dt_max 10 -ts_max_snes_failures 200 "
+							+ "-pc_type fieldsplit -pc_fieldsplit_detect_coupling -fieldsplit_0_pc_type redundant "
+							+ "-fieldsplit_1_pc_type sor -snes_monitor -ksp_monitor -ts_monitor",
+					args.getPetscArgs());
+		} catch (ArgumentValidationException e) {
+			e.printStackTrace();
+		}
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 	}
 
 	/**
 	 * This operation tests that default parameter values are only overridden if
+<<<<<<< HEAD
 	 * they are specified via the command line and that the optional arguments
+=======
+	 * they are specified via the command line and that the optional arguments 
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 	 * are only set if they are also specified
 	 */
 	@Test
 	public void testSpecifiedArguments() {
+<<<<<<< HEAD
 		// Local Declarations
 		Arguments args;
 
@@ -270,3 +319,61 @@ public class ArgumentsTest {
 		return;
 	}
 }
+=======
+
+		// Local Declarations
+		final Arguments args;
+
+		try {
+			// Parse the specified string of arguments
+			args = CliFactory.parseArguments(Arguments.class, new String[] {
+					"--startTemp", "900", "--material", "Fe", "--perfHandler",
+					"std" });
+			
+			// Check if there is a material argument
+			assertEquals(true, args.isMaterial());
+
+			// Check that the material is Fe
+			assertEquals("Fe", args.getMaterial());
+			
+			// Check if there is a startTemp argument
+			assertEquals(true, args.isStartTemp());
+
+			// Check that the startTemp is 900
+			assertEquals("900", args.getStartTemp());
+
+			// Check if there is a tempFile argument
+			assertEquals(false, args.isTempFile());
+
+			// Check if there is an heFlux argument
+			assertEquals(false, args.isHeFlux());
+			
+			// Check if there is an heFluence argument
+			assertEquals(false, args.isHeFluence());
+
+			// Check that the default perfHandler is dummy
+			assertEquals("std", args.getPerfHandler());
+
+			// Check if there is a vizHandler argument
+			assertEquals(false, args.isVizHandler());
+
+			// Check if there is a checkpoint argument
+			assertEquals(false, args.isCheckpoint());
+
+			// Check that the default networkFile is networkInit.h5
+			assertEquals("networkInit.h5", args.getNetworkFile());
+
+			// Check the default petscArgs
+			assertEquals(
+					"-da_grid_x 10 -ts_final_time 1000 "
+							+ "-ts_max_steps 3 -ts_adapt_dt_max 10 -ts_max_snes_failures 200 "
+							+ "-pc_type fieldsplit -pc_fieldsplit_detect_coupling -fieldsplit_0_pc_type redundant "
+							+ "-fieldsplit_1_pc_type sor -snes_monitor -ksp_monitor -ts_monitor",
+					args.getPetscArgs());
+		} catch (ArgumentValidationException e) {
+			e.printStackTrace();
+		}
+	}
+
+}
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624

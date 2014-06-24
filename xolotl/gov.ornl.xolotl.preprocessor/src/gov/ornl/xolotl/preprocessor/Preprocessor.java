@@ -4,11 +4,15 @@
 package gov.ornl.xolotl.preprocessor;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 import java.io.IOException;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Properties;
+<<<<<<< HEAD
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +23,11 @@ import ncsa.hdf.hdf5lib.HDF5Constants;
 =======
 import java.util.ArrayList;
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+
+import ncsa.hdf.hdf5lib.H5;
+import ncsa.hdf.hdf5lib.HDF5Constants;
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 
 /**
  * This class generates a valid Xolotl input file with each line representing a
@@ -291,6 +300,11 @@ public class Preprocessor {
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 
 	/**
+	 * The list of parameters that will be passed to Xolotl
+	 */
+	public Properties xolotlParams = new Properties();
+
+	/**
 	 * Constructor
 	 * 
 	 * @param args
@@ -377,6 +391,28 @@ public class Preprocessor {
 		}
 =======
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+
+		// Set the parameter options that will be passed to Xolotl
+		xolotlParams.setProperty("networkFile", args.getNetworkFile());
+		xolotlParams.setProperty("perfHandler", args.getPerfHandler());
+		xolotlParams.setProperty("petscArgs", args.getPetscArgs());
+
+		// The following parameter options are optional and will only
+		// be set if they are specified via the command line
+		if (args.isMaterial() == true)
+			xolotlParams.setProperty("material", args.getMaterial());
+		if (args.isStartTemp() == true)
+			xolotlParams.setProperty("startTemp", args.getStartTemp());
+		if (args.isTempFile() == true)
+			xolotlParams.setProperty("tempFile", args.getTempFile());
+		if (args.isHeFlux() == true)
+			xolotlParams.setProperty("heFlux", args.getHeFlux());
+		if (args.isHeFluence() == true)
+			xolotlParams.setProperty("heFluence", args.getHeFluence());
+		if (args.isVizHandler() == true)
+			xolotlParams.setProperty("vizHandler", args.getVizHandler());
+		if (args.isCheckpoint() == true)
+			xolotlParams.setProperty("checkpoint", args.getCheckpoint());
 
 	}
 
@@ -670,7 +706,7 @@ public class Preprocessor {
 	 * @return The list of clusters created by the preprocessor based on its
 	 *         arguments and settings.
 	 */
-	public ArrayList<Cluster> generate(String[] args) {
+	public ArrayList<Cluster> generateNetwork(String[] args) {
 
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 		// Create the list of clusters
@@ -689,6 +725,42 @@ public class Preprocessor {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/**
+	 * This operation generates the parameters needed to run Xolotl.
+	 * 
+	 * TODO is this function necessary?
+	 * 
+	 * @return The property list of parameters that will be passed to Xolotl
+	 */
+	public Properties generateParameters() {
+
+		// Create the default parameters to be used with Xolotl
+		Properties defaultParameters = new Properties();
+
+		// set the default parameters
+		defaultParameters.setProperty("material", "W");
+		defaultParameters.setProperty("startTemp", "1000");
+		defaultParameters.setProperty("tempFile", "tempFile");
+		defaultParameters.setProperty("heFlux", "2.5e27");
+		defaultParameters.setProperty("heFluence", "1.0e19");
+		defaultParameters.setProperty("perfHandler", "dummy");
+		defaultParameters.setProperty("vizHandler", "dummy");
+		defaultParameters
+				.setProperty(
+						"petscArgs",
+						"-da_grid_x 10 -ts_final_time 1000 "
+								+ "-ts_max_steps 3 -ts_adapt_dt_max 10 -ts_max_snes_failures 200 "
+								+ "-pc_type fieldsplit -pc_fieldsplit_detect_coupling -fieldsplit_0_pc_type redundant "
+								+ "-fieldsplit_1_pc_type sor -snes_monitor -ksp_monitor -ts_monitor");
+		defaultParameters.setProperty("networkFile", "networkInit.h5");
+		defaultParameters.setProperty("checkpoint", "false");
+
+		return defaultParameters;
+	}
+
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 	/**
 	 * This operation writes the parameters file that is needed to run Xolotl.
 	 * 
@@ -698,6 +770,10 @@ public class Preprocessor {
 	 *            The parameters that will be written to the file
 	 */
 	public void writeParameterFile(String parameterFile, Properties parameters) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 		try {
 			// Create the file containing the parameters
 			FileOutputStream paramsFile = new FileOutputStream(parameterFile);
@@ -705,8 +781,11 @@ public class Preprocessor {
 			// Write the parameters to the output file and save
 			// the file to the project root folder
 			parameters.store(paramsFile, null);
+<<<<<<< HEAD
 			// Flush the parameters to the intended stream
 			paramsFile.flush();
+=======
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 			// Close the parameter file
 			paramsFile.close();
 
@@ -724,6 +803,10 @@ public class Preprocessor {
 	 *            The parameter file name
 	 */
 	public Properties loadParameterFile(String parameterFile) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 		// Local declarations
 		Properties inProperties = new Properties();
 
@@ -736,13 +819,17 @@ public class Preprocessor {
 			inParamsFile.close();
 
 		} catch (IOException io) {
+<<<<<<< HEAD
 			System.err.println("Error loading parameter file.");
+=======
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 			io.printStackTrace();
 		}
 		return inProperties;
 	}
 
 	/**
+<<<<<<< HEAD
 	 * This operation creates the HDF5 file needed by Xolotl
 	 * 
 	 * @param name
@@ -827,6 +914,51 @@ public class Preprocessor {
 
 			// Close everything
 			status = H5.H5Gclose(headerGroupId);
+=======
+	 * This operation generates the grid needed to write the concentrations.
+	 * 
+	 * @param dimension
+	 *            The physical length of the grid
+	 * @param refinement
+	 *            The refinement of the grid
+	 * 
+	 * @return The array of physical positions on the grid
+	 */
+	public double[] generateGrid(int dimension, int refinement) {
+		int totalLength = dimension;
+		// Compute the total number of positions
+		for (int i = 0; i < refinement; i++) {
+			totalLength = (totalLength * 2) - 1;
+		}
+		// Create the array to return
+		double[] toReturn = new double[totalLength];
+		// Compute the distance between every position
+		double increment = (double) dimension / (totalLength - 1);
+
+		for (int i = 0; i < totalLength; i++) {
+			toReturn[i] = i * increment;
+		}
+
+		return toReturn;
+	}
+
+	/**
+	 * This operation creates the HDF5 file needed by Xolotl
+	 * 
+	 * @param name
+	 *            The name of the HDF5 file
+	 */
+	public void createHDF5(String name) {
+		// The status of the previous HDF5 operation
+		int status;
+
+		try {
+			// Create the HDF5 file
+			int fileId = H5.H5Fcreate(name, HDF5Constants.H5F_ACC_TRUNC,
+					HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT);
+
+			// Close the HDF5 file
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 			status = H5.H5Fclose(fileId);
 		} catch (Exception e) {
 			// Complain
@@ -837,6 +969,7 @@ public class Preprocessor {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * This operation copy the header from a given HDF5 file to the one created
 	 * by the preprocessor
 	 * 
@@ -1576,6 +1709,52 @@ public class Preprocessor {
 		} catch (RuntimeException e) {
 			// Complain
 			e.printStackTrace();
+=======
+	 * This operation writes the header in the HDF5 file
+	 * 
+	 * @param name
+	 *            The name of the HDF5 file
+	 * @param dimension
+	 *            The physical dimension of the grid
+	 * @param refinement
+	 *            The refinement of the grid
+	 */
+	public void writeHeader(String name, int[] dimension, int[] refinement) {
+		// The status of the previous HDF5 operation
+		int status;
+
+		try {
+			// Open the HDF5 file
+			int fileId = H5.H5Fopen(name, HDF5Constants.H5F_ACC_RDWR,
+					HDF5Constants.H5P_DEFAULT);
+
+			// Create the header group
+			int headerGroupId = H5.H5Gcreate(fileId, "headerGroup",
+					HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT,
+					HDF5Constants.H5P_DEFAULT);
+
+			// Create, write, and close the physicalDim attribute
+			int dimSId = H5.H5Screate(HDF5Constants.H5S_SCALAR);
+			int dimAId = H5.H5Acreate(headerGroupId, "physicalDim",
+					HDF5Constants.H5T_STD_I32LE, dimSId,
+					HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT);
+			status = H5
+					.H5Awrite(dimAId, HDF5Constants.H5T_STD_I32LE, dimension);
+			status = H5.H5Aclose(dimAId);
+
+			// Create, write, and close the refinement attribute
+			int refineSId = H5.H5Screate(HDF5Constants.H5S_SCALAR);
+			int refineAId = H5.H5Acreate(headerGroupId, "refinement",
+					HDF5Constants.H5T_STD_I32LE, refineSId,
+					HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT);
+			status = H5.H5Awrite(refineAId, HDF5Constants.H5T_STD_I32LE,
+					refinement);
+			status = H5.H5Aclose(refineAId);
+
+			// Close everything
+			status = H5.H5Gclose(headerGroupId);
+			status = H5.H5Fclose(fileId);
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 		} catch (Exception e) {
 			// Complain
 			e.printStackTrace();
@@ -1593,6 +1772,7 @@ public class Preprocessor {
 	 *            The list of clusters representing the network
 	 */
 	public void writeNetwork(String name, ArrayList<Cluster> clusters) {
+<<<<<<< HEAD
 		try {
 			// Open the HDF5 file
 			int fileId = H5.H5Fopen(name, HDF5Constants.H5F_ACC_RDWR, HDF5Constants.H5P_DEFAULT);
@@ -1604,12 +1784,31 @@ public class Preprocessor {
 			// Create the array that will store the network
 			int networkSize = clusters.size();
 			double[][] networkArray = new double[networkSize][6];
+=======
+		// The status of the previous HDF5 operation
+		int status;
+
+		try {
+			// Open the HDF5 file
+			int fileId = H5.H5Fopen(name, HDF5Constants.H5F_ACC_RDWR,
+					HDF5Constants.H5P_DEFAULT);
+
+			// Create the header group
+			int networkGroupId = H5.H5Gcreate(fileId, "networkGroup",
+					HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT,
+					HDF5Constants.H5P_DEFAULT);
+
+			// Create the array that will store the network
+			int networkSize = clusters.size();
+			double[][] networkArray = new double[networkSize][8];
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 
 			int id = 0;
 			// Loop on the clusters
 			for (Cluster cluster : clusters) {
 				// Store the composition
 				networkArray[id][0] = cluster.nHe;
+<<<<<<< HEAD
 				if (maxXe > 0)
 					networkArray[id][0] = cluster.nXe;
 				networkArray[id][1] = cluster.nV;
@@ -1623,6 +1822,21 @@ public class Preprocessor {
 
 				// Store the diffusion factor
 				networkArray[id][5] = cluster.D_0;
+=======
+				networkArray[id][1] = cluster.nV;
+				networkArray[id][2] = cluster.nI;
+
+				// Store the binding energies
+				networkArray[id][3] = cluster.E_He;
+				networkArray[id][4] = cluster.E_V;
+				networkArray[id][5] = cluster.E_I;
+
+				// Store the migration energy
+				networkArray[id][6] = cluster.E_m;
+
+				// Store the diffusion factor
+				networkArray[id][7] = cluster.D_0;
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 
 				// increment the id number
 				id++;
@@ -1631,6 +1845,7 @@ public class Preprocessor {
 			// Create the dataspace for the network with dimension dims
 			long[] dims = new long[2];
 			dims[0] = networkSize;
+<<<<<<< HEAD
 			dims[1] = 6;
 			int networkDataSpaceId = H5.H5Screate_simple(2, dims, null);
 
@@ -1659,6 +1874,38 @@ public class Preprocessor {
 		} catch (RuntimeException e) {
 			// Complain
 			e.printStackTrace();
+=======
+			dims[1] = 8;
+			int networkSId = H5.H5Screate_simple(2, dims, null);
+
+			// Create the dataset for the network
+			int datasetId = H5.H5Dcreate(networkGroupId, "network",
+					HDF5Constants.H5T_IEEE_F64LE, networkSId,
+					HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT,
+					HDF5Constants.H5P_DEFAULT);
+
+			// Write networkArray in the dataset
+			status = H5.H5Dwrite(datasetId, HDF5Constants.H5T_IEEE_F64LE,
+					HDF5Constants.H5S_ALL, HDF5Constants.H5S_ALL,
+					HDF5Constants.H5P_DEFAULT, networkArray);
+
+			// Create the attribute for the network size
+			int networkSizeSId = H5.H5Screate(HDF5Constants.H5S_SCALAR);
+			int networkSizeAId = H5.H5Acreate(datasetId, "networkSize",
+					HDF5Constants.H5T_STD_I32LE, networkSizeSId,
+					HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT);
+
+			// Write it
+			int[] tempNetworkSize = { networkSize };
+			status = H5.H5Awrite(networkSizeAId, HDF5Constants.H5T_STD_I32LE,
+					tempNetworkSize);
+
+			// Close everything
+			status = H5.H5Aclose(networkSizeAId);
+			status = H5.H5Dclose(datasetId);
+			status = H5.H5Gclose(networkGroupId);
+			status = H5.H5Fclose(fileId);
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 		} catch (Exception e) {
 			// Complain
 			e.printStackTrace();
@@ -1666,7 +1913,10 @@ public class Preprocessor {
 
 		return;
 	}
+<<<<<<< HEAD
 }
 =======
+=======
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 }
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618

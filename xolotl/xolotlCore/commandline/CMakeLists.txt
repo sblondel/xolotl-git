@@ -25,6 +25,7 @@ file(GLOB SRC *.cpp)
 # Where to look for include files
 include_directories(${CMAKE_SOURCE_DIR})
 <<<<<<< HEAD
+<<<<<<< HEAD
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/io)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/commandline)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/commandline/optionhandlers)
@@ -34,6 +35,9 @@ include_directories(${CMAKE_SOURCE_DIR}/xolotlPerf/)
 add_library(${LIBRARY_NAME} STATIC ${SRC})
 target_link_libraries(${LIBRARY_NAME})
 =======
+=======
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/io)
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 
 #Add a library to hold the command line handling code
 add_library(${LIBRARY_NAME} STATIC ${SRC})

@@ -184,14 +184,18 @@ std::shared_ptr<std::istream> PSIClusterNetworkLoader::getInputstream() {
  * This operation throws a std::string as an exception if there is a problem.
  */
 std::shared_ptr<PSIClusterReactionNetwork> PSIClusterNetworkLoader::load() {
+<<<<<<< HEAD
 
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 	// Local Declarations
 	TokenizedLineReader<std::string> reader;
 	std::vector<std::string> loadedLine;
 	std::shared_ptr<PSIClusterReactionNetwork> network = std::make_shared<
 			PSIClusterReactionNetwork>(handlerRegistry);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	std::string error(
 			"PSIClusterNetworkLoader Exception: Insufficient or erroneous data.");
@@ -200,6 +204,8 @@ std::shared_ptr<PSIClusterReactionNetwork> PSIClusterNetworkLoader::load() {
 	double diffusionFactor = 0.0;
 =======
 	std::istringstream dataStream;
+=======
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 	std::string error(
 			"PSIClusterNetworkLoader Exception: Insufficient or erroneous data.");
 	int numHe = 0, numV = 0, numI = 0;

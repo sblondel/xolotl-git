@@ -1183,8 +1183,11 @@ void PetscSolver::setupMesh() {
  * throw an exception of type std::string.
  */
 void PetscSolver::initialize() {
+<<<<<<< HEAD
 
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	 Initialize program
 	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
