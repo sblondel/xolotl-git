@@ -210,25 +210,6 @@ std::shared_ptr<PSIClusterNetworkLoader> setUpNetworkLoader(int rank,
 	// Give the networkFilename to the network loader
 	networkLoader->setFilename(networkFilename);
 
-//	std::shared_ptr<PSIClusterNetworkLoader> networkLoader;
-//	shared_ptr<std::istream> networkStream;
-//
-//	// Setup the master
-//	if (rank == 0) {
-//		// Say hello
-//		printStartMessage();
-//		// Set the input stream on the master
-//		networkStream = make_shared<std::ifstream>(networkFilename);
-//	}
-//
-//	// Broadcast the stream to all worker tasks
-//	networkLoader = std::make_shared<PSIClusterNetworkLoader>(registry);
-//	networkStream = xolotlCore::MPIUtils::broadcastStream(networkStream, 0,
-//			comm);
-//
-//	// Create a network loader and set the stream on every MPI task
-//	networkLoader->setInputstream(networkStream);
-
 	return networkLoader;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 }
