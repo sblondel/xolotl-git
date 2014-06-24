@@ -483,6 +483,19 @@ public:
 =======
 			std::shared_ptr<ReactionNetwork> reactionNetwork);
 
+
+    /**
+     * Release the reaction network object.
+     *
+     * This should only be done when the reaction network is no longer needed
+     * by the program, and is done to break dependence cycles that would
+     * otherwise keep the network and reactant objects from being destroyed.
+     */
+    virtual void releaseReactionNetwork( void ) {
+        network.reset();
+    }
+
+
 	/**
 	 * This operation returns a list that represents the connectivity
 	 * between this Reactant and other Reactants in the network.
@@ -906,7 +919,11 @@ public:
 		return temperature;
 	}
 
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+
+>>>>>>> Pulling "break circular dependencies of network and reactant objects" into the HDF5 branch. SB 20140624
 };
 
 } // end namespace xolotlCore

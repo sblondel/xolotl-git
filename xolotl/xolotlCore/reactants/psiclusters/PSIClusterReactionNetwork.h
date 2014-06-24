@@ -212,6 +212,7 @@ public:
 	 */
 	PSIClusterReactionNetwork(const PSIClusterReactionNetwork &other);
 
+
 	/**
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -648,7 +649,6 @@ public:
 		return composition;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 	}
-
 };
 
 }

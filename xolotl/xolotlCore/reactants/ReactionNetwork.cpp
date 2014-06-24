@@ -87,6 +87,7 @@ void ReactionNetwork::fillConcentrationsArray(double * concentrations) {
 #include "Reactant.h"
 #include "xolotlPerf/HandlerRegistryFactory.h"
 #include <iostream>
+#include <cassert>
 
 using namespace xolotlCore;
 
@@ -319,4 +320,22 @@ void ReactionNetwork::updateConcentrationsFromArray(double * concentrations) {
 
 	return;
 }
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+
+
+void ReactionNetwork::askReactantsToReleaseNetwork(void) {
+
+    auto allReactants = this->getAll();    
+
+    for(auto iter = allReactants->begin(); iter != allReactants->end(); ++iter) {
+        Reactant* currReactant = *iter;
+        assert( currReactant != NULL );
+
+        currReactant->releaseReactionNetwork();
+    }
+}
+
+
+>>>>>>> Pulling "break circular dependencies of network and reactant objects" into the HDF5 branch. SB 20140624

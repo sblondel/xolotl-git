@@ -126,14 +126,21 @@ bool initPerf(bool opts, std::vector<xolotlPerf::HardwareQuantities> hwq) {
 		return perfInitOK;
 }
 
+<<<<<<< HEAD
 xolotlSolver::PetscSolver setUpSolver(
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> handlerRegistry, int argc,
 		char **argv) {
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+std::shared_ptr<xolotlSolver::PetscSolver>
+setUpSolver( std::shared_ptr<xolotlPerf::IHandlerRegistry> handlerRegistry, 
+            int argc, char **argv) {
+>>>>>>> Pulling "break circular dependencies of network and reactant objects" into the HDF5 branch. SB 20140624
 
 	// Setup the solver
 	auto solverInitTimer = handlerRegistry->getTimer("initSolver");
 	solverInitTimer->start();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	std::shared_ptr<xolotlSolver::PetscSolver> solver = std::make_shared<
 			xolotlSolver::PetscSolver>(handlerRegistry);
@@ -145,11 +152,18 @@ xolotlSolver::PetscSolver setUpSolver(
 	solver.setCommandLineOptions(argc, argv);
 	solver.initialize();
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	std::shared_ptr<xolotlSolver::PetscSolver> solver = 
+        std::make_shared<xolotlSolver::PetscSolver>(handlerRegistry);
+	solver->setCommandLineOptions(argc, argv);
+	solver->initialize();
+>>>>>>> Pulling "break circular dependencies of network and reactant objects" into the HDF5 branch. SB 20140624
 	solverInitTimer->stop();
 
 	return solver;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void launchPetscSolver(std::shared_ptr<xolotlSolver::PetscSolver> solver,
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> handlerRegistry) {
@@ -169,6 +183,9 @@ void launchPetscSolver(std::shared_ptr<xolotlSolver::PetscSolver> solver,
 	solverTimer->stop();
 =======
 void launchPetscSolver(xolotlSolver::PetscSolver solver,
+=======
+void launchPetscSolver(std::shared_ptr<xolotlSolver::PetscSolver> solver,
+>>>>>>> Pulling "break circular dependencies of network and reactant objects" into the HDF5 branch. SB 20140624
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> handlerRegistry) {
 
 	// Launch the PetscSolver
@@ -178,7 +195,7 @@ void launchPetscSolver(xolotlSolver::PetscSolver solver,
 	auto fitFluxHandler = std::make_shared<xolotlSolver::FitFluxHandler>();
 	// Create object to handle temperature
 	auto tempHandler = std::make_shared<xolotlSolver::TemperatureHandler>();
-	solver.solve(fitFluxHandler, tempHandler);
+	solver->solve(fitFluxHandler, tempHandler);
 	solverTimer->stop();
 
 }
@@ -353,7 +370,7 @@ int main(int argc, char **argv) {
 				networkFilename, handlerRegistry);
 
 		// Give the network loader to PETSc as input
-		solver.setNetworkLoader(networkLoader);
+		solver->setNetworkLoader(networkLoader);
 		networkLoadTimer->stop();
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 
@@ -363,6 +380,7 @@ int main(int argc, char **argv) {
 		// Finalize our use of the solver.
 		auto solverFinalizeTimer = handlerRegistry->getTimer("solverFinalize");
 		solverFinalizeTimer->start();
+<<<<<<< HEAD
 <<<<<<< HEAD
 		solver->finalize();
 		solverFinalizeTimer->stop();
@@ -390,6 +408,9 @@ int main(int argc, char **argv) {
 		ret = EXIT_FAILURE;
 =======
 		solver.finalize();
+=======
+		solver->finalize();
+>>>>>>> Pulling "break circular dependencies of network and reactant objects" into the HDF5 branch. SB 20140624
 		solverFinalizeTimer->stop();
 		totalTimer->stop();
 

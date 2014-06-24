@@ -43,7 +43,7 @@ void PSIClusterReactionNetwork::setDefaultPropsAndNames() {
 #include <Constants.h>
 
 using namespace xolotlCore;
-using std::shared_ptr;
+
 
 void PSIClusterReactionNetwork::setDefaultPropsAndNames() {
 
@@ -907,6 +907,7 @@ std::vector<IReactant *> PSIClusterReactionNetwork::getAll(
 	}
 
 }
+
 
 /**
  * This operation sets the temperature at which the reactants currently
@@ -1840,3 +1841,5 @@ void PSIClusterReactionNetwork::computeAllPartials(double *vals, int *indices,
 	return networkSize;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 }
+
+
