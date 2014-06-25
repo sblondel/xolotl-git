@@ -169,6 +169,7 @@ public class PreprocessorTest {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * This operation checks if the optional options are specified via the
 	 * command line, that they will be included in the parameter file.
 	 */
@@ -176,6 +177,10 @@ public class PreprocessorTest {
 	public void testOptionalOptions() {
 =======
 	 * This operation checks writeParameterFile and loadParameterFile.
+=======
+	 * This operation checks that the default parameters will be used along with
+	 * writeParameterFile and loadParameterFile.
+>>>>>>> Merged the recent changes made in the preprocessor_branch to the HDF5_branch.  CLJ 20140625
 	 */
 	@Test
 	public void testParameterFile() {
@@ -218,6 +223,7 @@ public class PreprocessorTest {
 					String key = (String) paramNames.nextElement();
 					String value = inProps.getProperty(key);
 <<<<<<< HEAD
+<<<<<<< HEAD
 					// Check that the default parameter values were used
 					assertEquals(preprocessor.xolotlParams.getProperty(key), value);
 				}
@@ -230,9 +236,120 @@ public class PreprocessorTest {
 			e.printStackTrace();
 			fail();
 =======
+=======
+					// Check that the default parameter values were used
+>>>>>>> Merged the recent changes made in the preprocessor_branch to the HDF5_branch.  CLJ 20140625
 					assertEquals(preprocessor.xolotlParams.getProperty(key),
 							value);
 				}
+
+				// Delete the parameter file
+				new File("paramsTest").delete();
+
+			}
+		} catch (ArgumentValidationException e1) {
+			e1.printStackTrace();
+		}
+
+		return;
+	}
+
+	/**
+	 * This operation checks that the options specified via the command line
+	 * will override the default values.
+	 */
+	@Test
+	public void testCLOptionOverride() {
+
+		// Local Declarations
+		Arguments parsedArgs = null;
+
+		try {
+			parsedArgs = CliFactory.parseArguments(Arguments.class,
+					new String[] { "--perfHandler", "std",
+							"--petscArgs=" + "-da_grid_x 8 -ts_final_time 2" });
+
+			if (parsedArgs != null) {
+				Preprocessor preprocessor = new Preprocessor(parsedArgs);
+
+				// Write the parameter file
+				preprocessor.writeParameterFile("clOptionsTest",
+						preprocessor.xolotlParams);
+
+				// Load the properties from the parameter file to check they
+				// were written correctly
+				Properties inProps = preprocessor
+						.loadParameterFile("clOptionsTest");
+				// Enumeration to hold the parameter names
+				Enumeration<?> paramNames = inProps.propertyNames();
+				while (paramNames.hasMoreElements()) {
+					String key = (String) paramNames.nextElement();
+					String value = inProps.getProperty(key);
+					// Check that the default parameter values were used
+					assertEquals(preprocessor.xolotlParams.getProperty(key),
+							value);
+				}
+
+				// Delete the parameter file
+				new File("clOptionsTest").delete();
+
+			}
+		} catch (ArgumentValidationException e1) {
+			e1.printStackTrace();
+		}
+
+		return;
+	}
+
+	/**
+	 * This operation checks if the optional options are specified via the
+	 * command line, that they will be included in the parameter file.
+	 */
+	@Test
+	public void testOptionalOptions() {
+
+		// Local Declarations
+		Arguments parsedArgs = null;
+
+		try {
+			parsedArgs = CliFactory.parseArguments(Arguments.class,
+					new String[] { "--material", "Fe", "--startTemp", "900" });
+
+			// Check if there is a material argument
+			assertEquals(true, parsedArgs.isMaterial());
+
+			// Check that the material is Fe
+			assertEquals("Fe", parsedArgs.getMaterial());
+
+			// Check if there is a startTemp argument
+			assertEquals(true, parsedArgs.isStartTemp());
+
+			// Check that the startTemp is 900
+			assertEquals("900", parsedArgs.getStartTemp());
+
+			if (parsedArgs != null) {
+				Preprocessor preprocessor = new Preprocessor(parsedArgs);
+
+				// Write the parameter file
+				preprocessor.writeParameterFile("optionalOpsTest",
+						preprocessor.xolotlParams);
+
+				// Load the properties from the parameter file to check they
+				// were written correctly
+				Properties inProps = preprocessor
+						.loadParameterFile("optionalOpsTest");
+				// Enumeration to hold the parameter names
+				Enumeration<?> paramNames = inProps.propertyNames();
+				while (paramNames.hasMoreElements()) {
+					String key = (String) paramNames.nextElement();
+					String value = inProps.getProperty(key);
+					// Check that the default parameter values were used
+					assertEquals(preprocessor.xolotlParams.getProperty(key),
+							value);
+				}
+
+				// Delete the parameter file
+				new File("optionalOpsTest").delete();
 
 			}
 		} catch (ArgumentValidationException e1) {
