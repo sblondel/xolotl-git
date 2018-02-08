@@ -32,6 +32,7 @@ class NEClusterReactionNetwork: public ReactionNetwork {
 private:
 
 	/**
+<<<<<<< HEAD
 	 * The map of single-species clusters, indexed by a string representation
 	 * of a map that contains the name of the reactant and its size.
 	 */
@@ -94,6 +95,8 @@ private:
 	void setDefaultPropsAndNames();
 
 	/**
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	 * Calculate the dissociation constant of the first cluster with respect to
 	 * the single-species cluster of the same type based on the current clusters
 	 * atomic volume, reaction rate constant, and binding energies.
@@ -101,6 +104,7 @@ private:
 	 * @param reaction The reaction
 	 * @return The dissociation constant
 	 */
+<<<<<<< HEAD
 	double calculateDissociationConstant(DissociationReaction * reaction) const;
 
 	/**
@@ -129,6 +133,26 @@ public:
 	 * Computes the full reaction connectivity matrix for this network.
 	 */
 	void createReactionConnectivity();
+=======
+	double calculateDissociationConstant(
+			const DissociationReaction& reaction) const override;
+
+	/**
+	 * Calculate the binding energy for the dissociation cluster to emit the single
+	 * and second cluster.
+	 *
+	 * @param reaction The reaction
+	 * @return The binding energy corresponding to this dissociation
+	 */
+	virtual double computeBindingEnergy(
+			const DissociationReaction& reaction) const override {
+		double bindingEnergy = reaction.first.getFormationEnergy()
+				+ reaction.second.getFormationEnergy()
+				- reaction.dissociating.getFormationEnergy();
+
+		return bindingEnergy;
+	}
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Add the dissociation connectivity for the reverse reaction if it is allowed.
@@ -137,6 +161,7 @@ public:
 	 * @param reaction The reaction we want to reverse
 	 *
 	 */
+<<<<<<< HEAD
 	void checkDissociationConnectivity(IReactant * emittingReactant,
 			std::shared_ptr<ProductionReaction> reaction);
 
@@ -260,19 +285,67 @@ public:
 	 * @param reactants The reactants that should be removed.
 	 */
 	void removeReactants(const std::vector<IReactant*>& reactants);
+=======
+	void checkForDissociation(IReactant * emittingReactant,
+			std::shared_ptr<ProductionReaction> reaction);
+
+public:
+
+	/**
+	 * Default constructor, deleted to force construction using parameters.
+	 */
+	NEClusterReactionNetwork() = delete;
+
+	/**
+	 * The Constructor
+	 *
+	 * @param registry The performance handler registry
+	 */
+	NEClusterReactionNetwork(
+			std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
+
+	/**
+	 * Copy constructor, deleted to prevent use.
+	 */
+	NEClusterReactionNetwork(const NEClusterReactionNetwork& other) = delete;
+
+	/**
+	 * Computes the full reaction connectivity matrix for this network.
+	 */
+	void createReactionConnectivity();
+
+	/**
+	 * This operation sets the temperature at which the reactants currently
+	 * exists. It calls setTemperature() on each reactant.
+	 *
+	 * This is the simplest way to set the temperature for all reactants is to
+	 * call the ReactionNetwork::setTemperature() operation.
+	 *
+	 * @param temp The new temperature
+	 */
+	virtual void setTemperature(double temp) override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation reinitializes the network.
 	 *
 	 * It computes the cluster Ids and network size from the allReactants vector.
 	 */
+<<<<<<< HEAD
 	void reinitializeNetwork();
+=======
+	void reinitializeNetwork() override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This method redefines the connectivities for each cluster in the
 	 * allReactans vector.
 	 */
+<<<<<<< HEAD
 	void reinitializeConnectivities();
+=======
+	void reinitializeConnectivities() override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation updates the concentrations for all reactants in the
@@ -283,15 +356,24 @@ public:
 	 * array. Properly aligning the array in memory so that this operation
 	 * does not overrun is up to the caller.
 	 */
+<<<<<<< HEAD
 	void updateConcentrationsFromArray(double * concentrations);
+=======
+	void updateConcentrationsFromArray(double * concentrations) override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation returns the size or number of reactants and momentums in the network.
 	 *
 	 * @return The number of degrees of freedom
 	 */
+<<<<<<< HEAD
 	virtual int getDOF() {
-		return networkSize + numSuperClusters;
+		return networkSize + numSuperClusters + 1;
+=======
+	virtual int getDOF() const override {
+		return size() + getAll(ReactantType::NESuper).size() + 1;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	}
 
 	/**
@@ -299,13 +381,21 @@ public:
 	 *
 	 * @param diagFill The pointer to the vector where the connectivity information is kept
 	 */
+<<<<<<< HEAD
 	void getDiagonalFill(int *diagFill);
+=======
+	void getDiagonalFill(int *diagFill) override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Calculate all the rate constants for the reactions and dissociations of the network.
 	 * Need to be called only when the temperature changes.
 	 */
+<<<<<<< HEAD
 	void computeRateConstants();
+=======
+	void computeRateConstants() override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Compute the fluxes generated by all the reactions
@@ -314,7 +404,11 @@ public:
 	 * @param updatedConcOffset The pointer to the array of the concentration at the grid
 	 * point where the fluxes are computed used to find the next solution
 	 */
+<<<<<<< HEAD
 	void computeAllFluxes(double *updatedConcOffset);
+=======
+	void computeAllFluxes(double *updatedConcOffset) override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Compute the partial derivatives generated by all the reactions
@@ -327,6 +421,7 @@ public:
 	 * @param size The pointer to the array that will contain the number of reactions for
 	 * this cluster
 	 */
+<<<<<<< HEAD
 	virtual void computeAllPartials(double *vals, int *indices, int *size);
 
 	/**
@@ -371,6 +466,10 @@ public:
 		return maxXeIClusterSize;
 	}
 
+=======
+	virtual void computeAllPartials(double *vals, int *indices, int *size)
+			override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 };
 
 }

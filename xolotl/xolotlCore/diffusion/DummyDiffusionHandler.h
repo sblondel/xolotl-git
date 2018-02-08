@@ -15,10 +15,19 @@ class DummyDiffusionHandler: public DiffusionHandler {
 public:
 
 	//! The Constructor
+<<<<<<< HEAD
 	DummyDiffusionHandler() {}
 
 	//! The Destructor
 	~DummyDiffusionHandler() {}
+=======
+	DummyDiffusionHandler() {
+	}
+
+	//! The Destructor
+	~DummyDiffusionHandler() {
+	}
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Initialize the off-diagonal part of the Jacobian. If this step is skipped it
@@ -31,9 +40,15 @@ public:
 	 * @param ofill The pointer to the array that will contain the value 1 at the indices
 	 * of the diffusing clusters
 	 */
+<<<<<<< HEAD
 	void initializeOFill(IReactionNetwork *network, int *ofill) {
 		// Clear the index vector
 		indexVector.clear();
+=======
+	void initializeOFill(const IReactionNetwork& network, int *ofill) override {
+		// Clear the index vector
+		diffusingClusters.clear();
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 		// And don't do anything else
 		return;
@@ -50,9 +65,16 @@ public:
 	 * @param nz The number of grid points in the Z direction
 	 * @param hz The step size in the Z direction
 	 */
+<<<<<<< HEAD
 	void initializeDiffusionGrid(std::vector<IAdvectionHandler *> advectionHandlers,
 			std::vector<double> grid,
 			int ny = 0, double hy = 0.0, int nz = 0, double hz = 0.0) {
+=======
+	void initializeDiffusionGrid(
+			std::vector<IAdvectionHandler *> advectionHandlers,
+			std::vector<double> grid, int ny = 0, double hy = 0.0, int nz = 0,
+			double hz = 0.0) override {
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		// Don't do anything
 		return;
 	}
@@ -77,10 +99,19 @@ public:
 	 * @param sz The space parameter, depending on the grid step size in the z direction
 	 * @param iz The position on the z grid
 	 */
+<<<<<<< HEAD
 	void computeDiffusion(IReactionNetwork *network,
 			double **concVector, double *updatedConcOffset,
 			double hxLeft, double hxRight, int ix,
 			double sy = 0.0, int iy = 0, double sz = 0.0, int iz = 0) {return;}
+=======
+	void computeDiffusion(const IReactionNetwork& network, double **concVector,
+			double *updatedConcOffset, double hxLeft, double hxRight, int ix,
+			double sy = 0.0, int iy = 0, double sz = 0.0, int iz = 0) const
+					override {
+		return;
+	}
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Compute the partials due to the diffusion of all the diffusing clusters given
@@ -102,9 +133,18 @@ public:
 	 * @param sz The space parameter, depending on the grid step size in the z direction
 	 * @param iz The position on the z grid
 	 */
+<<<<<<< HEAD
 	void computePartialsForDiffusion(IReactionNetwork *network,
 			double *val, int *indices, double hxLeft, double hxRight, int ix,
 			double sy = 0.0, int iy = 0, double sz = 0.0, int iz = 0) {return;}
+=======
+	void computePartialsForDiffusion(const IReactionNetwork& network,
+			double *val, int *indices, double hxLeft, double hxRight, int ix,
+			double sy = 0.0, int iy = 0, double sz = 0.0, int iz = 0) const
+					override {
+		return;
+	}
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 };
 //end class DummyDiffusionHandler

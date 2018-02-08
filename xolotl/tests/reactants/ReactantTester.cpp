@@ -21,8 +21,15 @@ static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry =
  */BOOST_AUTO_TEST_SUITE(Reactant_testSuite)
 
 BOOST_AUTO_TEST_CASE(checkTemperature) {
+<<<<<<< HEAD
 	// Create a reactant
 	Reactant reactant(registry);
+=======
+	// Get the simple reaction network
+	auto network = getSimplePSIReactionNetwork(0);
+	// Create a reactant
+	Reactant reactant(*(network.get()), registry);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	// Set its temperature
 	reactant.setTemperature(1000.0);
 
@@ -33,8 +40,15 @@ BOOST_AUTO_TEST_CASE(checkTemperature) {
 }
 
 BOOST_AUTO_TEST_CASE(checkComposition) {
+<<<<<<< HEAD
 	// Create a reactant
 	Reactant reactant(registry);
+=======
+	// Get the simple reaction network
+	auto network = getSimplePSIReactionNetwork(0);
+	// Create a reactant
+	Reactant reactant(*(network.get()), registry);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Check its default composition
 <<<<<<< HEAD
@@ -47,6 +61,7 @@ BOOST_AUTO_TEST_CASE(checkComposition) {
 }
 
 BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
+<<<<<<< HEAD
 	// Create a reactant
 	Reactant reactant(registry);
 
@@ -54,9 +69,16 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
 	auto network = make_shared<PSIClusterReactionNetwork>(
 			make_shared<xolotlPerf::DummyHandlerRegistry>());
 	reactant.setReactionNetwork(network);
+=======
+	// Create a network
+	auto network = make_shared<PSIClusterReactionNetwork>(
+			make_shared<xolotlPerf::DummyHandlerRegistry>());
+	// Create a reactant
+	Reactant reactant(*(network.get()), registry);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Check its default partial derivatives
-	BOOST_REQUIRE_EQUAL(0U, reactant.getPartialDerivatives().size());
+	BOOST_REQUIRE_EQUAL(1U, reactant.getPartialDerivatives().size());
 
 	// Create a reference and temp partial derivative vector
 	std::vector<double> refPartials = std::vector<double>(3, 0.0);
@@ -73,8 +95,15 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
 }
 
 BOOST_AUTO_TEST_CASE(checkCopying) {
+<<<<<<< HEAD
 	// Create a reference Reactant
 	Reactant reactant(registry);
+=======
+	// Get the simple reaction network
+	auto network = getSimplePSIReactionNetwork(0);
+	// Create a reference reactant
+	Reactant reactant(*(network.get()), registry);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	reactant.setId(5);
 	reactant.setConcentration(10.0);
 	reactant.setTemperature(5.0);
@@ -95,17 +124,27 @@ BOOST_AUTO_TEST_CASE(checkCopying) {
 	BOOST_REQUIRE_CLOSE(reactant.getConcentration(), 10.0, 1.0e-7);
 	BOOST_REQUIRE_CLOSE(reactantCopy.getConcentration(), 15.0, 1.0e-7);
 
+<<<<<<< HEAD
 	// Try cloning the Reactant
 	auto reactantClone = reactant.clone();
 
 	BOOST_REQUIRE_CLOSE(10.0, reactantClone->getConcentration(), 1.0e-7);
 
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	return;
 }
 
 BOOST_AUTO_TEST_CASE(checkConcentration) {
+<<<<<<< HEAD
 	// Create a Reactant
 	Reactant reactant(registry);
+=======
+	// Get the simple reaction network
+	auto network = getSimplePSIReactionNetwork(0);
+	// Create a reactant
+	Reactant reactant(*(network.get()), registry);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	reactant.setConcentration(1.0);
 
 	// Make sure it was set correctly
@@ -117,6 +156,7 @@ BOOST_AUTO_TEST_CASE(checkConcentration) {
 	return;
 }
 
+<<<<<<< HEAD
 BOOST_AUTO_TEST_CASE(checkIsConnected) {
 	// Create a reaction network containing only clusters with maximum size 2
 	shared_ptr<ReactionNetwork> network = getSimplePSIReactionNetwork(2);
@@ -203,4 +243,6 @@ BOOST_AUTO_TEST_CASE(checkIsConnected) {
 	return;
 }
 
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 BOOST_AUTO_TEST_SUITE_END()

@@ -5,6 +5,10 @@
 #include <Diffusion1DHandler.h>
 #include <HDF5NetworkLoader.h>
 #include <XolotlConfig.h>
+<<<<<<< HEAD
+=======
+#include <Options.h>
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 #include <DummyHandlerRegistry.h>
 #include <mpi.h>
 
@@ -36,14 +40,21 @@ BOOST_AUTO_TEST_CASE(checkDiffusion) {
 	// Give the filename to the network loader
 	loader.setFilename(filename);
 
+<<<<<<< HEAD
 	// Load the network
 	auto network = loader.load().get();
+=======
+	// Create the options needed to load the network
+	Options opts;
+	// Load the network
+	auto network = loader.load(opts);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	// Get its size
 	const int dof = network->getDOF();
 
 	// Create a grid
 	std::vector<double> grid;
-	for (int l = 0; l < 3; l++) {
+	for (int l = 0; l < 5; l++) {
 		grid.push_back((double) l);
 	}
 
@@ -58,7 +69,11 @@ BOOST_AUTO_TEST_CASE(checkDiffusion) {
 	int *ofill = &mat[0];
 
 	// Initialize it
+<<<<<<< HEAD
 	diffusionHandler.initializeOFill(network, ofill);
+=======
+	diffusionHandler.initializeOFill(*network, ofill);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	diffusionHandler.initializeDiffusionGrid(advectionHandlers, grid);
 
 <<<<<<< HEAD
@@ -67,6 +82,7 @@ BOOST_AUTO_TEST_CASE(checkDiffusion) {
 	// All the clusters diffuse except the 8-th one
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	BOOST_REQUIRE_EQUAL(ofill[0], 1);
+<<<<<<< HEAD
 	BOOST_REQUIRE_EQUAL(ofill[10], 1);
 	BOOST_REQUIRE_EQUAL(ofill[20], 1);
 	BOOST_REQUIRE_EQUAL(ofill[30], 1);
@@ -74,6 +90,14 @@ BOOST_AUTO_TEST_CASE(checkDiffusion) {
 	BOOST_REQUIRE_EQUAL(ofill[50], 1);
 <<<<<<< HEAD
 	BOOST_REQUIRE_EQUAL(ofill[80], 1);
+=======
+	BOOST_REQUIRE_EQUAL(ofill[11], 1);
+	BOOST_REQUIRE_EQUAL(ofill[22], 1);
+	BOOST_REQUIRE_EQUAL(ofill[33], 1);
+	BOOST_REQUIRE_EQUAL(ofill[44], 1);
+	BOOST_REQUIRE_EQUAL(ofill[55], 1);
+	BOOST_REQUIRE_EQUAL(ofill[88], 1);
+>>>>>>> master
 
 	// Check the total number of diffusing clusters
 	BOOST_REQUIRE_EQUAL(diffusionHandler.getNumberOfDiffusing(), 7);
@@ -99,11 +123,15 @@ BOOST_AUTO_TEST_CASE(checkDiffusion) {
 	}
 
 	// Set the temperature to 1000K to initialize the diffusion coefficients
+<<<<<<< HEAD
 	auto reactants = network->getAll();
-	for (int i = 0; i < dof; i++) {
+	for (int i = 0; i < dof - 1; i++) {
 		auto cluster = (PSICluster *) reactants->at(i);
 		cluster->setTemperature(1000.0);
 	}
+=======
+	network->setTemperature(1000.0);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Get pointers
 	double *conc = &concentration[0];
@@ -122,10 +150,15 @@ BOOST_AUTO_TEST_CASE(checkDiffusion) {
 	concVector[2] = conc + 2 * dof; // right
 
 	// Compute the diffusion at this grid point
+<<<<<<< HEAD
 	diffusionHandler.computeDiffusion(network, concVector, updatedConcOffset,
+=======
+	diffusionHandler.computeDiffusion(*network, concVector, updatedConcOffset,
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			hx, hx, 1);
 
 	// Check the new values of updatedConcOffset
+<<<<<<< HEAD
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[0], 1.0393e+12, 0.01);
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[1], 5.0899e+11, 0.01);
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[2], 2.04785e+11, 0.01);
@@ -133,12 +166,20 @@ BOOST_AUTO_TEST_CASE(checkDiffusion) {
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[4], 2.01239e+11, 0.01);
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[5], 4.98404e+09, 0.01);
 <<<<<<< HEAD
+=======
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[0], 1.283e+12, 0.01);
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[1], 6.284e+11, 0.01);
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[2], 2.528e+11, 0.01);
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[3], 3.338e+11, 0.01);
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[4], 2.4844e+11, 0.01);
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[5], 6.153e+09, 0.01);
+>>>>>>> master
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[6], 0.0, 0.01); // Does not diffuse
 =======
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[6], 7.80861e+08, 0.01);
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[7], 0.0, 0.01); // Does not diffuse
-	BOOST_REQUIRE_CLOSE(updatedConcOffset[8], 8.18607e+07, 0.01);
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[8], 1.0106e+08, 0.01);
 
 	// Initialize the indices and values to set in the Jacobian
 	int nDiff = diffusionHandler.getNumberOfDiffusing();
@@ -149,7 +190,11 @@ BOOST_AUTO_TEST_CASE(checkDiffusion) {
 	double *valPointer = &val[0];
 
 	// Compute the partial derivatives for the diffusion a the grid point 1
+<<<<<<< HEAD
 	diffusionHandler.computePartialsForDiffusion(network, valPointer,
+=======
+	diffusionHandler.computePartialsForDiffusion(*network, valPointer,
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			indicesPointer, hx, hx, 1);
 
 	// Check the values for the indices

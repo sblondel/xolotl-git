@@ -26,6 +26,10 @@ include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/commandline)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants/psiclusters)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants/neclusters)
+<<<<<<< HEAD
+=======
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants/feclusters)
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/modifiedreaction/trapmutation)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlPerf)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/vizHandler)

@@ -52,6 +52,7 @@ public class FormationEnergyEngineTest {
 		FormationEnergyEngine engine = new FormationEnergyEngine();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Check the code for He_2.
 		assertEquals(11.44, engine.getXeFormationEnergy(2), 1.0e-2);
 
@@ -64,6 +65,13 @@ public class FormationEnergyEngineTest {
 		// Check the code for Xe_8.
 		assertEquals(39.45, engine.getXeFormationEnergy(8), 1.0e-2);
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+		// Check the code for Xe_2.
+		assertEquals(12.15, engine.getXeFormationEnergy(2), 1.0e-2);
+
+		// Check the code for Xe_8.
+		assertEquals(39.45, engine.getXeFormationEnergy(8), 1.0e-2);
+>>>>>>> master
 
 		// Check the code for the invalid case with size = 0.
 		assertEquals(Double.POSITIVE_INFINITY, engine.getXeFormationEnergy(0), 1.0e-16);

@@ -20,6 +20,7 @@ protected:
 	char **CLIArgs;
 
 	//! The original solver handler.
+<<<<<<< HEAD
 	static ISolverHandler *solverHandler;
 
 public:
@@ -29,6 +30,25 @@ public:
 
 	//! The Destructor
 	virtual ~Solver() {};
+=======
+	static ISolverHandler* solverHandler;
+
+public:
+
+	/**
+	 * Default constructor, deleted because we must have arguments to construct.
+	 */
+	Solver() = delete;
+
+	//! Constuct a solver.
+	Solver(ISolverHandler& _solverHandler,
+			std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
+
+	//! The Destructor
+	virtual ~Solver() {
+	}
+	;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation transfers the input arguments passed to the program on
@@ -46,8 +66,13 @@ public:
 	 * ISolver interface.
 	 * @return The advection handler for this solver
 	 */
+<<<<<<< HEAD
 	static ISolverHandler *getSolverHandler() {
 		return solverHandler;
+=======
+	static ISolverHandler& getSolverHandler() {
+		return *solverHandler;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	}
 
 protected:

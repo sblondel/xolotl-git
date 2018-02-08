@@ -3,7 +3,13 @@
 
 //Includes
 #include <NECluster.h>
+<<<<<<< HEAD
 #include <NetworkLoader.h>
+#include <NEClusterReactionNetwork.h>
+=======
+#include <NEClusterReactionNetwork.h>
+#include <NetworkLoader.h>
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 namespace xolotlCore {
 
@@ -27,6 +33,7 @@ namespace xolotlCore {
  * last. Each species is ordered from the smallest cluster size, (1), to the
  * maximum size for that cluster. Instances of the appropriate cluster type are
  * instantiated during the loading process, but returned as NEClusters.
+<<<<<<< HEAD
  *
  * The ReactionNetwork's map of properties will contains the following
  * information about the network with the following keys:
@@ -47,8 +54,10 @@ namespace xolotlCore {
  * network.
  * > numMixedClusters - The number of mixed-species clusters of all sizes in the
  * network.
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
  */
-class NEClusterNetworkLoader : public NetworkLoader {
+class NEClusterNetworkLoader: public NetworkLoader {
 
 protected:
 
@@ -65,7 +74,13 @@ protected:
 	/**
 	 * Private nullary constructor.
 	 */
-	NEClusterNetworkLoader() {}
+	NEClusterNetworkLoader() :
+<<<<<<< HEAD
+			xeMin(1000000), sectionWidth(1) {
+=======
+			xeMin(-1), sectionWidth(-1) {
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+	}
 
 	/**
 	 * This operation creates a singles-species cluster of helium, vacancies or
@@ -78,12 +93,38 @@ protected:
 	 * @param numI The number of interstitial defects
 	 * @return The new cluster
 	 */
+<<<<<<< HEAD
 	std::shared_ptr<NECluster> createNECluster(int numXe, int numV, int numI);
 =======
+<<<<<<< HEAD
 	 * @return The new cluster
 	 */
 	std::shared_ptr<NECluster> createNECluster(int numXe);
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	std::unique_ptr<NECluster> createNECluster(int numXe, int numV, int numI,
+			IReactionNetwork& network) const;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+
+	/**
+	 * This operation will add the given cluster to the network and reactants vector
+	 * as a standard cluster or a dummy one if we do not want the reactions to happen.
+	 *
+	 * @param network The network
+	 * @param reactants The vector of reactants kept by the loader
+	 * @param cluster The cluster to add to them
+	 */
+	virtual void pushNECluster(
+<<<<<<< HEAD
+			std::shared_ptr<NEClusterReactionNetwork> & network,
+			std::vector<std::shared_ptr<Reactant> > & reactants,
+			std::shared_ptr<NECluster> & cluster);
+=======
+			std::unique_ptr<NEClusterReactionNetwork> & network,
+			std::vector<std::reference_wrapper<Reactant> > & reactants,
+			std::unique_ptr<NECluster> & cluster);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 
 public:
 
@@ -93,7 +134,8 @@ public:
 	 *
 	 * @param registry The performance handler registry
 	 */
-	NEClusterNetworkLoader(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
+	NEClusterNetworkLoader(
+			std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
 
 	/**
 	 * An alternative constructor provided for convenience.
@@ -108,37 +150,68 @@ public:
 	/**
 	 * Destructor
 	 */
-	virtual ~NEClusterNetworkLoader() {}
+	virtual ~NEClusterNetworkLoader() {
+	}
 
 	/**
 	 * This operation will load the reaction network from the inputstream in
 	 * the format specified previously. The network will be empty if it can not
 	 * be loaded.
 	 *
+<<<<<<< HEAD
 	 * @return network The reaction network
 	 */
 	virtual std::shared_ptr<IReactionNetwork> load();
+=======
+	 * @param options The command line options.
+	 * @return network The reaction network
+	 */
+	virtual std::unique_ptr<IReactionNetwork> load(const IOptions& options)
+			override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+
+	/**
+	 * This operation will generate the reaction network from options.
+	 * The network will be empty if it can not be loaded.
+	 *
+	 * @param options The command line options
+	 * @return network The reaction network
+	 */
+<<<<<<< HEAD
+	virtual std::shared_ptr<IReactionNetwork> generate(IOptions &options);
+=======
+	virtual std::unique_ptr<IReactionNetwork> generate(const IOptions &options)
+			override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation will apply a grouping method to the network.
 	 *
 	 * @param The network to be modified.
 	 */
+<<<<<<< HEAD
 	void applyGrouping(std::shared_ptr<IReactionNetwork> network);
+=======
+	void applyGrouping(IReactionNetwork& network) const;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation will set the xenon size at which the grouping scheme starts.
 	 *
 	 * @param min The value for the size
 	 */
-	void setXeMin (int min) {xeMin = min;}
+	void setXeMin(int min) {
+		xeMin = min;
+	}
 
 	/**
 	 * This operation will set the xenon width for the grouping scheme.
 	 *
 	 * @param w The value of the width
 	 */
-	void setWidth (int w) {sectionWidth = w;}
+	void setWidth(int w) {
+		sectionWidth = w;
+	}
 };
 
 } /* namespace xolotlCore */

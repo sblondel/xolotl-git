@@ -13,6 +13,16 @@ namespace xolotlCore {
  */
 class NESuperCluster: public NECluster {
 
+<<<<<<< HEAD
+=======
+private:
+	static std::string buildName(IReactant::SizeType nXe) {
+		std::stringstream nameStream;
+		nameStream << "Xe_" << nXe;
+		return nameStream.str();
+	}
+
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 protected:
 
 	/**
@@ -157,6 +167,7 @@ private:
 	 */
 	double momentumFlux;
 
+<<<<<<< HEAD
 	/**
 	 * The default constructor is private because NEClusters must always be
 	 * initialized with a size.
@@ -165,12 +176,22 @@ private:
 			NECluster() {
 	}
 
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 public:
 
 	//! The vector of Xe clusters it will replace
 	std::vector<NECluster *> xeVector;
 
 	/**
+<<<<<<< HEAD
+=======
+	 * Default constructor, deleted because we require info to construct.
+	 */
+	NESuperCluster() = delete;
+
+	/**
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	 * The constructor. All NESuperClusters must be initialized with its
 	 * composition.
 	 *
@@ -179,6 +200,7 @@ public:
 	 * @param width The width of this super cluster in the xenon direction
 	 * @param radius The mean radius
 	 * @param energy The formation energy
+<<<<<<< HEAD
 	 * @param registry The performance handler registry
 	 */
 	NESuperCluster(double numXe, int nTot, int width, double radius,
@@ -191,12 +213,26 @@ public:
 	 * @param other the reactant to be copied
 	 */
 	NESuperCluster(NESuperCluster &other);
+=======
+	 * @param _network The network this cluster will belong to.
+	 * @param registry The performance handler registry
+	 */
+	NESuperCluster(double numXe, int nTot, int width, double radius,
+			double energy, IReactionNetwork& _network,
+			std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
+
+	/**
+	 * Copy constructor, deleted to prevent use.
+	 */
+	NESuperCluster(NESuperCluster &other) = delete;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	//! Destructor
 	~NESuperCluster() {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * This operation returns a Reactant that is created using the copy
 	 * constructor of NESuperCluster.
 	 *
@@ -212,18 +248,31 @@ public:
 	 */
 	void setReactionNetwork(
 			const std::shared_ptr<IReactionNetwork> reactionNetwork);
+=======
+	 * Update reactant using other reactants in its network.
+	 */
+	void updateFromNetwork() override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Group the same reactions together and add the reactions to the network lists.
 	 */
+<<<<<<< HEAD
 	void optimizeReactions();
+=======
+	void optimizeReactions() override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation returns false.
 	 *
 	 * @return True if mixed
 	 */
+<<<<<<< HEAD
 	virtual bool isMixed() const {
+=======
+	virtual bool isMixed() const override {
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		return false;
 	}
 
@@ -241,14 +290,22 @@ public:
 	 * @param distB Unused here
 	 * @return The concentration of this reactant
 	 */
+<<<<<<< HEAD
 	double getConcentration(double distXe, double distB = 0.0) const;
+=======
+	double getConcentration(double distXe, double distB = 0.0) const override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation returns the first xenon momentum.
 	 *
 	 * @return The momentum
 	 */
+<<<<<<< HEAD
 	double getMomentum() const;
+=======
+	double getMomentum() const override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation returns the current total concentration of clusters in the group.
@@ -299,7 +356,11 @@ public:
 	 * This operation reset the connectivity sets based on the information
 	 * in the production and dissociation vectors.
 	 */
+<<<<<<< HEAD
 	void resetConnectivities();
+=======
+	void resetConnectivities() override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation returns the total flux of this cluster in the
@@ -308,7 +369,11 @@ public:
 	 * @return The total change in flux for this cluster due to all
 	 * reactions
 	 */
+<<<<<<< HEAD
 	double getTotalFlux();
+=======
+	double getTotalFlux() override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation returns the total change in this cluster due to
@@ -368,7 +433,11 @@ public:
 	 * the vector should be equal to ReactionNetwork::size().
 	 *
 	 */
+<<<<<<< HEAD
 	void getPartialDerivatives(std::vector<double> & partials) const;
+=======
+	void getPartialDerivatives(std::vector<double> & partials) const override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation computes the partial derivatives due to production
@@ -378,7 +447,12 @@ public:
 	 * inserted. This vector should have a length equal to the size of the
 	 * network.
 	 */
+<<<<<<< HEAD
 	void getProductionPartialDerivatives(std::vector<double> & partials) const;
+=======
+	void getProductionPartialDerivatives(std::vector<double> & partials) const
+			override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation computes the partial derivatives due to combination
@@ -388,7 +462,12 @@ public:
 	 * inserted. This vector should have a length equal to the size of the
 	 * network.
 	 */
+<<<<<<< HEAD
 	void getCombinationPartialDerivatives(std::vector<double> & partials) const;
+=======
+	void getCombinationPartialDerivatives(std::vector<double> & partials) const
+			override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation computes the partial derivatives due to dissociation of
@@ -398,8 +477,13 @@ public:
 	 * inserted. This vector should have a length equal to the size of the
 	 * network.
 	 */
+<<<<<<< HEAD
 	void getDissociationPartialDerivatives(
 			std::vector<double> & partials) const;
+=======
+	void getDissociationPartialDerivatives(std::vector<double> & partials) const
+			override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation computes the partial derivatives due to emission
@@ -409,7 +493,12 @@ public:
 	 * inserted. This vector should have a length equal to the size of the
 	 * network.
 	 */
+<<<<<<< HEAD
 	void getEmissionPartialDerivatives(std::vector<double> & partials) const;
+=======
+	void getEmissionPartialDerivatives(std::vector<double> & partials) const
+			override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation computes the partial derivatives for the xenon momentum.

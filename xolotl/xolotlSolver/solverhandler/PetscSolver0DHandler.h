@@ -11,14 +11,28 @@ namespace xolotlSolver {
  * to solve the ADR equations in 0D using PETSc from Argonne National Laboratory.
  */
 class PetscSolver0DHandler: public PetscSolverHandler {
-private:
-	//! The position of the surface
-	int surfacePosition;
 
 public:
 
+<<<<<<< HEAD
 	//! The Constructor
 	PetscSolver0DHandler() {
+=======
+	/**
+	 * Construct a PetscSolver0DHandler.
+	 *
+	 * @param _network The reaction network to use.
+	 */
+	PetscSolver0DHandler() = delete;
+
+	/**
+	 * Construct a PetscSolver0DHandler.
+	 *
+	 * @param _network The reaction network to use.
+	 */
+	PetscSolver0DHandler(xolotlCore::IReactionNetwork& _network) :
+			PetscSolverHandler(_network) {
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	}
 
 	//! The Destructor
@@ -48,7 +62,12 @@ public:
 	 * Compute the off-diagonal part of the Jacobian which is related to cluster's motion.
 	 * \see ISolverHandler.h
 	 */
+<<<<<<< HEAD
 	void computeOffDiagonalJacobian(TS &ts, Vec &localC, Mat &J, PetscReal ftime);
+=======
+	void computeOffDiagonalJacobian(TS &ts, Vec &localC, Mat &J,
+			PetscReal ftime);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Compute the diagonal part of the Jacobian which is related to cluster reactions.
@@ -61,7 +80,7 @@ public:
 	 * \see ISolverHandler.h
 	 */
 	int getSurfacePosition(int j = -1, int k = -1) const {
-		return surfacePosition;
+		return 0;
 	}
 
 	/**
@@ -69,7 +88,7 @@ public:
 	 * \see ISolverHandler.h
 	 */
 	void setSurfacePosition(int pos, int j = -1, int k = -1) {
-		surfacePosition = pos;
+		return;
 	}
 
 };

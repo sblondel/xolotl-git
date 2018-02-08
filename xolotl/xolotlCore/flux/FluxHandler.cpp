@@ -24,6 +24,13 @@ FluxHandler::FluxHandler() :
 }
 
 void FluxHandler::initializeFluxHandler(IReactionNetwork *network,
+=======
+		fluence(0.0), fluxAmplitude(0.0), useTimeProfile(false), normFactor(0.0) {
+	return;
+}
+
+void FluxHandler::initializeFluxHandler(const IReactionNetwork& network,
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		int surfacePos, std::vector<double> grid) {
 	// Set the grid
 	xGrid = grid;
@@ -33,23 +40,38 @@ void FluxHandler::initializeFluxHandler(IReactionNetwork *network,
 =======
 	if (xGrid.size() == 0)
 		return;
+<<<<<<< HEAD
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 
 	// Compute the norm factor because the fit function has an
 	// arbitrary amplitude
 	normFactor = 0.0;
 	// Loop on the x grid points skipping the first after the surface position
 	// and last because of the boundary conditions
-	for (int i = surfacePos + 1; i < xGrid.size() - 1; i++) {
+	for (int i = surfacePos + 1; i < xGrid.size() - 3; i++) {
 		// Get the x position
-		double x = xGrid[i] - xGrid[surfacePos];
+<<<<<<< HEAD
+		double x = xGrid[i+1] - xGrid[surfacePos+1];
 
 		// Add the the value of the function times the step size
+<<<<<<< HEAD
 <<<<<<< HEAD
 		normFactor += FitFunction(x) * (xGrid[i] - xGrid[i-1]);
 =======
 		normFactor += FitFunction(x) * (xGrid[i] - xGrid[i - 1]);
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+		normFactor += FitFunction(x) * (xGrid[i+1] - xGrid[i]);
+=======
+		double x = xGrid[i + 1] - xGrid[surfacePos + 1];
+
+		// Add the the value of the function times the step size
+		normFactor += FitFunction(x) * (xGrid[i + 1] - xGrid[i]);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 	}
 
 	// Factor the incident flux will be multiplied by to get
@@ -60,7 +82,11 @@ void FluxHandler::initializeFluxHandler(IReactionNetwork *network,
 =======
 	if (normFactor > 0.0)
 		fluxNormalized = fluxAmplitude / normFactor;
+<<<<<<< HEAD
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 
 	// Clear the flux vector
 	incidentFluxVec.clear();
@@ -68,9 +94,13 @@ void FluxHandler::initializeFluxHandler(IReactionNetwork *network,
 	incidentFluxVec.push_back(0.0);
 
 	// Starts a i = surfacePos + 1 because the first value was already put in the vector
-	for (int i = surfacePos + 1; i < xGrid.size() - 1; i++) {
+	for (int i = surfacePos + 1; i < xGrid.size() - 3; i++) {
 		// Get the x position
-		auto x = xGrid[i] - xGrid[surfacePos];
+<<<<<<< HEAD
+		auto x = xGrid[i+1] - xGrid[surfacePos+1];
+=======
+		auto x = xGrid[i + 1] - xGrid[surfacePos + 1];
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 		// Compute the flux value
 		double incidentFlux = fluxNormalized * FitFunction(x);
@@ -92,12 +122,20 @@ void FluxHandler::recomputeFluxHandler(int surfacePos) {
 =======
 	if (normFactor > 0.0)
 		fluxNormalized = fluxAmplitude / normFactor;
+<<<<<<< HEAD
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 
 	// Starts a i = surfacePos + 1 because the first values were already put in the vector
-	for (int i = surfacePos + 1; i < xGrid.size() - 1; i++) {
+	for (int i = surfacePos + 1; i < xGrid.size() - 2; i++) {
 		// Get the x position
-		auto x = xGrid[i] - xGrid[surfacePos];
+<<<<<<< HEAD
+		auto x = xGrid[i+1] - xGrid[surfacePos+1];
+=======
+		auto x = xGrid[i + 1] - xGrid[surfacePos + 1];
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 		// Compute the flux value
 		double incidentFlux = fluxNormalized * FitFunction(x);
@@ -152,7 +190,11 @@ double FluxHandler::getProfileAmplitude(double currentTime) const {
 			continue;
 		if (currentTime > time[k + 1])
 			continue;
+<<<<<<< HEAD
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 
 		// Compute the amplitude following a linear interpolation between
 		// the two stored values
@@ -170,7 +212,11 @@ void FluxHandler::computeIncidentFlux(double currentTime, double *updatedConcOff
 =======
 void FluxHandler::computeIncidentFlux(double currentTime,
 		double *updatedConcOffset, int xi, int surfacePos) {
+<<<<<<< HEAD
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 	// Recompute the flux vector if a time profile is used
 	if (useTimeProfile) {
 		fluxAmplitude = getProfileAmplitude(currentTime);
@@ -178,12 +224,20 @@ void FluxHandler::computeIncidentFlux(double currentTime,
 	}
 
 	if (incidentFluxVec.size() == 0) {
+<<<<<<< HEAD
 		updatedConcOffset[fluxIndex] += fluxAmplitude;
+=======
+		updatedConcOffset[fluxIndices[0]] += fluxAmplitude;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		return;
 	}
 
 	// Update the concentration array
+<<<<<<< HEAD
 	updatedConcOffset[fluxIndex] += incidentFluxVec[xi - surfacePos];
+=======
+	updatedConcOffset[fluxIndices[0]] += incidentFluxVec[xi - surfacePos];
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	return;
 }

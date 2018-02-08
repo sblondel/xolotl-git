@@ -11,6 +11,11 @@
 //Includes
 #include <PSICluster.h>
 #include <NetworkLoader.h>
+<<<<<<< HEAD
+#include <PSIClusterReactionNetwork.h>
+=======
+#include "PSIClusterReactionNetwork.h"
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 namespace xolotlCore {
 
@@ -34,6 +39,7 @@ namespace xolotlCore {
  * last. Each species is ordered from the smallest cluster size, (1), to the
  * maximum size for that cluster. Instances of the appropriate cluster type are
  * instantiated during the loading process, but returned as PSIClusters.
+<<<<<<< HEAD
  *
  * The ReactionNetwork's map of properties will contains the following
  * information about the network with the following keys:
@@ -54,12 +60,18 @@ namespace xolotlCore {
  * network.
  * > numMixedClusters - The number of mixed-species clusters of all sizes in the
  * network.
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 class PSIClusterNetworkLoader : public NetworkLoader {
 =======
 class PSIClusterNetworkLoader: public NetworkLoader {
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+class PSIClusterNetworkLoader: public NetworkLoader {
+>>>>>>> master
 
 protected:
 
@@ -69,6 +81,24 @@ protected:
 	int vMin;
 
 	/**
+<<<<<<< HEAD
+=======
+	 * The maximum size for helium clusters
+	 */
+	int maxHe;
+
+	/**
+	 * The maximum size for interstitial clusters
+	 */
+	int maxI;
+
+	/**
+	 * The maximum size for vacancy clusters
+	 */
+	int maxV;
+
+	/**
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	 * The width of the group in the helium direction.
 	 */
 	int heSectionWidth;
@@ -79,14 +109,33 @@ protected:
 	int vSectionWidth;
 
 	/**
+<<<<<<< HEAD
 	 * Private nullary constructor.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	PSIClusterNetworkLoader() {}
 =======
 	PSIClusterNetworkLoader() {
 	}
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	PSIClusterNetworkLoader() :
+			vMin(1000000), heSectionWidth(1), vSectionWidth(1) {
+=======
+	 * The list of clusters that will be grouped.
+	 */
+	std::set<std::pair<int, int> > heVList;
+
+	/**
+	 * Private nullary constructor.
+	 */
+	PSIClusterNetworkLoader() :
+			NetworkLoader(), vMin(1000000), maxHe(0), maxI(0), maxV(0), heSectionWidth(
+					1), vSectionWidth(1) {
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+	}
+>>>>>>> master
 
 	/**
 	 * This operation creates a singles-species cluster of helium, vacancies or
@@ -99,8 +148,10 @@ protected:
 <<<<<<< HEAD
 	 * @return The new cluster
 	 */
+<<<<<<< HEAD
 	std::shared_ptr<PSICluster> createPSICluster(int numHe, int numV, int numI);
 =======
+<<<<<<< HEAD
 	 * @param numD The number of deuterium atoms
 	 * @param numT The number of tritium atoms
 	 * @return The new cluster
@@ -108,6 +159,40 @@ protected:
 	std::shared_ptr<PSICluster> createPSICluster(int numHe, int numV, int numI,
 			int numD, int numT);
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	std::unique_ptr<PSICluster> createPSICluster(int numHe, int numV, int numI,
+			IReactionNetwork& network) const;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+
+	/**
+	 * This operation will add the given cluster to the network and reactants vector
+	 * as a standard cluster or a dummy one if we do not want the reactions to happen.
+	 *
+	 * @param network The network
+	 * @param reactants The vector of reactants kept by the loader
+	 * @param cluster The cluster to add to them
+	 */
+	virtual void pushPSICluster(
+<<<<<<< HEAD
+			std::shared_ptr<PSIClusterReactionNetwork> & network,
+			std::vector<std::shared_ptr<Reactant> > & reactants,
+			std::shared_ptr<PSICluster> & cluster);
+=======
+			std::unique_ptr<PSIClusterReactionNetwork> & network,
+			std::vector<std::reference_wrapper<Reactant> > & reactants,
+			std::unique_ptr<PSICluster> & cluster);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+
+	/**
+	 * This operation computes the formation energy associated to the
+	 * cluster of the given size.
+	 *
+	 * @param numHe The number of helium atoms
+	 * @param numV The number of atomic vacancies
+	 * @return The corresponding formation energy
+	 */
+	double getHeVFormationEnergy(int numHe, int numV);
+>>>>>>> master
 
 public:
 
@@ -118,11 +203,16 @@ public:
 	 * @param registry The performance handler registry
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PSIClusterNetworkLoader(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
 =======
 	PSIClusterNetworkLoader(
 			std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	PSIClusterNetworkLoader(
+			std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
+>>>>>>> master
 
 	/**
 	 * An alternative constructor provided for convenience.
@@ -138,11 +228,16 @@ public:
 	 * Destructor
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	virtual ~PSIClusterNetworkLoader() {}
 =======
 	virtual ~PSIClusterNetworkLoader() {
 	}
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	virtual ~PSIClusterNetworkLoader() {
+	}
+>>>>>>> master
 
 	/**
 	 * This operation will load the reaction network from the inputstream in
@@ -151,14 +246,37 @@ public:
 	 *
 	 * @return network The reaction network
 	 */
+<<<<<<< HEAD
 	virtual std::shared_ptr<IReactionNetwork> load();
+=======
+	virtual std::unique_ptr<IReactionNetwork> load(const IOptions& options)
+			override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+
+	/**
+	 * This operation will generate the reaction network from options.
+	 * The network will be empty if it can not be loaded.
+	 *
+	 * @param options The command line options
+	 * @return network The reaction network
+	 */
+<<<<<<< HEAD
+	virtual std::shared_ptr<IReactionNetwork> generate(IOptions &options);
+=======
+	virtual std::unique_ptr<IReactionNetwork> generate(const IOptions &options)
+			override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation will apply a sectional grouping method to the network.
 	 *
 	 * @param The network to be modified.
 	 */
+<<<<<<< HEAD
 	void applySectionalGrouping(std::shared_ptr<IReactionNetwork> network);
+=======
+	void applySectionalGrouping(PSIClusterReactionNetwork& network);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation will set the helium size at which the grouping scheme starts.
@@ -166,12 +284,18 @@ public:
 	 * @param min The value for the size
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void setVMin (int min) {vMin = min;}
 =======
 	void setVMin(int min) {
 		vMin = min;
 	}
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	void setVMin(int min) {
+		vMin = min;
+	}
+>>>>>>> master
 
 	/**
 	 * This operation will set the helium width for the grouping scheme.
@@ -179,12 +303,18 @@ public:
 	 * @param w The value of the width
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void setHeWidth (int w) {heSectionWidth = w;}
 =======
 	void setHeWidth(int w) {
 		heSectionWidth = w;
 	}
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	void setHeWidth(int w) {
+		heSectionWidth = w;
+	}
+>>>>>>> master
 
 	/**
 	 * This operation will set the vacancy width for the grouping scheme.
@@ -192,12 +322,18 @@ public:
 	 * @param w The value of the width
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void setVWidth (int w) {vSectionWidth = w;}
 =======
 	void setVWidth(int w) {
 		vSectionWidth = w;
 	}
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	void setVWidth(int w) {
+		vSectionWidth = w;
+	}
+>>>>>>> master
 };
 
 } /* namespace xolotlCore */

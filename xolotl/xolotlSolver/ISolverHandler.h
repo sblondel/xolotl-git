@@ -35,12 +35,18 @@ public:
 	 *
 	 * @param material The material factory
 	 * @param tempHandler The temperature handler
+<<<<<<< HEAD
 	 * @param networkHandler The network handler
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	 * @param options The Xolotl options
 	 */
 	virtual void initializeHandlers(std::shared_ptr<xolotlFactory::IMaterialFactory> material,
 			std::shared_ptr<xolotlCore::ITemperatureHandler> tempHandler,
+<<<<<<< HEAD
 			std::shared_ptr<xolotlCore::IReactionNetwork> networkHandler,
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			xolotlCore::Options &options) = 0;
 
 	/**
@@ -171,6 +177,13 @@ public:
 	virtual xolotlCore::IFluxHandler *getFluxHandler() const = 0;
 
 	/**
+	 * Get the temperature handler.
+	 *
+	 * @return The temperature handler
+	 */
+	virtual xolotlCore::ITemperatureHandler *getTemperatureHandler() const = 0;
+
+	/**
 	 * Get the advection handler.
 	 *
 	 * @return The first advection handler
@@ -196,7 +209,11 @@ public:
 	 *
 	 * @return The network
 	 */
+<<<<<<< HEAD
 	virtual xolotlCore::IReactionNetwork *getNetwork() const = 0;
+=======
+	virtual xolotlCore::IReactionNetwork& getNetwork() const = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Get the network name.

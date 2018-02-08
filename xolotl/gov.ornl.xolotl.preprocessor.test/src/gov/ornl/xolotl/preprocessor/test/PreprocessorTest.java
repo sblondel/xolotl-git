@@ -258,10 +258,14 @@ public class PreprocessorTest {
 
 				// Check the size of the network
 <<<<<<< HEAD
+<<<<<<< HEAD
 				assertEquals(network.size(), 476);
 =======
 				assertEquals(network.size(), 447);
 >>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+				assertEquals(network.size(), 447);
+>>>>>>> master
 			}
 		} catch (ArgumentValidationException e) {
 			// Complain and fail

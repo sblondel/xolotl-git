@@ -1,7 +1,14 @@
 // Includes
+<<<<<<< HEAD
 #include <PetscSolver.h>
-#include <HDF5NetworkLoader.h>
 #include <HDF5Utils.h>
+#include <fstream>
+#include <iostream>
+=======
+#include <cassert>
+#include <PetscSolver.h>
+#include <HDF5Utils.h>
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 using namespace xolotlCore;
 
@@ -42,8 +49,13 @@ extern PetscErrorCode setupPetsc3DMonitor(TS);
 
 void PetscSolver::setupInitialConditions(DM da, Vec C) {
 	// Initialize the concentrations in the solution vector
+<<<<<<< HEAD
 	auto solverHandler = PetscSolver::getSolverHandler();
 	solverHandler->initializeConcentration(da, C);
+=======
+	auto& solverHandler = Solver::getSolverHandler();
+	solverHandler.initializeConcentration(da, C);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	return;
 }
@@ -94,8 +106,13 @@ PetscErrorCode RHSFunction(TS ts, PetscReal ftime, Vec C, Vec F, void *) {
 	CHKERRQ(ierr);
 
 	// Compute the new concentrations
+<<<<<<< HEAD
 	auto solverHandler = PetscSolver::getSolverHandler();
 	solverHandler->updateConcentration(ts, localC, F, ftime);
+=======
+	auto& solverHandler = Solver::getSolverHandler();
+	solverHandler.updateConcentration(ts, localC, F, ftime);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Stop the RHSFunction Timer
 	RHSFunctionTimer->stop();
@@ -133,10 +150,17 @@ PetscErrorCode RHSJacobian(TS ts, PetscReal ftime, Vec C, Mat A, Mat J,
 	CHKERRQ(ierr);
 
 	// Get the solver handler
+<<<<<<< HEAD
 	auto solverHandler = PetscSolver::getSolverHandler();
 
 	/* ----- Compute the off-diagonal part of the Jacobian ----- */
 	solverHandler->computeOffDiagonalJacobian(ts, localC, J, ftime);
+=======
+	auto& solverHandler = Solver::getSolverHandler();
+
+	/* ----- Compute the off-diagonal part of the Jacobian ----- */
+	solverHandler.computeOffDiagonalJacobian(ts, localC, J, ftime);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	ierr = MatAssemblyBegin(J, MAT_FINAL_ASSEMBLY);
 	CHKERRQ(ierr);
@@ -144,7 +168,11 @@ PetscErrorCode RHSJacobian(TS ts, PetscReal ftime, Vec C, Mat A, Mat J,
 	CHKERRQ(ierr);
 
 	/* ----- Compute the partial derivatives for the reaction term ----- */
+<<<<<<< HEAD
 	solverHandler->computeDiagonalJacobian(ts, localC, J, ftime);
+=======
+	solverHandler.computeDiagonalJacobian(ts, localC, J, ftime);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	ierr = MatAssemblyBegin(J, MAT_FINAL_ASSEMBLY);
 	CHKERRQ(ierr);
@@ -158,14 +186,25 @@ PetscErrorCode RHSJacobian(TS ts, PetscReal ftime, Vec C, Mat A, Mat J,
 		CHKERRQ(ierr);
 	}
 
+<<<<<<< HEAD
+=======
+//	ierr = MatView(J, PETSC_VIEWER_STDOUT_WORLD);
+
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	// Stop the RHSJacobian timer
 	RHSJacobianTimer->stop();
 
 	PetscFunctionReturn(0);
 }
 
+<<<<<<< HEAD
 PetscSolver::PetscSolver(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
 		Solver(registry) {
+=======
+PetscSolver::PetscSolver(ISolverHandler& _solverHandler,
+		std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
+		Solver(_solverHandler, registry) {
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	RHSFunctionTimer = handlerRegistry->getTimer("RHSFunctionTimer");
 	RHSJacobianTimer = handlerRegistry->getTimer("RHSJacobianTimer");
 }
@@ -179,15 +218,22 @@ void PetscSolver::setOptions(const std::map<std::string, std::string>&) {
 void PetscSolver::setupMesh() {
 }
 
+<<<<<<< HEAD
 void PetscSolver::initialize(std::shared_ptr<ISolverHandler> solverHandler) {
+=======
+void PetscSolver::initialize() {
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	 Initialize program
 	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 	PetscInitialize(&numCLIArgs, &CLIArgs, (char*) 0, help);
 
+<<<<<<< HEAD
 	// Set the solver handler
 	Solver::solverHandler = (ISolverHandler *) solverHandler.get();
 
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	return;
 }
 
@@ -196,7 +242,11 @@ void PetscSolver::solve() {
 
 	// Create the solver context
 	DM da;
+<<<<<<< HEAD
 	Solver::solverHandler->createSolverContext(da);
+=======
+	getSolverHandler().createSolverContext(da);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/*  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	 Extract global vector from DMDA to hold solution
@@ -232,20 +282,32 @@ void PetscSolver::solve() {
 	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 	// Read the times if the information is in the HDF5 file
+<<<<<<< HEAD
 	auto fileName = Solver::solverHandler->getNetworkName();
+=======
+	auto fileName = getSolverHandler().getNetworkName();
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	double time = 0.0, deltaTime = 1.0e-12;
 	int tempTimeStep = -2;
-	if (HDF5Utils::hasConcentrationGroup(fileName, tempTimeStep)) {
-		HDF5Utils::readTimes(fileName, tempTimeStep, time, deltaTime);
+	if (!fileName.empty()) {
+		if (HDF5Utils::hasConcentrationGroup(fileName, tempTimeStep)) {
+			HDF5Utils::readTimes(fileName, tempTimeStep, time, deltaTime);
+		}
 	}
 
-	ierr = TSSetInitialTimeStep(ts, time, deltaTime);
-	checkPetscError(ierr, "PetscSolver::solve: TSSetInitialTimeStep failed.");
+	ierr = TSSetTime(ts, time);
+	checkPetscError(ierr, "PetscSolver::solve: TSSetTime failed.");
+	ierr = TSSetTimeStep(ts, deltaTime);
+	checkPetscError(ierr, "PetscSolver::solve: TSSetTimeStep failed.");
 	ierr = TSSetFromOptions(ts);
 	checkPetscError(ierr, "PetscSolver::solve: TSSetFromOptions failed.");
 
 	// Switch on the number of dimensions to set the monitors
+<<<<<<< HEAD
 	int dim = Solver::solverHandler->getDimension();
+=======
+	int dim = getSolverHandler().getDimension();
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	switch (dim) {
 	case 0:
 		// One dimension
@@ -289,6 +351,41 @@ void PetscSolver::solve() {
 	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 	if (ts != NULL && C != NULL) {
 		ierr = TSSolve(ts, C);
+<<<<<<< HEAD
+
+		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		 Write in a file if everything went well or not.
+		 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		// Check the option -plot_perf
+		PetscBool flagCheck;
+		ierr = PetscOptionsHasName(NULL, NULL, "-check_collapse", &flagCheck);
+		checkPetscError(ierr,
+				"PetscSolver::solve: PetscOptionsHasName (-check_collapse) failed.");
+		if (flagCheck) {
+			// Open the output file
+			std::ofstream outputFile;
+			outputFile.open("solverStatus.txt");
+
+			// Get the converged reason from PETSc
+			TSConvergedReason reason;
+			ierr = TSGetConvergedReason(ts, &reason);
+			checkPetscError(ierr,
+					"PetscSolver::solve: TSGetConvergedReason failed.");
+
+			// Write it
+			if (reason == TS_CONVERGED_EVENT)
+				outputFile << "collapsed" << std::endl;
+			else if (reason == TS_DIVERGED_NONLINEAR_SOLVE
+					|| reason == TS_DIVERGED_STEP_REJECTED)
+				outputFile << "diverged" << std::endl;
+			else
+				outputFile << "good" << std::endl;
+
+			outputFile.close();
+		}
+
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		checkPetscError(ierr, "PetscSolver::solve: TSSolve failed.");
 	} else {
 		throw std::string(

@@ -20,6 +20,33 @@ std::shared_ptr<xolotlViz::IPlot> perfPlot;
 
 //! The variable to store the time at the previous time step.
 double previousTime = 0.0;
+//! The variable to store the threshold on time step defined by the user.
+double timeStepThreshold = 0.0;
+
+#undef __FUNCT__
+#define __FUNCT__ Actual__FUNCT__("xolotlSolver", "checkTimeStep")
+/**
+ * This is a method that decides when to extend the network
+ */
+PetscErrorCode checkTimeStep(TS ts) {
+	// Initial declarations
+	PetscErrorCode ierr;
+
+	PetscFunctionBeginUser;
+
+	// Get the time step from ts
+	PetscReal timestep;
+	ierr = TSGetTimeStep(ts, &timestep);
+	CHKERRQ(ierr);
+
+	// Stop when the time step is lower than the user defined threshold
+	if (timestep < timeStepThreshold) {
+		ierr = TSSetConvergedReason(ts, TS_CONVERGED_EVENT);
+		CHKERRQ(ierr);
+	}
+
+	PetscFunctionReturn(0);
+}
 
 #undef __FUNCT__
 #define __FUNCT__ Actual__FUNCT__("xolotlSolver", "monitorTime")
@@ -46,8 +73,13 @@ PetscErrorCode computeFluence(TS, PetscInt, PetscReal time, Vec, void *) {
 	PetscFunctionBeginUser;
 
 	// Get the solver handler and the flux handler
+<<<<<<< HEAD
 	auto solverHandler = PetscSolver::getSolverHandler();
 	auto fluxHandler = solverHandler->getFluxHandler();
+=======
+	auto& solverHandler = PetscSolver::getSolverHandler();
+	auto fluxHandler = solverHandler.getFluxHandler();
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// The length of the time step
 	double dt = time - previousTime;

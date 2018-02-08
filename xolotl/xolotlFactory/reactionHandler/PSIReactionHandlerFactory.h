@@ -18,7 +18,11 @@ protected:
 	std::shared_ptr<xolotlCore::INetworkLoader> theNetworkLoaderHandler;
 
 	//! The network handler
+<<<<<<< HEAD
 	std::shared_ptr<xolotlCore::IReactionNetwork> theNetworkHandler;
+=======
+	std::unique_ptr<xolotlCore::IReactionNetwork> theNetworkHandler;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 public:
 
@@ -47,7 +51,8 @@ public:
 		MPI_Comm_rank(MPI_COMM_WORLD, &procId);
 
 		// Create a HDF5NetworkLoader
-		auto tempNetworkLoader = std::make_shared<xolotlCore::HDF5NetworkLoader>(registry);
+		auto tempNetworkLoader =
+				std::make_shared<xolotlCore::HDF5NetworkLoader>(registry);
 		// Give the networkFilename to the network loader
 		tempNetworkLoader->setFilename(options.getNetworkFilename());
 		// Set the options for the grouping scheme
@@ -58,12 +63,22 @@ public:
 
 		// Check if we want dummy reactions
 		auto map = options.getProcesses();
-		if (!map["reaction"]) theNetworkLoaderHandler->setDummyReactions();
+		if (!map["reaction"])
+			theNetworkLoaderHandler->setDummyReactions();
 		// Load the network
-		theNetworkHandler = theNetworkLoaderHandler->load();
+		if (options.useHDF5())
+<<<<<<< HEAD
+			theNetworkHandler = theNetworkLoaderHandler->load();
+		else theNetworkHandler = theNetworkLoaderHandler->generate(options);
+=======
+			theNetworkHandler = theNetworkLoaderHandler->load(options);
+		else
+			theNetworkHandler = theNetworkLoaderHandler->generate(options);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 		if (procId == 0) {
-			std::cout << "\nFactory Message: " << "Master loaded network of size "
+			std::cout << "\nFactory Message: "
+					<< "Master loaded network of size "
 					<< theNetworkHandler->size() << "." << std::endl;
 		}
 	}
@@ -82,8 +97,13 @@ public:
 	 *
 	 * @return The network.
 	 */
+<<<<<<< HEAD
 	std::shared_ptr<xolotlCore::IReactionNetwork> getNetworkHandler() const {
 		return theNetworkHandler;
+=======
+	xolotlCore::IReactionNetwork& getNetworkHandler() const {
+		return *theNetworkHandler;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	}
 
 };

@@ -21,7 +21,12 @@ public:
 	/**
 	 * The destructor
 	 */
+<<<<<<< HEAD
 	virtual ~ITrapMutationHandler() {}
+=======
+	virtual ~ITrapMutationHandler() {
+	}
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * The initialize method has to add connectivity between the He clusters and
@@ -36,9 +41,15 @@ public:
 	 * @param nz The number of grid points in the Z direction
 	 * @param hz The step size in the Z direction
 	 */
+<<<<<<< HEAD
 	virtual void initialize(IReactionNetwork *network,
 			std::vector<double> grid, int ny = 0, double hy = 0.0,
 			int nz = 0, double hz = 0.0) = 0;
+=======
+	virtual void initialize(const IReactionNetwork& network,
+			std::vector<double> grid, int ny = 0, double hy = 0.0, int nz = 0,
+			double hz = 0.0) = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This method defines which trap-mutation is allowed at each grid point.
@@ -48,7 +59,12 @@ public:
 	 * @param advectionHandlers The vector of advection handlers
 	 * @param grid The grid on the x axis
 	 */
+<<<<<<< HEAD
 	virtual void initializeIndex1D(int surfacePos, IReactionNetwork *network,
+=======
+	virtual void initializeIndex1D(int surfacePos,
+			const IReactionNetwork& network,
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			std::vector<IAdvectionHandler *> advectionHandlers,
 			std::vector<double> grid) = 0;
 
@@ -62,7 +78,12 @@ public:
 	 * @param ny The number of grid points in the Y direction
 	 * @param hy The step size in the Y direction
 	 */
+<<<<<<< HEAD
 	virtual void initializeIndex2D(std::vector<int> surfacePos, IReactionNetwork *network,
+=======
+	virtual void initializeIndex2D(std::vector<int> surfacePos,
+			const IReactionNetwork& network,
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			std::vector<IAdvectionHandler *> advectionHandlers,
 			std::vector<double> grid, int ny, double hy) = 0;
 
@@ -78,10 +99,17 @@ public:
 	 * @param nz The number of grid points in the Z direction
 	 * @param hz The step size in the Z direction
 	 */
+<<<<<<< HEAD
 	virtual void initializeIndex3D(std::vector<std::vector<int> > surfacePos, IReactionNetwork *network,
 			std::vector<IAdvectionHandler *> advectionHandlers,
 			std::vector<double> grid, int ny, double hy,
 			int nz, double hz) = 0;
+=======
+	virtual void initializeIndex3D(std::vector<std::vector<int> > surfacePos,
+			const IReactionNetwork& network,
+			std::vector<IAdvectionHandler *> advectionHandlers,
+			std::vector<double> grid, int ny, double hy, int nz, double hz) = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This method update the rate for the modified trap-mutation if the rates
@@ -90,7 +118,11 @@ public:
 	 *
 	 * @param network The network
 	 */
+<<<<<<< HEAD
 	virtual void updateTrapMutationRate(IReactionNetwork *network) = 0;
+=======
+	virtual void updateTrapMutationRate(const IReactionNetwork& network) = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This method set the boolean to remember if we want attenuation or not.
@@ -122,9 +154,15 @@ public:
 	 * @param yj The index of the position on the grid in the Y direction
 	 * @param zk The index of the position on the grid in the Z direction
 	 */
+<<<<<<< HEAD
 	virtual void computeTrapMutation(IReactionNetwork *network,
 			double *concOffset, double *updatedConcOffset,
 			int xi, int yj = 0, int zk = 0) = 0;
+=======
+	virtual void computeTrapMutation(const IReactionNetwork& network,
+			double *concOffset, double *updatedConcOffset, int xi, int yj = 0,
+			int zk = 0) = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Compute the partials due to the modified trap-mutation for all the
@@ -144,9 +182,22 @@ public:
 	 * @return The number of helium clusters that go through modified trap-mutation
 	 * at this grid point
 	 */
+<<<<<<< HEAD
 	virtual int computePartialsForTrapMutation(IReactionNetwork *network,
 			double *val, int *indices, int xi, int yj = 0, int zk = 0) = 0;
 
+=======
+	virtual int computePartialsForTrapMutation(const IReactionNetwork& network,
+			double *val, int *indices, int xi, int yj = 0, int zk = 0) = 0;
+
+	/**
+	 * Get the total number of clusters in the network that can undergo trap mutation.
+	 *
+	 * @return The number of clusters
+	 */
+	virtual int getNumberOfMutating() const = 0;
+
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 };
 //end class ITrapMutationHandler
 
