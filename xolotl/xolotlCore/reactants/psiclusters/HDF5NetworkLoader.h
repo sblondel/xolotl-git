@@ -16,7 +16,12 @@ private:
 	/**
 	 * Private nullary constructor.
 	 */
+<<<<<<< HEAD
 	HDF5NetworkLoader() {}
+=======
+	HDF5NetworkLoader() {
+	}
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 public:
 
@@ -24,7 +29,12 @@ public:
 	 * The default constructor.
 	 */
 	HDF5NetworkLoader(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
+<<<<<<< HEAD
 		PSIClusterNetworkLoader(registry) {}
+=======
+			PSIClusterNetworkLoader(registry) {
+	}
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * The destructor.
@@ -39,7 +49,11 @@ public:
 	 *
 	 * @return The reaction network.
 	 */
+<<<<<<< HEAD
 	std::shared_ptr<IReactionNetwork> load();
+=======
+	std::unique_ptr<IReactionNetwork> load(const IOptions& options) override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 };
 

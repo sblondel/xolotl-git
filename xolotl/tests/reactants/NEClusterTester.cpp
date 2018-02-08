@@ -10,9 +10,17 @@
 #include <typeinfo>
 #include <limits>
 #include <math.h>
+<<<<<<< HEAD
 
 using namespace std;
 using namespace xolotlCore;
+=======
+#include "SimpleReactionNetwork.h"
+
+using namespace std;
+using namespace xolotlCore;
+using namespace testUtils;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry =
 		std::make_shared<xolotlPerf::DummyHandlerRegistry>();
@@ -24,8 +32,15 @@ BOOST_AUTO_TEST_SUITE (NECluster_testSuite)
 
 /** This operation checks the loader. */
 BOOST_AUTO_TEST_CASE(checkDiffusionCoefficient) {
+<<<<<<< HEAD
 	// Local Declarations
 	NECluster cluster(registry);
+=======
+	// Get the simple reaction network
+	auto network = getSimpleNEReactionNetwork(0);
+	// Create a cluster
+	NECluster cluster(*(network.get()), registry);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Check E_m = 0.0
 	cluster.setMigrationEnergy(0.0);
@@ -69,6 +84,7 @@ BOOST_AUTO_TEST_CASE(checkDiffusionCoefficient) {
 }
 
 /**
+<<<<<<< HEAD
  * This operation tests the copy constructor.
  */
 BOOST_AUTO_TEST_CASE(checkCopying) {
@@ -120,6 +136,15 @@ BOOST_AUTO_TEST_CASE(checkCopying) {
 BOOST_AUTO_TEST_CASE(checkDefaultFluxes) {
 	// Local Declarations
 	NECluster cluster(registry);
+=======
+ * This operation tests the default values returned by select flux routines.
+ */
+BOOST_AUTO_TEST_CASE(checkDefaultFluxes) {
+	// Get the simple reaction network
+	auto network = getSimpleNEReactionNetwork(0);
+	// Create a cluster
+	NECluster cluster(*(network.get()), registry);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Check the default values of the fluxes
 	BOOST_REQUIRE_CLOSE(cluster.getProductionFlux(), 0.0, 1e-5);

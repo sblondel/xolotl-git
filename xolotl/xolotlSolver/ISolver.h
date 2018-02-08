@@ -22,7 +22,12 @@ public:
 	/**
 	 * The destructor
 	 */
+<<<<<<< HEAD
 	virtual ~ISolver(){}
+=======
+	virtual ~ISolver() {
+	}
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation transfers the input arguments passed to the program on
@@ -47,7 +52,12 @@ public:
 	 * for keys and associated values mapped to those keys. A relevant example
 	 * is "startTime" and "0.01" where both are of type std::string.
 	 */
+<<<<<<< HEAD
 	virtual void setOptions(const std::map<std::string, std::string>& options) = 0;
+=======
+	virtual void setOptions(
+			const std::map<std::string, std::string>& options) = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation sets up the mesh that will be used by the solver and
@@ -61,9 +71,14 @@ public:
 	 * possibly including but not limited to setting up MPI and loading initial
 	 * conditions. If the solver can not be initialized, this operation will
 	 * throw an exception of type std::string.
+<<<<<<< HEAD
 	 * @param solverHandler The solver handler
 	 */
 	virtual void initialize(std::shared_ptr<ISolverHandler> solverHandler) = 0;
+=======
+	 */
+	virtual void initialize() = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation directs the Solver to perform the solve. If the solve
@@ -79,7 +94,12 @@ public:
 	 */
 	virtual void finalize() = 0;
 
+<<<<<<< HEAD
 }; //end class ISolver
+=======
+};
+//end class ISolver
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 } /* namespace xolotlSolver */
 #endif

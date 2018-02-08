@@ -39,9 +39,15 @@ protected:
 	double fluxAmplitude;
 
 	/**
+<<<<<<< HEAD
 	 * The index of the cluster.
 	 */
 	int fluxIndex;
+=======
+	 * The indices of the incoming clusters.
+	 */
+	std::vector<int> fluxIndices;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Are we using a time profile for the amplitude of the helium incoming flux?
@@ -104,7 +110,11 @@ public:
 	 * Compute and store the incident flux values at each grid point.
 	 * \see IFluxHandler.h
 	 */
+<<<<<<< HEAD
 	virtual void initializeFluxHandler(IReactionNetwork *network,
+=======
+	virtual void initializeFluxHandler(const IReactionNetwork& network,
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			int surfacePos, std::vector<double> grid);
 
 	/**
@@ -118,7 +128,12 @@ public:
 	 * This operation computes the flux due to incoming particles at a given grid point.
 	 * \see IFluxHandler.h
 	 */
+<<<<<<< HEAD
 	virtual void computeIncidentFlux(double currentTime, double *updatedConcOffset, int xi, int surfacePos);
+=======
+	virtual void computeIncidentFlux(double currentTime,
+			double *updatedConcOffset, int xi, int surfacePos);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation increments the fluence at the current time step.

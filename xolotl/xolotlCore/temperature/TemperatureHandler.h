@@ -54,10 +54,17 @@ public:
 	 *
 	 * \see ITemperatureHandler.h
 	 */
+<<<<<<< HEAD
 	virtual void initializeTemperature(IReactionNetwork *network, int *ofill,
 			int *dfill) {
 		// Set dof
 		dof = network->getDOF();
+=======
+	virtual void initializeTemperature(const IReactionNetwork& network,
+			int *ofill, int *dfill) {
+		// Set dof
+		dof = network.getDOF();
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 		// Add the temperature to ofill
 		ofill[(dof - 1) * dof + (dof - 1)] = 1;
@@ -75,8 +82,12 @@ public:
 	 *
 	 * \see ITemperatureHandler.h
 	 */
+<<<<<<< HEAD
 	virtual double getTemperature(const std::vector<double>& position,
 			double) const {
+=======
+	virtual double getTemperature(const Point3D& position, double) const {
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		return temperature;
 	}
 

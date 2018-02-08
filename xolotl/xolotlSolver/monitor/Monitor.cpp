@@ -73,8 +73,13 @@ PetscErrorCode computeFluence(TS, PetscInt, PetscReal time, Vec, void *) {
 	PetscFunctionBeginUser;
 
 	// Get the solver handler and the flux handler
+<<<<<<< HEAD
 	auto solverHandler = PetscSolver::getSolverHandler();
 	auto fluxHandler = solverHandler->getFluxHandler();
+=======
+	auto& solverHandler = PetscSolver::getSolverHandler();
+	auto fluxHandler = solverHandler.getFluxHandler();
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// The length of the time step
 	double dt = time - previousTime;

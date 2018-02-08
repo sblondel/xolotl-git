@@ -4,11 +4,19 @@
 #include <boost/test/included/unit_test.hpp>
 #include <PSICluster.h>
 #include "SimpleReactionNetwork.h"
+<<<<<<< HEAD
 #include <HeVCluster.h>
 #include <HeCluster.h>
 #include <VCluster.h>
 #include <InterstitialCluster.h>
 #include <HeInterstitialCluster.h>
+=======
+#include <PSIHeVCluster.h>
+#include <PSIHeCluster.h>
+#include <PSIVCluster.h>
+#include <PSIInterstitialCluster.h>
+#include <PSIHeInterstitialCluster.h>
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 #include <xolotlPerf.h>
 
 using namespace std;
@@ -28,6 +36,7 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 	auto psiNetwork = make_shared<PSIClusterReactionNetwork>(registry);
 
 	// Add a few He, V and I PSIClusters
+<<<<<<< HEAD
 	auto heCluster = make_shared<HeCluster>(10, registry);
 	auto vCluster = make_shared<VCluster>(4, registry);
 	auto interstitialCluster = make_shared<InterstitialCluster>(48, registry);
@@ -37,23 +46,50 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 
 	// Check the network, He first
 	auto retHeCluster = (PSICluster *) psiNetwork->get("He", 10);
+=======
+	auto heCluster = std::unique_ptr<PSIHeCluster>(
+			new PSIHeCluster(10, *(psiNetwork.get()), registry));
+	auto vCluster = std::unique_ptr<PSIVCluster>(
+			new PSIVCluster(4, *(psiNetwork.get()), registry));
+	auto interstitialCluster = std::unique_ptr<PSIInterstitialCluster>(
+			new PSIInterstitialCluster(48, *(psiNetwork.get()), registry));
+	psiNetwork->add(std::move(heCluster));
+	psiNetwork->add(std::move(vCluster));
+	psiNetwork->add(std::move(interstitialCluster));
+
+	// Check the network, He first
+	auto retHeCluster = (PSICluster *) psiNetwork->get(Species::He, 10);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	BOOST_REQUIRE(retHeCluster);
 	BOOST_REQUIRE_EQUAL("He_10", retHeCluster->getName());
 	BOOST_REQUIRE_EQUAL(10, retHeCluster->getSize());
 	// V
+<<<<<<< HEAD
 	auto retVCluster = (PSICluster *) psiNetwork->get("V", 4);
+=======
+	auto retVCluster = (PSICluster *) psiNetwork->get(Species::V, 4);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	BOOST_REQUIRE(retVCluster);
 	BOOST_REQUIRE_EQUAL(4, retVCluster->getSize());
 	BOOST_REQUIRE_EQUAL("V_4", retVCluster->getName());
 	// I
+<<<<<<< HEAD
 	auto retICluster = (PSICluster *) psiNetwork->get("I", 48);
+=======
+	auto retICluster = (PSICluster *) psiNetwork->get(Species::I, 48);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	BOOST_REQUIRE(retICluster);
 	BOOST_REQUIRE_EQUAL(48, retICluster->getSize());
 	BOOST_REQUIRE_EQUAL("I_48", retICluster->getName());
 
 	// Check the getter for all reactants
+<<<<<<< HEAD
 	auto clusters = psiNetwork->getAll();
 	BOOST_REQUIRE_EQUAL(3U, clusters->size());
+=======
+	auto& clusters = psiNetwork->getAll();
+	BOOST_REQUIRE_EQUAL(3U, clusters.size());
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	// Check the size of the network
 	BOOST_REQUIRE_EQUAL(3, psiNetwork->size());
 
@@ -74,9 +110,16 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 	int maxClusterSize = 10;
 	for (int numV = 1; numV <= maxClusterSize; numV++) {
 		for (int numHe = 1; numHe + numV <= maxClusterSize; numHe++) {
+<<<<<<< HEAD
 			shared_ptr<HeVCluster> cluster = std::make_shared<HeVCluster>(numHe,
 					numV, registry);
 			psiNetwork->add(cluster);
+=======
+			auto cluster = std::unique_ptr<PSIHeVCluster>(
+					new PSIHeVCluster(numHe, numV, *(psiNetwork.get()),
+							registry));
+			psiNetwork->add(std::move(cluster));
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			counter++;
 		}
 	}
@@ -90,9 +133,16 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 	maxClusterSize = 9;
 	for (int numI = 1; numI <= maxClusterSize; numI++) {
 		for (int numHe = 1; numHe + numI <= maxClusterSize; numHe++) {
+<<<<<<< HEAD
 			shared_ptr<HeInterstitialCluster> cluster(
 					new HeInterstitialCluster(numHe, numI, registry));
 			psiNetwork->add(cluster);
+=======
+			auto cluster = std::unique_ptr<PSIHeInterstitialCluster>(
+					new PSIHeInterstitialCluster(numHe, numI,
+							*(psiNetwork.get()), registry));
+			psiNetwork->add(std::move(cluster));
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			counter++;
 		}
 	}
@@ -100,10 +150,17 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 	BOOST_TEST_MESSAGE("Added " << counter << " HeI clusters");
 
 	// Try adding a duplicate HeV and catch the exception
+<<<<<<< HEAD
 	shared_ptr<HeVCluster> duplicateCluster = std::make_shared<HeVCluster>(5, 3,
 			registry);
 	try {
 		psiNetwork->add(duplicateCluster);
+=======
+	auto duplicateCluster = std::unique_ptr<PSIHeVCluster>(
+			new PSIHeVCluster(5, 3, *(psiNetwork.get()), registry));
+	try {
+		psiNetwork->add(std::move(duplicateCluster));
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		BOOST_FAIL(
 				"Test failed because adding a duplicate" << " to the network was allowed.");
 	} catch (const std::string& /* e */) {
@@ -111,6 +168,7 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 	}
 
 	// Make sure that everything was added
+<<<<<<< HEAD
 	auto reactants = psiNetwork->getAll();
 	BOOST_REQUIRE_EQUAL(84U, reactants->size());
 	// Get the clusters by type and check them. Start with He.
@@ -146,6 +204,49 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 	// Try changing the temperature and make sure it works
 	psiNetwork->setTemperature(1000.0);
 	BOOST_REQUIRE_CLOSE(1000.0, reactants->at(0)->getTemperature(), 0.0001);
+=======
+	auto& reactants = psiNetwork->getAll();
+	BOOST_REQUIRE_EQUAL(84U, reactants.size());
+
+	// Get the clusters by type and check them. Start with He.
+	auto& heReactants = psiNetwork->getAll(ReactantType::He);
+	auto& heReactant = heReactants.begin()->second;
+	BOOST_REQUIRE_EQUAL(1U, heReactants.size());
+	BOOST_REQUIRE_EQUAL("He_10", heReactant->getName());
+	// V
+	auto& vReactants = psiNetwork->getAll(ReactantType::V);
+	auto& vReactant = vReactants.begin()->second;
+	BOOST_REQUIRE_EQUAL(1U, vReactants.size());
+	BOOST_REQUIRE_EQUAL("V_4", vReactant->getName());
+	// I
+	auto& iReactants = psiNetwork->getAll(ReactantType::I);
+	auto& iReactant = iReactants.begin()->second;
+	BOOST_REQUIRE_EQUAL(1U, iReactants.size());
+	BOOST_REQUIRE_EQUAL("I_48", iReactant->getName());
+
+	// HeV
+	auto& heVReactants = psiNetwork->getAll(ReactantType::HeV);
+	BOOST_REQUIRE_EQUAL(45U, heVReactants.size());
+	// HeI
+	auto& heIReactants = psiNetwork->getAll(ReactantType::HeI);
+	BOOST_REQUIRE_EQUAL(36U, heIReactants.size());
+
+	// Add the required He_1, V_1, I_1 clusters to the network.
+	heCluster = std::unique_ptr<PSIHeCluster>(
+			new PSIHeCluster(1, *(psiNetwork.get()), registry));
+	vCluster = std::unique_ptr<PSIVCluster>(
+			new PSIVCluster(1, *(psiNetwork.get()), registry));
+	interstitialCluster = std::unique_ptr<PSIInterstitialCluster>(
+			new PSIInterstitialCluster(1, *(psiNetwork.get()), registry));
+	psiNetwork->add(std::move(heCluster));
+	psiNetwork->add(std::move(vCluster));
+	psiNetwork->add(std::move(interstitialCluster));
+
+	// Try changing the temperature and make sure it works
+	psiNetwork->setTemperature(1000.0);
+	IReactant& reactant = reactants.at(0);
+	BOOST_REQUIRE_CLOSE(1000.0, reactant.getTemperature(), 0.0001);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	return;
 }
@@ -154,6 +255,7 @@ BOOST_AUTO_TEST_CASE(checkProperties) {
 	// Create the network
 	auto psiNetwork = make_shared<PSIClusterReactionNetwork>(registry);
 
+<<<<<<< HEAD
 	// Access the network "properties."
 	auto numHeClusters = psiNetwork->getNumHeClusters();
 	auto numVClusters = psiNetwork->getNumVClusters();
@@ -195,6 +297,26 @@ BOOST_AUTO_TEST_CASE(checkProperties) {
 	BOOST_REQUIRE_EQUAL(1, numHeVClusters);
 	BOOST_REQUIRE_EQUAL(5, maxHeClusterSize);
 	BOOST_REQUIRE_EQUAL(8, maxHeVClusterSize);
+=======
+	// Check the properties
+	BOOST_REQUIRE_EQUAL(psiNetwork->getMaxClusterSize(ReactantType::He), 0);
+	BOOST_REQUIRE_EQUAL(psiNetwork->getMaxClusterSize(ReactantType::V), 0);
+	BOOST_REQUIRE_EQUAL(psiNetwork->getMaxClusterSize(ReactantType::I), 0);
+	BOOST_REQUIRE_EQUAL(psiNetwork->getMaxClusterSize(ReactantType::HeV), 0);
+	BOOST_REQUIRE_EQUAL(psiNetwork->getMaxClusterSize(ReactantType::HeI), 0);
+
+	// Add a couple of clusters
+	auto heCluster = std::unique_ptr<PSIHeCluster>(
+			new PSIHeCluster(5, *(psiNetwork.get()), registry));
+	psiNetwork->add(std::move(heCluster));
+	auto heVCluster = std::unique_ptr<PSIHeVCluster>(
+			new PSIHeVCluster(5, 3, *(psiNetwork.get()), registry));
+	psiNetwork->add(std::move(heVCluster));
+
+	// Check the properties again
+	BOOST_REQUIRE_EQUAL(psiNetwork->getMaxClusterSize(ReactantType::He), 5);
+	BOOST_REQUIRE_EQUAL(psiNetwork->getMaxClusterSize(ReactantType::HeV), 8);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	return;
 }
@@ -203,6 +325,7 @@ BOOST_AUTO_TEST_CASE(checkNames) {
 	// Create the network
 	auto psiNetwork = make_shared<PSIClusterReactionNetwork>(registry);
 
+<<<<<<< HEAD
 	// Check the names of the regular cluster types. Use a simple counting
 	// system to look over the list since there is no way to check exact
 	// containment with a vector.
@@ -266,6 +389,28 @@ BOOST_AUTO_TEST_CASE(checkCopying) {
 
 	// Check the size of the network
 	BOOST_REQUIRE_EQUAL(1, networkCopy.size());
+=======
+	// Check the names of all cluster types. Use a simple counting
+	// system to look over the list.
+	auto names = psiNetwork->getKnownReactantTypes();
+	unsigned int marker = 0;
+	for (auto name : names) {
+		if (name == ReactantType::He)
+			++marker;
+		else if (name == ReactantType::V)
+			++marker;
+		else if (name == ReactantType::I)
+			++marker;
+		else if (name == ReactantType::PSISuper)
+			++marker;
+		else if (name == ReactantType::HeV)
+			++marker;
+		else if (name == ReactantType::HeI)
+			++marker;
+	}
+	BOOST_REQUIRE_EQUAL(6U, marker);
+	BOOST_REQUIRE_EQUAL(marker, names.size());
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	return;
 }
@@ -301,7 +446,12 @@ BOOST_AUTO_TEST_CASE(checkArrayOperations) {
 	network->updateConcentrationsFromArray(concentrations);
 	auto reactants = network->getAll();
 	for (int i = 0; i < size; i++) {
+<<<<<<< HEAD
 		BOOST_REQUIRE_CLOSE(1.0, reactants->at(0)->getConcentration(), 1.0e-15);
+=======
+		IReactant& reactant = reactants.at(i);
+		BOOST_REQUIRE_CLOSE(1.0, reactant.getConcentration(), 1.0e-15);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	}
 
 	// Clear memory
@@ -310,6 +460,7 @@ BOOST_AUTO_TEST_CASE(checkArrayOperations) {
 	return;
 }
 
+<<<<<<< HEAD
 BOOST_AUTO_TEST_CASE(checkRefCounts) {
 	// Obtain a network to work with.
 	// This network was built programmatically.
@@ -346,4 +497,6 @@ BOOST_AUTO_TEST_CASE(checkRefCounts) {
 	return;
 }
 
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 BOOST_AUTO_TEST_SUITE_END()

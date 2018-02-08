@@ -21,7 +21,12 @@ public:
 	/**
 	 * The destructor
 	 */
+<<<<<<< HEAD
 	virtual ~IDiffusionHandler() {}
+=======
+	virtual ~IDiffusionHandler() {
+	}
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Initialize the off-diagonal part of the Jacobian. If this step is skipped it
@@ -31,7 +36,11 @@ public:
 	 * @param ofill The pointer to the array that will contain the value 1 at the indices
 	 * of the diffusing clusters
 	 */
+<<<<<<< HEAD
 	virtual void initializeOFill(IReactionNetwork *network,
+=======
+	virtual void initializeOFill(const IReactionNetwork& network,
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			int *ofill) = 0;
 
 	/**
@@ -45,9 +54,16 @@ public:
 	 * @param nz The number of grid points in the Z direction
 	 * @param hz The step size in the Z direction
 	 */
+<<<<<<< HEAD
 	virtual void initializeDiffusionGrid(std::vector<IAdvectionHandler *> advectionHandlers,
 			std::vector<double> grid,
 			int ny = 0, double hy = 0.0, int nz = 0, double hz = 0.0) = 0;
+=======
+	virtual void initializeDiffusionGrid(
+			std::vector<IAdvectionHandler *> advectionHandlers,
+			std::vector<double> grid, int ny = 0, double hy = 0.0, int nz = 0,
+			double hz = 0.0) = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Compute the flux due to the diffusion for all the cluster that are diffusing,
@@ -67,10 +83,17 @@ public:
 	 * @param sz The space parameter, depending on the grid step size in the z direction
 	 * @param iz The position on the z grid
 	 */
+<<<<<<< HEAD
 	virtual void computeDiffusion(IReactionNetwork *network,
 			double **concVector, double *updatedConcOffset,
 			double hxLeft, double hxRight, int ix,
 			double sy = 0.0, int iy = 0, double sz = 0.0, int iz = 0) = 0;
+=======
+	virtual void computeDiffusion(const IReactionNetwork& network,
+			double **concVector, double *updatedConcOffset, double hxLeft,
+			double hxRight, int ix, double sy = 0.0, int iy = 0,
+			double sz = 0.0, int iz = 0) const = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Compute the partials due to the diffusion of all the diffusing clusters given
@@ -90,16 +113,26 @@ public:
 	 * @param sz The space parameter, depending on the grid step size in the z direction
 	 * @param iz The position on the z grid
 	 */
+<<<<<<< HEAD
 	virtual void computePartialsForDiffusion(IReactionNetwork *network,
 			double *val, int *indices, double hxLeft, double hxRight, int ix,
 			double sy = 0.0, int iy = 0, double sz = 0.0, int iz = 0) = 0;
+=======
+	virtual void computePartialsForDiffusion(const IReactionNetwork& network,
+			double *val, int *indices, double hxLeft, double hxRight, int ix,
+			double sy = 0.0, int iy = 0, double sz = 0.0, int iz = 0) const = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Get the total number of diffusing clusters in the network.
 	 *
 	 * @return The number of diffusing clusters
 	 */
+<<<<<<< HEAD
 	virtual int getNumberOfDiffusing() = 0;
+=======
+	virtual int getNumberOfDiffusing() const = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 };
 //end class IDiffusionHandler

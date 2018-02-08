@@ -20,7 +20,11 @@ BOOST_AUTO_TEST_CASE(check_getTemperature) {
 	double currTime = 1.0;
 
 	// Create a position
+<<<<<<< HEAD
 	std::vector<double> x = {0.0, 0.0, 0.0};
+=======
+	Point3D x = { 0.0, 0.0, 0.0 };
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Get the temperature
 	double temp = testTemp->getTemperature(x, currTime);

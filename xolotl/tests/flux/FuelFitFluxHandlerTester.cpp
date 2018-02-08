@@ -7,6 +7,10 @@
 #include <NEClusterNetworkLoader.h>
 #include <DummyHandlerRegistry.h>
 #include <XolotlConfig.h>
+<<<<<<< HEAD
+=======
+#include <Options.h>
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 using namespace std;
 using namespace xolotlCore;
@@ -32,8 +36,15 @@ BOOST_AUTO_TEST_CASE(checkComputeIncidentFlux) {
 	// Give the filename to the network loader
 	loader.setFilename(filename);
 
+<<<<<<< HEAD
 	// Load the network
 	auto network = loader.load().get();
+=======
+	// Create the options needed to load the network
+	Options opts;
+	// Load the network
+	auto network = loader.load(opts);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	// Get its size
 	const int dof = network->getDOF();
 
@@ -50,7 +61,11 @@ BOOST_AUTO_TEST_CASE(checkComputeIncidentFlux) {
 	// Set the flux amplitude
 	testFitFlux->setFluxAmplitude(1.0);
 	// Initialize the flux handler
+<<<<<<< HEAD
 	testFitFlux->initializeFluxHandler(network, surfacePos, grid);
+=======
+	testFitFlux->initializeFluxHandler(*network, surfacePos, grid);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Create a time
 	double currTime = 1.0;
@@ -68,11 +83,22 @@ BOOST_AUTO_TEST_CASE(checkComputeIncidentFlux) {
 	double *updatedConcOffset = updatedConc + dof;
 
 	// Update the concentrations at some grid points
+<<<<<<< HEAD
 	testFitFlux->computeIncidentFlux(currTime, updatedConcOffset, 1, surfacePos);
 	updatedConcOffset = updatedConc + 2 * dof;
 	testFitFlux->computeIncidentFlux(currTime, updatedConcOffset, 2, surfacePos);
 	updatedConcOffset = updatedConc + 3 * dof;
 	testFitFlux->computeIncidentFlux(currTime, updatedConcOffset, 3, surfacePos);
+=======
+	testFitFlux->computeIncidentFlux(currTime, updatedConcOffset, 1,
+			surfacePos);
+	updatedConcOffset = updatedConc + 2 * dof;
+	testFitFlux->computeIncidentFlux(currTime, updatedConcOffset, 2,
+			surfacePos);
+	updatedConcOffset = updatedConc + 3 * dof;
+	testFitFlux->computeIncidentFlux(currTime, updatedConcOffset, 3,
+			surfacePos);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Check the value at some grid points
 	BOOST_REQUIRE_CLOSE(newConcentration[4], 0.26666, 0.01);

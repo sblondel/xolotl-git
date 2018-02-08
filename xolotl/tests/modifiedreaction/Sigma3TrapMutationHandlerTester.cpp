@@ -6,6 +6,10 @@
 #include <Sigma3TrapMutationHandler.h>
 #include <HDF5NetworkLoader.h>
 #include <XolotlConfig.h>
+<<<<<<< HEAD
+=======
+#include <Options.h>
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 #include <DummyHandlerRegistry.h>
 #include <DummyAdvectionHandler.h>
 #include <YGBAdvectionHandler.h>
@@ -38,6 +42,7 @@ BOOST_AUTO_TEST_CASE(checkModifiedTrapMutation) {
 	// Give the filename to the network loader
 	loader.setFilename(filename);
 
+<<<<<<< HEAD
 	// Load the network
 	auto network = loader.load().get();
 	// Get all the reactants
@@ -51,6 +56,16 @@ BOOST_AUTO_TEST_CASE(checkModifiedTrapMutation) {
 		// and recompute the diffusion coefficient
 		allReactants->at(i)->setTemperature(1000.0);
 	}
+=======
+	// Create the options needed to load the network
+	Options opts;
+	// Load the network
+	auto network = loader.load(opts);
+	// Get its size
+	const int dof = network->getDOF();
+	// Initialize the rate constants
+	network->setTemperature(1000.0);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	network->computeRateConstants();
 
 	// Suppose we have a grid with 13 grip points and distance of
@@ -74,8 +89,13 @@ BOOST_AUTO_TEST_CASE(checkModifiedTrapMutation) {
 	advectionHandlers.push_back(advecHandler);
 
 	// Initialize it
+<<<<<<< HEAD
 	trapMutationHandler.initialize(network, grid, 5, 0.5);
 	trapMutationHandler.initializeIndex2D(surfacePos, network,
+=======
+	trapMutationHandler.initialize(*network, grid, 5, 0.5);
+	trapMutationHandler.initializeIndex2D(surfacePos, *network,
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			advectionHandlers, grid, 5, 0.5);
 
 	// The arrays of concentration
@@ -101,7 +121,11 @@ BOOST_AUTO_TEST_CASE(checkModifiedTrapMutation) {
 	network->updateConcentrationsFromArray(concOffset);
 
 	// Compute the modified trap mutation at the sixth grid point
+<<<<<<< HEAD
 	trapMutationHandler.computeTrapMutation(network, concOffset,
+=======
+	trapMutationHandler.computeTrapMutation(*network, concOffset,
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			updatedConcOffset, 5, 1);
 
 	// Check the new values of updatedConcOffset
@@ -118,7 +142,11 @@ BOOST_AUTO_TEST_CASE(checkModifiedTrapMutation) {
 	network->updateConcentrationsFromArray(concOffset);
 
 	// Compute the modified trap mutation at the ninth grid point
+<<<<<<< HEAD
 	trapMutationHandler.computeTrapMutation(network, concOffset,
+=======
+	trapMutationHandler.computeTrapMutation(*network, concOffset,
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			updatedConcOffset, 8, 3);
 
 	// Check the new values of updatedConcOffset
@@ -129,7 +157,11 @@ BOOST_AUTO_TEST_CASE(checkModifiedTrapMutation) {
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[21], 5.9985155e+24, 0.01); // Create He7V2
 
 	// Initialize the indices and values to set in the Jacobian
+<<<<<<< HEAD
 	int nHelium = network->getAll(heType).size();
+=======
+	int nHelium = network->getAll(ReactantType::He).size();
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	int indices[3 * nHelium];
 	double val[3 * nHelium];
 	// Get the pointer on them for the compute modified trap-mutation method
@@ -137,7 +169,11 @@ BOOST_AUTO_TEST_CASE(checkModifiedTrapMutation) {
 	double *valPointer = &val[0];
 
 	// Compute the partial derivatives for the modified trap-mutation at the grid point 8
+<<<<<<< HEAD
 	int nMutating = trapMutationHandler.computePartialsForTrapMutation(network,
+=======
+	int nMutating = trapMutationHandler.computePartialsForTrapMutation(*network,
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			valPointer, indicesPointer, 8, 3);
 
 	// Check the values for the indices
@@ -161,10 +197,17 @@ BOOST_AUTO_TEST_CASE(checkModifiedTrapMutation) {
 	network->setTemperature(500.0);
 
 	// Update the bursting rate
+<<<<<<< HEAD
 	trapMutationHandler.updateTrapMutationRate(network);
 
 	// Compute the partial derivatives for the bursting a the grid point 8
 	nMutating = trapMutationHandler.computePartialsForTrapMutation(network,
+=======
+	trapMutationHandler.updateTrapMutationRate(*network);
+
+	// Compute the partial derivatives for the bursting a the grid point 8
+	nMutating = trapMutationHandler.computePartialsForTrapMutation(*network,
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			valPointer, indicesPointer, 8, 3);
 
 	// Check values
