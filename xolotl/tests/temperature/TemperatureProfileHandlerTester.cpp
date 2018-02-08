@@ -19,6 +19,7 @@ BOOST_AUTO_TEST_CASE(check_getTemperature) {
 	// the temperature at that time.
 	std::ofstream writeTempFile("tempFile.dat");
 	writeTempFile << "0.0 2.0 \n"
+<<<<<<< HEAD
 			"1.0 1.99219766723 \n"
 			"2.0 1.87758256189 \n"
 			"3.0 1.4311765168 \n"
@@ -29,12 +30,28 @@ BOOST_AUTO_TEST_CASE(check_getTemperature) {
 			"8.0 0.854499966191 \n"
 			"9.0 0.235300873168 \n"
 			"10.0 1.99779827918";
+=======
+	"1.0 1.99219766723 \n"
+	"2.0 1.87758256189 \n"
+	"3.0 1.4311765168 \n"
+	"4.0 0.583853163453 \n"
+	"5.0 0.000137654918313 \n"
+	"6.0 0.789204200569 \n"
+	"7.0 1.9875147713 \n"
+	"8.0 0.854499966191 \n"
+	"9.0 0.235300873168 \n"
+	"10.0 1.99779827918";
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	writeTempFile.close();
 
 	// Create and initialize the temperature profile handler
 	auto testTemp = make_shared<TemperatureProfileHandler>("tempFile.dat");
 	testTemp->initializeTemperature();
+<<<<<<< HEAD
 	std::vector<double> pos = {1.142857142857143, 0.0, 0.0};
+=======
+	std::vector<double> pos = { 1.142857142857143, 0.0, 0.0 };
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	// Vector to hold the user defined time values
 	std::vector<double> t;
@@ -56,11 +73,16 @@ BOOST_AUTO_TEST_CASE(check_getTemperature) {
 
 	// Vector to hold interpolated values
 	std::vector<double> tempInterp;
+<<<<<<< HEAD
 	for (int i = 0; i < t.size(); i++) {
+=======
+	for (unsigned int i = 0; i < t.size(); i++) {
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 		tempInterp.push_back(testTemp->getTemperature(pos, t[i]));
 	}
 
 	// Verify the values
+<<<<<<< HEAD
 	for(int j = 0; j < t.size(); j++)
 		BOOST_REQUIRE_CLOSE(tempInterp[j], trueInterp[j], 10e-8);
 
@@ -69,6 +91,16 @@ BOOST_AUTO_TEST_CASE(check_getTemperature) {
     std::remove(tempFile.c_str());
 
     return;
+=======
+	for(unsigned int j = 0; j < t.size(); j++)
+	BOOST_REQUIRE_CLOSE(tempInterp[j], trueInterp[j], 10e-8);
+
+	// Remove the created file
+	std::string tempFile = "tempFile.dat";
+	std::remove(tempFile.c_str());
+
+	return;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 }
 
 BOOST_AUTO_TEST_SUITE_END()

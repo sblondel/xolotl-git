@@ -6,9 +6,13 @@
 #include "IHandlerRegistry.h"
 #include "RuntimeError.h"
 
+<<<<<<< HEAD
 
 namespace xolotlPerf
 {
+=======
+namespace xolotlPerf {
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 /**
  * Detect the type of performance handlers registry to create based
@@ -23,6 +27,7 @@ namespace xolotlPerf
  * @param arg String description of performance handler registry to create.
  * @return The performance handler registry type to create.
  */
+<<<<<<< HEAD
 inline
 IHandlerRegistry::RegistryType
 toPerfRegistryType(const std::string& arg)
@@ -57,6 +62,28 @@ toPerfRegistryType(const std::string& arg)
 
 
 
+=======
+inline IHandlerRegistry::RegistryType toPerfRegistryType(
+		const std::string& arg) {
+	IHandlerRegistry::RegistryType ret;
+
+	if (arg == "dummy") {
+		ret = IHandlerRegistry::dummy;
+	} else if (arg == "std") {
+		ret = IHandlerRegistry::std;
+	} else if (arg == "os") {
+		ret = IHandlerRegistry::os;
+	} else if (arg == "papi") {
+		ret = IHandlerRegistry::papi;
+	} else {
+		std::ostringstream estr;
+		estr << "Invalid performance handler argument \"" << arg << "\" seen.";
+		throw std::invalid_argument(estr.str());
+	}
+	return ret;
+}
+
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 /**
  * Initialize the performance library for using the desired type of handlers.
  * Throws a std::invalid_argument if caller requests a registry type that
@@ -64,8 +91,12 @@ toPerfRegistryType(const std::string& arg)
  *
  * @param rtype Type of handlerRegistry to create.
  */
+<<<<<<< HEAD
 void initialize( IHandlerRegistry::RegistryType rtype );
 
+=======
+void initialize(IHandlerRegistry::RegistryType rtype);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 /**
  * Access the handler registry.
@@ -74,8 +105,14 @@ void initialize( IHandlerRegistry::RegistryType rtype );
  *
  *  @return The handler registry object.
  */
+<<<<<<< HEAD
 std::shared_ptr<IHandlerRegistry> getHandlerRegistry( void );
 
 }; // end namespace xolotlPerf
+=======
+std::shared_ptr<IHandlerRegistry> getHandlerRegistry(void);
+
+} // end namespace xolotlPerf
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 #endif // XOLOTLPERF_H

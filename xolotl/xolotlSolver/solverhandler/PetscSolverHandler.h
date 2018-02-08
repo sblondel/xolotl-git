@@ -38,6 +38,7 @@ protected:
 	double lastTemperature;
 
 	/**
+<<<<<<< HEAD
 	 * A map for storing the dfill configuration and accelerating the formation of
 	 * the Jacobian. Its keys are reactant/cluster ids and its values are integer
 	 * vectors of the column ids that are marked as connected for that cluster in
@@ -50,6 +51,12 @@ protected:
 	 * network after it is set.
 	 */
 	std::shared_ptr<std::vector<xolotlCore::Reactant *>> allReactants;
+=======
+	 * A pointer to all of the reactants in the network. It is retrieved from the
+	 * network after it is set.
+	 */
+	std::shared_ptr<std::vector<xolotlCore::IReactant *>> allReactants;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * A vector for holding the partial derivatives of one cluster. It is sized in
@@ -73,6 +80,7 @@ protected:
 	 */
 	std::vector<double> reactingPartialsForCluster;
 
+<<<<<<< HEAD
 public:
 
 	//! The Constructor
@@ -88,6 +96,40 @@ public:
 	void getDiagonalFill(PetscInt *diagFill, int diagFillSize);
 
 }; //end class PetscSolverHandler
+=======
+	/**
+	 * A pointer to an array of the size dof * dof keeping the partial
+	 * derivatives for all the reactions at one grid point.
+	 *
+	 * Its size must be initialized.
+	 */
+	PetscScalar *reactionVals;
+
+	/**
+	 * A pointer to an array of the size dof * dof keeping the indices for partial
+	 * derivatives for all the reactions at one grid point.
+	 *
+	 * Its size must be initialized.
+	 */
+	PetscInt *reactionIndices;
+
+public:
+
+	//! The Constructor
+	PetscSolverHandler() :
+			lastTemperature(0.0) {
+	}
+
+	//! The Destructor
+	~PetscSolverHandler() {
+		// Delete arrays
+		delete[] reactionVals;
+		delete[] reactionIndices;
+	}
+
+};
+//end class PetscSolverHandler
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 } /* end namespace xolotlSolver */
 #endif

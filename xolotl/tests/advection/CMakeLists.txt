@@ -27,7 +27,12 @@ if(Boost_FOUND)
         message(STATUS "Making test ${test}")
         get_filename_component(testName ${test} NAME_WE)
         add_executable(${testName} ${test})
+<<<<<<< HEAD
         target_link_libraries(${testName} xolotlAdvection xolotlReactants xolotlPerf)
+=======
+        target_link_libraries(${testName} xolotlAdvection xolotlPerf
+        xolotlReactants)
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
         add_test(${testName} ${testName}) 
         #add a label so the tests can be run separately
         set_property(TEST ${testName} PROPERTY LABELS ${PACKAGE_NAME})   

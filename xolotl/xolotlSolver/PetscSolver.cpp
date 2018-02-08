@@ -64,7 +64,11 @@ void PetscSolver::setupInitialConditions(DM da, Vec C) {
  .  F - function values
  */
 /* ------------------------------------------------------------------- */
+<<<<<<< HEAD
 PetscErrorCode RHSFunction(TS ts, PetscReal ftime, Vec C, Vec F, void *ptr) {
+=======
+PetscErrorCode RHSFunction(TS ts, PetscReal ftime, Vec C, Vec F, void *) {
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	// Start the RHSFunction Timer
 	RHSFunctionTimer->start();
 
@@ -103,7 +107,11 @@ PetscErrorCode RHSFunction(TS ts, PetscReal ftime, Vec C, Vec F, void *ptr) {
  Compute the Jacobian entries based on IFunction() and insert them into the matrix
  */
 PetscErrorCode RHSJacobian(TS ts, PetscReal ftime, Vec C, Mat A, Mat J,
+<<<<<<< HEAD
 		void *ptr) {
+=======
+		void *) {
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	// Start the RHSJacobian timer
 	RHSJacobianTimer->start();
 
@@ -125,13 +133,21 @@ PetscErrorCode RHSJacobian(TS ts, PetscReal ftime, Vec C, Mat A, Mat J,
 	auto solverHandler = PetscSolver::getSolverHandler();
 
 	/* ----- Compute the off-diagonal part of the Jacobian ----- */
+<<<<<<< HEAD
 	solverHandler->computeOffDiagonalJacobian(ts, localC, J);
+=======
+	solverHandler->computeOffDiagonalJacobian(ts, localC, J, ftime);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	ierr = MatAssemblyBegin(J, MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
 	ierr = MatAssemblyEnd(J, MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
 
 	/* ----- Compute the partial derivatives for the reaction term ----- */
+<<<<<<< HEAD
 	solverHandler->computeDiagonalJacobian(ts, localC, J);
+=======
+	solverHandler->computeDiagonalJacobian(ts, localC, J, ftime);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	ierr = MatAssemblyBegin(J, MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
 	ierr = MatAssemblyEnd(J, MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
@@ -156,7 +172,11 @@ PetscSolver::PetscSolver(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry)
 PetscSolver::~PetscSolver() {
 }
 
+<<<<<<< HEAD
 void PetscSolver::setOptions(const std::map<std::string, std::string>& options) {
+=======
+void PetscSolver::setOptions(const std::map<std::string, std::string>&) {
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 }
 
 void PetscSolver::setupMesh() {
@@ -177,6 +197,7 @@ void PetscSolver::initialize(std::shared_ptr<ISolverHandler> solverHandler) {
 void PetscSolver::solve() {
 	PetscErrorCode ierr;
 
+<<<<<<< HEAD
 	// Check the network before getting busy.
 	if (!network) {
 		throw std::string("PetscSolver Exception: Network not set!");
@@ -194,6 +215,11 @@ void PetscSolver::solve() {
 	// Create the solver context
 	DM da;
 	Solver::solverHandler->createSolverContext(da, nx, hx, ny, hy, nz, hz);
+=======
+	// Create the solver context
+	DM da;
+	Solver::solverHandler->createSolverContext(da);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/*  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	 Extract global vector from DMDA to hold solution
@@ -228,6 +254,10 @@ void PetscSolver::solve() {
 	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 	// Read the times if the information is in the HDF5 file
+<<<<<<< HEAD
+=======
+	auto fileName = Solver::solverHandler->getNetworkName();
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	double time = 0.0, deltaTime = 1.0e-12;
 	int tempTimeStep = -2;
 	if (HDF5Utils::hasConcentrationGroup(fileName, tempTimeStep)) {

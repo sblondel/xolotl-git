@@ -17,9 +17,17 @@ class Plot: public IPlot, public xolotlCore::Identifiable {
 protected:
 
 	/**
+<<<<<<< HEAD
      * Declare the constructor as private to force the use of a name
 	 */
     Plot() : xolotlCore::Identifiable("unused") {}
+=======
+	 * Declare the constructor as private to force the use of a name
+	 */
+	Plot() :
+			xolotlCore::Identifiable("unused") {
+	}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * Choice of PlottingStyle.
@@ -93,19 +101,31 @@ public:
 	 * Gets the data provider used.
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	std::shared_ptr<IDataProvider> getDataProvider() const ;
+=======
+	std::shared_ptr<IDataProvider> getDataProvider() const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * Method getting the i-th data provider for SeriesPlot
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	std::shared_ptr<IDataProvider> getDataProvider(int i) const ;
+=======
+	std::shared_ptr<IDataProvider> getDataProvider(int i) const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * Method getting the total number of data providers
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	int getDataProviderNumber() const ;
+=======
+	int getDataProviderNumber() const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * Sets the label provider used for the plots.
@@ -117,7 +137,11 @@ public:
 	 * Gets the label provider used.
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	std::shared_ptr<LabelProvider> getLabelProvider() const ;
+=======
+	std::shared_ptr<LabelProvider> getLabelProvider() const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * Method that enables the rendering of the legend.
@@ -129,7 +153,11 @@ public:
 	 * Method getting the legend.
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	std::string getLegend() const ;
+=======
+	std::string getLegend() const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * Method that enables the log scale.

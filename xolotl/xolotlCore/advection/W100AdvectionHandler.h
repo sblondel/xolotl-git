@@ -2,7 +2,11 @@
 #define W100ADVECTIONHANDLER_H
 
 // Includes
+<<<<<<< HEAD
 #include "AdvectionHandler.h"
+=======
+#include "SurfaceAdvectionHandler.h"
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 #include <MathUtils.h>
 
 namespace xolotlCore {
@@ -11,7 +15,11 @@ namespace xolotlCore {
  * This class realizes the IAdvectionHandler interface responsible for all
  * the physical parts for the advection of mobile helium cluster.
  */
+<<<<<<< HEAD
 class W100AdvectionHandler: public AdvectionHandler {
+=======
+class W100AdvectionHandler: public SurfaceAdvectionHandler {
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 public:
 
@@ -26,18 +34,33 @@ public:
 	 * (100) tungsten material.
 	 *
 	 * @param network The network
+<<<<<<< HEAD
 	 */
 	void initialize(PSIClusterReactionNetwork *network) {
 		// Get all the reactants and their number
 		auto reactants = network->getAll();
 		int size = reactants->size();
+=======
+	 * @param ofill The pointer to the array that will contain the value 1 at the indices
+	 * of the advecting clusters
+	 */
+	void initialize(IReactionNetwork *network, int *ofill) {
+		// Get all the reactants and their number
+		auto reactants = network->getAll();
+		int networkSize = reactants->size();
+		int dof = network->getDOF();
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 		// Clear the index and sink strength vectors
 		indexVector.clear();
 		sinkStrengthVector.clear();
 
 		// Loop on all the reactants
+<<<<<<< HEAD
 		for (int i = 0; i < size; i++) {
+=======
+		for (int i = 0; i < networkSize; i++) {
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 			// Get the i-th cluster
 			auto cluster = (PSICluster *) reactants->at(i);
 			// Get its diffusion coefficient
@@ -86,6 +109,15 @@ public:
 
 			// Add the sink strength to the vector
 			sinkStrengthVector.push_back(sinkStrength);
+<<<<<<< HEAD
+=======
+
+			// Set the off-diagonal part for the Jacobian to 1
+			// Get its id
+			int index = cluster->getId() - 1;
+			// Set the ofill value to 1 for this cluster
+			ofill[index * dof + index] = 1;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 		}
 
 		return;

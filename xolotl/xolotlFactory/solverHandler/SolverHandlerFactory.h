@@ -22,6 +22,10 @@ bool initializeDimension(xolotlCore::Options &options);
  */
 std::shared_ptr<xolotlSolver::ISolverHandler> getSolverHandler();
 
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 #endif /* SOLVERHANDLERFACTORY_H */

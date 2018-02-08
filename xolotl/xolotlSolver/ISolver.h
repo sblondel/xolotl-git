@@ -2,7 +2,10 @@
 #define ISOLVER_H
 
 // Includes
+<<<<<<< HEAD
 #include <PSIClusterNetworkLoader.h>
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 #include <map>
 #include <ISolverHandler.h>
 #include <Options.h>
@@ -40,6 +43,7 @@ public:
 	virtual void setCommandLineOptions(int argc, char **argv) = 0;
 
 	/**
+<<<<<<< HEAD
 	 * This operation sets the PSIClusterNetworkLoader that should be used by
 	 * the ISolver to load the ReactionNetwork.
 	 * @param networkLoader The PSIClusterNetworkLoader that will load the
@@ -48,6 +52,8 @@ public:
 	virtual void setNetworkLoader(std::shared_ptr<PSIClusterNetworkLoader> networkLoader) = 0;
 
 	/**
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	 * This operation sets the run-time options of the solver. The map is a set
 	 * of key-value std::string pairs that are interpreted by the solver. These
 	 * options may change during execution, but it is up to Solvers to monitor

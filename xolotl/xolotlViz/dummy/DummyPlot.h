@@ -11,22 +11,35 @@ namespace xolotlViz {
  * The DummyPlot class is instantiated by the DummyHandlerRegistry
  * class and realizes the IPlot interface.
  */
+<<<<<<< HEAD
 class DummyPlot : public IPlot, public xolotlCore::Identifiable
 {
+=======
+class DummyPlot: public IPlot, public xolotlCore::Identifiable {
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 private:
 
 	/**
 	 * Declare the constructor as private to force the use of a name.
 	 */
+<<<<<<< HEAD
     DummyPlot() : xolotlCore::Identifiable("unused") {}
+=======
+	DummyPlot() :
+			xolotlCore::Identifiable("unused") {
+	}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * Data provider used for the plot.
 	 */
 	std::shared_ptr<IDataProvider> plotDataProvider;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 public:
 
 	/**
@@ -79,19 +92,31 @@ public:
 	 * Gets the data provider used.
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	std::shared_ptr<IDataProvider> getDataProvider() const ;
+=======
+	std::shared_ptr<IDataProvider> getDataProvider() const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * Method getting the i-th data provider for SeriesPlot
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	std::shared_ptr<IDataProvider> getDataProvider(int i) const ;
+=======
+	std::shared_ptr<IDataProvider> getDataProvider(int i) const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * Method getting the total number of data providers
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	int getDataProviderNumber() const ;
+=======
+	int getDataProviderNumber() const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * Sets the label provider used for the plots.
@@ -103,7 +128,11 @@ public:
 	 * Gets the label provider used.
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	std::shared_ptr<LabelProvider> getLabelProvider() const ;
+=======
+	std::shared_ptr<LabelProvider> getLabelProvider() const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * Method that enables the rendering of the legend.
@@ -115,7 +144,11 @@ public:
 	 * Method getting the legend.
 	 * \see IPlot.h
 	 */
+<<<<<<< HEAD
 	std::string getLegend() const ;
+=======
+	std::string getLegend() const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * Method that enables the log scale.
@@ -123,9 +156,16 @@ public:
 	 */
 	void setLogScale(bool logScale = true);
 
+<<<<<<< HEAD
 
 };  //end class DummyPlot
 
 }  //end namespace xolotlViz
+=======
+};
+//end class DummyPlot
+
+}//end namespace xolotlViz
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 #endif

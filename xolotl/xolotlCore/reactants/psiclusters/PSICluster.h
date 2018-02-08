@@ -3,6 +3,7 @@
 
 // Includes
 #include <Reactant.h>
+<<<<<<< HEAD
 #include <math.h>
 #include <vector>
 #include <set>
@@ -12,6 +13,12 @@
 namespace xolotlPerf {
     class ITimer;
 };
+=======
+
+namespace xolotlPerf {
+class ITimer;
+}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 namespace xolotlCore {
 
@@ -59,6 +66,7 @@ protected:
 		PSICluster * second;
 
 		/**
+<<<<<<< HEAD
 		 * The reaction/dissociation constant associated to this
 		 * reaction or dissociation
 		 */
@@ -67,6 +75,43 @@ protected:
 		//! The constructor
 		ClusterPair(PSICluster * firstPtr, PSICluster * secondPtr, double k)
 		: first(firstPtr), second(secondPtr), kConstant(k) {}
+=======
+		 * The first cluster helium distance in the group (0.0 for non-super clusters)
+		 */
+		double firstHeDistance;
+
+		/**
+		 * The first cluster vacancy distance in the group (0.0 for non-super clusters)
+		 */
+		double firstVDistance;
+
+		/**
+		 * The second cluster helium distance in the group (0.0 for non-super clusters)
+		 */
+		double secondHeDistance;
+
+		/**
+		 * The second cluster vacancy distance in the group (0.0 for non-super clusters)
+		 */
+		double secondVDistance;
+
+		/**
+		 * The reaction/dissociation pointer to the list
+		 */
+		std::shared_ptr<Reaction> reaction;
+
+		/**
+		 * The number of times this reaction should be counted
+		 */
+		int multiplicity;
+
+		//! The constructor
+		ClusterPair(PSICluster * firstPtr, PSICluster * secondPtr) :
+				first(firstPtr), second(secondPtr), reaction(
+						nullptr), firstHeDistance(0.0), firstVDistance(
+						0.0), secondHeDistance(0.0), secondVDistance(0.0), multiplicity(1) {
+		}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	};
 
 	/**
@@ -86,6 +131,7 @@ protected:
 		PSICluster * combining;
 
 		/**
+<<<<<<< HEAD
 		 * The reaction constant associated to this reaction
 		 */
 		double kConstant;
@@ -135,6 +181,59 @@ protected:
 	 * The reaction radius of this cluster
 	 */
 	double reactionRadius;
+=======
+		 * The combining cluster helium distance in the group (0.0 for non-super clusters)
+		 */
+		double heDistance;
+
+		/**
+		 * The combining cluster vacancy distance in the group (0.0 for non-super clusters)
+		 */
+		double vDistance;
+
+		/**
+		 * The reaction pointer to the list
+		 */
+		std::shared_ptr<Reaction> reaction;
+
+		/**
+		 * The number of times this reaction should be counted
+		 */
+		int multiplicity;
+
+		//! The constructor
+		CombiningCluster(PSICluster * ptr) :
+				combining(ptr), reaction(nullptr), heDistance(
+						0.0), vDistance(0.0), multiplicity(1) {
+		}
+	};
+
+	/**
+
+	 * This operation returns a set that contains only the entries of the
+	 * reaction connectivity array that are non-zero.
+	 *
+	 * @return The set of connected reactants. Each entry in the set is the id
+	 * of a connected cluster for forward reactions.
+	 */
+	std::set<int> getReactionConnectivitySet() const;
+
+	/**
+	 * This operation returns a set that contains only the entries of the
+	 * dissociation connectivity array that are non-zero.
+	 *
+	 * @return The set of connected reactants. Each entry in the set is the id
+	 * of a connected cluster for dissociation reactions
+	 */
+	const std::set<int> & getDissociationConnectivitySet() const;
+
+	/**
+	 * The default constructor is protected
+	 */
+	PSICluster();
+
+public:
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * A vector of ClusterPairs that represents reacting pairs of clusters
@@ -145,6 +244,7 @@ protected:
 	std::vector<ClusterPair> reactingPairs;
 
 	/**
+<<<<<<< HEAD
 	 * A vector of pointers to ClusterPairs that represents the effective reacting
 	 * pairs, i.e. those for which the reaction rate is not 0.0. Should be filled
 	 * every time the temperature changes.
@@ -152,6 +252,8 @@ protected:
 	std::vector<ClusterPair *> effReactingPairs;
 
 	/**
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	 * A vector of clusters that combine with this cluster to produce other
 	 * clusters. This vector should be populated early in the cluster's
 	 * lifecycle by subclasses. In the standard Xolotl clusters, this vector is
@@ -160,6 +262,7 @@ protected:
 	std::vector<CombiningCluster> combiningReactants;
 
 	/**
+<<<<<<< HEAD
 	 * A vector of pointers to CombiningCluster that represents the effective
 	 * combining clusters, i.e. those for which the reaction rate is not 0.0.
 	 * Should be filled every time the temperature changes.
@@ -167,6 +270,8 @@ protected:
 	std::vector<CombiningCluster *> effCombiningReactants;
 
 	/**
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	 * A vector of pairs of clusters: the first one is the one dissociation into
 	 * this cluster, the second one is the one that is emitted at the same time
 	 * during the dissociation. This vector should be populated early in the
@@ -177,6 +282,7 @@ protected:
 	std::vector<ClusterPair> dissociatingPairs;
 
 	/**
+<<<<<<< HEAD
 	 * A vector of pointers to ClusterPairs that represents the effective dissociating
 	 * pairs, i.e. those for which the dissociation rate is not 0.0. Should be filled
 	 * every time the temperature changes.
@@ -184,6 +290,8 @@ protected:
 	std::vector<ClusterPair *> effDissociatingPairs;
 
 	/**
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	 * A vector of ClusterPairs that represent pairs of clusters that are emitted
 	 * from the dissociation of this cluster. This vector should be populated early
 	 * in the cluster's lifecycle by subclasses. In the standard Xolotl clusters,
@@ -193,6 +301,7 @@ protected:
 	std::vector<ClusterPair> emissionPairs;
 
 	/**
+<<<<<<< HEAD
 	 * A vector of pointers to ClusterPairs that represents the effective emission
 	 * pairs, i.e. those for which the dissociation rate is not 0.0. Should be filled
 	 * every time the temperature changes.
@@ -409,18 +518,96 @@ protected:
 	 * to this cluster
 	 */
 	virtual void setReactionConnectivity(int clusterId);
+=======
+	 * The default constructor
+	 *
+	 * @param registry The performance handler registry
+	 */
+	PSICluster(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
+
+	/**
+	 * The copy constructor
+	 *
+	 * @param other The cluster to copy
+	 */
+	PSICluster(PSICluster &other);
+
+	/**
+	 * The destructor
+	 */
+	virtual ~PSICluster() {
+	}
+
+	/**
+	 * Returns a reactant created using the copy constructor
+	 */
+	virtual std::shared_ptr<IReactant> clone() {
+		return std::shared_ptr<IReactant>(new PSICluster(*this));
+	}
+
+	/**
+	 * Sets the collection of other clusters that make up
+	 * the reaction network in which this cluster exists.
+	 *
+	 * @param network The reaction network of which this cluster is a part
+	 */
+	virtual void setReactionNetwork(
+			const std::shared_ptr<IReactionNetwork> reactionNetwork);
+
+	/**
+	 * Create a production pair associated with the given reaction.
+	 * Create the connectivity.
+	 *
+	 * @param reaction The reaction creating this cluster.
+	 */
+	void createProduction(std::shared_ptr<ProductionReaction> reaction);
+
+	/**
+	 * Create a combination associated with the given reaction.
+	 * Create the connectivity.
+	 *
+	 * @param reaction The reaction where this cluster takes part.
+	 */
+	void createCombination(std::shared_ptr<ProductionReaction> reaction);
+
+	/**
+	 * Create a dissociation pair associated with the given reaction.
+	 * Create the connectivity.
+	 *
+	 * @param reaction The reaction creating this cluster.
+	 */
+	void createDissociation(std::shared_ptr<DissociationReaction> reaction);
+
+	/**
+	 * Create an emission pair associated with the given reaction.
+	 * Create the connectivity.
+	 *
+	 * @param reaction The reaction where this cluster emits.
+	 */
+	void createEmission(std::shared_ptr<DissociationReaction> reaction);
+
+	/**
+	 * Add the reactions to the network lists.
+	 */
+	virtual void optimizeReactions();
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * This operation returns the connectivity array for this cluster for
 	 * forward reactions. An entry with value one means that this cluster
 	 * and the cluster with id = index + 1 are connected.
+<<<<<<< HEAD
 	 *
+=======
+	 * 
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	 * @return The connectivity array for "forward" (non-dissociating)
 	 * reactions
 	 */
 	virtual std::vector<int> getReactionConnectivity() const;
 
 	/**
+<<<<<<< HEAD
 	 * This operation signifies that the cluster with cluster Id should be
 	 * listed as connected with this cluster through forward reactions.
 	 *
@@ -434,12 +621,19 @@ protected:
 	 * forward reactions. An entry with value one means that this cluster
 	 * and the cluster with id = index + 1 are connected.
 	 *
+=======
+	 * This operation returns the connectivity array for this cluster for
+	 * forward reactions. An entry with value one means that this cluster
+	 * and the cluster with id = index + 1 are connected.
+	 * 
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	 * @return The connectivity array for "forward" (non-dissociating)
 	 * reactions
 	 */
 	virtual std::vector<int> getDissociationConnectivity() const;
 
 	/**
+<<<<<<< HEAD
 	 * This operation recomputes the diffusion coefficient. It is called
 	 * whenever the diffusion factor, migration energy or temperature change.
 	 *
@@ -524,6 +718,20 @@ public:
 	 */
 	void setReactionNetwork(
 			const std::shared_ptr<ReactionNetwork> reactionNetwork);
+=======
+	 * This operation returns the first helium momentum.
+	 *
+	 * @return The momentum
+	 */
+	virtual double getHeMomentum() const;
+
+	/**
+	 * This operation returns the first vacancy momentum.
+	 *
+	 * @return The momentum
+	 */
+	virtual double getVMomentum() const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * This operation returns the total flux of this cluster in the
@@ -601,7 +809,12 @@ public:
 	 * inserted. This vector should have a length equal to the size of the
 	 * network.
 	 */
+<<<<<<< HEAD
 	virtual void getProductionPartialDerivatives(std::vector<double> & partials) const;
+=======
+	virtual void getProductionPartialDerivatives(
+			std::vector<double> & partials) const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * This operation computes the partial derivatives due to combination
@@ -611,7 +824,12 @@ public:
 	 * inserted. This vector should have a length equal to the size of the
 	 * network.
 	 */
+<<<<<<< HEAD
 	virtual void getCombinationPartialDerivatives(std::vector<double> & partials) const;
+=======
+	virtual void getCombinationPartialDerivatives(
+			std::vector<double> & partials) const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * This operation computes the partial derivatives due to dissociation of
@@ -621,7 +839,12 @@ public:
 	 * inserted. This vector should have a length equal to the size of the
 	 * network.
 	 */
+<<<<<<< HEAD
 	virtual void getDissociationPartialDerivatives(std::vector<double> & partials) const;
+=======
+	virtual void getDissociationPartialDerivatives(
+			std::vector<double> & partials) const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * This operation computes the partial derivatives due to emission
@@ -631,6 +854,7 @@ public:
 	 * inserted. This vector should have a length equal to the size of the
 	 * network.
 	 */
+<<<<<<< HEAD
 	virtual void getEmissionPartialDerivatives(std::vector<double> & partials) const;
 
 	/**
@@ -662,6 +886,16 @@ public:
 	 * @return The diffusion factor of this cluster
 	 */
 	double getDiffusionFactor() const;
+=======
+	virtual void getEmissionPartialDerivatives(
+			std::vector<double> & partials) const;
+
+	/**
+	 * This operation reset the connectivity sets based on the information
+	 * in the effective production and dissociation vectors.
+	 */
+	void resetConnectivities();
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * This operation sets the diffusion factor, D_0, that is used to calculate
@@ -672,6 +906,7 @@ public:
 	void setDiffusionFactor(const double factor);
 
 	/**
+<<<<<<< HEAD
 	 * This operation returns the diffusion coefficient for this cluster and is
 	 * calculated from the diffusion factor.
 	 *
@@ -681,12 +916,16 @@ public:
 
 	/**
 	 * This operation sets the migration energy for this cluster.
+=======
+	 * This operation sets the migration energy for this reactant.
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	 *
 	 * @param energy The migration energy
 	 */
 	void setMigrationEnergy(const double energy);
 
 	/**
+<<<<<<< HEAD
 	 * This operation retrieves the migration energy for this cluster.
 	 *
 	 * @return the migration energy
@@ -700,6 +939,17 @@ public:
 	 * @return The reaction radius
 	 */
 	virtual double getReactionRadius() const;
+=======
+	 * This operation returns the sum of combination rate and emission rate
+	 * (where this cluster is on the left side of the reaction) for this
+	 * particular cluster.
+	 * This is used to computed the desorption rate in the
+	 * modified trap-mutation handler.
+	 *
+	 * @return The rate
+	 */
+	double getLeftSideRate() const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * This operation returns a list that represents the connectivity
@@ -716,6 +966,7 @@ public:
 	 */
 	std::vector<int> getConnectivity() const;
 
+<<<<<<< HEAD
 	/**
 	 * Calculate all the rate constants for the reactions and dissociations in which this
 	 * cluster is taking part. Store these values in the kConstant field of ClusterPair
@@ -738,6 +989,8 @@ public:
 	 */
 	virtual bool isMixed() const {return false;}
 
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 };
 
 } /* end namespace xolotlCore */

@@ -21,6 +21,10 @@ bool initializeVizHandler(bool useStdRegistry);
  */
 std::shared_ptr<xolotlViz::IVizHandlerRegistry> getVizHandlerRegistry();
 
+<<<<<<< HEAD
 }; // end namespace xolotlFactory
+=======
+} // end namespace xolotlFactory
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 #endif // VIZHANDLERREGISTRYFACTORY_H

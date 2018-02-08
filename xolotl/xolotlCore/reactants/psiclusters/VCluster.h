@@ -19,7 +19,11 @@ private:
 	 * initialized with a size.
 	 */
 	VCluster() :
+<<<<<<< HEAD
 		PSICluster(1)
+=======
+		PSICluster()
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	{ }
 
 public:
@@ -36,6 +40,7 @@ public:
 	~VCluster() {}
 
 	/**
+<<<<<<< HEAD
 	 * This operation returns a Reactant that is created using the copy
 	 * constructor of VCluster.
 	 *
@@ -66,6 +71,13 @@ protected:
 	 *
 	 */
 	void createDissociationConnectivity();
+=======
+	 * Returns a reactant created using the copy constructor
+	 */
+	virtual std::shared_ptr<IReactant> clone() {
+		return std::shared_ptr<IReactant> (new VCluster(*this));
+	}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 };
 //end class VCluster

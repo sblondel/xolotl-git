@@ -14,6 +14,10 @@ file(GLOB SRC *.cpp)
 
 #Include directories
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore)
+<<<<<<< HEAD
+=======
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/advection)
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants/psiclusters)
 

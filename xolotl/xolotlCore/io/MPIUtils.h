@@ -23,7 +23,11 @@ namespace MPIUtils {
 	 */
 	std::shared_ptr<std::istream> broadcastStream(
 		std::shared_ptr<std::istream> stream, int root);
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 } /* namespace xolotlCore */
 #endif

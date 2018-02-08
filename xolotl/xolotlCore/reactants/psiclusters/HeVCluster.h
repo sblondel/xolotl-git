@@ -26,6 +26,7 @@ private:
 	 * initialized with a size.
 	 */
 	HeVCluster() :
+<<<<<<< HEAD
 		PSICluster(1)
 	{ numHe = 1; numV = 1; }
 
@@ -67,6 +68,10 @@ private:
 	 */
 	void combineClusters(std::vector<Reactant *> & clusters,
 			const std::string& productName);
+=======
+		PSICluster()
+	{ numHe = 0; numV = 0; }
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 public:
 
@@ -89,18 +94,30 @@ public:
 	 *
 	 * @param other the reactant to be copied
 	 */
+<<<<<<< HEAD
 	HeVCluster(const HeVCluster &other);
+=======
+	HeVCluster(HeVCluster &other);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	//! Destructor
 	~HeVCluster() {}
 
 	/**
+<<<<<<< HEAD
 	 * This operation returns a Reactant that is created using the copy
 	 * constructor of HeVCluster.
 	 *
 	 * @return A copy of this reactant
 	 */
 	virtual std::shared_ptr<Reactant> clone();
+=======
+	 * Returns a reactant created using the copy constructor
+	 */
+	virtual std::shared_ptr<IReactant> clone() {
+		return std::shared_ptr<IReactant> (new HeVCluster(*this));
+	}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * This operation returns true to signify that this cluster is a mixture of
@@ -110,6 +127,7 @@ public:
 	 */
 	virtual bool isMixed() const {return true;}
 
+<<<<<<< HEAD
 	/**
 	 * Computes a row of the reaction connectivity matrix corresponding to
 	 * this reactant.
@@ -128,6 +146,8 @@ public:
 	 */
 	void createDissociationConnectivity();
 
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 };
 //end class HeVCluster
 

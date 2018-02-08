@@ -87,11 +87,20 @@ include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/advection)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants/psiclusters)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/temperature)
+<<<<<<< HEAD
+=======
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/modifiedreaction/trapmutation)
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/displacement)
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/flux)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlFactory/material)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlFactory/vizHandler)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlFactory/temperatureHandler)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlFactory/solverHandler)
+<<<<<<< HEAD
+=======
+include_directories(${CMAKE_SOURCE_DIR}/xolotlFactory/reactionHandler)
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 include_directories(${CMAKE_SOURCE_DIR}/xolotlSolver)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlPerf)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlViz)

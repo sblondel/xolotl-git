@@ -6,13 +6,22 @@
 
 using namespace xolotlCore;
 
+<<<<<<< HEAD
 VCluster::VCluster(int nV, std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
 		PSICluster(nV, registry) {
+=======
+VCluster::VCluster(int nV,
+		std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
+		PSICluster(registry) {
+	// Set the size
+	size = nV;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	// Set the reactant name appropriately
 	std::stringstream nameStream;
 	nameStream << "V_" << size;
 	name = nameStream.str();
 	// Set the typename appropriately
+<<<<<<< HEAD
 	typeName = "V";
 
 	// Update the composition map
@@ -132,3 +141,20 @@ void VCluster::createDissociationConnectivity() {
 
 	return;
 }
+=======
+	typeName = vType;
+
+	// Update the composition map
+	compositionMap[vType] = size;
+
+	// Compute the reaction radius
+	// It is the same formula for HeV clusters
+	reactionRadius = (sqrt(3.0) / 4.0) * xolotlCore::tungstenLatticeConstant
+			+ pow(
+					(3.0 * pow(xolotlCore::tungstenLatticeConstant, 3.0) * size)
+							/ (8.0 * xolotlCore::pi), (1.0 / 3.0))
+			- pow(
+					(3.0 * pow(xolotlCore::tungstenLatticeConstant, 3.0))
+							/ (8.0 * xolotlCore::pi), (1.0 / 3.0));
+}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a

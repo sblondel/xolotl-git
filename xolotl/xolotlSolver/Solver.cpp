@@ -1,6 +1,9 @@
 // Includes
 #include <Solver.h>
+<<<<<<< HEAD
 #include <HDF5NetworkLoader.h>
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 using namespace xolotlCore;
 
@@ -13,6 +16,7 @@ Solver::Solver(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
 	numCLIArgs(0), CLIArgs(NULL), handlerRegistry(registry) {
 }
 
+<<<<<<< HEAD
 Solver::~Solver() {
 	// std::cerr << "Destroying a Solver" << std::endl;
 
@@ -22,12 +26,15 @@ Solver::~Solver() {
 	network->askReactantsToReleaseNetwork();
 }
 
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 void Solver::setCommandLineOptions(int argc, char **argv) {
 	// Keep the arguments
 	numCLIArgs = argc;
 	CLIArgs = argv;
 }
 
+<<<<<<< HEAD
 void Solver::setNetworkLoader(
 		std::shared_ptr<PSIClusterNetworkLoader> networkLoader) {
 
@@ -55,4 +62,6 @@ void Solver::setNetworkLoader(
 	return;
 }
 
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 } /* end namespace xolotlSolver */

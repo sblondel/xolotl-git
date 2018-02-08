@@ -1,4 +1,8 @@
 #include <cassert>
+<<<<<<< HEAD
+=======
+#include <limits>
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 #include <fstream>
 #include <TokenizedLineReader.h>
 #include <NetworkOptionHandler.h>
@@ -11,7 +15,19 @@
 #include <VizOptionHandler.h>
 #include <MaterialOptionHandler.h>
 #include <VConcentrationOptionHandler.h>
+<<<<<<< HEAD
 #include <DimensionsOptionHandler.h>
+=======
+#include <VoidPortionOptionHandler.h>
+#include <DimensionsOptionHandler.h>
+#include <RegularGridOptionHandler.h>
+#include <ProcessOptionHandler.h>
+#include <GrainBoundariesOptionHandler.h>
+#include <GroupingOptionHandler.h>
+#include <SputteringOptionHandler.h>
+#include <DisplacementOptionHandler.h>
+#include <KrFluenceOptionHandler.h>
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 #include "Options.h"
 
 namespace xolotlCore {
@@ -23,6 +39,10 @@ Options::Options() :
 		petscArgv(NULL),
 		constTempFlag(false),
 		constTemperature(1000.0),
+<<<<<<< HEAD
+=======
+		temperatureGradient(0.0),
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 		tempProfileFlag(false),
 		fluxFlag(false),
 		fluxAmplitude(0.0),
@@ -31,7 +51,20 @@ Options::Options() :
 		vizStandardHandlersFlag(false),
 		materialName(""),
 		initialVConcentration(0.0),
+<<<<<<< HEAD
 		dimensionNumber(1) {
+=======
+		voidPortion(50.0),
+		dimensionNumber(1),
+		useRegularGridFlag(true), 
+		gbList(""),
+		groupingMin(std::numeric_limits<int>::max()),
+		groupingWidthA(1),
+		groupingWidthB(1),
+		sputteringYield(0.0),
+		krFluenceAmplitude(0.0),
+		thresholdDisplacementEnergy(0) {
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	// Create the network option handler
 	auto networkHandler = new NetworkOptionHandler();
@@ -53,8 +86,29 @@ Options::Options() :
 	auto materialHandler = new MaterialOptionHandler();
 	// Create the initial vacancy concentration option handler
 	auto vConcHandler = new VConcentrationOptionHandler();
+<<<<<<< HEAD
 	// Create the dimensions option handler
 	auto dimHandler = new DimensionsOptionHandler();
+=======
+	// Create the void portion option handler
+	auto voidHandler = new VoidPortionOptionHandler();
+	// Create the dimensions option handler
+	auto dimHandler = new DimensionsOptionHandler();
+	// Create the regular grid option handler
+	auto gridHandler = new RegularGridOptionHandler();
+	// Create the physical processes option handler
+	auto procHandler = new ProcessOptionHandler();
+	// Create the GB option handler
+	auto gbHandler = new GrainBoundariesOptionHandler();
+	// Create the grouping option handler
+	auto groupingHandler = new GroupingOptionHandler();
+	// Create the grouping option handler
+	auto sputteringHandler = new SputteringOptionHandler();
+	// Create the displacement option handler
+	auto disHandler = new DisplacementOptionHandler();
+	// Create the Kr option handler
+	auto krHandler = new KrFluenceOptionHandler();
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	// Add our notion of which options we support.
 	optionsMap[networkHandler->key] = networkHandler;
@@ -67,7 +121,19 @@ Options::Options() :
 	optionsMap[vizHandler->key] = vizHandler;
 	optionsMap[materialHandler->key] = materialHandler;
 	optionsMap[vConcHandler->key] = vConcHandler;
+<<<<<<< HEAD
 	optionsMap[dimHandler->key] = dimHandler;
+=======
+	optionsMap[voidHandler->key] = voidHandler;
+	optionsMap[dimHandler->key] = dimHandler;
+	optionsMap[gridHandler->key] = gridHandler;
+	optionsMap[procHandler->key] = procHandler;
+	optionsMap[gbHandler->key] = gbHandler;
+	optionsMap[groupingHandler->key] = groupingHandler;
+	optionsMap[sputteringHandler->key] = sputteringHandler;
+	optionsMap[disHandler->key] = disHandler;
+	optionsMap[krHandler->key] = krHandler;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 }
 
 Options::~Options(void) {
@@ -79,14 +145,22 @@ Options::~Options(void) {
 	optionsMap.clear();
 
 	// release the dynamically-allocated PETSc arguments
+<<<<<<< HEAD
 	for (unsigned int i = 0; i < petscArgc; ++i) {
+=======
+	for (int i = 0; i < petscArgc; ++i) {
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 		delete[] petscArgv[i];
 	}
 	delete[] petscArgv;
 	petscArgv = NULL;
 }
 
+<<<<<<< HEAD
 void Options::readParams(int argc, char* argv[]) {
+=======
+void Options::readParams(char* argv[]) {
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	// All the options are read from an ASCII file that is parsed
 	// with the TokenizedLineReader.
 	// We assume that the name of this file is the first and only
@@ -122,7 +196,20 @@ void Options::readParams(int argc, char* argv[]) {
 		if (iter != optionsMap.end()) {
 			// Call the option's handler
 			auto currOpt = iter->second;
+<<<<<<< HEAD
 			assert(currOpt != NULL);
+=======
+			if (currOpt == nullptr) {
+				// Something went wrong.
+				std::cerr
+						<< "\nOption: No handler associated to the option: "
+						<< line[0] << " !"
+						<< std::endl;
+				shouldRunFlag = false;
+				exitCode = EXIT_FAILURE;
+				break;
+			}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 			// Continue to read if everything went well with the current option
 			bool continueReading = currOpt->handler(this, line[1]);
 
@@ -167,5 +254,9 @@ void Options::showHelp(std::ostream& os) const {
 	os << std::endl;
 }
 
+<<<<<<< HEAD
 };  // end namespace xolotlCore
 
+=======
+} // end namespace xolotlCore
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a

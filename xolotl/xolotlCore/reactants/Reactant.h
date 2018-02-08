@@ -2,18 +2,28 @@
 #define REACTANT_H
 
 // Includes
+<<<<<<< HEAD
 #include <string>
 #include <vector>
 #include <memory>
 #include <map>
 #include "ReactionNetwork.h"
 #include <iostream>
+=======
+#include "IReactant.h"
+#include <math.h>
+#include <sstream>
+#include <set>
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 namespace xolotlPerf {
 class IHandlerRegistry;
 class IEventCounter;
 }
+<<<<<<< HEAD
 ;
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 namespace xolotlCore {
 
@@ -31,7 +41,11 @@ namespace xolotlCore {
  * manipulating the concentration, etc. It should be subclassed to add
  * functionality for calculate fluxes and computing connectivity.
  */
+<<<<<<< HEAD
 class Reactant {
+=======
+class Reactant: public IReactant {
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 protected:
 
@@ -56,6 +70,24 @@ protected:
 	int id;
 
 	/**
+<<<<<<< HEAD
+=======
+	 * An integer identification number for the xenon momentum.
+	 */
+	int xeMomId;
+
+	/**
+	 * An integer identification number for the helium momentum.
+	 */
+	int heMomId;
+
+	/**
+	 * An integer identification number for the vacancy momentum.
+	 */
+	int vMomId;
+
+	/**
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	 * The temperature at which the cluster currently exists. The diffusion
 	 * coefficient is recomputed each time the temperature is changed.
 	 */
@@ -64,7 +96,11 @@ protected:
 	/**
 	 * The reaction network that includes this reactant.
 	 */
+<<<<<<< HEAD
 	std::shared_ptr<ReactionNetwork> network;
+=======
+	std::shared_ptr<IReactionNetwork> network;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * The map that contains the composition of this cluster.
@@ -78,6 +114,70 @@ protected:
 	std::shared_ptr<xolotlPerf::IHandlerRegistry> handlerRegistry;
 
 	/**
+<<<<<<< HEAD
+=======
+	 * The total size of this cluster including the contributions from all
+	 * species.
+	 */
+	int size;
+
+	/**
+	 * The diffusion factor, D_0, that is used to calculate the diffusion
+	 * coefficient for this cluster. The default value is 0 (does not diffuse).
+	 */
+	double diffusionFactor;
+
+	/**
+	 * The diffusion coefficient computed from the diffusion factor using an
+	 * Arrhenius rate equation. It is re-computed every time the temperature is
+	 * updated.
+	 */
+	double diffusionCoefficient;
+
+	/**
+	 * The formation energy of this cluster. It will be used to compute the
+	 * binding energies appearing in the dissociation constant calculation.
+	 */
+	double formationEnergy;
+
+	/**
+	 * The migration energy for this cluster.
+	 */
+	double migrationEnergy;
+
+	/**
+	 * The reaction radius of this cluster
+	 */
+	double reactionRadius;
+
+	/**
+	 * The row of the reaction connectivity matrix corresponding to
+	 * this Reactant stored as a set.
+	 *
+	 * If a cluster is involved in a reaction with this Reactant,
+	 * the cluster id is an element of this set.
+	 */
+	std::set<int> reactionConnectivitySet;
+
+	/**
+	 * The row of the dissociation connectivity matrix corresponding to
+	 * this Reactant stored as a set.
+	 *
+	 * If this Reactant can dissociate into a particular cluster,
+	 * the cluster id is an element of this set.
+	 */
+	std::set<int> dissociationConnectivitySet;
+
+	/**
+	 * This operation recomputes the diffusion coefficient. It is called
+	 * whenever the diffusion factor, migration energy or temperature change.
+	 *
+	 * @param temp the temperature
+	 */
+	void recomputeDiffusionCoefficient(double temp);
+
+	/**
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	 * The constructor.
 	 */
 	Reactant();
@@ -92,6 +192,7 @@ public:
 	Reactant(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
 
 	/**
+<<<<<<< HEAD
 	 * An alternative constructor that can be used to create a reactant
 	 * with an initial concentration.
 	 *
@@ -102,15 +203,22 @@ public:
 			std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
 
 	/**
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	 * The copy constructor. All reactants MUST be deep copied.
 	 *
 	 * @param other The reactant to copy
 	 */
+<<<<<<< HEAD
 	Reactant(const Reactant &other);
+=======
+	Reactant(Reactant &other);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * The destructor
 	 */
+<<<<<<< HEAD
 	virtual ~Reactant() {}
 
 	/**
@@ -149,6 +257,78 @@ public:
 	 * @param deltaConc the change in concentration
 	 */
 	void decreaseConcentration(double deltaConc);
+=======
+	virtual ~Reactant() {
+	}
+
+	/**
+	 * Returns a reactant created using the copy constructor
+	 */
+	virtual std::shared_ptr<IReactant> clone() {
+		return std::shared_ptr<IReactant>(new Reactant(*this));
+	}
+
+	/**
+	 * Create a production pair associated with the given reaction.
+	 * Create the connectivity.
+	 *
+	 * @param reaction The reaction creating this cluster.
+	 */
+	virtual void createProduction(
+			std::shared_ptr<ProductionReaction> reaction) {
+		return;
+	}
+
+	/**
+	 * Create a combination associated with the given reaction.
+	 * Create the connectivity.
+	 *
+	 * @param reaction The reaction where this cluster takes part.
+	 */
+	virtual void createCombination(
+			std::shared_ptr<ProductionReaction> reaction) {
+		return;
+	}
+
+	/**
+	 * Create a dissociation pair associated with the given reaction.
+	 * Create the connectivity.
+	 *
+	 * @param reaction The reaction creating this cluster.
+	 */
+	virtual void createDissociation(
+			std::shared_ptr<DissociationReaction> reaction) {
+		return;
+	}
+
+	/**
+	 * Create an emission pair associated with the given reaction.
+	 * Create the connectivity.
+	 *
+	 * @param reaction The reaction where this cluster emits.
+	 */
+	virtual void createEmission(
+			std::shared_ptr<DissociationReaction> reaction) {
+		return;
+	}
+
+	/**
+	 * Add the reactions to the network lists.
+	 */
+	virtual void optimizeReactions() {
+		return;
+	}
+
+	/**
+	 * This operation returns the current concentration.
+	 *
+	 * @param distA The first distance for super clusters
+	 * @param distB The second distance for super clusters
+	 * @return The concentration of this reactant
+	 */
+	virtual double getConcentration(double distA = 0.0,
+			double distB = 0.0) const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * This operation sets the concentration of the reactant to the
@@ -159,11 +339,14 @@ public:
 	void setConcentration(double conc);
 
 	/**
+<<<<<<< HEAD
 	 * This operation sets the concentration of the reactant to zero.
 	 */
 	void zero();
 
 	/**
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	 * This operation returns the total flux of this reactant in the
 	 * current network.
 	 *
@@ -179,7 +362,11 @@ public:
 	 * @param network The reaction network of which this reactant is a part
 	 */
 	virtual void setReactionNetwork(
+<<<<<<< HEAD
 			std::shared_ptr<ReactionNetwork> reactionNetwork);
+=======
+			std::shared_ptr<IReactionNetwork> reactionNetwork);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * Release the reaction network object.
@@ -188,7 +375,37 @@ public:
 	 * by the program, and is done to break dependence cycles that would
 	 * otherwise keep the network and reactant objects from being destroyed.
 	 */
+<<<<<<< HEAD
 	virtual void releaseReactionNetwork() {network.reset();}
+=======
+	void releaseReactionNetwork();
+
+	/**
+	 * This operation signifies that the reactant with reactant Id should be
+	 * listed as connected with this reactant through forward reactions.
+	 *
+	 * @param id The integer id of the reactant that is connected
+	 * to this reactant
+	 */
+	void setReactionConnectivity(int id);
+
+	/**
+	 * This operation signifies that the reactant with reactant Id should be
+	 * listed as connected with this reactant through forward reactions.
+	 *
+	 * @param id The integer id of the reactant that is connected
+	 * to this reactant
+	 */
+	void setDissociationConnectivity(int id);
+
+	/**
+	 * This operation reset the connectivity sets based on the information
+	 * in the effective production and dissociation vectors.
+	 */
+	virtual void resetConnectivities() {
+		return;
+	}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * This operation returns a list that represents the connectivity
@@ -258,20 +475,85 @@ public:
 	virtual const std::map<std::string, int> & getComposition() const;
 
 	/**
+<<<<<<< HEAD
+=======
+	 * Get a string containing the canonical representation of the
+	 * composition of this reactant.  The string is not intended to
+	 * be human-readable, but rather is useful for keys in reactant maps
+	 * and for composition match tests (as opposed to comparisons of
+	 * the composition maps themselves).
+	 *
+	 * @return A string containing the canonical representation of our
+	 * composition.
+	 */
+	virtual std::string getCompositionString() const;
+
+	/**
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	 * This operation sets the id of the reactant, The id is zero by default
 	 * and clients, most likely the ReactionNetwork, are expected to set the
 	 * id as needed.
 	 *
 	 * @param nId The new id for this reactant
 	 */
+<<<<<<< HEAD
 	void setId(int nId) {id = nId;}
+=======
+	void setId(int nId);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * This operation returns the id for this reactant.
 	 *
 	 * @return The id
 	 */
+<<<<<<< HEAD
 	int getId() const {return id;}
+=======
+	int getId() const;
+
+	/**
+	 * This operation sets the id of the xenon momentum of the reactant.
+	 *
+	 * @param nId The new id for this momentum
+	 */
+	void setXeMomentumId(int nId);
+
+	/**
+	 * This operation returns the id for this reactant xenon momentum.
+	 *
+	 * @return The id
+	 */
+	int getXeMomentumId() const;
+
+	/**
+	 * This operation sets the id of the helium momentum of the reactant.
+	 *
+	 * @param nId The new id for this momentum
+	 */
+	void setHeMomentumId(int nId);
+
+	/**
+	 * This operation returns the id for this reactant helium momentum.
+	 *
+	 * @return The id
+	 */
+	int getHeMomentumId() const;
+
+	/**
+	 * This operation sets the id of the vacancy momentum of the reactant.
+	 *
+	 * @param nId The new id for this momentum
+	 */
+	void setVMomentumId(int nId);
+
+	/**
+	 * This operation returns the id for this reactant vacancy momentum.
+	 *
+	 * @return The id
+	 */
+	int getVMomentumId() const;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * This operation sets the temperature at which the reactant currently
@@ -287,13 +569,18 @@ public:
 	 *
 	 * @param temp The new cluster temperature
 	 */
+<<<<<<< HEAD
 	virtual void setTemperature(double temp) {temperature = temp;}
+=======
+	void setTemperature(double temp);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * This operation returns the temperature at which the reactant currently exists.
 	 *
 	 * @return The temperature.
 	 */
+<<<<<<< HEAD
 	double getTemperature() const {return temperature;}
 
 	/**
@@ -306,6 +593,115 @@ public:
 	 */
 	friend std::ostream& operator<<(std::ostream& out,
 			const Reactant& reactant);
+=======
+	double getTemperature() const;
+
+	/**
+	 * This operation returns the total size of the reactant.
+	 *
+	 * @return The total size of this reactant including the contributions
+	 * from all species types
+	 */
+	int getSize() const;
+
+	/**
+	 * This operation retrieves the formation energy for this reactant.
+	 *
+	 * @return The value of the formation energy
+	 */
+	double getFormationEnergy() const;
+
+	/**
+	 * This operation sets the formation energy for this reactant.
+	 *
+	 * @param energy The formation energy
+	 */
+	void setFormationEnergy(double energy);
+
+	/**
+	 * This operation retrieves the diffusion factor, D_0, that is used to
+	 * calculate the diffusion coefficient for this reactant.
+	 *
+	 * @return The diffusion factor of this reactant
+	 */
+	double getDiffusionFactor() const;
+
+	/**
+	 * This operation sets the diffusion factor, D_0, that is used to calculate
+	 * the diffusion coefficient for this reactant.
+	 *
+	 * @param factor The diffusion factor
+	 */
+	virtual void setDiffusionFactor(const double factor);
+
+	/**
+	 * This operation returns the diffusion coefficient for this reactant and is
+	 * calculated from the diffusion factor.
+	 *
+	 * @return The diffusion coefficient
+	 */
+	double getDiffusionCoefficient() const;
+
+	/**
+	 * This operation sets the migration energy for this reactant.
+	 *
+	 * @param energy The migration energy
+	 */
+	virtual void setMigrationEnergy(const double energy);
+
+	/**
+	 * This operation retrieves the migration energy for this reactant.
+	 *
+	 * @return the migration energy
+	 */
+	double getMigrationEnergy() const;
+
+	/**
+	 * This operation returns the reaction radius for the
+	 * particular reactant.
+	 *
+	 * @return The reaction radius
+	 */
+	double getReactionRadius() const;
+
+	/**
+	 * This operation returns the sum of combination rate and emission rate
+	 * (where this reactant is on the left side of the reaction) for this
+	 * particular reactant.
+	 * This is used to computed the desorption rate in the
+	 * modified trap-mutation handler.
+	 *
+	 * @return The rate
+	 */
+	virtual double getLeftSideRate() const {
+		return 0.0;
+	}
+
+	/**
+	 * This operation returns true if the cluster is a mixed-species or compound
+	 * cluster and false if it is a single species cluster.
+	 */
+	virtual bool isMixed() const {
+		return false;
+	}
+
+	/**
+	 * Get a string containing the canonical representation of the
+	 * given composition.  The string is not intended to
+	 * be human-readable, but rather is useful for keys in reactant maps
+	 * and for composition match tests (as opposed to comparisons of
+	 * the composition maps themselves).
+	 *
+	 * @param type The type that will be used with the given composition.
+	 * @param composition A map containing the names and amounts of each
+	 * part of the reactant.
+	 * @return A string containing the canonical representation of our
+	 * composition.
+	 */
+	static std::string toCanonicalString(std::string type,
+			const std::map<std::string, int>& composition);
+
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 };
 
 } // end namespace xolotlCore

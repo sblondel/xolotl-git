@@ -18,7 +18,11 @@ private:
 	 * initialized with a size.
 	 */
 	InterstitialCluster() :
+<<<<<<< HEAD
 		PSICluster(1) {}
+=======
+		PSICluster() {}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 public:
 
@@ -37,6 +41,7 @@ public:
 	~InterstitialCluster() {}
 
 	/**
+<<<<<<< HEAD
 	 * This operation returns a Reactant that is created using the copy
 	 * constructor of InterstitialCluster.
 	 *
@@ -67,6 +72,13 @@ protected:
 	 *
 	 */
 	void createDissociationConnectivity();
+=======
+	 * Returns a reactant created using the copy constructor
+	 */
+	virtual std::shared_ptr<IReactant> clone() {
+		return std::shared_ptr<IReactant> (new InterstitialCluster(*this));
+	}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 };
 //end class InterstitialCluster

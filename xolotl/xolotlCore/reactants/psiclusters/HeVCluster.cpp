@@ -8,7 +8,11 @@ using namespace xolotlCore;
 
 HeVCluster::HeVCluster(int numHe, int numV,
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
+<<<<<<< HEAD
 		PSICluster(1, registry), numHe(numHe), numV(numV) {
+=======
+		PSICluster(registry), numHe(numHe), numV(numV) {
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	// Set the cluster size as the sum of
 	// the number of Helium and Vacancies
 	size = numHe + numV;
@@ -22,6 +26,7 @@ HeVCluster::HeVCluster(int numHe, int numV,
 	nameStream << "He_" << numHe << "V_" << numV;
 	name = nameStream.str();
 	// Set the typename appropriately
+<<<<<<< HEAD
 	typeName = "HeV";
 
 	// Compute the reaction radius
@@ -31,18 +36,34 @@ HeVCluster::HeVCluster(int numHe, int numV,
 							/ (8.0 * xolotlCore::pi), (1.0 / 3.0))
 			- pow(
 					(3.0 * pow(xolotlCore::latticeConstant, 3.0))
+=======
+	typeName = heVType;
+
+	// Compute the reaction radius
+	reactionRadius = (sqrt(3.0) / 4.0) * xolotlCore::tungstenLatticeConstant
+			+ pow(
+					(3.0 * pow(xolotlCore::tungstenLatticeConstant, 3.0) * numV)
+							/ (8.0 * xolotlCore::pi), (1.0 / 3.0))
+			- pow(
+					(3.0 * pow(xolotlCore::tungstenLatticeConstant, 3.0))
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 							/ (8.0 * xolotlCore::pi), (1.0 / 3.0));
 
 	return;
 }
 
+<<<<<<< HEAD
 HeVCluster::HeVCluster(const HeVCluster &other) :
+=======
+HeVCluster::HeVCluster(HeVCluster &other) :
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 		PSICluster(other) {
 	numHe = other.numHe;
 	numV = other.numV;
 
 	return;
 }
+<<<<<<< HEAD
 
 std::shared_ptr<Reactant> HeVCluster::clone() {
 	std::shared_ptr<Reactant> reactant(new HeVCluster(*this));
@@ -411,3 +432,5 @@ void HeVCluster::createDissociationConnectivity() {
 	
 	return;
 }
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a

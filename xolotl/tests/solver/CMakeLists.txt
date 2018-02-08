@@ -16,10 +16,19 @@ include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/advection)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/flux)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/temperature)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/commandline)
+<<<<<<< HEAD
+=======
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/modifiedreaction/trapmutation)
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/displacement)
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 include_directories(${CMAKE_SOURCE_DIR}/xolotlPerf)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlPerf/dummy)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlFactory/material)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlFactory/temperatureHandler)
+<<<<<<< HEAD
+=======
+include_directories(${CMAKE_SOURCE_DIR}/xolotlFactory/reactionHandler)
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 include_directories(${CMAKE_SOURCE_DIR}/xolotlFactory/vizHandler)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlViz)
 include_directories(${Boost_BINARY_DIRS})
@@ -38,8 +47,13 @@ if(Boost_FOUND)
         message(STATUS "Making test ${test}")
         get_filename_component(testName ${test} NAME_WE)
         add_executable(${testName} ${test})
+<<<<<<< HEAD
         target_link_libraries(${testName} xolotlSolver xolotlReactants ${PETSC_LIBRARIES} 
         xolotlPerf xolotlFactory)
+=======
+        target_link_libraries(${testName} xolotlSolver xolotlFactory 
+        ${PETSC_LIBRARIES})
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
         add_test(${testName} ${testName}) 
         #add a label so the tests can be run separately
         set_property(TEST ${testName} PROPERTY LABELS ${PACKAGE_NAME})   

@@ -42,9 +42,14 @@ BOOST_AUTO_TEST_CASE(checkTiming) {
 
 }
 
+<<<<<<< HEAD
 
 BOOST_AUTO_TEST_SUITE_END()
 
 
 
 
+=======
+BOOST_AUTO_TEST_SUITE_END()
+
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a

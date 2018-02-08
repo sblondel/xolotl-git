@@ -6,27 +6,46 @@ using namespace xolotlCore;
 
 InterstitialCluster::InterstitialCluster(int nI,
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
+<<<<<<< HEAD
 		PSICluster(nI, registry) {
 	// Update the composition map
 	compositionMap["I"] = size;
+=======
+		PSICluster(registry) {
+	// Set the size
+	size = nI;
+	// Update the composition map
+	compositionMap[iType] = size;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	// Set the reactant name appropriately
 	std::stringstream nameStream;
 	nameStream << "I_" << size;
 	name = nameStream.str();
 	// Set the typename appropriately
+<<<<<<< HEAD
 	typeName = "I";
 
 	// Compute the reaction radius
 	double EightPi = 8.0 * xolotlCore::pi;
 	double aCubed = pow(xolotlCore::latticeConstant, 3.0);
 	double termOne = 1.15 * (sqrt(3.0) / 4.0) * xolotlCore::latticeConstant;
+=======
+	typeName = iType;
+
+	// Compute the reaction radius
+	double EightPi = 8.0 * xolotlCore::pi;
+	double aCubed = pow(xolotlCore::tungstenLatticeConstant, 3.0);
+	double termOne = 1.15 * (sqrt(3.0) / 4.0)
+			* xolotlCore::tungstenLatticeConstant;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	double termTwo = pow((3.0 / EightPi) * aCubed * size, (1.0 / 3.0));
 	double termThree = pow((3.0 / EightPi) * aCubed, (1.0 / 3.0));
 	reactionRadius = termOne + termTwo - termThree;
 
 	return;
 }
+<<<<<<< HEAD
 
 std::shared_ptr<Reactant> InterstitialCluster::clone() {
 	std::shared_ptr<Reactant> reactant(new InterstitialCluster(*this));
@@ -237,3 +256,5 @@ void InterstitialCluster::createDissociationConnectivity() {
 
 	return;
 }
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a

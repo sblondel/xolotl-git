@@ -35,12 +35,39 @@ public class FormationEnergyEngineTest {
 		assertEquals(38.80, engine.getHeFormationEnergy(8), 1.0e-2);
 
 		// Check the code for the invalid case with size = 0.
+<<<<<<< HEAD
 		assertEquals(Double.POSITIVE_INFINITY, engine.getHeFormationEnergy(0),
 				1.0e-16);
 
 		// Check the code for the invalid case where size > 8.
 		assertEquals(Double.POSITIVE_INFINITY, engine.getHeFormationEnergy(10),
 				1.0e-16);
+=======
+		assertEquals(Double.POSITIVE_INFINITY, engine.getHeFormationEnergy(0), 1.0e-16);
+
+		// Check the code for the invalid case where size > 8.
+		assertEquals(Double.POSITIVE_INFINITY, engine.getHeFormationEnergy(10), 1.0e-16);
+
+		return;
+	}
+
+	/**
+	 * This operation checks the xenon formation energies.
+	 */
+	@Test
+	public void testXeEnergies() {
+		// Local Declarations
+		FormationEnergyEngine engine = new FormationEnergyEngine();
+
+		// Check the code for He_2.
+		assertEquals(11.44, engine.getXeFormationEnergy(2), 1.0e-2);
+
+		// Check the code for He_8.
+		assertEquals(38.80, engine.getXeFormationEnergy(8), 1.0e-2);
+
+		// Check the code for the invalid case with size = 0.
+		assertEquals(Double.POSITIVE_INFINITY, engine.getXeFormationEnergy(0), 1.0e-16);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 		return;
 	}
@@ -57,8 +84,12 @@ public class FormationEnergyEngineTest {
 		assertEquals(7.25, engine.getVFormationEnergy(2), 1.0e-2);
 
 		// Check the code for the invalid case with size = 0.
+<<<<<<< HEAD
 		assertEquals(Double.POSITIVE_INFINITY, engine.getVFormationEnergy(0),
 				1.0e-16);
+=======
+		assertEquals(Double.POSITIVE_INFINITY, engine.getVFormationEnergy(0), 1.0e-16);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 		// Check V = 29 to make sure the larger size clusters are computed
 		// correctly.
@@ -85,8 +116,12 @@ public class FormationEnergyEngineTest {
 		assertEquals(72.0, engine.getIFormationEnergy(10), 1.0e-16);
 
 		// Check the code for the invalid case with size = 0.
+<<<<<<< HEAD
 		assertEquals(Double.POSITIVE_INFINITY, engine.getIFormationEnergy(0),
 				1.0e-16);
+=======
+		assertEquals(Double.POSITIVE_INFINITY, engine.getIFormationEnergy(0), 1.0e-16);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 		return;
 	}
@@ -133,7 +168,12 @@ public class FormationEnergyEngineTest {
 			}
 			fitWriter.close();
 
+<<<<<<< HEAD
 			// Create the FormationEnergyEngine and test it. The answer should be
+=======
+			// Create the FormationEnergyEngine and test it. The answer should
+			// be
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 			// equal to 0.0.
 			FormationEnergyEngine engine = new FormationEnergyEngine();
 			assertEquals(0.0, engine.getHeVFormationEnergy(31, 6), 1.0e-2);
@@ -146,6 +186,7 @@ public class FormationEnergyEngineTest {
 			// around.)
 			engine = new FormationEnergyEngine();
 			assertEquals(75.049, engine.getHeVFormationEnergy(30, 6), 1.0e-2);
+<<<<<<< HEAD
 		} 
 		catch (IOException e) {
 			// Complain and fail
@@ -156,3 +197,14 @@ public class FormationEnergyEngineTest {
 		return;
 	}
 }
+=======
+		} catch (IOException e) {
+			// Complain and fail
+			e.printStackTrace();
+			fail();
+		}
+
+		return;
+	}
+}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a

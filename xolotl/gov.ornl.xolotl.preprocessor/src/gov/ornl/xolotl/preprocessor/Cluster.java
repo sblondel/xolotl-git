@@ -12,9 +12,18 @@ package gov.ornl.xolotl.preprocessor;
  */
 public class Cluster {
 
+<<<<<<< HEAD
 	// The number of Helium atoms in the cluster. Default value is 0.
 	public int nHe = 0;
 
+=======
+	// The number of helium atoms in the cluster. Default value is 0.
+	public int nHe = 0;
+
+	// The number of xenon atoms in the cluster. Default value is 0.
+	public int nXe = 0;
+
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	// The number of vacancies in the cluster. Default value is 0.
 	public int nV = 0;
 
@@ -33,6 +42,7 @@ public class Cluster {
 	// is 0.
 	public double D_0 = 0.0;
 
+<<<<<<< HEAD
 	/**
 	 * This operation returns the cluster as a string of the form
 	 * 
@@ -49,4 +59,6 @@ public class Cluster {
 		return nHe + " " + nV + " " + nI + " " + EfAsString + " " + EMAsString + " " + D_0;
 	}
 
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 }

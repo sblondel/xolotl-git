@@ -18,9 +18,17 @@ class SurfacePlot: public Plot {
 private:
 
 	/**
+<<<<<<< HEAD
      * Declare the constructor as private to force the use of a name
 	 */
     SurfacePlot() : Plot() {}
+=======
+	 * Declare the constructor as private to force the use of a name
+	 */
+	SurfacePlot() :
+			Plot() {
+	}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 public:
 

@@ -26,6 +26,7 @@ private:
 	 * initialized with a size.
 	 */
 	HeInterstitialCluster() :
+<<<<<<< HEAD
 		PSICluster(1)
 	{ numHe = 1; numI = 1; }
 
@@ -49,6 +50,10 @@ private:
 	 */
 	void replaceInCompound(std::vector<Reactant *> & clusters,
 			const std::string& oldComponentName, const std::string& newComponentName);
+=======
+		PSICluster()
+	{ numHe = 0; numI = 0; }
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 public:
 
@@ -71,18 +76,30 @@ public:
 	 *
 	 * @param other the reactant to be copied
 	 */
+<<<<<<< HEAD
 	HeInterstitialCluster(const HeInterstitialCluster &other);
+=======
+	HeInterstitialCluster(HeInterstitialCluster &other);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	//! Destructor
 	~HeInterstitialCluster() {}
 
 	/**
+<<<<<<< HEAD
 	 * This operation returns a Reactant that is created using the copy
 	 * constructor of HeInterstitialCluster.
 	 *
 	 * @return A copy of this reactant
 	 */
 	virtual std::shared_ptr<Reactant> clone();
+=======
+	 * Returns a reactant created using the copy constructor
+	 */
+	virtual std::shared_ptr<IReactant> clone() {
+		return std::shared_ptr<IReactant> (new HeInterstitialCluster(*this));
+	}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * This operation returns true to signify that this cluster is a mixture of
@@ -91,6 +108,7 @@ public:
 	 * @return True if mixed
 	 */
 	virtual bool isMixed() const {return true;}
+<<<<<<< HEAD
 
 	/**
 	 * Computes a row of the reaction connectivity matrix corresponding to
@@ -109,6 +127,8 @@ public:
 	 * the element at the position of the second reactant is 1, otherwise 0.
 	 */
 	void createDissociationConnectivity();
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 };
 //end class HeInterstitialCluster
 

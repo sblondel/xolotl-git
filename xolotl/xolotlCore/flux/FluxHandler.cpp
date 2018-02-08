@@ -1,5 +1,9 @@
 #include "FluxHandler.h"
 #include <xolotlPerf.h>
+<<<<<<< HEAD
+=======
+#include <Reactant.h>
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 #include <iostream>
 #include <fstream>
 #include <cmath>
@@ -9,7 +13,10 @@
 namespace xolotlCore {
 
 FluxHandler::FluxHandler() :
+<<<<<<< HEAD
 		stepSize(0.0),
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 		fluence(0.0),
 		fluxAmplitude(0.0),
 		fluxIndex(-1),
@@ -18,14 +25,22 @@ FluxHandler::FluxHandler() :
 	return;
 }
 
+<<<<<<< HEAD
 void FluxHandler::initializeFluxHandler(PSIClusterReactionNetwork *network,
 		int nx, double hx) {
 	// Set the step and elementary surface sizes
 	stepSize = hx;
+=======
+void FluxHandler::initializeFluxHandler(IReactionNetwork *network,
+		int surfacePos, std::vector<double> grid) {
+	// Set the grid
+	xGrid = grid;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	// Compute the norm factor because the fit function has an
 	// arbitrary amplitude
 	normFactor = 0.0;
+<<<<<<< HEAD
 	// Loop on the x grid points skipping the first and last because
 	// of the boundary conditions
 	for (int i = 1; i < nx - 1; i++) {
@@ -34,12 +49,23 @@ void FluxHandler::initializeFluxHandler(PSIClusterReactionNetwork *network,
 
 		// Add the the value of the function times the step size
 		normFactor += FitFunction(x) * stepSize;
+=======
+	// Loop on the x grid points skipping the first after the surface position
+	// and last because of the boundary conditions
+	for (int i = surfacePos + 1; i < xGrid.size() - 1; i++) {
+		// Get the x position
+		double x = xGrid[i] - xGrid[surfacePos];
+
+		// Add the the value of the function times the step size
+		normFactor += FitFunction(x) * (xGrid[i] - xGrid[i-1]);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	}
 
 	// Factor the incident flux will be multiplied by to get
 	// the wanted intensity
 	double fluxNormalized = fluxAmplitude / normFactor;
 
+<<<<<<< HEAD
 	// The first value should always be 0.0 because of boundary conditions
 	incidentFluxVec.push_back(0.0);
 
@@ -47,6 +73,17 @@ void FluxHandler::initializeFluxHandler(PSIClusterReactionNetwork *network,
 	for (int i = 1; i < nx - 1; i++) {
 		// Get the x position
 		double x = i * stepSize;
+=======
+	// Clear the flux vector
+	incidentFluxVec.clear();
+	// The first value corresponding to the surface position should always be 0.0
+	incidentFluxVec.push_back(0.0);
+
+	// Starts a i = surfacePos + 1 because the first value was already put in the vector
+	for (int i = surfacePos + 1; i < xGrid.size() - 1; i++) {
+		// Get the x position
+		auto x = xGrid[i] - xGrid[surfacePos];
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 		// Compute the flux value
 		double incidentFlux = fluxNormalized * FitFunction(x);
@@ -57,6 +94,7 @@ void FluxHandler::initializeFluxHandler(PSIClusterReactionNetwork *network,
 	// The last value should always be 0.0 because of boundary conditions
 	incidentFluxVec.push_back(0.0);
 
+<<<<<<< HEAD
 	// Set the flux index corresponding the the single helium cluster here
 	auto fluxCluster = (PSICluster *) network->get(heType, 1);
 	// Check that the helium cluster is present in the network
@@ -87,11 +125,28 @@ void FluxHandler::recomputeFluxHandler() {
 	for (int i = 1; i < numGridPoints; i++) {
 		// Get the x position
 		double x = i * stepSize;
+=======
+	return;
+}
+
+void FluxHandler::recomputeFluxHandler(int surfacePos) {
+	// Factor the incident flux will be multiplied by
+	double fluxNormalized = fluxAmplitude / normFactor;
+
+	// Starts a i = surfacePos + 1 because the first values were already put in the vector
+	for (int i = surfacePos + 1; i < xGrid.size() - 1; i++) {
+		// Get the x position
+		auto x = xGrid[i] - xGrid[surfacePos];
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 		// Compute the flux value
 		double incidentFlux = fluxNormalized * FitFunction(x);
 		// Add it to the vector
+<<<<<<< HEAD
 		incidentFluxVec.push_back(incidentFlux);
+=======
+		incidentFluxVec[i - surfacePos] = incidentFlux;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	}
 
 	return;
@@ -132,7 +187,11 @@ double FluxHandler::getProfileAmplitude(double currentTime) const {
 
 	// Else loop to determine the interval the time falls in
 	// i.e. time[k] < time < time[k + 1]
+<<<<<<< HEAD
 	for (int k = 0; k < time.size() - 1; k++) {
+=======
+	for (unsigned int k = 0; k < time.size() - 1; k++) {
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 		if (currentTime < time[k]) continue;
 		if (currentTime > time[k + 1]) continue;
 
@@ -147,6 +206,7 @@ double FluxHandler::getProfileAmplitude(double currentTime) const {
 	return f;
 }
 
+<<<<<<< HEAD
 std::vector<double> FluxHandler::getIncidentFluxVec(double currentTime) {
 	// Recompute the flux vector if a time profile is used
 	if (useTimeProfile) {
@@ -159,6 +219,19 @@ std::vector<double> FluxHandler::getIncidentFluxVec(double currentTime) {
 
 int FluxHandler::getIncidentFluxClusterIndex() {
 	return fluxIndex;
+=======
+void FluxHandler::computeIncidentFlux(double currentTime, double *updatedConcOffset, int xi, int surfacePos) {
+	// Recompute the flux vector if a time profile is used
+	if (useTimeProfile) {
+		fluxAmplitude = getProfileAmplitude(currentTime);
+		recomputeFluxHandler(surfacePos);
+	}
+
+	// Update the concentration array
+	updatedConcOffset[fluxIndex] += incidentFluxVec[xi - surfacePos];
+
+	return;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 }
 
 void FluxHandler::incrementFluence(double dt) {

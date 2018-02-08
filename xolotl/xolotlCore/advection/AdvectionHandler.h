@@ -3,6 +3,10 @@
 
 // Includes
 #include "IAdvectionHandler.h"
+<<<<<<< HEAD
+=======
+#include <Constants.h>
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 namespace xolotlCore {
 
@@ -14,21 +18,38 @@ namespace xolotlCore {
 class AdvectionHandler: public IAdvectionHandler {
 protected:
 
+<<<<<<< HEAD
+=======
+	//! The location of the sink
+	double location;
+
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	//! The vector containing the indices of the advecting clusters
 	std::vector<int> indexVector;
 
 	//! The vector containing the value of the sink strength (called A) of the advecting clusters
 	std::vector<double> sinkStrengthVector;
 
+<<<<<<< HEAD
 public:
 
 	//! The Constructor
 	AdvectionHandler() {}
+=======
+	//! The number of dimensions of the problem
+	int dimension;
+
+public:
+
+	//! The Constructor
+	AdvectionHandler() : location(0.0), dimension(0) {}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	//! The Destructor
 	~AdvectionHandler() {}
 
 	/**
+<<<<<<< HEAD
 	 * Compute the flux due to the advection for all the helium clusters,
 	 * given the space parameter hx and the position.
 	 * This method is called by the RHSFunction from the PetscSolver.
@@ -74,6 +95,20 @@ public:
 	 */
 	void computePartialsForAdvection(PSIClusterReactionNetwork *network,
 			double hx, double *val, int *indices, std::vector<double> &pos);
+=======
+	 * Set the number of dimension.
+	 *
+	 * @param dim The number of dimensions of the problem
+	 */
+	void setDimension(int dim) {dimension = dim;}
+
+	/**
+	 * Set the location of the sink.
+	 *
+	 * @param pos The location of the sink
+	 */
+	void setLocation(double pos) {location = pos;}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	/**
 	 * Get the total number of advecting clusters in the network.
@@ -82,6 +117,23 @@ public:
 	 */
 	int getNumberOfAdvecting() {return indexVector.size();}
 
+<<<<<<< HEAD
+=======
+	/**
+	 * Get the vector of index of advecting clusters in the network.
+	 *
+	 * @return The vector of advecting clusters
+	 */
+	std::vector<int> getIndexVector() {return indexVector;}
+
+	/**
+	 * Get the location of the sink.
+	 *
+	 * @return The location
+	 */
+	double getLocation() {return location;}
+
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 };
 //end class AdvectionHandler
 

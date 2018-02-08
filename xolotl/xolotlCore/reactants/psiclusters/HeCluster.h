@@ -19,6 +19,7 @@ private:
 	 * initialized with a size and performance handler registry
 	 */
 	HeCluster() :
+<<<<<<< HEAD
 		PSICluster(1) {}
 
 	/**
@@ -38,6 +39,9 @@ private:
 	 */
 	void combineClusters(std::vector<Reactant *> & clusters,
 			const std::string& productName);
+=======
+		PSICluster() {}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 public:
 
@@ -55,6 +59,7 @@ public:
 	~HeCluster() {}
 
 	/**
+<<<<<<< HEAD
 	 * This operation returns a Reactant that is created using the copy
 	 * constructor of HeCluster.
 	 *
@@ -86,6 +91,13 @@ protected:
 	 */
 	void createDissociationConnectivity();
 
+=======
+	 * Returns a reactant created using the copy constructor
+	 */
+	virtual std::shared_ptr<IReactant> clone() {
+		return std::shared_ptr<IReactant> (new HeCluster(*this));
+	}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 }; //end class HeCluster
 

@@ -42,10 +42,16 @@ public class Main {
 				Preprocessor preprocessor = new Preprocessor(myArgs);
 
 				// Generate the network of clusters
+<<<<<<< HEAD
 				ArrayList<Cluster> clusters = preprocessor
 						.generateNetwork();
 				System.out.println("Network generated.");
 				
+=======
+				ArrayList<Cluster> clusters = preprocessor.generateNetwork();
+				System.out.println("Network generated.");
+
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 				// Get the name of the networkFile from xolotlParams
 				String networkFileName = preprocessor.xolotlParams.getProperty("networkFile");
 
@@ -57,6 +63,7 @@ public class Main {
 
 				if (myArgs.isCheckpoint()) {
 					String HDF5FileName = myArgs.getCheckpoint();
+<<<<<<< HEAD
 					// Read the header and the concentration from this file 
 					// and copy them to the network file
 					int[] gridSize = preprocessor.copyHeader(HDF5FileName, networkFileName);
@@ -65,6 +72,15 @@ public class Main {
 				}
 				else {
 					// Write the header in it with the size options from the preprocessor
+=======
+					// Read the header and the concentration from this file
+					// and copy them to the network file
+					int[] gridSize = preprocessor.copyHeader(HDF5FileName, networkFileName);
+					preprocessor.copyConcentration(HDF5FileName, networkFileName, gridSize, clusters);
+				} else {
+					// Write the header in it with the size options from the
+					// preprocessor
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 					preprocessor.writeHeader(networkFileName, myArgs);
 				}
 
@@ -72,8 +88,12 @@ public class Main {
 
 				// Write the file containing the parameters that are needed
 				// to run Xolotl
+<<<<<<< HEAD
 				preprocessor.writeParameterFile("params.txt",
 						preprocessor.xolotlParams);
+=======
+				preprocessor.writeParameterFile("params.txt", preprocessor.xolotlParams);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 				System.out.println("Parameters written.");
 			}
 		} catch (ArgumentValidationException e1) {
@@ -81,8 +101,12 @@ public class Main {
 			e1.printStackTrace();
 			return;
 		} catch (Exception e) {
+<<<<<<< HEAD
 			System.err.println("Exception caught while generating input. "
 					+ "Aborting.");
+=======
+			System.err.println("Exception caught while generating input. " + "Aborting.");
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 			e.printStackTrace();
 			return;
 		}

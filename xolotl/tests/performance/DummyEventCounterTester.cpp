@@ -24,7 +24,11 @@ BOOST_AUTO_TEST_CASE(checkInitialValue) {
 
 	DummyEventCounter tester("test");
 
+<<<<<<< HEAD
 	BOOST_REQUIRE_EQUAL(0, tester.getValue());
+=======
+	BOOST_REQUIRE_EQUAL(0U, tester.getValue());
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 }
 
@@ -32,6 +36,7 @@ BOOST_AUTO_TEST_CASE(checkCounting) {
 
 	DummyEventCounter tester("test");
 
+<<<<<<< HEAD
 	for(int i = 0; i < 3; i++){
 		tester.increment();
 	}
@@ -41,5 +46,15 @@ BOOST_AUTO_TEST_CASE(checkCounting) {
 }
 
 
+=======
+	for (int i = 0; i < 3; i++) {
+		tester.increment();
+	}
+
+	BOOST_REQUIRE_EQUAL(0U, tester.getValue());
+
+}
+
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 BOOST_AUTO_TEST_SUITE_END()
 

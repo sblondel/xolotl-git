@@ -81,7 +81,11 @@ BOOST_AUTO_TEST_CASE(checkDataProvider) {
 	auto dataPoints = myScatterPlot->getDataProvider()->getDataPoints();
 
 	// Loop on all the points in dataPoints
+<<<<<<< HEAD
 	for (int i = 0; i < dataPoints->size(); i++) {
+=======
+	for (unsigned int i = 0; i < dataPoints->size(); i++) {
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 		// Check that all the fields are the same
 		BOOST_REQUIRE_EQUAL(dataPoints->at(i).value, myPoints->at(i).value);

@@ -51,12 +51,19 @@ public:
 	 * This operation returns the temperature at the given position
 	 * and time.
 	 *
+<<<<<<< HEAD
 	 * @param position The position
 	 * @param currentTime The time
 	 * @return The temperature
 	 */
 	virtual double getTemperature(std::vector<double> position,
 			double currentTime) const {return temperature;}
+=======
+	 * @return The temperature
+	 */
+	virtual double getTemperature(const std::vector<double>& position,
+			double) const {return temperature;}
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 }; //end class TemperatureHandler
 

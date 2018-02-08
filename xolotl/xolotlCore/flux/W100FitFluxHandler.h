@@ -46,6 +46,31 @@ public:
 	 */
 	~W100FitFluxHandler() {}
 
+<<<<<<< HEAD
+=======
+	/**
+	 * Compute and store the incident flux values at each grid point.
+	 * \see IFluxHandler.h
+	 */
+	void initializeFluxHandler(IReactionNetwork *network,
+			int surfacePos, std::vector<double> grid) {
+		// Call the general method
+		FluxHandler::initializeFluxHandler(network, surfacePos, grid);
+
+		// Set the flux index corresponding the the single helium cluster here
+		auto fluxCluster = network->get(heType, 1);
+		// Check that the helium cluster is present in the network
+		if (!fluxCluster) {
+			throw std::string(
+					"\nThe single helium cluster is not present in the network, "
+					"cannot use the flux option!");
+		}
+		fluxIndex = fluxCluster->getId() - 1;
+
+		return;
+	}
+
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 };
 //end class W100FitFluxHandler
 

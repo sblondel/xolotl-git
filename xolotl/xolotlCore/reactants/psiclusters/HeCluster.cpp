@@ -8,20 +8,36 @@ using namespace xolotlCore;
 
 HeCluster::HeCluster(int nHe,
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
+<<<<<<< HEAD
 		PSICluster(nHe, registry) {
 	// Update the composition map
 	compositionMap["He"] = size;
+=======
+		PSICluster(registry) {
+	// Set the size
+	size = nHe;
+	// Update the composition map
+	compositionMap[heType] = size;
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	// Set the reactant name appropriately
 	std::stringstream nameStream;
 	nameStream << "He_" << size;
 	name = nameStream.str();
 	// Set the typename appropriately
+<<<<<<< HEAD
 	typeName = "He";
 
 	// Compute the reaction radius
 	double FourPi = 4.0 * xolotlCore::pi;
 	double aCubed = pow(xolotlCore::latticeConstant, 3);
+=======
+	typeName = heType;
+
+	// Compute the reaction radius
+	double FourPi = 4.0 * xolotlCore::pi;
+	double aCubed = pow(xolotlCore::tungstenLatticeConstant, 3);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	double termOne = pow((3.0 / FourPi) * (1.0 / 10.0) * aCubed * size,
 			(1.0 / 3.0));
 	double termTwo = pow((3.0 / FourPi) * (1.0 / 10.0) * aCubed, (1.0 / 3.0));
@@ -29,6 +45,7 @@ HeCluster::HeCluster(int nHe,
 
 	return;
 }
+<<<<<<< HEAD
 
 std::shared_ptr<Reactant> HeCluster::clone() {
 	std::shared_ptr<Reactant> reactant(new HeCluster(*this));
@@ -201,3 +218,5 @@ void HeCluster::createDissociationConnectivity() {
 
 	return;
 }
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a

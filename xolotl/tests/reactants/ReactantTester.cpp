@@ -13,7 +13,12 @@ using namespace std;
 using namespace xolotlCore;
 using namespace testUtils;
 
+<<<<<<< HEAD
 static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry = std::make_shared<xolotlPerf::DummyHandlerRegistry>();
+=======
+static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry =
+		std::make_shared<xolotlPerf::DummyHandlerRegistry>();
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 /**
  * This suite is responsible for testing the Reactant.
@@ -36,6 +41,7 @@ BOOST_AUTO_TEST_CASE(checkComposition) {
 	Reactant reactant(registry);
 
 	// Check its default composition
+<<<<<<< HEAD
 	BOOST_REQUIRE_EQUAL(0, reactant.getComposition().size());
 
 	return;
@@ -51,6 +57,9 @@ BOOST_AUTO_TEST_CASE(checkConnectivity) {
 
 	// Check its default connectivity
 	BOOST_REQUIRE_EQUAL(0, reactant.getConnectivity().size());
+=======
+	BOOST_REQUIRE_EQUAL(4U, reactant.getComposition().size());
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	return;
 }
@@ -60,11 +69,20 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
 	Reactant reactant(registry);
 
 	// Create a network and set it
+<<<<<<< HEAD
 	auto network = make_shared<PSIClusterReactionNetwork>(make_shared<xolotlPerf::DummyHandlerRegistry>());
 	reactant.setReactionNetwork(network);
 
 	// Check its default partial derivatives
 	BOOST_REQUIRE_EQUAL(0, reactant.getPartialDerivatives().size());
+=======
+	auto network = make_shared<PSIClusterReactionNetwork>(
+			make_shared<xolotlPerf::DummyHandlerRegistry>());
+	reactant.setReactionNetwork(network);
+
+	// Check its default partial derivatives
+	BOOST_REQUIRE_EQUAL(0U, reactant.getPartialDerivatives().size());
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	// Create a reference and temp partial derivative vector
 	std::vector<double> refPartials = std::vector<double>(3, 0.0);
@@ -93,10 +111,17 @@ BOOST_AUTO_TEST_CASE(checkCopying) {
 	// Check the ids and names
 	BOOST_REQUIRE_EQUAL(reactant.getId(), reactantCopy.getId());
 	BOOST_REQUIRE_EQUAL(reactant.getName(), reactantCopy.getName());
+<<<<<<< HEAD
 	BOOST_REQUIRE_CLOSE(5.0,reactant.getTemperature(),0.0001);
 
 	// Increase the concentration
 	reactantCopy.increaseConcentration(5.0);
+=======
+	BOOST_REQUIRE_CLOSE(5.0, reactant.getTemperature(), 0.0001);
+
+	// Increase the concentration
+	reactantCopy.setConcentration(15.0);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 
 	// The values should now be different,
 	// so check them against the known values
@@ -105,7 +130,11 @@ BOOST_AUTO_TEST_CASE(checkCopying) {
 
 	// Try cloning the Reactant
 	auto reactantClone = reactant.clone();
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	BOOST_REQUIRE_CLOSE(10.0, reactantClone->getConcentration(), 1.0e-7);
 
 	return;
@@ -119,6 +148,7 @@ BOOST_AUTO_TEST_CASE(checkConcentration) {
 	// Make sure it was set correctly
 	BOOST_REQUIRE_EQUAL(1.0, reactant.getConcentration());
 
+<<<<<<< HEAD
 	// Increase it
 	reactant.increaseConcentration(3.3);
 
@@ -137,6 +167,8 @@ BOOST_AUTO_TEST_CASE(checkConcentration) {
 	// Check it was zeroed
 	BOOST_REQUIRE_EQUAL(0.0, reactant.getConcentration());
 
+=======
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	// Make sure the base class getTotalFlux returns 0 for now
 	BOOST_REQUIRE_EQUAL(0.0, reactant.getTotalFlux());
 
@@ -145,6 +177,7 @@ BOOST_AUTO_TEST_CASE(checkConcentration) {
 
 BOOST_AUTO_TEST_CASE(checkIsConnected) {
 	// Create a reaction network containing only clusters with maximum size 2
+<<<<<<< HEAD
 	shared_ptr<ReactionNetwork> network = getSimpleReactionNetwork(2);
 
 	// Check the connectivity matrix (8 * 8)
@@ -157,41 +190,80 @@ BOOST_AUTO_TEST_CASE(checkIsConnected) {
 			{0, 0, 1, 0, 1, 1, 0, 0}, // I_2
 			{1, 0, 1, 0, 0, 0, 1, 0}, // HeV
 			{1, 0, 0, 0, 1, 0, 0, 1}  // HeI
+=======
+	shared_ptr<ReactionNetwork> network = getSimplePSIReactionNetwork(2);
+
+	// Check the connectivity matrix (8 * 8)
+	int connectivityExpected[8][8] = { { 1, 1, 1, 0, 1, 0, 1, 1 }, // He
+			{ 1, 1, 0, 0, 0, 0, 0, 0 }, // He_2
+			{ 1, 0, 1, 1, 1, 1, 1, 1 }, // V
+			{ 0, 0, 1, 1, 1, 1, 0, 0 }, // V_2
+			{ 1, 0, 1, 1, 1, 1, 1, 0 }, // I
+			{ 0, 0, 1, 1, 1, 1, 0, 0 }, // I_2
+			{ 1, 0, 1, 0, 1, 0, 1, 0 }, // HeV
+			{ 1, 0, 1, 0, 1, 0, 0, 1 }  // HeI
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	};
 
 	// Check He
 	auto reactantConnectivity = network->get("He", 1)->getConnectivity();
 	for (int j = 0; j < 8; j++) {
+<<<<<<< HEAD
 		BOOST_REQUIRE_EQUAL(connectivityExpected[0][j],reactantConnectivity[j]);
+=======
+		BOOST_REQUIRE_EQUAL(connectivityExpected[0][j],
+				reactantConnectivity[j]);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	}
 
 	// Check He_2
 	reactantConnectivity = network->get("He", 2)->getConnectivity();
 	for (int j = 0; j < 8; j++) {
+<<<<<<< HEAD
 		BOOST_REQUIRE_EQUAL(connectivityExpected[1][j],reactantConnectivity[j]);
+=======
+		BOOST_REQUIRE_EQUAL(connectivityExpected[1][j],
+				reactantConnectivity[j]);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	}
 
 	// Check V
 	reactantConnectivity = network->get("V", 1)->getConnectivity();
 	for (int j = 0; j < 8; j++) {
+<<<<<<< HEAD
 		BOOST_REQUIRE_EQUAL(connectivityExpected[2][j],reactantConnectivity[j]);
+=======
+		BOOST_REQUIRE_EQUAL(connectivityExpected[2][j],
+				reactantConnectivity[j]);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	}
 
 	// Check V_2
 	reactantConnectivity = network->get("V", 2)->getConnectivity();
 	for (int j = 0; j < 8; j++) {
+<<<<<<< HEAD
 		BOOST_REQUIRE_EQUAL(connectivityExpected[3][j],reactantConnectivity[j]);
+=======
+		BOOST_REQUIRE_EQUAL(connectivityExpected[3][j],
+				reactantConnectivity[j]);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	}
 
 	// Check I
 	reactantConnectivity = network->get("I", 1)->getConnectivity();
 	for (int j = 0; j < 8; j++) {
+<<<<<<< HEAD
 		BOOST_REQUIRE_EQUAL(connectivityExpected[4][j],reactantConnectivity[j]);
+=======
+		BOOST_REQUIRE_EQUAL(connectivityExpected[4][j],
+				reactantConnectivity[j]);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	}
 
 	// Check I_2
 	reactantConnectivity = network->get("I", 2)->getConnectivity();
 	for (int j = 0; j < 8; j++) {
+<<<<<<< HEAD
 		BOOST_REQUIRE_EQUAL(connectivityExpected[5][j],reactantConnectivity[j]);
 	}
 
@@ -200,13 +272,34 @@ BOOST_AUTO_TEST_CASE(checkIsConnected) {
 	reactantConnectivity = network->getCompound("HeV", compositionVector)->getConnectivity();
 	for (int j = 0; j < 8; j++) {
 		BOOST_REQUIRE_EQUAL(connectivityExpected[6][j],reactantConnectivity[j]);
+=======
+		BOOST_REQUIRE_EQUAL(connectivityExpected[5][j],
+				reactantConnectivity[j]);
+	}
+
+	// Check HeV
+	std::vector<int> compositionVector = { 1, 1, 0 };
+	reactantConnectivity =
+			network->getCompound("HeV", compositionVector)->getConnectivity();
+	for (int j = 0; j < 8; j++) {
+		BOOST_REQUIRE_EQUAL(connectivityExpected[6][j],
+				reactantConnectivity[j]);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	}
 
 	// Check HeI
 	compositionVector = {1,0,1};
+<<<<<<< HEAD
 	reactantConnectivity = network->getCompound("HeI", compositionVector)->getConnectivity();
 	for (int j = 0; j < 8; j++) {
 		BOOST_REQUIRE_EQUAL(connectivityExpected[7][j],reactantConnectivity[j]);
+=======
+	reactantConnectivity =
+			network->getCompound("HeI", compositionVector)->getConnectivity();
+	for (int j = 0; j < 8; j++) {
+		BOOST_REQUIRE_EQUAL(connectivityExpected[7][j],
+				reactantConnectivity[j]);
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 	}
 
 	return;

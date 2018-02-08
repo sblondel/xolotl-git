@@ -3,6 +3,10 @@
 
 // Includes
 #include <stdlib.h>
+<<<<<<< HEAD
+=======
+#include <TokenizedLineReader.h>
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 #include "OptionHandler.h"
 
 namespace xolotlCore {
@@ -20,7 +24,12 @@ public:
 			OptionHandler("startTemp",
 					"startTemp <value>                 "
 							"The temperature (in Kelvin) will be the constant floating point value specified. "
+<<<<<<< HEAD
 							"(default = 1000)"
+=======
+							"(default = 1000). "
+							"\n	                            If two values are given, the second one is interpreted as a gradient."
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 							"\n	                            (NOTE: Use only ONE temperature option)\n") {
 	}
 
@@ -42,10 +51,32 @@ public:
 		// Set the flag to use constant temperature to true
 		opt->setConstTempFlag(true);
 
+<<<<<<< HEAD
 		// Set the value for the temperature
 		double temp = strtod(arg.c_str(), NULL);
 		opt->setConstTemperature(temp);
 
+=======
+		// Build an input stream from the argument string.
+		xolotlCore::TokenizedLineReader<std::string> reader;
+		auto argSS = std::make_shared < std::istringstream > (arg);
+		reader.setInputStream(argSS);
+
+		// Break the argument into tokens.
+		auto tokens = reader.loadLine();
+
+		// Set the value for the temperature
+		double temp = strtod(tokens[0].c_str(), NULL);
+		opt->setConstTemperature(temp);
+
+		// Check if we have another value
+		if (tokens.size() > 1) {
+			// Set the temperature gradient
+			double gradient = strtod(tokens[1].c_str(), NULL);
+			opt->setTemperatureGradient(gradient);
+		}
+
+>>>>>>> f67313bf226aed355571bfbfe00456ece9e8a58a
 		return true;
 	}
 
