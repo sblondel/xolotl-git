@@ -8,6 +8,7 @@ SET(LIBRARY_NAME "xolotlSolver")
 #Collect all header filenames in this project 
 #and glob them in HEADERS
 <<<<<<< HEAD
+<<<<<<< HEAD
 file(GLOB HEADERS *.h solverhandler/*.h monitor/*.h)
 
 #Collect all of the cpp files in this folder 
@@ -43,6 +44,8 @@ add_library(${LIBRARY_NAME} STATIC ${SRC})
 target_link_libraries(${LIBRARY_NAME} xolotlReactants xolotlIO xolotlCL xolotlDiffusion
 xolotlAdvection xolotlFlux xolotlModified ${PETSC_LIBRARIES} xolotlPerf xolotlViz)
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 file(GLOB HEADERS *.h)
 
 #Collect all of the cpp files in this folder 
@@ -63,7 +66,10 @@ include_directories(${PETSC_INCLUDES})
 add_library(${LIBRARY_NAME} STATIC ${SRC})
 target_link_libraries(${LIBRARY_NAME} xolotlReactants xolotlIO
 ${PETSC_LIBRARIES} xolotlPerf xolotlViz)
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 #Install the xolotl header files
 install(FILES ${HEADERS} DESTINATION include)

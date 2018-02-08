@@ -4,9 +4,12 @@
 #include <algorithm>
 #include <vector>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "PSIClusterReactionNetwork.h"
 #include <xolotlPerf.h>
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include "HeCluster.h"
 #include "VCluster.h"
 #include "InterstitialCluster.h"
@@ -14,11 +17,15 @@
 // #include "HeInterstitialCluster.h"
 #include "PSIClusterReactionNetwork.h"
 #include <HandlerRegistryFactory.h>
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <HDF5Utils.h>
 
 using namespace xolotlCore;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 std::shared_ptr<IReactionNetwork> HDF5NetworkLoader::load() {
 	// Get the dataset from the HDF5 files
@@ -29,6 +36,8 @@ std::shared_ptr<IReactionNetwork> HDF5NetworkLoader::load() {
 	double formationEnergy = 0.0, migrationEnergy = 0.0;
 	double diffusionFactor = 0.0;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 std::shared_ptr<PSIClusterReactionNetwork> HDF5NetworkLoader::load() {
 	// Get the dataset from the HDF5 files
 	auto networkVector = xolotlCore::HDF5Utils::readNetwork(fileName);
@@ -39,7 +48,10 @@ std::shared_ptr<PSIClusterReactionNetwork> HDF5NetworkLoader::load() {
 			0.0;
 	double diffusionFactor = 0.0;
 	std::vector<double> bindingEnergies;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	std::vector<std::shared_ptr<Reactant> > reactants;
 
 	// Prepare the network
@@ -54,6 +66,7 @@ std::shared_ptr<PSIClusterReactionNetwork> HDF5NetworkLoader::load() {
 		numV = (int) (*lineIt)[1];
 		numI = (int) (*lineIt)[2];
 		// Create the cluster
+<<<<<<< HEAD
 <<<<<<< HEAD
 		auto nextCluster = createPSICluster(numHe, numV, numI);
 
@@ -87,6 +100,8 @@ std::shared_ptr<PSIClusterReactionNetwork> HDF5NetworkLoader::load() {
 
 	// Set the reaction network for each reactant
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		auto nextCluster = createCluster(numHe, numV, numI);
 
 		// Binding energies
@@ -111,12 +126,16 @@ std::shared_ptr<PSIClusterReactionNetwork> HDF5NetworkLoader::load() {
 		reactants.push_back(nextCluster);
 	}
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	for (auto reactantsIt = reactants.begin(); reactantsIt != reactants.end();
 			++reactantsIt) {
 		(*reactantsIt)->setReactionNetwork(network);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// Create the reactions
 	network->createReactionConnectivity();
@@ -136,6 +155,10 @@ std::shared_ptr<PSIClusterReactionNetwork> HDF5NetworkLoader::load() {
 <<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
+=======
+	return network;
+}
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 void HDF5NetworkLoader::setFilename (std::string name) {
 	fileName = name;
@@ -146,4 +169,7 @@ std::string HDF5NetworkLoader::getFilename () const {
 	return fileName;
 }
 
+<<<<<<< HEAD
 >>>>>>> Xolotl starts with the HDF5 file named xolotlStart.h5. Fixing of number of clusters plotted for seriesPlot. SB 20140521
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7

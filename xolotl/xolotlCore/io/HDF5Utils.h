@@ -2,10 +2,14 @@
 #define HDF5UTILS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <IReactionNetwork.h>
 =======
 #include <PSIClusterReactionNetwork.h>
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+#include <PSIClusterReactionNetwork.h>
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <memory>
 
 namespace xolotlCore {
@@ -14,6 +18,7 @@ namespace HDF5Utils {
 
 	/**
 	 * Create the HDF5 file with the needed structure.
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -129,6 +134,9 @@ namespace HDF5Utils {
 =======
 	 * @param fileName The name of the file to create.
 >>>>>>> Undoing some hard-wiring for the name of the HDF5 file and updating the tests. SB 20140618
+=======
+	 * @param fileName The name of the file to create.
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @param networkSize The total number of cluster in the network.
 	 * @param gridSize The total number of grid points.
 	 */
@@ -179,11 +187,15 @@ namespace HDF5Utils {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Add the data to the file and close it.
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
 	 * Close the file for the first time after creating it.
 >>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
+=======
+	 * Close the file for the first time after creating it.
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 */
 	void finalizeFile();
 
@@ -191,13 +203,17 @@ namespace HDF5Utils {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * Close the file when it had been opened by openFile().
 	 */
 	void closeFile();
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Read the header of a HDF5 file.
 	 *
@@ -344,6 +360,8 @@ namespace HDF5Utils {
 =======
 =======
 >>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * Read the header of a HDF5 file.
 	 * @param fileName The name of the file to read from.
 	 * @param physicalDim The physical length of the material to be changed.
@@ -368,11 +386,15 @@ namespace HDF5Utils {
 	void readTimes(std::string fileName, int lastTimeStep, double & time, double & deltaTime);
 
 	/**
+<<<<<<< HEAD
 >>>>>>> Xolotl starts with the HDF5 file named xolotlStart.h5. Fixing of number of clusters plotted for seriesPlot. SB 20140521
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * Read the network from a HDF5 file.
 	 * @param fileName The name of the file to read from.
 	 * @return The vector of vector which contain the network dataset.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	std::vector< std::vector <double> > readNetwork(const std::string& fileName);
 
@@ -391,6 +413,8 @@ namespace HDF5Utils {
 
 }
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	std::vector< std::vector <double> > readNetwork(std::string fileName);
 
 	/**
@@ -404,7 +428,10 @@ namespace HDF5Utils {
 			int lastTimeStep, int i);
 
 };
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 } /* namespace xolotlCore */
 #endif

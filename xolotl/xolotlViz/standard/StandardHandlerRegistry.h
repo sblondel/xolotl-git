@@ -7,9 +7,13 @@
 #include "IVizHandlerRegistry.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 namespace xolotlViz {
 
 /**
@@ -17,6 +21,7 @@ namespace xolotlViz {
  * This is used only if the libraries are present and if the user uses
  * the standard registry.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 class StandardHandlerRegistry: public IVizHandlerRegistry {
 public:
@@ -44,6 +49,8 @@ public:
 };
 //end class StandardHandlerRegistry
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 class StandardHandlerRegistry : public IVizHandlerRegistry
 {
 public:
@@ -68,7 +75,10 @@ public:
     virtual std::shared_ptr<IPlot> getPlot(std::string name, PlotType type);
 
 };  //end class StandardHandlerRegistry
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 }//end namespace xolotlViz
 

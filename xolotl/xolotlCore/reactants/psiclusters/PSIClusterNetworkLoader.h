@@ -10,16 +10,22 @@
 
 //Includes
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <PSICluster.h>
 #include <NetworkLoader.h>
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <map>
 #include <memory>
 #include "PSICluster.h"
 #include <PSIClusterReactionNetwork.h>
 #include <IHandlerRegistry.h>
 #include <string>
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 namespace xolotlCore {
 
@@ -34,15 +40,21 @@ namespace xolotlCore {
  * > The number of V in the cluster
  * > The number of I in the cluster
 <<<<<<< HEAD
+<<<<<<< HEAD
  * > The formation energy
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  * > The He binding energy
  * > The V binding energy
  * > The I binding energy
  *
  * Where appropriate, any binding energy may be specified as "Infinity" to
  * signify that the cluster does not undergo that type of dissociation.
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  *
  * Lines of comments starting with a "#" will be ignored as will lines that do
  * not clearly provide the information above.
@@ -74,14 +86,19 @@ namespace xolotlCore {
  * network.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 class PSIClusterNetworkLoader : public NetworkLoader {
 =======
 class PSIClusterNetworkLoader {
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+class PSIClusterNetworkLoader {
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 protected:
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * The vacancy size at which the grouping scheme starts
 	 */
@@ -97,6 +114,8 @@ protected:
 	 */
 	int vSectionWidth;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * The istream from which the network of clusters will be read.
 	 */
 	std::shared_ptr<std::istream> networkStream;
@@ -111,22 +130,31 @@ protected:
 	 * during loads.
 	 */
 	std::shared_ptr<xolotlPerf::IHandlerRegistry> handlerRegistry;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * Private nullary constructor.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	PSIClusterNetworkLoader() {}
 =======
 	PSIClusterNetworkLoader() {
 	};
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	PSIClusterNetworkLoader() {
+	};
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation creates a singles-species cluster of helium, vacancies or
 	 * interstitials. It adds the cluster to the appropriate internal list of
 	 * clusters for that type.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *
 	 * @param numHe The number of helium atoms
@@ -146,19 +174,25 @@ protected:
 	 */
 	double getHeVFormationEnergy(int numHe, int numV);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @param numHe - The number of helium atoms
 	 * @param numV - The number of atomic vacancies
 	 * @param numI - The number of interstitial defects
 	 * @return The new cluster
 	 */
 	std::shared_ptr<PSICluster> createCluster(int numHe, int numV, int numI);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 public:
 
 	/**
 	 * The default constructor. The setInputstream() operation must be called
 	 * if this constructor is used.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *
 	 * @param registry The performance handler registry
@@ -172,6 +206,8 @@ public:
 	 * loaded
 	 * @param registry The performance handler registry
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 */
 	PSIClusterNetworkLoader(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) {
 		handlerRegistry = registry;
@@ -181,7 +217,10 @@ public:
 	 * An alternative constructor provided for convenience.
 	 * @param inputstream The inputstream from which the cluster data should be
 	 * loaded.
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 */
 	PSIClusterNetworkLoader(const std::shared_ptr<std::istream> stream,
 			std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
@@ -189,6 +228,7 @@ public:
 	/**
 	 * Destructor
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	virtual ~PSIClusterNetworkLoader() {}
 
@@ -242,6 +282,8 @@ public:
 } /* namespace xolotlCore */
 
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	virtual ~PSIClusterNetworkLoader() {
 	}
 
@@ -265,5 +307,8 @@ public:
 };
 
 } /* namespace xolotlCore */
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #endif /* PSICLUSTERNETWORKLOADER_H_ */

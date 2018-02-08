@@ -3,6 +3,7 @@
 
 #include <boost/test/included/unit_test.hpp>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <Options.h>
 #include <fstream>
 #include <iostream>
@@ -13,12 +14,18 @@ using namespace std;
 
 
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+#include "xolotlCore/commandline/Options.h"
+
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 /**
  * Test suite for the Options class.
  */
 BOOST_AUTO_TEST_SUITE (Options_testSuite)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 BOOST_AUTO_TEST_CASE(noOptions) {
 	xolotlCore::Options opts;
@@ -579,6 +586,8 @@ BOOST_AUTO_TEST_CASE(dummyPerfHandler) {
 
 BOOST_AUTO_TEST_SUITE_END()
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 BOOST_AUTO_TEST_CASE(noOptions)
 {
     xolotlCore::Options xopts;
@@ -609,4 +618,7 @@ BOOST_AUTO_TEST_SUITE_END()
 
 
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7

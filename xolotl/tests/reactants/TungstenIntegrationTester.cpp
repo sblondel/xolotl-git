@@ -7,10 +7,15 @@
 #include <typeinfo>
 #include <limits>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 #include <PSIClusterNetworkLoader.h>
 #include <PSIClusterReactionNetwork.h>
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+#include <PSIClusterNetworkLoader.h>
+#include <PSIClusterReactionNetwork.h>
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <XolotlConfig.h>
 #include <DummyHandlerRegistry.h>
 
@@ -20,11 +25,15 @@ using namespace xolotlCore;
 /**
  * The test suite configuration
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 BOOST_AUTO_TEST_SUITE (TungstenIntegrationTester_testSuite)
 =======
  */BOOST_AUTO_TEST_SUITE (TungstenIntegrationTester_testSuite)
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+ */BOOST_AUTO_TEST_SUITE (TungstenIntegrationTester_testSuite)
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 /**
  * I just noticed that there is no unit test for checking the partial
@@ -48,6 +57,7 @@ BOOST_AUTO_TEST_SUITE (TungstenIntegrationTester_testSuite)
  * This operation checks the fluxs from the reactant as best as is possible
  * given that it requires external data.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 BOOST_AUTO_TEST_CASE(checkGetReactantFluxesAndParials) {
@@ -132,6 +142,12 @@ BOOST_AUTO_TEST_CASE(checkSingleReaction) {
 	string sourceDir(XolotlSourceDirectory);
 	// This file contains specific values to obtain round numbers for the partial derivatives
 	string pathToFile("/tests/testfiles/single_reaction.txt");
+=======
+BOOST_AUTO_TEST_CASE(checkGetReactantFluxesAndParials) {
+	// Local Declarations
+	string sourceDir(XolotlSourceDirectory);
+	string pathToFile("/tests/reactants/testfiles/tungsten.txt");
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	string networkFilename = sourceDir + pathToFile;
 
 	BOOST_TEST_MESSAGE(
@@ -147,6 +163,7 @@ BOOST_AUTO_TEST_CASE(checkSingleReaction) {
 			> (std::make_shared<xolotlPerf::DummyHandlerRegistry>());
 	networkLoader->setInputstream(networkStream);
 	// Load the network
+<<<<<<< HEAD
 	auto network = networkLoader->load();
 
 	BOOST_TEST_MESSAGE("TungstenIntegrationTester Message: Network loaded");
@@ -189,6 +206,8 @@ BOOST_AUTO_TEST_CASE(checkSingleReaction) {
 }
 
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	shared_ptr<ReactionNetwork> network = networkLoader->load();
 
 	BOOST_TEST_MESSAGE("TungstenIntegrationTester Message: Network loaded");
@@ -223,5 +242,8 @@ BOOST_AUTO_TEST_CASE(checkSingleReaction) {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 BOOST_AUTO_TEST_SUITE_END()

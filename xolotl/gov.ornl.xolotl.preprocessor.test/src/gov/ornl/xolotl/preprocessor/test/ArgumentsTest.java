@@ -21,6 +21,7 @@ public class ArgumentsTest {
 	@Test
 	public void testDefaultArguments() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Local Declarations
 		Arguments args;
 =======
@@ -28,11 +29,17 @@ public class ArgumentsTest {
 		// Local Declarations
 		final Arguments args;
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+
+		// Local Declarations
+		final Arguments args;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 		try {
 			// Parse the empty string of arguments
 			args = CliFactory.parseArguments(Arguments.class, new String[] {});
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			// Check that the default maximum Helium cluster size is 8
 			assertEquals(8, args.getMaxHeSize());
@@ -99,16 +106,22 @@ public class ArgumentsTest {
 			// Check the default flux argument
 			assertEquals("4.0e7", args.getFlux());
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 			// Check if there is a material argument
 			assertEquals(false, args.isMaterial());
 
 			// Check if there is a startTemp argument
 			assertEquals(false, args.isStartTemp());
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 			// Check if there is a tempFile argument
 			assertEquals(false, args.isTempFile());
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			// Check if there is a heat equation argument
 			assertEquals(false, args.isHeat());
@@ -116,6 +129,8 @@ public class ArgumentsTest {
 			// Check if there is an fluxFile argument
 			assertEquals(false, args.isFluxFile());
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 			// Check if there is an heFlux argument
 			assertEquals(false, args.isHeFlux());
 			
@@ -127,11 +142,15 @@ public class ArgumentsTest {
 
 			// Check if there is a vizHandler argument
 			assertEquals(false, args.isVizHandler());
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 			// Check if there is a checkpoint argument
 			assertEquals(false, args.isCheckpoint());
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			// Check if there is a initial vacancy concentration argument
 			assertEquals(false, args.isInitialV());
@@ -156,6 +175,8 @@ public class ArgumentsTest {
 
 		return;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 			// Check that the default networkFile is networkInit.h5
 			assertEquals("networkInit.h5", args.getNetworkFile());
 
@@ -169,20 +190,28 @@ public class ArgumentsTest {
 		} catch (ArgumentValidationException e) {
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 
 	/**
 	 * This operation tests that default parameter values are only overridden if
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * they are specified via the command line and that the optional arguments
 =======
 	 * they are specified via the command line and that the optional arguments 
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+	 * they are specified via the command line and that the optional arguments 
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * are only set if they are also specified
 	 */
 	@Test
 	public void testSpecifiedArguments() {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// Local Declarations
 		Arguments args;
@@ -320,6 +349,8 @@ public class ArgumentsTest {
 	}
 }
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 		// Local Declarations
 		final Arguments args;
@@ -376,4 +407,7 @@ public class ArgumentsTest {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7

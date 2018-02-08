@@ -9,6 +9,7 @@ SET(PACKAGE_DESCRIPTION "Tests for the Xolotl commandline package")
 include_directories(${CMAKE_SOURCE_DIR})
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/commandline)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlPerf)
 =======
@@ -16,6 +17,9 @@ include_directories(${CMAKE_SOURCE_DIR}/xolotlPerf)
 =======
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/commandline)
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/commandline)
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 include_directories(${Boost_BINARY_DIRS}) 
 
 # Figure out which tests to build

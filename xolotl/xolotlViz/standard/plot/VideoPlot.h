@@ -20,6 +20,7 @@ private:
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Declare the constructor as private to force the use of a name
 	 */
 	VideoPlot() :
@@ -30,6 +31,11 @@ private:
 	 */
     VideoPlot() : Plot() {}
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+     * Declare the constructor as private to force the use of a name
+	 */
+    VideoPlot() : Plot() {}
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 private:
 
@@ -44,10 +50,14 @@ public:
 	 * The default constructor
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VideoPlot(const std::string& name);
 =======
 	VideoPlot(std::string name);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	VideoPlot(std::string name);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * The destructor
@@ -58,10 +68,14 @@ public:
 	 * Method managing everything that is related to the rendering of a plot.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void render(const std::string& fileName = "fileName");
 =======
 	void render(std::string fileName = "fileName");
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	void render(std::string fileName = "fileName");
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * Sets the frame rate for VideoPlot.

@@ -13,6 +13,7 @@ namespace xolotlViz {
  * regard to whether visualization is active or disabled.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 class DummyHandlerRegistry: public IVizHandlerRegistry {
 public:
 
@@ -38,6 +39,8 @@ public:
 };
 //end class DummyHandlerRegistry
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 class DummyHandlerRegistry : public IVizHandlerRegistry
 {
 public:
@@ -61,7 +64,10 @@ public:
     virtual std::shared_ptr<IPlot> getPlot(std::string name, PlotType type);
 
 };  //end class DummyHandlerRegistry
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 }//end namespace xolotlViz
 

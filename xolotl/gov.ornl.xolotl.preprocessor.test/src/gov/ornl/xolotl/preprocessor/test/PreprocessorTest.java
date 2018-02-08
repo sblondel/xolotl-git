@@ -13,9 +13,12 @@ import gov.ornl.xolotl.preprocessor.Cluster;
 
 import org.junit.Test;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.junit.rules.ExpectedException;
 =======
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 import uk.co.flamingpenguin.jewel.cli.ArgumentValidationException;
 import uk.co.flamingpenguin.jewel.cli.CliFactory;
@@ -27,22 +30,29 @@ public class PreprocessorTest {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * This operation checks that the default parameters will be used along with
 	 * writeParameterFile and loadParameterFile.
 	 */
 	@Test
 	public void testParameterFile() {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * This operation checks the generateParameters function.
 	 */
 	@Test
 	public void testGenerateParameters() {
 
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Local Declarations
 		Arguments parsedArgs = null;
 
 		try {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			parsedArgs = CliFactory.parseArguments(Arguments.class, new String[] {});
 =======
@@ -94,10 +104,15 @@ public class PreprocessorTest {
 		try {
 			parsedArgs = CliFactory.parseArguments(Arguments.class,
 					new String[] { "--perfHandler", "dummy", "--petscArgs=" + "-da_grid_x 8 -ts_final_time 2" });
+=======
+			parsedArgs = CliFactory.parseArguments(Arguments.class,
+					new String[] {});
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 			if (parsedArgs != null) {
 				Preprocessor preprocessor = new Preprocessor(parsedArgs);
 
+<<<<<<< HEAD
 				// Write the parameter file
 				preprocessor.writeParameterFile("clOptionsTest", preprocessor.xolotlParams);
 
@@ -124,6 +139,8 @@ public class PreprocessorTest {
 		}
 
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 				// Generate the parameters
 				Properties defaults = preprocessor.generateParameters();
 
@@ -163,11 +180,15 @@ public class PreprocessorTest {
 		} catch (ArgumentValidationException e1) {
 			e1.printStackTrace();
 		}
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		return;
 	}
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	 * This operation checks if the optional options are specified via the
@@ -181,26 +202,38 @@ public class PreprocessorTest {
 	 * This operation checks that the default parameters will be used along with
 	 * writeParameterFile and loadParameterFile.
 >>>>>>> Merged the recent changes made in the preprocessor_branch to the HDF5_branch.  CLJ 20140625
+=======
+	 * This operation checks that the default parameters will be used along with
+	 * writeParameterFile and loadParameterFile.
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 */
 	@Test
 	public void testParameterFile() {
 
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Local Declarations
 		Arguments parsedArgs = null;
 
 		try {
 			parsedArgs = CliFactory.parseArguments(Arguments.class,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					new String[] { "--startTemp", "900", "--flux", "1.5" });
 =======
 					new String[] {});
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+					new String[] {});
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 			if (parsedArgs != null) {
 				Preprocessor preprocessor = new Preprocessor(parsedArgs);
 
 				// Write the parameter file
+<<<<<<< HEAD
 <<<<<<< HEAD
 				preprocessor.writeParameterFile("optionalOpsTest", preprocessor.xolotlParams);
 
@@ -209,6 +242,8 @@ public class PreprocessorTest {
 				Properties inProps = preprocessor.loadParameterFile("optionalOpsTest");
 
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 				preprocessor.writeParameterFile("paramsTest",
 						preprocessor.xolotlParams);
 
@@ -216,12 +251,16 @@ public class PreprocessorTest {
 				// were written correctly
 				Properties inProps = preprocessor
 						.loadParameterFile("paramsTest");
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 				// Enumeration to hold the parameter names
 				Enumeration<?> paramNames = inProps.propertyNames();
 				while (paramNames.hasMoreElements()) {
 					String key = (String) paramNames.nextElement();
 					String value = inProps.getProperty(key);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 					// Check that the default parameter values were used
@@ -239,6 +278,9 @@ public class PreprocessorTest {
 =======
 					// Check that the default parameter values were used
 >>>>>>> Merged the recent changes made in the preprocessor_branch to the HDF5_branch.  CLJ 20140625
+=======
+					// Check that the default parameter values were used
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 					assertEquals(preprocessor.xolotlParams.getProperty(key),
 							value);
 				}
@@ -354,6 +396,7 @@ public class PreprocessorTest {
 			}
 		} catch (ArgumentValidationException e1) {
 			e1.printStackTrace();
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 		}
 
@@ -415,27 +458,36 @@ public class PreprocessorTest {
 			}
 		} catch (ArgumentValidationException e) {
 			e.printStackTrace();
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		}
 
 		return;
 	}
 
 	/**
+<<<<<<< HEAD
 	 * This operation checks the generation of the network.
 	 */
 	@Test
 	public void testNetworkGeneration() {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * This operation checks generateGrid.
 	 */
 	@Test
 	public void testGenerateGrid() {
 
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Local Declarations
 		Arguments parsedArgs = null;
 
 		try {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			// Keep the default arguments
 			parsedArgs = CliFactory.parseArguments(Arguments.class, new String[] {});
@@ -457,10 +509,15 @@ public class PreprocessorTest {
 
 			// Change the number of V clusters
 			parsedArgs = CliFactory.parseArguments(Arguments.class, new String[] { "--maxVSize", "60" });
+=======
+			parsedArgs = CliFactory.parseArguments(Arguments.class,
+					new String[] {});
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 			if (parsedArgs != null) {
 				Preprocessor preprocessor = new Preprocessor(parsedArgs);
 
+<<<<<<< HEAD
 				// Generate the network
 				ArrayList<Cluster> network = preprocessor.generateNetwork();
 
@@ -485,6 +542,8 @@ public class PreprocessorTest {
 			e.printStackTrace();
 			fail();
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 				// Create the known grid array
 				double[] knownGrid = new double[15];
 
@@ -514,7 +573,10 @@ public class PreprocessorTest {
 			}
 		} catch (ArgumentValidationException e1) {
 			e1.printStackTrace();
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		}
 
 		return;
@@ -526,19 +588,28 @@ public class PreprocessorTest {
 	@Test
 	public void testHDF5Writing() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Local Declarations
 		Arguments parsedArgs = null;
 
 		try {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			parsedArgs = CliFactory.parseArguments(Arguments.class, new String[] {});
 =======
 			parsedArgs = CliFactory.parseArguments(Arguments.class,
 					new String[] {});
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+			parsedArgs = CliFactory.parseArguments(Arguments.class,
+					new String[] {});
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 			if (parsedArgs != null) {
 				Preprocessor preprocessor = new Preprocessor(parsedArgs);
@@ -549,24 +620,31 @@ public class PreprocessorTest {
 				// Create a cluster
 				Cluster cluster = new Cluster();
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cluster.nXe = 1;
 				cluster.nV = 23;
 				cluster.nI = 52;
 				cluster.E_f = 12.3;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 				cluster.nHe = 1;
 				cluster.nV = 23;
 				cluster.nI = 52;
 				cluster.E_He = 9.325;
 				cluster.E_V = 34.2346;
 				cluster.E_I = 3326424.2323543;
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 				cluster.E_m = 0.04;
 				cluster.D_0 = 1.1;
 
 				// Add it to clusters
 				clusters.add(cluster);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 				// Create the HDF5 file
 				preprocessor.createHDF5("test.h5");
@@ -587,6 +665,8 @@ public class PreprocessorTest {
 			e.printStackTrace();
 			fail();
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 				try {
 					// Create the HDF5 file
 					preprocessor.createHDF5("test.h5");
@@ -613,13 +693,20 @@ public class PreprocessorTest {
 			}
 		} catch (ArgumentValidationException e1) {
 			e1.printStackTrace();
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		}
 
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
 }
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+}
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7

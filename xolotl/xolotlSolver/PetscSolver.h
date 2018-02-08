@@ -3,6 +3,7 @@
 
 // Includes
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "Solver.h"
 
 namespace xolotlSolver {
@@ -37,6 +38,8 @@ private:
 	 */
 	void setupInitialConditions(DM data, Vec solutionVector);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include "ISolver.h"
 #include <PSIClusterNetworkLoader.h>
 #include <PSIClusterReactionNetwork.h>
@@ -99,7 +102,10 @@ private:
 
 	//! The Constructor
 	PetscSolver();
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 public:
 
@@ -111,7 +117,10 @@ public:
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * This operation transfers the input arguments passed to the program on
 	 * startup to the solver. These options are static options specified at
 	 * the start of the program whereas the options passed to setOptions() may
@@ -131,7 +140,10 @@ public:
 			std::shared_ptr<PSIClusterNetworkLoader> networkLoader);
 
 	/**
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * This operation sets the run-time options of the solver. The map is a set
 	 * of key-value std::string pairs that are interpreted by the solver. These
 	 * options may change during execution, but it is up to Solvers to monitor
@@ -141,10 +153,14 @@ public:
 	 * is "startTime" and "0.01" where both are of type std::string.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void setOptions(const std::map<std::string, std::string>& options);
 =======
 	void setOptions(std::map<std::string, std::string> options);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	void setOptions(std::map<std::string, std::string> options);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation sets up the mesh that will be used by the solver and
@@ -159,6 +175,7 @@ public:
 	 * conditions. If the solver can not be initialized, this operation will
 	 * throw an exception of type std::string.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param solverHandler The solver handler
 	 */
 	void initialize(std::shared_ptr<ISolverHandler> solverHandler);
@@ -166,21 +183,31 @@ public:
 	 */
 	void initialize();
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	 */
+	void initialize();
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation directs the Solver to perform the solve. If the solve
 	 * fails, it will throw an exception of type std::string.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 */
 	void solve();
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @param fluxHandler The flux handler that will be used when performing
 	 * the solve
 	 */
 	void solve(std::shared_ptr<IFluxHandler> fluxHandler,
 			std::shared_ptr<ITemperatureHandler> temperatureHandler);
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation performs all necessary finalization for the solver
@@ -189,6 +216,7 @@ public:
 	 * this operation will throw an exception of type std::string.
 	 */
 	void finalize();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	
 }; //end class PetscSolver
@@ -208,6 +236,8 @@ public:
 #endif /* if it is the Intel compiler */
 
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation returns the network loaded for this solver. This
@@ -252,5 +282,8 @@ protected:
 }; //end class PetscSolver
 
 } /* end namespace xolotlSolver */
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #endif

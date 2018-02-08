@@ -1,31 +1,44 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 /*
  * PSIClusterTester.cpp
  *
  *  Created on: May 6, 2013
  *      Author: Jay Jay Billings
  */
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE Regression
 
 #include <boost/test/included/unit_test.hpp>
 #include <PSICluster.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <map>
 #include <memory>
 #include <typeinfo>
 #include <limits>
 #include <math.h>
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include "SimpleReactionNetwork.h"
 #include <HeVCluster.h>
 #include <HeCluster.h>
 #include <VCluster.h>
 #include <InterstitialCluster.h>
 #include <HeInterstitialCluster.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 #include <xolotlPerf.h>
@@ -35,11 +48,15 @@
 =======
 #include <xolotlPerf/HandlerRegistryFactory.h>
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+#include <xolotlPerf/HandlerRegistryFactory.h>
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 using namespace std;
 using namespace xolotlCore;
 using namespace testUtils;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry =
 		std::make_shared<xolotlPerf::DummyHandlerRegistry>();
@@ -51,6 +68,8 @@ BOOST_AUTO_TEST_SUITE(PSIReactionNetwork_testSuite)
 
 BOOST_AUTO_TEST_CASE(checkReactants) {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry = std::make_shared<xolotlPerf::DummyHandlerRegistry>();
 
 /**
@@ -96,7 +115,10 @@ BOOST_AUTO_TEST_CASE(checkCompositionCreation) {
 
 BOOST_AUTO_TEST_CASE(checkReactants) {
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Create the network
 	auto psiNetwork = make_shared<PSIClusterReactionNetwork>(registry);
 
@@ -109,6 +131,7 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 	psiNetwork->add(interstitialCluster);
 
 	// Check the network, He first
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	auto retHeCluster = (PSICluster *) psiNetwork->get("He", 10);
@@ -136,6 +159,10 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 	auto retHeCluster = (PSICluster *)
 			psiNetwork->get("He", 10);
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+	auto retHeCluster = (PSICluster *)
+			psiNetwork->get("He", 10);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	BOOST_REQUIRE(retHeCluster);
 	BOOST_REQUIRE_EQUAL("He_10", retHeCluster->getName());
 	BOOST_REQUIRE_EQUAL(10, retHeCluster->getSize());
@@ -155,7 +182,10 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 	// Check the getter for all reactants
 	auto clusters = psiNetwork->getAll();
 	BOOST_REQUIRE_EQUAL(3, clusters->size());
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Check the size of the network
 	BOOST_REQUIRE_EQUAL(3, psiNetwork->size());
 
@@ -183,9 +213,12 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	BOOST_TEST_MESSAGE("Added " << counter << " HeV clusters");
 
 	// Add a whole bunch of HeI clusters to make sure that the network can
@@ -202,6 +235,7 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	BOOST_TEST_MESSAGE("Added " << counter << " HeI clusters");
 
@@ -214,6 +248,8 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 				"Test failed because adding a duplicate" << " to the network was allowed.");
 	} catch (const std::string& /* e */) {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	BOOST_TEST_MESSAGE("Added " << counter << " HeI clusters");
 
 	// Try adding a duplicate HeV and catch the exception
@@ -225,12 +261,16 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 				"Test failed because adding a duplicate"
 						<< " to the network was allowed.");
 	} catch (const std::string & e) {
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Do nothing. It was supposed to fail.
 	}
 
 	// Make sure that everything was added
 	auto reactants = psiNetwork->getAll();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BOOST_REQUIRE_EQUAL(84U, reactants->size());
 	// Get the clusters by type and check them. Start with He.
@@ -267,6 +307,8 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 	psiNetwork->setTemperature(1000.0);
 	BOOST_REQUIRE_CLOSE(1000.0, reactants->at(0)->getTemperature(), 0.0001);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	BOOST_REQUIRE_EQUAL(84, reactants->size());
 	// Get the clusters by type and check them. Start with He.
 	auto heReactants = psiNetwork->getAll("He");
@@ -299,6 +341,7 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Try to get something that obviously isn't there
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
@@ -306,11 +349,17 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 	psiNetwork->setTemperature(1000.0);
 	BOOST_REQUIRE_CLOSE(1000.0,reactants->at(0)->getTemperature(),0.0001);
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+	// Try changing the temperature and make sure it works
+	psiNetwork->setTemperature(1000.0);
+	BOOST_REQUIRE_CLOSE(1000.0,reactants->at(0)->getTemperature(),0.0001);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	return;
 }
 
 BOOST_AUTO_TEST_CASE(checkProperties) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// Create the network
 	auto psiNetwork = make_shared<PSIClusterReactionNetwork>(registry);
@@ -327,6 +376,8 @@ BOOST_AUTO_TEST_CASE(checkProperties) {
 	auto maxVClusterSize = psiNetwork->getMaxVClusterSize();
 	auto maxIClusterSize = psiNetwork->getMaxIClusterSize();
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Create the network
 	auto psiNetwork = make_shared<PSIClusterReactionNetwork>(registry);
@@ -344,7 +395,10 @@ BOOST_AUTO_TEST_CASE(checkProperties) {
 	auto maxHeClusterSize = stoi(props["maxHeClusterSize"]);
 	auto maxVClusterSize = stoi(props["maxVClusterSize"]);
 	auto maxIClusterSize = stoi(props["maxIClusterSize"]);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Check the properties
 	BOOST_REQUIRE_EQUAL(0, numHeClusters);
@@ -359,7 +413,10 @@ BOOST_AUTO_TEST_CASE(checkProperties) {
 	BOOST_REQUIRE_EQUAL(0, maxIClusterSize);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Set a couple of properties
 	psiNetwork->setProperty("rangePenalty", "5");
 	psiNetwork->setProperty("agility", "d8");
@@ -373,7 +430,10 @@ BOOST_AUTO_TEST_CASE(checkProperties) {
 	BOOST_REQUIRE_EQUAL("5", rangePenalty);
 	BOOST_REQUIRE_EQUAL("d8", agility);
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Add a couple of clusters
 	auto heCluster = make_shared<HeCluster>(5, registry);
 	psiNetwork->add(heCluster);
@@ -382,17 +442,23 @@ BOOST_AUTO_TEST_CASE(checkProperties) {
 
 	// Grab the properties afresh
 <<<<<<< HEAD
+<<<<<<< HEAD
 	numHeClusters = psiNetwork->getNumHeClusters();
 	maxHeClusterSize = psiNetwork->getMaxHeClusterSize();
 	numHeVClusters = psiNetwork->getNumHeVClusters();
 	maxHeVClusterSize = psiNetwork->getMaxHeVClusterSize();
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	auto propsWithClusters = psiNetwork->getProperties();
 	numHeClusters = stoi(propsWithClusters["numHeClusters"]);
 	maxHeClusterSize = stoi(propsWithClusters["maxHeClusterSize"]);
 	numHeVClusters = stoi(propsWithClusters["numHeVClusters"]);
 	maxHeVClusterSize = stoi(propsWithClusters["maxHeVClusterSize"]);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Check the properties again
 	BOOST_REQUIRE_EQUAL(1, numHeClusters);
@@ -400,17 +466,23 @@ BOOST_AUTO_TEST_CASE(checkProperties) {
 	BOOST_REQUIRE_EQUAL(5, maxHeClusterSize);
 	BOOST_REQUIRE_EQUAL(8, maxHeVClusterSize);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
 }
 
 BOOST_AUTO_TEST_CASE(checkNames) {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 BOOST_AUTO_TEST_CASE(checkNames) {
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Create the network
 	auto psiNetwork = make_shared<PSIClusterReactionNetwork>(registry);
 
@@ -419,12 +491,17 @@ BOOST_AUTO_TEST_CASE(checkNames) {
 	// containment with a vector.
 	auto names = psiNetwork->getNames();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int marker = 0;
 	for (unsigned int i = 0; i < names.size(); i++) {
 =======
 	int marker = 0;
 	for (int i = 0; i < names.size(); i++) {
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	int marker = 0;
+	for (int i = 0; i < names.size(); i++) {
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		if (names[i] == "He")
 			++marker;
 		else if (names[i] == "V")
@@ -433,10 +510,14 @@ BOOST_AUTO_TEST_CASE(checkNames) {
 			++marker;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BOOST_REQUIRE_EQUAL(3U, marker);
 =======
 	BOOST_REQUIRE_EQUAL(3, marker);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	BOOST_REQUIRE_EQUAL(3, marker);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	BOOST_REQUIRE_EQUAL(marker, names.size());
 
 	// Check the names of the compound cluster types. Use the same counting
@@ -444,14 +525,19 @@ BOOST_AUTO_TEST_CASE(checkNames) {
 	auto compoundNames = psiNetwork->getCompoundNames();
 	marker = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (unsigned int i = 0; i < compoundNames.size(); i++) {
 =======
 	for (int i = 0; i < compoundNames.size(); i++) {
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	for (int i = 0; i < compoundNames.size(); i++) {
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		if (compoundNames[i] == "HeV")
 			++marker;
 		else if (compoundNames[i] == "HeI")
 			++marker;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		else if (compoundNames[i] == "PSISuper")
 			++marker;
@@ -465,10 +551,16 @@ BOOST_AUTO_TEST_CASE(checkNames) {
 	BOOST_REQUIRE_EQUAL(2, marker);
 	BOOST_REQUIRE_EQUAL(marker, compoundNames.size());
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	}
+	BOOST_REQUIRE_EQUAL(2, marker);
+	BOOST_REQUIRE_EQUAL(marker, compoundNames.size());
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 /**
  * This operation tests the copy constructor.
+<<<<<<< HEAD
 <<<<<<< HEAD
  */
 BOOST_AUTO_TEST_CASE(checkCopying) {
@@ -476,6 +568,10 @@ BOOST_AUTO_TEST_CASE(checkCopying) {
  */BOOST_AUTO_TEST_CASE(checkCopying) {
 
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+ */BOOST_AUTO_TEST_CASE(checkCopying) {
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	//PSIClusterReactionNetwork network;
 	PSIClusterReactionNetwork network(registry);
 
@@ -489,15 +585,21 @@ BOOST_AUTO_TEST_CASE(checkCopying) {
 
 	// Check that the ReactionNetwork fields are copied
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BOOST_REQUIRE_EQUAL(network.getNumHeClusters(),
 			networkCopy.getNumHeClusters());
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	auto properties = network.getProperties();
 	auto copiedProperties = networkCopy.getProperties();
 	BOOST_REQUIRE_EQUAL(properties.size(), copiedProperties.size());
 	BOOST_REQUIRE_EQUAL(properties["numHeClusters"],
 			copiedProperties["numHeClusters"]);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Check that changing the concentration of a copy does not update the
 	// original. Start by updating the copy.
@@ -510,26 +612,35 @@ BOOST_AUTO_TEST_CASE(checkCopying) {
 	// Check the size of the network
 	BOOST_REQUIRE_EQUAL(1, networkCopy.size());
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 /**
  * This operation tests the operations of the ReactionNetwork that copy the
  * concentrations to and from a client array.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 BOOST_AUTO_TEST_CASE(checkArrayOperations) {
 	// Local Declarations
 	shared_ptr<ReactionNetwork> network = getSimplePSIReactionNetwork();
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  */BOOST_AUTO_TEST_CASE(checkArrayOperations) {
 
 	// Local Declarations
 	shared_ptr<ReactionNetwork> network = getSimpleReactionNetwork();
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	int size = network->size();
 	double * concentrations = new double[size];
 
@@ -554,6 +665,7 @@ BOOST_AUTO_TEST_CASE(checkArrayOperations) {
 	network->updateConcentrationsFromArray(concentrations);
 	auto reactants = network->getAll();
 	for (int i = 0; i < size; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		BOOST_REQUIRE_CLOSE(1.0, reactants->at(0)->getConcentration(), 1.0e-15);
@@ -611,6 +723,11 @@ BOOST_AUTO_TEST_CASE(checkRefCounts) {
 <<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
+=======
+		BOOST_REQUIRE_CLOSE(1.0, reactants->at(0)->getConcentration(), 1.0e-15);
+	}
+}
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 
 BOOST_AUTO_TEST_CASE(checkRefCounts) {
@@ -645,5 +762,8 @@ BOOST_AUTO_TEST_CASE(checkRefCounts) {
     BOOST_REQUIRE_EQUAL(network.use_count(), 1);
 }
 
+<<<<<<< HEAD
 >>>>>>> Pulling "break circular dependencies of network and reactant objects" into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 BOOST_AUTO_TEST_SUITE_END()

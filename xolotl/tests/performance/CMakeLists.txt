@@ -5,6 +5,7 @@ SET(PACKAGE_NAME "xolotl.tests.performance")
 SET(PACKAGE_DESCRIPTION "Tests for the Xolotl performance package")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Our tests depend on Boost.
 if(Boost_FOUND)
 
@@ -64,6 +65,8 @@ else(Boost_FOUND)
     message(STATUS "Not building xperf library tests; required Boost library not available")
 endif(Boost_FOUND)
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 # Find GPTL
 FIND_PACKAGE(GPTL)
 
@@ -135,7 +138,10 @@ if(Boost_FOUND)
 
 endif(GPTL_FOUND AND PAPI_FOUND)
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 
 

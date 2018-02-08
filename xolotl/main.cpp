@@ -7,6 +7,7 @@
 #include <cassert>
 #include <Reactant.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <PetscSolver.h>
 #include <mpi.h>
 #include <MPIUtils.h>
@@ -83,6 +84,8 @@ std::shared_ptr<xolotlSolver::PetscSolver> setUpSolver(
 	solvHandler->initializeHandlers(material, tempHandler, networkHandler,
 			options);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <PSIClusterNetworkLoader.h>
 #include <PetscSolver.h>
 #include <mpi.h>
@@ -130,6 +133,7 @@ bool initPerf(bool opts, std::vector<xolotlPerf::HardwareQuantities> hwq) {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 xolotlSolver::PetscSolver setUpSolver(
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> handlerRegistry, int argc,
 		char **argv) {
@@ -141,6 +145,8 @@ setUpSolver( std::shared_ptr<xolotlPerf::IHandlerRegistry> handlerRegistry,
 >>>>>>> Pulling "break circular dependencies of network and reactant objects" into the HDF5 branch. SB 20140624
 
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 bool initViz(bool opts) {
 
 	bool vizInitOK = xolotlViz::initialize(opts);
@@ -156,6 +162,7 @@ bool initViz(bool opts) {
 std::shared_ptr<xolotlSolver::PetscSolver>
 setUpSolver( std::shared_ptr<xolotlPerf::IHandlerRegistry> handlerRegistry, 
             int argc, char **argv) {
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 	// Setup the solver
 	auto solverInitTimer = handlerRegistry->getTimer("initSolver");
@@ -173,16 +180,25 @@ setUpSolver( std::shared_ptr<xolotlPerf::IHandlerRegistry> handlerRegistry,
 	solver.initialize();
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
+=======
+	// Setup the solver
+	auto solverInitTimer = handlerRegistry->getTimer("initSolver");
+	solverInitTimer->start();
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	std::shared_ptr<xolotlSolver::PetscSolver> solver = 
         std::make_shared<xolotlSolver::PetscSolver>(handlerRegistry);
 	solver->setCommandLineOptions(argc, argv);
 	solver->initialize();
+<<<<<<< HEAD
 >>>>>>> Pulling "break circular dependencies of network and reactant objects" into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	solverInitTimer->stop();
 
 	return solver;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 void launchPetscSolver(std::shared_ptr<xolotlSolver::PetscSolver> solver,
@@ -208,6 +224,11 @@ void launchPetscSolver(std::shared_ptr<xolotlSolver::PetscSolver> solver,
 >>>>>>> Pulling "break circular dependencies of network and reactant objects" into the HDF5 branch. SB 20140624
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> handlerRegistry) {
 
+=======
+void launchPetscSolver(std::shared_ptr<xolotlSolver::PetscSolver> solver,
+		std::shared_ptr<xolotlPerf::IHandlerRegistry> handlerRegistry) {
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Launch the PetscSolver
 	auto solverTimer = handlerRegistry->getTimer("solve");
 	solverTimer->start();
@@ -231,7 +252,10 @@ std::shared_ptr<PSIClusterNetworkLoader> setUpNetworkLoader(int rank,
 	networkLoader->setFilename(networkFilename);
 
 	return networkLoader;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 //! Main program
@@ -239,6 +263,7 @@ int main(int argc, char **argv) {
 
 	// Local Declarations
 	int rank;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret = EXIT_SUCCESS;
 
@@ -263,6 +288,8 @@ int main(int argc, char **argv) {
 
 		// Initialize MPI. We do this instead of leaving it to some
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Check the command line arguments.
 	// Skip the executable name before parsing.
@@ -294,11 +321,15 @@ int main(int argc, char **argv) {
 		auto vizInitOK = initViz(xopts.useVizStandardHandlers());
 
 		// Initialize MPI.  We do this instead of leaving it to some
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// other package (e.g., PETSc), because we want to avoid problems
 		// with overlapping Timer scopes.
 		MPI_Init(&argc, &argv);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// Get the MPI rank
 		MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -332,10 +363,16 @@ int main(int argc, char **argv) {
 		// measuring the runtime of the entire program.
 		// NOTE: these long template types could be replaced with 'auto'
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+		// Access our handler registry to obtain a Timer
+		// measuring the runtime of the entire program.
+		// NOTE: these long template types could be replaced with 'auto'
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		auto handlerRegistry = xolotlPerf::getHandlerRegistry();
 		auto totalTimer = handlerRegistry->getTimer("total");
 		totalTimer->start();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// Initialize and get the solver handler
 		bool dimOK = xolotlFactory::initializeDimension(opts);
@@ -363,6 +400,8 @@ int main(int argc, char **argv) {
 		auto solver = setUpSolver(handlerRegistry, material, tempHandler,
 				networkHandler, solvHandler, opts);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Setup the solver
 		auto solver = setUpSolver(handlerRegistry,
 				xopts.getPetscArgc(), xopts.getPetscArgv());
@@ -381,7 +420,10 @@ int main(int argc, char **argv) {
 		// Give the network loader to PETSc as input
 		solver->setNetworkLoader(networkLoader);
 		networkLoadTimer->stop();
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 		// Launch the PetscSolver
 		launchPetscSolver(solver, handlerRegistry);
@@ -389,6 +431,7 @@ int main(int argc, char **argv) {
 		// Finalize our use of the solver.
 		auto solverFinalizeTimer = handlerRegistry->getTimer("solverFinalize");
 		solverFinalizeTimer->start();
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		solver->finalize();
@@ -420,6 +463,9 @@ int main(int argc, char **argv) {
 =======
 		solver->finalize();
 >>>>>>> Pulling "break circular dependencies of network and reactant objects" into the HDF5 branch. SB 20140624
+=======
+		solver->finalize();
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		solverFinalizeTimer->stop();
 		totalTimer->stop();
 
@@ -435,15 +481,21 @@ int main(int argc, char **argv) {
 		std::cout << error << std::endl;
 		std::cout << "Aborting." << std::endl;
 		return EXIT_FAILURE;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 
 	// finalize our use of MPI
 	MPI_Finalize();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Uncomment if GPTL was built with pmpi disabled
 	// Output performance data if pmpi is disabled in GPTL
 	// Access the handler registry to output performance data
@@ -451,5 +503,8 @@ int main(int argc, char **argv) {
 //    handlerRegistry->dump(rank);
 
 	return EXIT_SUCCESS;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }

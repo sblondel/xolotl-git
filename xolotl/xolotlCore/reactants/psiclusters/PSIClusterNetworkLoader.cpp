@@ -8,6 +8,7 @@
 #include "PSIClusterNetworkLoader.h"
 #include <TokenizedLineReader.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <HeCluster.h>
 #include <VCluster.h>
 #include <InterstitialCluster.h>
@@ -18,6 +19,8 @@
 #include <xolotlPerf.h>
 #include <MathUtils.h>
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <stdio.h>
 #include <limits>
 #include <algorithm>
@@ -29,7 +32,10 @@
 // #include "HeInterstitialCluster.h"
 #include "PSIClusterReactionNetwork.h"
 #include "xolotlPerf/HandlerRegistryFactory.h"
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 using namespace xolotlCore;
 
@@ -37,26 +43,35 @@ using namespace xolotlCore;
  * This operation converts a string to a double, taking in to account the fact
  * that the input file may contain keys such as "infinite."
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * @param inString the string to be converted
  * @return the string as a double
  */
 static inline double convertStrToDouble(const std::string& inString) {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  * @param inString the string to be converted
  * @return the string as a double
  */
 static inline double convertStrToDouble(const std::string inString) {
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	return (inString.compare("infinite") == 0) ?
 			std::numeric_limits<double>::infinity() :
 			strtod(inString.c_str(), NULL);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 std::shared_ptr<PSICluster> PSIClusterNetworkLoader::createPSICluster(int numHe,
 		int numV, int numI) {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 /**
  * This operation creates a singles-species cluster of helium, vacancies or
  * interstitials. It adds the cluster to the appropriate internal list of
@@ -69,7 +84,10 @@ std::shared_ptr<PSICluster> PSIClusterNetworkLoader::createPSICluster(int numHe,
 std::shared_ptr<PSICluster> PSIClusterNetworkLoader::createCluster(int numHe,
 		int numV, int numI) {
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Local Declarations
 	std::shared_ptr<PSICluster> cluster;
 
@@ -80,16 +98,22 @@ std::shared_ptr<PSICluster> PSIClusterNetworkLoader::createCluster(int numHe,
 		// Create a new HeVCluster
 		cluster = std::make_shared<HeVCluster>(numHe, numV, handlerRegistry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 		clusters.push_back(cluster);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+
+		clusters.push_back(cluster);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	} else if (numHe > 0 && numI > 0) {
 		throw std::string("HeliumInterstitialCluster is not yet implemented.");
 		// FIXME! Add code to add it to the list
 	} else if (numHe > 0) {
 		// Create a new HeCluster
 		cluster = std::make_shared<HeCluster>(numHe, handlerRegistry);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	} else if (numV > 0) {
 		// Create a new VCluster
@@ -98,6 +122,8 @@ std::shared_ptr<PSICluster> PSIClusterNetworkLoader::createCluster(int numHe,
 		// Create a new ICluster
 		cluster = std::make_shared<InterstitialCluster>(numI, handlerRegistry);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 		clusters.push_back(cluster);
 	} else if (numV > 0) {
@@ -111,12 +137,16 @@ std::shared_ptr<PSICluster> PSIClusterNetworkLoader::createCluster(int numHe,
 
 		// Add it to the ICluster list
 		clusters.push_back(cluster);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 
 	return cluster;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 PSIClusterNetworkLoader::PSIClusterNetworkLoader(
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) {
@@ -147,6 +177,8 @@ PSIClusterNetworkLoader::PSIClusterNetworkLoader(
 
 std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::load() {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 /**
  * An alternative constructor provided for convenience.
  * @param inputstream The inputstream from which the cluster data should be
@@ -185,16 +217,20 @@ std::shared_ptr<std::istream> PSIClusterNetworkLoader::getInputstream() {
  */
 std::shared_ptr<PSIClusterReactionNetwork> PSIClusterNetworkLoader::load() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Local Declarations
 	TokenizedLineReader<std::string> reader;
 	std::vector<std::string> loadedLine;
 	std::shared_ptr<PSIClusterReactionNetwork> network = std::make_shared<
 			PSIClusterReactionNetwork>(handlerRegistry);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	std::string error(
@@ -206,6 +242,8 @@ std::shared_ptr<PSIClusterReactionNetwork> PSIClusterNetworkLoader::load() {
 	std::istringstream dataStream;
 =======
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	std::string error(
 			"PSIClusterNetworkLoader Exception: Insufficient or erroneous data.");
 	int numHe = 0, numV = 0, numI = 0;
@@ -213,7 +251,10 @@ std::shared_ptr<PSIClusterReactionNetwork> PSIClusterNetworkLoader::load() {
 			0.0;
 	double diffusionFactor = 0.0;
 	std::vector<double> bindingEnergies;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	std::vector<std::shared_ptr<Reactant> > reactants;
 
 	// Load the network if the stream is available
@@ -226,10 +267,14 @@ std::shared_ptr<PSIClusterReactionNetwork> PSIClusterNetworkLoader::load() {
 		while (loadedLine.size() > 0) {
 			// Check the size of the loaded line
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (loadedLine.size() < 6)
 =======
 			if (loadedLine.size() < 8)
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+			if (loadedLine.size() < 8)
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 				// And notify the calling function if the size is insufficient
 				throw error;
 			// Load the sizes
@@ -239,6 +284,7 @@ std::shared_ptr<PSIClusterReactionNetwork> PSIClusterNetworkLoader::load() {
 				numI = std::stoi(loadedLine[2]);
 				// Create the cluster
 <<<<<<< HEAD
+<<<<<<< HEAD
 				auto nextCluster = createPSICluster(numHe, numV, numI);
 				// Load the energies
 				formationEnergy = convertStrToDouble(loadedLine[3]);
@@ -247,6 +293,8 @@ std::shared_ptr<PSIClusterReactionNetwork> PSIClusterNetworkLoader::load() {
 				// Set the formation energy
 				nextCluster->setFormationEnergy(formationEnergy);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 				auto nextCluster = createCluster(numHe, numV, numI);
 				// Load the binding energies
 				heBindingE = convertStrToDouble(loadedLine[3]);
@@ -260,7 +308,10 @@ std::shared_ptr<PSIClusterReactionNetwork> PSIClusterNetworkLoader::load() {
 				bindingEnergies.push_back(vBindingE);
 				bindingEnergies.push_back(iBindingE);
 				nextCluster->setBindingEnergies(bindingEnergies);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 				// Set the diffusion factor and migration energy
 				nextCluster->setMigrationEnergy(migrationEnergy);
 				nextCluster->setDiffusionFactor(diffusionFactor);
@@ -274,6 +325,7 @@ std::shared_ptr<PSIClusterReactionNetwork> PSIClusterNetworkLoader::load() {
 			loadedLine = reader.loadLine();
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		// Set the network for all of the reactants. This MUST be done manually.
@@ -293,16 +345,23 @@ std::shared_ptr<PSIClusterReactionNetwork> PSIClusterNetworkLoader::load() {
 =======
 		// Set the network for all of the reactants. This MUST be done manually.
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+		// Set the network for all of the reactants. This MUST be done manually.
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		for (auto reactantsIt = reactants.begin();
 				reactantsIt != reactants.end(); ++reactantsIt) {
 			(*reactantsIt)->setReactionNetwork(network);
 		}
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 
 	return network;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
@@ -1141,3 +1200,5 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 }
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7

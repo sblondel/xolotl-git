@@ -34,10 +34,14 @@ public:
 	 * Method managing everything that is related to the rendering of a plot.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	virtual void render(const std::string& fileName = "fileName") = 0;
 =======
 	virtual void render(std::string fileName = "fileName") = 0;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	virtual void render(std::string fileName = "fileName") = 0;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * Method that will save the plotted plot in a file.
@@ -45,10 +49,14 @@ public:
 	 * will be saved.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	virtual void write(const std::string& fileName) = 0;
 =======
 	virtual void write(std::string fileName) = 0;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	virtual void write(std::string fileName) = 0;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * Method allowing the user to set the PlottingStyle.

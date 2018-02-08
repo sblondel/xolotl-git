@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <cassert>
 #include <limits>
 #include <fstream>
@@ -233,6 +234,8 @@ void Options::showHelp(std::ostream& os) const {
 
 } // end namespace xolotlCore
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <string>
 #include <cassert>
 #include <memory>
@@ -398,4 +401,7 @@ Options::readParams( int argc, char* argv[] )
 }; // end namespace xolotlCore
 
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7

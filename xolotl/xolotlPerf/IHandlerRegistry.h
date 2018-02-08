@@ -9,11 +9,16 @@
 #include "IEventCounter.h"
 #include "IHardwareCounter.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "PerfObjStatistics.h"
 =======
 #include "HardwareQuantities.h"
 
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+#include "HardwareQuantities.h"
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 namespace xolotlPerf {
 
@@ -25,6 +30,7 @@ class IHandlerRegistry {
 
 public:
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/// Possible types of performance handler registries.
 	enum RegistryType {
@@ -40,34 +46,48 @@ public:
 	virtual ~IHandlerRegistry() {
 	}
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	/**
 	 * The destructor
 	 */
 	virtual ~IHandlerRegistry(){}
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation returns the ITimer specified by the parameter.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	virtual std::shared_ptr<ITimer> getTimer(const std::string& name) = 0;
 =======
 	virtual std::shared_ptr<ITimer> getTimer(std::string name) = 0;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	virtual std::shared_ptr<ITimer> getTimer(std::string name) = 0;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation returns the IEventCounter specified by the parameter.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	virtual std::shared_ptr<IEventCounter> getEventCounter(
 			const std::string& name) = 0;
 =======
 	virtual std::shared_ptr<IEventCounter> getEventCounter( std::string name) = 0;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	virtual std::shared_ptr<IEventCounter> getEventCounter( std::string name) = 0;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation returns the specified IHardwareCounter.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	virtual std::shared_ptr<IHardwareCounter> getHardwareCounter(
 			const std::string& name,
@@ -102,6 +122,8 @@ public:
 
 };
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	virtual std::shared_ptr<IHardwareCounter> getHardwareCounter( std::string name,
 			            std::vector<HardwareQuantities> quantities) = 0;
 
@@ -118,7 +140,10 @@ public:
 	virtual void dump(int rank) const = 0;
 
 }; //end class IHandlerRegistry
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 } //end namespace xolotlPerf
 

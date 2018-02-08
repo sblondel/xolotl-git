@@ -9,12 +9,16 @@
 #include <XolotlConfig.h>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mpi.h>
 =======
 >>>>>>> Updating the input file used in the HDF5UtilsTester. Adding HDF5NetworkLoaderTester that might need more complete tests. SB 20140521
 =======
 #include <mpi.h>
 >>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
+=======
+#include <mpi.h>
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <memory>
 
 using namespace std;
@@ -31,14 +35,19 @@ BOOST_AUTO_TEST_SUITE(HDF5NetworkLoader_testSuite)
 BOOST_AUTO_TEST_CASE(checkLoad) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
+=======
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Initialize MPI for HDF5
 	int argc = 0;
 	char **argv;
 	MPI_Init(&argc, &argv);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// Create the network loader
 	HDF5NetworkLoader loader = HDF5NetworkLoader(
@@ -49,11 +58,14 @@ BOOST_AUTO_TEST_CASE(checkLoad) {
 =======
 =======
 >>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Create the network loader
 	HDF5NetworkLoader loader =
 			HDF5NetworkLoader(make_shared<xolotlPerf::DummyHandlerRegistry>());
 	// Define the filename to load the network from
 	string sourceDir(XolotlSourceDirectory);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	string pathToFile("/tests/reactants/testfiles/tungsten_small.h5");
 >>>>>>> Updating the input file used in the HDF5UtilsTester. Adding HDF5NetworkLoaderTester that might need more complete tests. SB 20140521
@@ -145,6 +157,12 @@ BOOST_AUTO_TEST_CASE(checkApplySectional) {
 	loader.setVMin(28);
 	loader.setHeWidth(4);
 	loader.setVWidth(2);
+=======
+	string pathToFile("/tests/reactants/testfiles/tungsten_diminutive.h5");
+	string filename = sourceDir + pathToFile;
+	// Give the filename to the network loader
+	loader.setFilename(filename);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Load the network
 	auto network = loader.load();
@@ -152,6 +170,7 @@ BOOST_AUTO_TEST_CASE(checkApplySectional) {
 	// Get the size of the network
 	int networkSize = network->size();
 	// Check the value
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BOOST_REQUIRE_EQUAL(networkSize, 1869);
 
@@ -181,6 +200,8 @@ BOOST_AUTO_TEST_CASE(checkApplySectional) {
 	BOOST_REQUIRE_EQUAL(networkSize, 100);
 >>>>>>> Updating the input file used in the HDF5UtilsTester. Adding HDF5NetworkLoaderTester that might need more complete tests. SB 20140521
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	BOOST_REQUIRE_EQUAL(networkSize, 5);
 
 	// Get the properties
@@ -292,12 +313,18 @@ BOOST_AUTO_TEST_CASE(checkApplySectional) {
 	diffusionFactor = reactant->getDiffusionFactor();
 	BOOST_REQUIRE_EQUAL(diffusionFactor, 0.0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> The test for the HDF5NetworkLoader is now more complete, using the tungsten_diminutive benchmark. SB 20140523
 =======
 
 	// Finalize MPI
 	MPI_Finalize();
 >>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
+=======
+
+	// Finalize MPI
+	MPI_Finalize();
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 BOOST_AUTO_TEST_SUITE_END()

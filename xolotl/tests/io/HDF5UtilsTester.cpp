@@ -6,6 +6,7 @@
 #include <PSIClusterReactionNetwork.h>
 #include <DummyHandlerRegistry.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <HDF5NetworkLoader.h>
 #include <XolotlConfig.h>
 #include <mpi.h>
@@ -20,12 +21,18 @@
 =======
 #include <mpi.h>
 >>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
+=======
+#include <PSIClusterNetworkLoader.h>
+#include <XolotlConfig.h>
+#include <mpi.h>
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <memory>
 
 using namespace std;
 using namespace xolotlCore;
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
  * This suite is responsible for testing the HDF5Utils
@@ -35,12 +42,16 @@ using namespace xolotlCore;
 =======
  * This suite is responsible for testing the HDF5Utils
 >>>>>>> Updating the input file used in the HDF5UtilsTester. Adding HDF5NetworkLoaderTester that might need more complete tests. SB 20140521
+=======
+ * This suite is responsible for testing the HDF5Utils
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  */
 BOOST_AUTO_TEST_SUITE(HDF5Utils_testSuite)
 
 /**
  * Method checking the writing and reading of the HDF5 file.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 BOOST_AUTO_TEST_CASE(checkIO) {
 	// Initialize MPI for HDF5
@@ -61,6 +72,8 @@ BOOST_AUTO_TEST_CASE(checkIO) {
 	// Load the network
 	auto network = (PSIClusterReactionNetwork *) loader.load().get();
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 BOOST_AUTO_TEST_CASE(checkOI) {
 
 	// Initialize MPI for HDF5
@@ -86,13 +99,17 @@ BOOST_AUTO_TEST_CASE(checkOI) {
 
 	// Load the network
 	auto network = loader.load();
+<<<<<<< HEAD
 >>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Get the size of the network
 	int networkSize = network->size();
 	// Set the time step number
 	int timeStep = 0;
 	// Initialize the HDF5 file
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -192,6 +209,9 @@ BOOST_AUTO_TEST_CASE(checkOI) {
 =======
 	HDF5Utils::initializeFile("test.h5", networkSize, 1);
 >>>>>>> Undoing some hard-wiring for the name of the HDF5 file and updating the tests. SB 20140618
+=======
+	HDF5Utils::initializeFile("test.h5", networkSize, 1);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Set the physical dimension of the grid and the refinement
 	int dimension = 5;
@@ -253,6 +273,7 @@ BOOST_AUTO_TEST_CASE(checkOI) {
 	// Read the network of the written file
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	auto networkVector = HDF5Utils::readNetwork("xolotlStop_0.h5");
 >>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
 =======
@@ -261,11 +282,15 @@ BOOST_AUTO_TEST_CASE(checkOI) {
 =======
 	auto networkVector = HDF5Utils::readNetwork("test.h5");
 >>>>>>> Undoing some hard-wiring for the name of the HDF5 file and updating the tests. SB 20140618
+=======
+	auto networkVector = HDF5Utils::readNetwork("test.h5");
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Get all the reactants
 	auto reactants = network->getAll();
 	// Check the network vector
 	for (int i = 0; i < networkSize; i++) {
 		// Get the i-th reactant in the network
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		auto reactant = (PSICluster *) reactants->at(i);
@@ -275,6 +300,9 @@ BOOST_AUTO_TEST_CASE(checkOI) {
 =======
 		auto reactant = (PSICluster *) reactants->at(i);
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+		auto reactant = (PSICluster *) reactants->at(i);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		int id = reactant->getId() - 1;
 		// Get the corresponding line from the HDF5 file
 		auto line = networkVector.at(id);
@@ -285,6 +313,7 @@ BOOST_AUTO_TEST_CASE(checkOI) {
 		BOOST_REQUIRE_EQUAL((int) line[1], composition["V"]);
 		BOOST_REQUIRE_EQUAL((int) line[2], composition["I"]);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// Check the formation energy
 		auto formationEnergy = reactant->getFormationEnergy();
@@ -443,6 +472,8 @@ BOOST_AUTO_TEST_CASE(checkSurface3D) {
 			BOOST_REQUIRE_CLOSE(previousIFlux[i][j], previousFlux[i][j], 0.0001);
 		}
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Check the binding energies
 		auto bindingEnergies = reactant->getBindingEnergies();
 		BOOST_REQUIRE_EQUAL(line[3], bindingEnergies.at(0)); // Helium binding energy
@@ -459,6 +490,7 @@ BOOST_AUTO_TEST_CASE(checkSurface3D) {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Read the concentrations at the given grid point
 	double newConcentrations[networkSize];
 	double * newConc = &newConcentrations[0];
@@ -468,6 +500,8 @@ BOOST_AUTO_TEST_CASE(checkSurface3D) {
 		BOOST_REQUIRE_EQUAL(newConcentrations[i], concentrations[i]);
 >>>>>>> Adding unit test for HDF5Utils and fixing the type for storing int in HDF5 files to 32 bits. SB 20140521
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// If the HDF5 file contains initial concentrations
 	int tempTimeStep = -2;
 	if (HDF5Utils::hasConcentrationGroup("test.h5", tempTimeStep)) {
@@ -483,7 +517,10 @@ BOOST_AUTO_TEST_CASE(checkSurface3D) {
 			BOOST_REQUIRE_EQUAL(returnedVector.at(i).at(0), concVector.at(i).at(0));
 			BOOST_REQUIRE_EQUAL(returnedVector.at(i).at(1), concVector.at(i).at(1));
 		}
+<<<<<<< HEAD
 >>>>>>> Fixing the way to test if the concentration group exist. Using H5Fclose to close the file in the same function. The absence of that function was causing the mpi communication problem. SB 20140617
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 
 	// Finalize MPI

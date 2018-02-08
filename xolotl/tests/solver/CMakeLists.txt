@@ -8,6 +8,7 @@ SET(PACKAGE_DESCRIPTION "Tests for the Xolotl solver package")
 include_directories(${CMAKE_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/xolotlSolver)
 <<<<<<< HEAD
+<<<<<<< HEAD
 include_directories(${CMAKE_SOURCE_DIR}/xolotlSolver/solverhandler)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/io)
@@ -33,6 +34,13 @@ include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants/psiclusters)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlPerf)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlPerf/dummy)
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore)
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants)
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants/psiclusters)
+include_directories(${CMAKE_SOURCE_DIR}/xolotlPerf)
+include_directories(${CMAKE_SOURCE_DIR}/xolotlPerf/dummy)
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 include_directories(${Boost_BINARY_DIRS})
 include_directories(${PETSC_INCLUDES})
 
@@ -50,11 +58,15 @@ if(Boost_FOUND)
         get_filename_component(testName ${test} NAME_WE)
         add_executable(${testName} ${test})
 <<<<<<< HEAD
+<<<<<<< HEAD
         target_link_libraries(${testName} xolotlSolver xolotlFactory 
         ${PETSC_LIBRARIES})
 =======
         target_link_libraries(${testName} xolotlSolver xolotlReactants ${PETSC_LIBRARIES} xolotlPerf)
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+        target_link_libraries(${testName} xolotlSolver xolotlReactants ${PETSC_LIBRARIES} xolotlPerf)
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
         add_test(${testName} ${testName}) 
         #add a label so the tests can be run separately
         set_property(TEST ${testName} PROPERTY LABELS ${PACKAGE_NAME})   

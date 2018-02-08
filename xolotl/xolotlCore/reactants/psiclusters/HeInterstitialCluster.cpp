@@ -9,15 +9,21 @@ using namespace xolotlCore;
 HeInterstitialCluster::HeInterstitialCluster(int numHelium, int numInterstitial,
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PSICluster(registry), numHe(numHelium), numI(numInterstitial) {
 =======
 		PSICluster(1, registry), numHe(numHelium), numI(numInterstitial) {
 
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+		PSICluster(1, registry), numHe(numHelium), numI(numInterstitial) {
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Set the cluster size as the sum of
 	// the number of Helium and Interstitials
 	size = numHe + numI;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	// Update the composition map
@@ -53,6 +59,8 @@ HeInterstitialCluster::HeInterstitialCluster(HeInterstitialCluster &other) :
 
 =======
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Update the composition map
 	compositionMap[heType] = numHe;
 	compositionMap[iType] = numI;
@@ -324,7 +332,10 @@ void HeInterstitialCluster::getDissociationPartialDerivatives(
 
 	// This cluster cannot dissociate into a smaller HeI cluster and a vacancy,
 	// so there is no partial derivative term for that case.
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	return;
 }

@@ -2,6 +2,7 @@
 #define DUMMYTIMER_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xolotlPerf/ITimer.h"
 #include "xolotlCore/Identifiable.h"
 
@@ -9,30 +10,41 @@ using namespace std;
 
 namespace xolotlPerf {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include "ITimer.h"
 #include "Identifiable.h"
 
 using namespace std;
 
 namespace xolotlPerf{
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 /**
  * The DummyTimer class is instantiated by the DummerHandlerRegistry class
  * and realizes the DummyTimer interface.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 class DummyTimer: public ITimer, public xolotlCore::Identifiable {
 =======
 class DummyTimer : public ITimer, public xolotlCore::Identifiable
 {
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+class DummyTimer : public ITimer, public xolotlCore::Identifiable
+{
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 private:
 
 	/**
 	 * The default constructor is declared as private since Timers
 	 *  must be initialized with a name.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DummyTimer(void) :
 			xolotlCore::Identifiable("unused") {
@@ -42,6 +54,11 @@ private:
       : xolotlCore::Identifiable("unused")
     { }
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+    DummyTimer()
+      : xolotlCore::Identifiable("unused")
+    { }
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 public:
 
@@ -49,6 +66,7 @@ public:
 	 * DummyTimer constructor that takes the argument timerName
 	 * to distinguish specific DummyTimer.
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @param name The DummyTimer's name
 	 */
@@ -92,6 +110,8 @@ public:
 
 }//end namespace xolotlPerf
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @param timerName The DummyTimer's name
 	 */
 	DummyTimer(std::string name)
@@ -126,6 +146,9 @@ public:
 };  //end class DummyTimer
 
 }  //end namespace xolotlPerf
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 #endif

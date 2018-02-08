@@ -2,6 +2,7 @@
 #define OPTIONS_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "IOptions.h"
 #include "optionhandlers/IOptionHandler.h"
 
@@ -895,6 +896,8 @@ public:
 
 } /* namespace xolotlCore */
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <iostream>
 #include <string>
 #include <map>
@@ -975,6 +978,9 @@ public:
 };
 
 };
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 #endif // OPTIONS_H

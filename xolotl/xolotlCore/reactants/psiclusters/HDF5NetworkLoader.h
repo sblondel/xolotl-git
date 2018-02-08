@@ -8,6 +8,7 @@ namespace xolotlCore {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This class overwrites the load() methods of PSIClusterNetworkLoader
  * for HDF5 files.
  */
@@ -24,20 +25,34 @@ private:
 
 	std::string fileName;
 >>>>>>> Xolotl starts with the HDF5 file named xolotlStart.h5. Fixing of number of clusters plotted for seriesPlot. SB 20140521
+=======
+ * This class overwrites load() for HDF5 files
+ */
+class HDF5NetworkLoader: public PSIClusterNetworkLoader {
+private:
+
+	std::string fileName;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * Private nullary constructor.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	HDF5NetworkLoader() {}
 =======
 	HDF5NetworkLoader() {
 	};
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	HDF5NetworkLoader() {
+	};
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 public:
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * The default constructor.
 	 */
@@ -47,6 +62,8 @@ public:
 	/**
 	 * The destructor.
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * The default constructor. The setInputstream() operation must be called
 	 * if this constructor is used.
 	 */
@@ -56,12 +73,16 @@ public:
 
 	/**
 	 * Destructor
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 */
 	virtual ~HDF5NetworkLoader() {
 	}
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * This operation will load the reaction network from the HDF5 file in
 	 * the format specified previously. The network will be empty if it can not
@@ -76,6 +97,8 @@ public:
 } /* namespace xolotlCore */
 
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * This operation will load the reaction network from the HDF5 file xolotlStart.h5 in
 	 * the format specified previously. The network will be empty if it can not
 	 * be loaded.
@@ -97,5 +120,8 @@ public:
 };
 
 } /* namespace xolotlCore */
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #endif /* HDF5NETWORKLOADER_H_ */

@@ -22,11 +22,15 @@ using namespace xolotlCore;
 using namespace testUtils;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry =
 		std::make_shared<xolotlPerf::DummyHandlerRegistry>();
 =======
 static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry = std::make_shared<xolotlPerf::DummyHandlerRegistry>();
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry = std::make_shared<xolotlPerf::DummyHandlerRegistry>();
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 /**
  * This suite is responsible for testing the HeInterstitialCluster.
@@ -34,9 +38,13 @@ static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry = std::make_shared
 BOOST_AUTO_TEST_SUITE(HeInterstitialCluster_testSuite)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 BOOST_AUTO_TEST_CASE(getSpeciesSize) {
 	HeInterstitialCluster cluster(4, 2, registry);
 
@@ -48,6 +56,7 @@ BOOST_AUTO_TEST_CASE(getSpeciesSize) {
 	BOOST_REQUIRE_EQUAL(composition["V"], 0);
 	BOOST_REQUIRE_EQUAL(composition["I"], 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	// Check if it is a mixed cluster
 	BOOST_REQUIRE_EQUAL(cluster.isMixed(), true);
@@ -55,6 +64,8 @@ BOOST_AUTO_TEST_CASE(getSpeciesSize) {
 	return;
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 /**
@@ -62,6 +73,7 @@ BOOST_AUTO_TEST_CASE(getSpeciesSize) {
  * its connectivity to other clusters.
  */
 BOOST_AUTO_TEST_CASE(checkConnectivity) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	shared_ptr<ReactionNetwork> network = getSimplePSIReactionNetwork();
 
@@ -105,6 +117,8 @@ BOOST_AUTO_TEST_CASE(checkConnectivity) {
 
 	return;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	shared_ptr<ReactionNetwork> network = getSimpleReactionNetwork();
 	auto props = network->getProperties();
@@ -166,7 +180,10 @@ BOOST_AUTO_TEST_CASE(checkConnectivity) {
 			BOOST_REQUIRE_EQUAL(reactionConnectivity[i], connectivityExpected[i]);
 		}
 	}
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 /**
@@ -174,6 +191,7 @@ BOOST_AUTO_TEST_CASE(checkConnectivity) {
  * the total flux.
  */
 BOOST_AUTO_TEST_CASE(checkTotalFlux) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	BOOST_TEST_MESSAGE(
 			"HeInterstitialClusterTester Message: \n" << "BOOST_AUTO_TEST_CASE(checkTotalFlux): " << "Arbitrary values used because of lack of data!" << "\n");
@@ -248,6 +266,8 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
 
 	return;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	BOOST_TEST_MESSAGE("HeInterstitialClusterTester Message: \n"
 			  << "BOOST_AUTO_TEST_CASE(checkTotalFlux): "
 			  << "Arbitrary values used because of lack of data!"
@@ -291,6 +311,7 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
 	// The flux should be nearly zero because the binding energies for all the
 	// data that we have are infinite for I1.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BOOST_REQUIRE_CLOSE(-4.747e-14, flux,.01);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
@@ -298,12 +319,18 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
 
 	return;
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+	BOOST_REQUIRE_CLOSE(-5958214005696.4355, flux,.01);
+
+	return;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 /**
  * This operation checks the reaction radius for HeInterstitialCluster.
  */
 BOOST_AUTO_TEST_CASE(checkReactionRadius) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// Create the HeI clsuter
 	shared_ptr<HeInterstitialCluster> cluster;
@@ -324,6 +351,8 @@ BOOST_AUTO_TEST_CASE(checkReactionRadius) {
 }
 
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	vector<shared_ptr<HeInterstitialCluster>> clusters;
 	shared_ptr<HeInterstitialCluster> cluster;
@@ -338,5 +367,8 @@ BOOST_AUTO_TEST_CASE(checkReactionRadius) {
 }
 
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 BOOST_AUTO_TEST_SUITE_END()

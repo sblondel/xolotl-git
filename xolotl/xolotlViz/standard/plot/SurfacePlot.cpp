@@ -14,37 +14,51 @@ using namespace xolotlViz;
 #define W_HEIGHT 1024
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SurfacePlot::SurfacePlot(const std::string& name) :
 		Plot(name) {
 =======
 SurfacePlot::SurfacePlot(std::string name) : Plot(name) {
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+SurfacePlot::SurfacePlot(std::string name) : Plot(name) {
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 SurfacePlot::~SurfacePlot() {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void SurfacePlot::render(const std::string& fileName) {
 
 	// Check if the label provider is set
 	if (!plotLabelProvider) {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 void SurfacePlot::render(std::string fileName) {
 
 	// Check if the label provider is set
 	if (!plotLabelProvider){
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		std::cout << "The LabelProvider is not set!!" << std::endl;
 		return;
 	}
 
 	// Check if the data provider is set
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!plotDataProvider) {
 =======
 	if (!plotDataProvider){
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	if (!plotDataProvider){
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		std::cout << "The DataProvider is not set!!" << std::endl;
 		return;
 	}
@@ -56,18 +70,24 @@ void SurfacePlot::render(std::string fileName) {
 
 	// Create the eavlDataSet
 <<<<<<< HEAD
+<<<<<<< HEAD
 	eavlDataSet *data = new eavlDataSet();
 	data->SetNumPoints(zVector.size());
 
 	// Give it the xVector and yVector
 	std::vector<std::vector<double> > coords;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
     eavlDataSet *data = new eavlDataSet();
     data->SetNumPoints(zVector.size());
 
     // Give it the xVector and yVector
 	std::vector< std::vector<double> > coords;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	coords.push_back(xVector);
 	coords.push_back(yVector);
 	std::vector<std::string> coordNames;
@@ -76,6 +96,7 @@ void SurfacePlot::render(std::string fileName) {
 	AddRectilinearMesh(data, coords, coordNames, true, "RectilinearGridCells");
 
 	// Give the zVector to the axisValues
+<<<<<<< HEAD
 <<<<<<< HEAD
 	eavlArray *axisValues = new eavlFloatArray(plotDataProvider->getDataName(),
 			1);
@@ -86,10 +107,16 @@ void SurfacePlot::render(std::string fileName) {
 	axisValues->SetNumberOfTuples(data->GetNumPoints());
 	for (int i = 0; i < zVector.size(); i++){
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	eavlArray *axisValues = new eavlFloatArray(plotDataProvider->getDataName(), 1);
+	axisValues->SetNumberOfTuples(data->GetNumPoints());
+	for (int i = 0; i < zVector.size(); i++){
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		axisValues->SetComponentFromDouble(i, 0, zVector.at(i));
 	}
 
 	// Add the axisValues to a field of the data set
+<<<<<<< HEAD
 <<<<<<< HEAD
 	eavlField *field = new eavlField(0, axisValues, eavlField::ASSOC_CELL_SET,
 			"RectilinearGridCells");
@@ -151,6 +178,8 @@ void SurfacePlot::render(std::string fileName) {
 	// Save the final buffer as an image
 	window->SaveWindowAsPNM(fileName);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	eavlField *field = new eavlField(1, axisValues, eavlField::ASSOC_POINTS);
 	data->AddField(field);
 
@@ -212,7 +241,10 @@ void SurfacePlot::render(std::string fileName) {
     char fn[25];
     sprintf(fn, (fileName).c_str());
     window->SaveWindowAsPNM(fn);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	return;
 }

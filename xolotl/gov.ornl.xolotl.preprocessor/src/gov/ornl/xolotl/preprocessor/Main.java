@@ -5,15 +5,19 @@ package gov.ornl.xolotl.preprocessor;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import java.io.File;
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 =======
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 import java.util.ArrayList;
 
 import uk.co.flamingpenguin.jewel.cli.ArgumentValidationException;
 import uk.co.flamingpenguin.jewel.cli.CliFactory;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -22,6 +26,8 @@ import ncsa.hdf.object.h5.H5File;
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 =======
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 /**
  * This class launches the Xolotl preprocessor.
@@ -39,6 +45,7 @@ public class Main {
 	 *            Command line arguments.
 	 */
 	public static void main(String[] args) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		// Local Declarations
@@ -111,6 +118,8 @@ public class Main {
 
 =======
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Local Declarations
 		Arguments myArgs = null;
 
@@ -157,5 +166,8 @@ public class Main {
 		return;
 	}
 
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }

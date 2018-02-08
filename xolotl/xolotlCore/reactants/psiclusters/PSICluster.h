@@ -4,20 +4,27 @@
 // Includes
 #include <Reactant.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 namespace xolotlPerf {
 class ITimer;
 }
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <math.h>
 #include <vector>
 #include <set>
 #include <unordered_map>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
 #include <sstream>
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+#include <sstream>
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 namespace xolotlCore {
 
@@ -31,6 +38,7 @@ namespace xolotlCore {
  * passed a size of zero or less, the actual size will be set to 1.
  *
  * The getComposition() operation is implemented by subclasses and will always
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
  * return a map with the keys He, V, I, HeV or HeI. The operation getTypeName()
@@ -47,6 +55,10 @@ namespace xolotlCore {
  * return a map with the keys He, V, I, HeV or HeI. The operation getTypeName()
  * will always return one of the same values.
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+ * return a map with the keys He, V, I, HeV or HeI. The operation getTypeName()
+ * will always return one of the same values.
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  */
 class PSICluster: public Reactant {
 
@@ -54,6 +66,7 @@ protected:
 
 	/**
 	 * This is a protected class that is used to implement the flux calculations
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * for two body reactions or dissociation.
 	 *
@@ -184,6 +197,8 @@ public:
 	/**
 	 * A vector of ClusterPairs that represents reacting pairs of clusters
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * for two body reactions of the form "first + second -> third".
 	 */
 	class ReactingPair {
@@ -260,16 +275,23 @@ public:
 
 	/**
 	 * A vector of ReactingPairs that represent reacting pairs of clusters
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * that produce this cluster. This vector should be populated early in the
 	 * cluster's lifecycle by subclasses. In the standard Xolotl clusters,
 	 * this vector is filled in createReactionConnectivity.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std::vector<ClusterPair> reactingPairs;
 =======
 	std::vector<ReactingPair> reactingPairs;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	std::vector<ReactingPair> reactingPairs;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * A vector of clusters that combine with this cluster to produce other
@@ -277,6 +299,7 @@ public:
 	 * lifecycle by subclasses. In the standard Xolotl clusters, this vector is
 	 * filled in createReactionConnectivity.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	std::vector<CombiningCluster> combiningReactants;
@@ -377,6 +400,9 @@ public:
 =======
 	std::vector<Reactant *> combiningReactants;
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+	std::vector<Reactant *> combiningReactants;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * A vector of clusters that dissociate to form this cluster.
@@ -610,12 +636,16 @@ public:
 	 * to this cluster.
 	 */
 	virtual void setReactionConnectivity(int clusterId);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation returns the connectivity array for this cluster for
 	 * forward reactions. An entry with value one means that this cluster
 	 * and the cluster with id = index + 1 are connected.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * 
 	 * @return The connectivity array for "forward" (non-dissociating)
@@ -624,10 +654,15 @@ public:
 	 * @return The connectivity array for "forward" (non-dissociating)
 	 * reactions.
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	 * @return The connectivity array for "forward" (non-dissociating)
+	 * reactions.
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 */
 	virtual std::vector<int> getReactionConnectivity() const;
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * This operation returns the connectivity array for this cluster for
 	 * forward reactions. An entry with value one means that this cluster
@@ -636,6 +671,8 @@ public:
 	 * @return The connectivity array for "forward" (non-dissociating)
 	 * reactions
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * This operation returns a set that contains only the entries of the
 	 * reaction connectivity array that are non-zero.
 	 * @return The set of connected reactants. Each entry in the set is the id
@@ -657,11 +694,15 @@ public:
 	 * and the cluster with id = index + 1 are connected.
 	 * @return The connectivity array for "forward" (non-dissociating)
 	 * reactions.
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 */
 	virtual std::vector<int> getDissociationConnectivity() const;
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * This operation returns the first helium momentum.
 	 *
@@ -801,6 +842,8 @@ public:
 	 */
 	void resetConnectivities();
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * This operation returns a set that contains only the entries of the
 	 * dissociation connectivity array that are non-zero.
 	 * @return The set of connected reactants. Each entry in the set is the id
@@ -949,25 +992,35 @@ public:
 	 * @return The diffusion factor of this cluster
 	 */
 	double getDiffusionFactor() const;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation sets the diffusion factor, D_0, that is used to calculate
 	 * the diffusion coefficient for this cluster.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *
 	 * @param factor The diffusion factor
 =======
 	 * @param factor The diffusion factor.
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	 * @param factor The diffusion factor.
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 */
 	void setDiffusionFactor(const double factor);
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * This operation sets the migration energy for this reactant.
 	 *
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * This operation returns the diffusion coefficient for this cluster and is
 	 * calculated from the diffusion factor.
 	 * @param temperature The temperature at which to calculate the Diffusion Coefficient
@@ -977,12 +1030,16 @@ public:
 
 	/**
 	 * This operation sets the migration energy for this cluster.
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @param energy The migration energy
 	 */
 	void setMigrationEnergy(const double energy);
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * This operation returns the sum of combination rate and emission rate
 	 * (where this cluster is on the left side of the reaction) for this
@@ -994,6 +1051,8 @@ public:
 	 */
 	double getLeftSideRate() const;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * This operation retrieves the migration energy for this cluster
 	 * @return the migration energy
 	 */
@@ -1006,7 +1065,10 @@ public:
 	 * @return
 	 */
 	virtual double getReactionRadius() const;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation returns a list that represents the connectivity
@@ -1024,7 +1086,10 @@ public:
 	std::vector<int> getConnectivity() const;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	/**
 	 * This operation returns the list of partial derivatives of this cluster
 	 * with respect to all other clusters in the network. The combined lists
@@ -1039,8 +1104,11 @@ public:
 	virtual std::vector<double> getPartialDerivatives(double temperature) const;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	/**
 	 * This operation works as getPartialDerivatives above, but instead of
 	 * returning a vector that it creates it fills a vector that is passed to
@@ -1071,7 +1139,10 @@ public:
 	 */
 	virtual bool isMixed() const { return false; };
 
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 };
 
 } /* end namespace xolotlCore */

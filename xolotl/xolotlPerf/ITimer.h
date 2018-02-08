@@ -2,12 +2,16 @@
 #define ITIMER_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "mpi.h"
 #include <string>
 #include <float.h>
 =======
 #include <string>
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+#include <string>
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include "../xolotlCore/IIdentifiable.h"
 
 using namespace std;
@@ -19,14 +23,19 @@ namespace xolotlPerf {
  * of performance timing statistics.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 class ITimer: public virtual xolotlCore::IIdentifiable {
 =======
 class ITimer : public virtual xolotlCore::IIdentifiable {
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+class ITimer : public virtual xolotlCore::IIdentifiable {
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 public:
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * The type of a timer value.
 	 */
@@ -78,6 +87,8 @@ public:
 	 */
 	virtual std::string getUnits(void) const = 0;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * The destructor
 	 */
 	virtual ~ITimer() { }
@@ -102,7 +113,10 @@ public:
      * This operation returns the units of the ITimer.
      */
     virtual std::string getUnits() const = 0;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 };
 //end class ITimer

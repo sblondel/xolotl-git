@@ -4,9 +4,13 @@
 // Includes
 #include "PSICluster.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 #include "../../xolotlPerf/HandlerRegistryFactory.h"
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+#include "../../xolotlPerf/HandlerRegistryFactory.h"
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <string>
 #include <map>
 
@@ -26,6 +30,7 @@ private:
 	PSICluster * vCluster;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 =======
@@ -36,6 +41,10 @@ private:
 	//! The interstitial cluster of size 1
 	PSICluster * iCluster;
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+	//! The interstitial cluster of size 1
+	PSICluster * iCluster;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	//! The HeV cluster with one less helium
 	PSICluster * heVClusterLessHe;
@@ -54,15 +63,21 @@ private:
 	double f4 = 0.0;
 
 	/**
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * The default constructor is private because PSIClusters must always be
 	 * initialized with a size.
 	 */
 	HeVCluster() :
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PSICluster()
 	{ numHe = 0; numV = 0; }
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		PSICluster(1)
 	{ numHe = 1; numV = 1; }
 
@@ -80,7 +95,10 @@ protected:
 	 */
 	virtual void getDissociationPartialDerivatives(std::vector<double> & partials,
 			double temperature) const;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 public:
 
@@ -91,17 +109,21 @@ public:
 	 * species as its values. The names of the species must be one of
 	 * {He,V}.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *
 	 * @param numHe The number of helium atoms in this cluster
 	 * @param numV The number of vacancies in this cluster
 	 * @param registry The performance handler registry
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 */
 	HeVCluster(int numHe, int numV,
 			std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Copy constructor.
 	 *
@@ -127,6 +149,8 @@ public:
 	 */
 	virtual bool isMixed() const {return true;}
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * Copy constructor
 	 * @param other the reactant to be copied
 	 */
@@ -194,7 +218,10 @@ protected:
 	 * the element at the position of the second reactant is 1, otherwise 0.
 	 */
 	void createDissociationConnectivity();
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 };
 //end class HeVCluster

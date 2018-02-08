@@ -7,6 +7,7 @@
 using namespace xolotlCore;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 VCluster::VCluster(int nV,
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
 		PSICluster(registry) {
@@ -32,6 +33,8 @@ VCluster::VCluster(int nV,
 					(3.0 * pow(xolotlCore::tungstenLatticeConstant, 3.0))
 							/ (8.0 * xolotlCore::pi), (1.0 / 3.0));
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 VCluster::VCluster(int nV, std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
 		PSICluster(nV, registry) {
 
@@ -167,5 +170,8 @@ void VCluster::createReactionConnectivity() {
 	}
 
 	return;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }

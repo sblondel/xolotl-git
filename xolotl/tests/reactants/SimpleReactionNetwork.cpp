@@ -13,10 +13,13 @@
 #include <HeVCluster.h>
 #include <HeInterstitialCluster.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <NECluster.h>
 #include <XeCluster.h>
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <memory>
 #include <typeinfo>
 #include <limits>
@@ -29,10 +32,13 @@ using namespace testUtils;
 using namespace xolotlPerf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SimplePSIReactionNetwork::SimplePSIReactionNetwork(const int maxClusterSize,
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
 		PSIClusterReactionNetwork(registry) {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 /**
  * Constructor
  * @param maxClusterSize the maximal size of the clusters that will be in
@@ -42,16 +48,22 @@ SimpleReactionNetwork::SimpleReactionNetwork(const int maxClusterSize,
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
 	PSIClusterReactionNetwork(registry){
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Add He clusters
 	for (int numHe = 1; numHe <= maxClusterSize; numHe++) {
 		// Create a He cluster with cluster size numHe
 		shared_ptr<HeCluster> cluster = make_shared<HeCluster>(numHe, registry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Set the diffusion factor for some of them to 1.0 so that they can react
 		if (numHe < 8) cluster->setDiffusionFactor(1.0);
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Add it to the network
 		add(cluster);
 	}
@@ -61,10 +73,13 @@ SimpleReactionNetwork::SimpleReactionNetwork(const int maxClusterSize,
 		// Create a V cluster with cluster size numV
 		shared_ptr<VCluster> cluster = make_shared<VCluster>(numV, registry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Set the diffusion factor for the first one so that it can react
 		if (numV == 1) cluster->setDiffusionFactor(1.0);
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Add it to the network
 		add(cluster);
 	}
@@ -73,6 +88,7 @@ SimpleReactionNetwork::SimpleReactionNetwork(const int maxClusterSize,
 	for (int numI = 1; numI <= maxClusterSize; numI++) {
 		// Create a He cluster with cluster size numI
 <<<<<<< HEAD
+<<<<<<< HEAD
 		shared_ptr<InterstitialCluster> cluster = make_shared<
 				InterstitialCluster>(numI, registry);
 		// Set the diffusion factor for all of them to 1.0 so that they can react
@@ -80,6 +96,9 @@ SimpleReactionNetwork::SimpleReactionNetwork(const int maxClusterSize,
 =======
 		shared_ptr<InterstitialCluster> cluster = make_shared<InterstitialCluster>(numI, registry);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+		shared_ptr<InterstitialCluster> cluster = make_shared<InterstitialCluster>(numI, registry);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Add it to the network
 		add(cluster);
 	}
@@ -90,11 +109,15 @@ SimpleReactionNetwork::SimpleReactionNetwork(const int maxClusterSize,
 		for (int numHe = 1; numHe + numV <= maxClusterSize; numHe++) {
 			// Create a HeVCluster with the current amount of He and V
 <<<<<<< HEAD
+<<<<<<< HEAD
 			shared_ptr<HeVCluster> cluster = make_shared<HeVCluster>(numHe,
 					numV, registry);
 =======
 			shared_ptr<HeVCluster> cluster = make_shared<HeVCluster>(numHe, numV, registry);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+			shared_ptr<HeVCluster> cluster = make_shared<HeVCluster>(numHe, numV, registry);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 			add(cluster);
 		}
 	}
@@ -106,11 +129,15 @@ SimpleReactionNetwork::SimpleReactionNetwork(const int maxClusterSize,
 		for (int numHe = 1; numHe + numI <= maxClusterSize; numHe++) {
 			// Create the HeI cluster
 <<<<<<< HEAD
+<<<<<<< HEAD
 			shared_ptr<HeInterstitialCluster> cluster = make_shared<
 					HeInterstitialCluster>(numHe, numI, registry);
 =======
 			shared_ptr<HeInterstitialCluster> cluster = make_shared<HeInterstitialCluster>(numHe, numI, registry);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+			shared_ptr<HeInterstitialCluster> cluster = make_shared<HeInterstitialCluster>(numHe, numI, registry);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 			// Add it to the reactants vector
 			add(cluster);
 		}
@@ -119,6 +146,7 @@ SimpleReactionNetwork::SimpleReactionNetwork(const int maxClusterSize,
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 SimpleNEReactionNetwork::SimpleNEReactionNetwork(const int maxClusterSize,
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
@@ -190,6 +218,8 @@ shared_ptr<xolotlCore::NEClusterReactionNetwork> testUtils::getSimpleNEReactionN
 			reactantIt++) {
 		auto cluster = (NECluster *) (*reactantIt);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 SimpleReactionNetwork::~SimpleReactionNetwork() {
 	// Nothing to do
 }
@@ -221,12 +251,16 @@ shared_ptr<xolotlCore::ReactionNetwork> testUtils::getSimpleReactionNetwork(cons
 	for (auto reactantIt = reactants->begin();
 			reactantIt != reactants->end(); reactantIt++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		shared_ptr<PSICluster> cluster = dynamic_pointer_cast<
 				PSICluster>(*reactantIt);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
 		auto cluster = (PSICluster *) (*reactantIt);
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+		auto cluster = (PSICluster *) (*reactantIt);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		vector<int> conn = cluster->getConnectivity();
 
 		for (auto connIt = conn.begin(); connIt != conn.end(); connIt++) {

@@ -1,7 +1,10 @@
 // Includes
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <PetscSolver.h>
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include "PetscSolver.h"
 #include <HandlerRegistryFactory.h>
 #include <HDF5NetworkLoader.h>
@@ -17,12 +20,16 @@
 #include <fstream>
 #include <string>
 #include <unordered_map>
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <HDF5Utils.h>
 
 using namespace xolotlCore;
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  C_t =  -D*C_xx + A*C_x + F(C) + R(C) + D(C) from Brian Wirth's SciDAC project.
 
@@ -38,6 +45,8 @@ using namespace xolotlCore;
  -ts_final_time <time>                   -- maximum time to compute to
  -ts_dt <size>							 -- initial size of the time step
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  C_t =  -D*C_xx + F(C) + R(C) + D(C) from Brian Wirth's SciDAC project.
 
  D*C_xx  - diffusion of He[1-5] and V[1] and I[1]
@@ -55,12 +64,16 @@ using namespace xolotlCore;
 
  Rules for maximum number of He allowed for V in cluster
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
  */
 
 namespace xolotlSolver {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //Timer for RHSFunction()
 std::shared_ptr<xolotlPerf::ITimer> RHSFunctionTimer;
@@ -85,6 +98,8 @@ void PetscSolver::setupInitialConditions(DM da, Vec C) {
 
 	return;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 //Counter for the number of times RHSFunction is called.
 std::shared_ptr<xolotlPerf::IEventCounter> RHSFunctionCounter;
 
@@ -326,17 +341,24 @@ void computeDiffusion(PSICluster * cluster, double temp, PetscReal sx,
 // Update the concentration of the cluster
 	updatedConcOffset[reactantIndex] += conc;
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 /* ------------------------------------------------------------------- */
 
 #undef __FUNCT__
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __FUNCT__ Actual__FUNCT__("xolotlSolver", "RHSFunction")
 =======
 #define __FUNCT__ "RHSFunction"
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+#define __FUNCT__ "RHSFunction"
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 /*
  RHSFunction - Evaluates the right-hand-side of the nonlinear function defining the ODE
 
@@ -350,6 +372,7 @@ void computeDiffusion(PSICluster * cluster, double temp, PetscReal sx,
  .  F - function values
  */
 /* ------------------------------------------------------------------- */
+<<<<<<< HEAD
 <<<<<<< HEAD
 PetscErrorCode RHSFunction(TS ts, PetscReal ftime, Vec C, Vec F, void *) {
 	// Start the RHSFunction Timer
@@ -366,6 +389,8 @@ PetscErrorCode RHSFunction(TS ts, PetscReal ftime, Vec C, Vec F, void *) {
 	ierr = DMGetLocalVector(da, &localC);
 	CHKERRQ(ierr);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 PetscErrorCode RHSFunction(TS ts, PetscReal ftime, Vec C, Vec F, void *ptr) {
 
 // increment the event counter monitoring this function
@@ -424,13 +449,17 @@ PetscErrorCode RHSFunction(TS ts, PetscReal ftime, Vec C, Vec F, void *ptr) {
 //	std::cout << "Number of grid points = " << Mx << std::endl;
 //	std::cout << "Step size hx = " << hx << std::endl;
 	sx = 1.0 / (hx * hx);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 // Scatter ghost points to local vector, using the 2-step process
 // DMGlobalToLocalBegin(),DMGlobalToLocalEnd().
 // By placing code between these two statements, computations can be
 // done while messages are in transition.
 	ierr = DMGlobalToLocalBegin(da, C, INSERT_VALUES, localC);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	CHKERRQ(ierr);
 	ierr = DMGlobalToLocalEnd(da, C, INSERT_VALUES, localC);
@@ -462,6 +491,8 @@ PetscErrorCode RHSJacobian(TS ts, PetscReal ftime, Vec C, Mat A, Mat J,
 
 	PetscErrorCode ierr;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	checkPetscError(ierr);
 	ierr = DMGlobalToLocalEnd(da, C, INSERT_VALUES, localC);
 	checkPetscError(ierr);
@@ -674,11 +705,15 @@ PetscErrorCode RHSJacobian(TS ts, PetscReal ftime, Vec C, Mat A, Mat J,
 	int numHeClusters = std::stoi(props["numHeClusters"]);
 	int reactantIndex = 0;
 	int size = 0;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 // Get the matrix from PETSc
 	PetscFunctionBeginUser;
 	ierr = MatZeroEntries(J);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	CHKERRQ(ierr);
 	DM da;
@@ -743,6 +778,8 @@ void PetscSolver::setupMesh() {
 
 void PetscSolver::initialize(std::shared_ptr<ISolverHandler> solverHandler) {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	checkPetscError(ierr);
 	ierr = TSGetDM(ts, &da);
 	checkPetscError(ierr);
@@ -1184,15 +1221,19 @@ void PetscSolver::setupMesh() {
  */
 void PetscSolver::initialize() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	 Initialize program
 	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 	PetscInitialize(&numCLIArgs, &CLIArgs, (char*) 0, help);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// Set the solver handler
 	Solver::solverHandler = (ISolverHandler *) solverHandler.get();
@@ -1207,6 +1248,8 @@ void PetscSolver::solve() {
 	DM da;
 	Solver::solverHandler->createSolverContext(da);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	return;
 }
 
@@ -1325,11 +1368,15 @@ void PetscSolver::solve(std::shared_ptr<IFluxHandler> fluxHandler,
 	checkPetscError(ierr);
 	ierr = PetscFree(dfill);
 	checkPetscError(ierr);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/*  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	 Extract global vector from DMDA to hold solution
 	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	Vec C;
 	ierr = DMCreateGlobalVector(da, &C);
@@ -1338,10 +1385,15 @@ void PetscSolver::solve(std::shared_ptr<IFluxHandler> fluxHandler,
 	ierr = DMCreateGlobalVector(da, &C);
 	checkPetscError(ierr);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	ierr = DMCreateGlobalVector(da, &C);
+	checkPetscError(ierr);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	 Create timestepping solver context
 	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TS ts;
 	ierr = TSCreate(PETSC_COMM_WORLD, &ts);
@@ -1362,6 +1414,8 @@ void PetscSolver::solve(std::shared_ptr<IFluxHandler> fluxHandler,
 	ierr = TSSetSolution(ts, C);
 	checkPetscError(ierr, "PetscSolver::solve: TSSetSolution failed.");
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	ierr = TSCreate(PETSC_COMM_WORLD, &ts);
 	checkPetscError(ierr);
 	ierr = TSSetType(ts, TSARKIMEX);
@@ -1380,11 +1434,15 @@ void PetscSolver::solve(std::shared_ptr<IFluxHandler> fluxHandler,
 	checkPetscError(ierr);
 	ierr = TSSetSolution(ts, C);
 	checkPetscError(ierr);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	 Set solver options
 	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -1439,6 +1497,9 @@ void PetscSolver::solve(std::shared_ptr<IFluxHandler> fluxHandler,
 =======
 	ierr = TSSetInitialTimeStep(ts, time, deltaTime);
 >>>>>>> Xolotl starts with the HDF5 file named xolotlStart.h5. Fixing of number of clusters plotted for seriesPlot. SB 20140521
+=======
+	ierr = TSSetInitialTimeStep(ts, time, deltaTime);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	checkPetscError(ierr);
 //	ierr = TSSetDuration(ts, 100, 50.0);
 //	checkPetscError(ierr);
@@ -1446,11 +1507,15 @@ void PetscSolver::solve(std::shared_ptr<IFluxHandler> fluxHandler,
 	checkPetscError(ierr);
 	ierr = setupPetscMonitor(ts);
 	checkPetscError(ierr);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	 Set initial conditions
 	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	setupInitialConditions(da, C);
 
@@ -1460,10 +1525,15 @@ void PetscSolver::solve(std::shared_ptr<IFluxHandler> fluxHandler,
 	ierr = setupInitialConditions(da, C);
 	checkPetscError(ierr);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	ierr = setupInitialConditions(da, C);
+	checkPetscError(ierr);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	 Solve the ODE system
 	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	if (ts != NULL && C != NULL) {
@@ -1474,6 +1544,9 @@ void PetscSolver::solve(std::shared_ptr<IFluxHandler> fluxHandler,
 =======
 // Time how long it takes to solve the ODE system
 >>>>>>> Optimizing the way of storing the concentrations in the HDF5 file. Now only store the id and values for the concentrations above 1e-16. SB 20140617
+=======
+// Time how long it takes to solve the ODE system
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	solveODEsystem->start();  // start the timer
 	if (ts != NULL && C != NULL) {
 		ierr = TSSolve(ts, C);
@@ -1490,14 +1563,20 @@ void PetscSolver::solve(std::shared_ptr<IFluxHandler> fluxHandler,
 
 		if (flagRetention)
 			computeRetention(ts, C);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	} else {
 		throw std::string(
 				"PetscSolver Exception: Unable to solve! Data not configured properly.");
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 /**
@@ -1508,11 +1587,15 @@ void PetscSolver::solve(std::shared_ptr<IFluxHandler> fluxHandler,
  */
 void PetscSolver::finalize() {
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	 Free work space.
 	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 	ierr = VecDestroy(&C);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	checkPetscError(ierr, "PetscSolver::solve: VecDestroy failed.");
 	ierr = TSDestroy(&ts);
@@ -1531,6 +1614,8 @@ void PetscSolver::finalize() {
 
 	return;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	checkPetscError(ierr);
 	ierr = TSDestroy(&ts);
 	checkPetscError(ierr);
@@ -1541,7 +1626,10 @@ void PetscSolver::finalize() {
 		throw std::string("PetscSolver Exception: Unable to finalize solve!");
 	}
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 } /* end namespace xolotlSolver */

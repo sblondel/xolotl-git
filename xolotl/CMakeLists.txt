@@ -1,9 +1,13 @@
 # Set a name for this project.
 <<<<<<< HEAD
+<<<<<<< HEAD
 PROJECT ( xolotl C CXX Java )
 =======
 PROJECT ( xolotl C CXX )
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+PROJECT ( xolotl C CXX )
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 # Set the minimum required version of cmake for this project.
 cmake_minimum_required(VERSION 2.8)
 
@@ -11,6 +15,7 @@ cmake_minimum_required(VERSION 2.8)
 list (APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake-modules")
 
 # Xolotl requires C++11 to use shared pointers
+<<<<<<< HEAD
 <<<<<<< HEAD
 INCLUDE (CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" CXX_SUPPORTS_CXX11_FLAG)
@@ -26,6 +31,8 @@ ENDIF()
 # Tell CMake to look for static libraries
 SET(BUILD_SHARED_LIBS OFF)
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 list( APPEND CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
 
 # Find Boost
@@ -34,11 +41,15 @@ IF (Boost_FOUND)
     INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
     set( hasBoost "")
 ENDIF()
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 # Find PETSc
 FIND_PACKAGE(PETSc REQUIRED)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # Make sure that we only pull the static HDF5
 #set(HDF5_USE_STATIC_LIBRARIES yes)
@@ -75,6 +86,8 @@ IF (Boost_FOUND)
     message(STATUS "Tests will be built since Boost was found.")
     INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 # Build the performance library first, so it can be used by other libraries.
 add_subdirectory(xolotlPerf)
 
@@ -92,7 +105,10 @@ enable_testing()
 IF (DEFINED hasBoost)
     message(STATUS "Boost version ${Boost_VERSION} found.")
     message(STATUS "Tests will be built since Boost was found.")
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
     add_subdirectory(tests)
 ENDIF()
 
@@ -118,6 +134,7 @@ include_directories(${CMAKE_SOURCE_DIR}/xolotlCore)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/io)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/commandline)
 <<<<<<< HEAD
+<<<<<<< HEAD
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/diffusion)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/advection)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants)
@@ -134,6 +151,10 @@ include_directories(${CMAKE_SOURCE_DIR}/xolotlFactory/reactionHandler)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants/psiclusters)
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants)
+include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants/psiclusters)
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 include_directories(${CMAKE_SOURCE_DIR}/xolotlSolver)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlPerf)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlViz)
@@ -143,11 +164,15 @@ configure_file ("${CMAKE_SOURCE_DIR}/XolotlConfig.h.in" "${CMAKE_SOURCE_DIR}/Xol
 
 # Setup the library list
 <<<<<<< HEAD
+<<<<<<< HEAD
 set(XOLOTL_LIBS xolotlReactants xolotlSolver xolotlIO xolotlPerf xolotlViz 
 xolotlFactory xolotlCL ${PETSC_LIBRARIES} ${HDF5_LIBRARIES})
 =======
 set(XOLOTL_LIBS xolotlReactants xolotlSolver xolotlIO xolotlPerf xolotlViz xolotlCL ${PETSC_LIBRARIES})
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+set(XOLOTL_LIBS xolotlReactants xolotlSolver xolotlIO xolotlPerf xolotlViz xolotlCL ${PETSC_LIBRARIES})
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 # Add an executable for the main program
 ADD_EXECUTABLE (xolotl main.cpp)

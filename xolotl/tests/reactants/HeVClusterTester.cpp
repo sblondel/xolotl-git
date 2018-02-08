@@ -1,12 +1,18 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 /*
  * PSIClusterTester.cpp
  *
  *  Created on: May 6, 2013
  *      Author: Jay Jay Billings
  */
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE Regression
 
@@ -27,11 +33,15 @@ using namespace xolotlCore;
 using namespace testUtils;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry =
 		std::make_shared<xolotlPerf::DummyHandlerRegistry>();
 =======
 static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry = std::make_shared<xolotlPerf::DummyHandlerRegistry>();
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry = std::make_shared<xolotlPerf::DummyHandlerRegistry>();
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 /**
  * This suite is responsible for testing the HeVCluster.
@@ -39,9 +49,13 @@ static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry = std::make_shared
 BOOST_AUTO_TEST_SUITE(HeVCluster_testSuite)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 BOOST_AUTO_TEST_CASE(getSpeciesSize) {
 	HeVCluster cluster(4, 5, registry);
 
@@ -53,6 +67,7 @@ BOOST_AUTO_TEST_CASE(getSpeciesSize) {
 	BOOST_REQUIRE_EQUAL(composition["V"], 5);
 	BOOST_REQUIRE_EQUAL(composition["I"], 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	// Check if it is a mixed cluster
 	BOOST_REQUIRE_EQUAL(cluster.isMixed(), true);
@@ -60,6 +75,8 @@ BOOST_AUTO_TEST_CASE(getSpeciesSize) {
 	return;
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 /**
@@ -67,6 +84,7 @@ BOOST_AUTO_TEST_CASE(getSpeciesSize) {
  * its connectivity to other clusters.
  */
 BOOST_AUTO_TEST_CASE(checkConnectivity) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	shared_ptr<ReactionNetwork> network = getSimplePSIReactionNetwork();
 
@@ -111,6 +129,8 @@ BOOST_AUTO_TEST_CASE(checkConnectivity) {
 
 	return;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	shared_ptr<ReactionNetwork> network = getSimpleReactionNetwork();
 	auto props = network->getProperties();
@@ -172,13 +192,17 @@ BOOST_AUTO_TEST_CASE(checkConnectivity) {
 			BOOST_REQUIRE_EQUAL(reactionConnectivity[i], connectivityExpected[i]);
 		}
 	}
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 /**
  * This operation checks the ability of the HeVCluster to compute the total flux.
  */
 BOOST_AUTO_TEST_CASE(checkTotalFlux) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// Local Declarations
 	auto network = getSimplePSIReactionNetwork();
@@ -251,6 +275,8 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
 
 	return;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Local Declarations
 	shared_ptr<ReactionNetwork> network = getSimpleReactionNetwork();
@@ -287,13 +313,17 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
 			  << "   -Combination Flux: " << cluster->getCombinationFlux(1000.0) << "\n"
 			  << "   -Dissociation Flux: " << cluster->getDissociationFlux(1000.0) << "\n");
 	BOOST_REQUIRE_CLOSE(-8964899015.0, flux, 10.0);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 /**
  * This operation checks the reaction radius for HeVCluster.
  */
 BOOST_AUTO_TEST_CASE(checkReactionRadius) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// Create the HeV cluster
 	shared_ptr<HeVCluster> cluster;
@@ -311,6 +341,8 @@ BOOST_AUTO_TEST_CASE(checkReactionRadius) {
 
 	return;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	vector<shared_ptr<HeVCluster>> clusters;
 	shared_ptr<HeVCluster> cluster;
@@ -322,7 +354,10 @@ BOOST_AUTO_TEST_CASE(checkReactionRadius) {
 		BOOST_REQUIRE_CLOSE(expectedRadii[i - 1], cluster->getReactionRadius(),
 				.000001);
 	}
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 BOOST_AUTO_TEST_SUITE_END()

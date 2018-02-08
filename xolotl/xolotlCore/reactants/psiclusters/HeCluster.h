@@ -4,10 +4,14 @@
 // Includes
 #include "PSICluster.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <xolotlPerf.h>
 =======
 #include "../../xolotlPerf/HandlerRegistryFactory.h"
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+#include "../../xolotlPerf/HandlerRegistryFactory.h"
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 namespace xolotlCore {
 
@@ -24,16 +28,22 @@ private:
 	 */
 	HeCluster() :
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PSICluster() {}
 =======
 		PSICluster(1)
 	{ }
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+		PSICluster(1)
+	{ }
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 public:
 
 	/**
 	 * The constructor. All HeClusters must be initialized with a size.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *
 	 * @param nHe the number of helium atoms in the cluster
@@ -41,12 +51,16 @@ public:
 =======
 	 * @param nHe the number of helium atoms in the cluster
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	 * @param nHe the number of helium atoms in the cluster
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 */
 	HeCluster(int nHe, std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
 
 	/**
 	 * Destructor
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	~HeCluster() {}
 
@@ -57,6 +71,8 @@ public:
 		return std::shared_ptr<IReactant> (new HeCluster(*this));
 	}
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	~HeCluster();
 
 	/**
@@ -77,7 +93,10 @@ protected:
 	 */
 	void createReactionConnectivity();
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 }; //end class HeCluster
 

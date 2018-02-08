@@ -27,10 +27,14 @@ public:
 	 * This operation returns the IPlot specified by the parameter.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	virtual std::shared_ptr<IPlot> getPlot(const std::string& name, PlotType type) = 0;
 =======
 	virtual std::shared_ptr<IPlot> getPlot(std::string name, PlotType type) = 0;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	virtual std::shared_ptr<IPlot> getPlot(std::string name, PlotType type) = 0;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 }; //end class IVizHandlerRegistry
 

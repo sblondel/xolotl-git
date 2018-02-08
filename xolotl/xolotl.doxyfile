@@ -592,10 +592,14 @@ FILE_PATTERNS          =
 # If left blank NO is used.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 RECURSIVE              = YES
 =======
 RECURSIVE              = NO
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+RECURSIVE              = NO
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 # The EXCLUDE tag can be used to specify files and/or directories that should
 # excluded from the INPUT source files. This way you can easily exclude a
@@ -1362,10 +1366,14 @@ HIDE_UNDOC_RELATIONS   = YES
 # have no effect if this option is set to NO (the default)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 HAVE_DOT               = YES
 =======
 HAVE_DOT               = NO
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+HAVE_DOT               = NO
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 # By default doxygen will write a font called FreeSans.ttf to the output
 # directory and reference it in all dot files that doxygen generates. This

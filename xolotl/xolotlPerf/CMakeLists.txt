@@ -7,6 +7,7 @@ SET(LIBRARY_NAME "xolotlPerf")
 
 #Include headers in order to build
 <<<<<<< HEAD
+<<<<<<< HEAD
 include_directories(${CMAKE_SOURCE_DIR})
 include_directories(${CMAKE_BINARY_DIR})
 
@@ -83,6 +84,8 @@ set(SRC ${COMMONSRC} ${DUMMYSRC} ${STD_SRC} ${OS_SRC} ${PAPI_SRC})
 add_library(${LIBRARY_NAME} STATIC ${SRC})
 target_link_libraries(${LIBRARY_NAME} ${MAYBE_PAPI} ${MAYBE_RT})
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
@@ -131,7 +134,10 @@ endif(GPTL_FOUND AND PAPI_FOUND)
 #Add the library
 add_library(${LIBRARY_NAME} STATIC ${SRC})
 target_link_libraries(${LIBRARY_NAME} ${MAYBE_GPTL_PAPI})
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 #Install the xolotl header files
 install(FILES ${HEADERS} DESTINATION include)
@@ -142,9 +148,13 @@ install(TARGETS ${LIBRARY_NAME} DESTINATION lib)
 # Note: must do this after all the other checks, or else the 
 # contents of the generated file won't take the check results into account.
 <<<<<<< HEAD
+<<<<<<< HEAD
 configure_file( "${CMAKE_CURRENT_SOURCE_DIR}/perfConfig.h.in" "${CMAKE_CURRENT_BINARY_DIR}/perfConfig.h")
 =======
 configure_file( "${CMAKE_CURRENT_SOURCE_DIR}/XolotlConfigPerf.h.in" "${CMAKE_CURRENT_BINARY_DIR}/XolotlConfigPerf.h")
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+configure_file( "${CMAKE_CURRENT_SOURCE_DIR}/XolotlConfigPerf.h.in" "${CMAKE_CURRENT_BINARY_DIR}/XolotlConfigPerf.h")
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 

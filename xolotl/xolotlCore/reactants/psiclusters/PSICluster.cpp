@@ -1,6 +1,7 @@
 #include "PSICluster.h"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <xolotlPerf.h>
 #include <Constants.h>
 #include <MathUtils.h>
@@ -107,6 +108,9 @@ void PSICluster::createEmission(
 =======
 #include "HandlerRegistryFactory.h"
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+#include "HandlerRegistryFactory.h"
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <Constants.h>
 #include <iostream>
 
@@ -226,6 +230,7 @@ void PSICluster::printReaction(const Reactant & firstReactant,
 	auto productComp = productReactant.getComposition();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std::cout << firstReactant.getName() << "(" << firstComp["He"] << ", "
 			<< firstComp["V"] << ", " << firstComp["I"] << ") + "
 			<< secondReactant.getName() << "(" << secondComp["He"] << ", "
@@ -234,17 +239,23 @@ void PSICluster::printReaction(const Reactant & firstReactant,
 			<< productComp["V"] << ", " << productComp["I"] << ")" << std::endl;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	std::cout << firstReactant.getName() << "(" << firstComp[heType] << ", "
 			<< firstComp[vType] << ", " << firstComp[iType] << ") + "
 			<< secondReactant.getName() << "(" << secondComp[heType] << ", "
 			<< secondComp[vType] << ", " << secondComp[iType] << ") -> "
 			<< productReactant.getName() << "(" << productComp[heType] << ", "
 			<< productComp[vType] << ", " << productComp[iType] << ")" << std::endl;
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void PSICluster::optimizeReactions() {
 	// Loop on the pairs to add reactions to the network
@@ -290,6 +301,8 @@ void PSICluster::optimizeReactions() {
 		(*it).reaction = newReaction;
 	}
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 /**
  * This operation prints a backward reaction given the three reactants in
  * A -> B + C.
@@ -306,6 +319,7 @@ void PSICluster::printDissociation(const Reactant & firstReactant,
 	auto productComp = productReactant.getComposition();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std::cout << firstReactant.getName() << "(" << firstComp["He"] << ", "
 			<< firstComp["V"] << ", " << firstComp["I"] << ") -> "
 			<< secondReactant.getName() << "(" << secondComp["He"] << ", "
@@ -314,21 +328,29 @@ void PSICluster::printDissociation(const Reactant & firstReactant,
 			<< productComp["V"] << ", " << productComp["I"] << ")" << std::endl;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	std::cout << firstReactant.getName() << "(" << firstComp[heType] << ", "
 			<< firstComp[vType] << ", " << firstComp[iType] << ") -> "
 			<< secondReactant.getName() << "(" << secondComp[heType] << ", "
 			<< secondComp[vType] << ", " << secondComp[iType] << ") + "
 			<< productReactant.getName() << "(" << productComp[heType] << ", "
 			<< productComp[vType] << ", " << productComp[iType] << ")" << std::endl;
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	return;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static std::vector<int> getFullConnectivityVector(std::set<int> connectivitySet,
 		int size) {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 /**
  * This operation creates a full vector from the connectivity set. It expands
  * the set to fill an array of length size with ones and zeros based on whether
@@ -344,12 +366,16 @@ static std::vector<int> getFullConnectivityVector(std::set<int> connectivitySet,
 static std::vector<int> getFullConnectivityVector(std::set<int> connectivitySet,
 		int size) {
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Create a vector of zeroes with size equal to the network size
 	std::vector<int> connectivity(size);
 
 	// Set the value of the connectivity array to one for each element that is
 	// in the set.
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	for (auto it = connectivitySet.begin(); it != connectivitySet.end(); ++it) {
@@ -363,11 +389,16 @@ static std::vector<int> getFullConnectivityVector(std::set<int> connectivitySet,
 	for (auto it = connectivitySet.begin(); it != connectivitySet.end(); it++) {
 		connectivity[*it - 1] = 1;
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+	for (auto it = connectivitySet.begin(); it != connectivitySet.end(); it++) {
+		connectivity[*it - 1] = 1;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 
 	return connectivity;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 std::vector<int> PSICluster::getReactionConnectivity() const {
 	// Create the full vector from the set and return it
@@ -513,6 +544,8 @@ double PSICluster::getProductionFlux() const {
 						reactingPairs[i].secondHeDistance,
 						reactingPairs[i].secondVDistance);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 void PSICluster::setReactionConnectivity(int clusterId) {
 
 	// Add the cluster to the set.
@@ -680,7 +713,10 @@ double PSICluster::getProductionFlux(double temperature) const {
 			// Debug output.
 			//printReaction(*firstReactant,*secondReactant,*this);
 		}
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 
 	// Return the production flux
@@ -688,23 +724,30 @@ double PSICluster::getProductionFlux(double temperature) const {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 double PSICluster::getCombinationFlux() const {
 	// Local declarations
 	double flux = 0.0;
 	int nReactants = 0;
 	PSICluster *combiningCluster = nullptr;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 double PSICluster::getCombinationFlux(double temperature) const {
 
 	// Local declarations
 	double flux = 0.0, conc = 0.0;
 	int nReactants = 0;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Set the total number of reactants that combine to form this one
 	nReactants = combiningReactants.size();
 	// Loop over all possible clusters
 	for (int j = 0; j < nReactants; j++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		// Get the cluster that combines with this one
@@ -890,6 +933,9 @@ void PSICluster::setDiffusionFactor(const double factor) {
 =======
 		auto otherCluster = (PSICluster *) combiningReactants.at(j);
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+		auto otherCluster = (PSICluster *) combiningReactants.at(j);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		conc = otherCluster->getConcentration();
 		// Calculate Second term of production flux
 		flux += calculateReactionRateConstant(*this, *otherCluster, temperature)
@@ -966,12 +1012,16 @@ void PSICluster::setBindingEnergies(const std::vector<double> energies) {
 double PSICluster::getMigrationEnergy() const {
 	// Return the migration energy
 	return migrationEnergy;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 void PSICluster::setMigrationEnergy(const double energy) {
 	// Set the migration energy
 	migrationEnergy = energy;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	// Update the diffusion coefficient
@@ -1011,6 +1061,10 @@ std::vector<int> PSICluster::getConnectivity() const {
 	// Update the diffusion coefficient
 	recomputeDiffusionCoefficient(getTemperature());
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+	// Update the diffusion coefficient
+	recomputeDiffusionCoefficient(getTemperature());
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	return;
 }
 
@@ -1077,7 +1131,10 @@ double PSICluster::getReactionRadius() const {
 std::vector<int> PSICluster::getConnectivity() const {
 
 	int connectivityLength = network->size();
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	std::vector<int> connectivity = std::vector<int>(connectivityLength, 0);
 	auto reactionConnVector = getReactionConnectivity();
 	auto dissociationConnVector = getDissociationConnectivity();
@@ -1085,16 +1142,22 @@ std::vector<int> PSICluster::getConnectivity() const {
 	// The reaction and dissociation vectors must have a length equal to the
 	// number of clusters
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (reactionConnVector.size() != (unsigned int) connectivityLength) {
 		throw std::string("The reaction vector is an incorrect length");
 	}
 	if (dissociationConnVector.size() != (unsigned int) connectivityLength) {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	if (reactionConnVector.size() != connectivityLength) {
 		throw std::string("The reaction vector is an incorrect length");
 	}
 	if (dissociationConnVector.size() != connectivityLength) {
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		throw std::string("The dissociation vector is an incorrect length");
 	}
 
@@ -1107,9 +1170,12 @@ std::vector<int> PSICluster::getConnectivity() const {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return connectivity;
 }
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 //	// DEBUG
 //	std::cout << std::endl << "Reactant Column: " << this->name << "_"
 //			<< this->size << std::endl;
@@ -1545,8 +1611,11 @@ void PSICluster::fillVWithI(std::string secondClusterName,std::vector<Reactant *
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 void PSICluster::recomputeDiffusionCoefficient(double temp) {
 
@@ -1573,4 +1642,7 @@ void PSICluster::setTemperature(double temp) {
 
 	return;
 }
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7

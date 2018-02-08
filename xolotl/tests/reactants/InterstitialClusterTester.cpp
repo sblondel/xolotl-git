@@ -21,6 +21,7 @@ using namespace xolotlCore;
 using namespace testUtils;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry =
 		std::make_shared<xolotlPerf::DummyHandlerRegistry>();
 
@@ -29,18 +30,24 @@ static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry =
  */
 BOOST_AUTO_TEST_SUITE(InterstitialCluster_testSuite)
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry = std::make_shared<xolotlPerf::DummyHandlerRegistry>();
 
 /**
  * This suite is responsible for testing the InterstitialCluster.
  */BOOST_AUTO_TEST_SUITE(InterstitialCluster_testSuite)
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 /**
  * This operation checks the ability of the InterstitialCluster to describe
  * its connectivity to other clusters.
  */
 BOOST_AUTO_TEST_CASE(checkConnectivity) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	shared_ptr<ReactionNetwork> network = getSimplePSIReactionNetwork();
 
@@ -156,6 +163,8 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
 	return;
 }
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	
 	shared_ptr<ReactionNetwork> network = getSimpleReactionNetwork();
 	auto props = network->getProperties();
@@ -252,12 +261,16 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
  			  << "   -Dissociation Flux: " << cluster->getDissociationFlux(1000.0) << "\n");
  	BOOST_REQUIRE_CLOSE(-67088824870., flux, 10);
  }
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 /**
  * This operation checks the reaction radius for InterstitialCluster.
  */
 BOOST_AUTO_TEST_CASE(checkReactionRadius) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// Create the interstitial cluster
 	shared_ptr<InterstitialCluster> cluster;
@@ -268,18 +281,27 @@ BOOST_AUTO_TEST_CASE(checkReactionRadius) {
 	vector<shared_ptr<InterstitialCluster>> clusters;
 	shared_ptr<InterstitialCluster> cluster;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+
+	vector<shared_ptr<InterstitialCluster>> clusters;
+	shared_ptr<InterstitialCluster> cluster;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	double expectedRadii[] = { 0.1578547805, 0.1984238001, 0.2268820159,
 			0.2495375620, 0.2686693072, 0.2853926671, 0.3003469838,
 			0.3139368664, 0.3264365165, 0.3380413550 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Check all the values
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	for (int i = 1; i <= 10; i++) {
 		cluster = shared_ptr<InterstitialCluster>(
 				new InterstitialCluster(i, registry));
 		BOOST_REQUIRE_CLOSE(expectedRadii[i - 1], cluster->getReactionRadius(),
+<<<<<<< HEAD
 <<<<<<< HEAD
 				0.000001);
 	}
@@ -289,6 +311,10 @@ BOOST_AUTO_TEST_CASE(checkReactionRadius) {
 				.000001);
 	}
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+				.000001);
+	}
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 BOOST_AUTO_TEST_SUITE_END()

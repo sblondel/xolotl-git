@@ -18,6 +18,7 @@ protected:
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Declare the constructor as private to force the use of a name
 	 */
 	Plot() :
@@ -28,6 +29,11 @@ protected:
 	 */
     Plot() : xolotlCore::Identifiable("unused") {}
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+     * Declare the constructor as private to force the use of a name
+	 */
+    Plot() : xolotlCore::Identifiable("unused") {}
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * Choice of PlottingStyle.
@@ -55,10 +61,14 @@ public:
 	 * The default constructor
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Plot(const std::string& name);
 =======
 	Plot(std::string name);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	Plot(std::string name);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * The destructor.
@@ -70,20 +80,28 @@ public:
 	 * \see IPlot.h
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void render(const std::string& fileName = "fileName");
 =======
 	void render(std::string fileName = "fileName");
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	void render(std::string fileName = "fileName");
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * Method that will save the plotted plot in a file.
 	 * \see IPlot.h
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void write(const std::string& fileName);
 =======
 	void write(std::string fileName);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	void write(std::string fileName);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * Method allowing the user to set the PlottingStyle.
@@ -114,30 +132,42 @@ public:
 	 * \see IPlot.h
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std::shared_ptr<IDataProvider> getDataProvider() const;
 =======
 	std::shared_ptr<IDataProvider> getDataProvider() const ;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	std::shared_ptr<IDataProvider> getDataProvider() const ;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * Method getting the i-th data provider for SeriesPlot
 	 * \see IPlot.h
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std::shared_ptr<IDataProvider> getDataProvider(int i) const;
 =======
 	std::shared_ptr<IDataProvider> getDataProvider(int i) const ;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	std::shared_ptr<IDataProvider> getDataProvider(int i) const ;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * Method getting the total number of data providers
 	 * \see IPlot.h
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int getDataProviderNumber() const;
 =======
 	int getDataProviderNumber() const ;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	int getDataProviderNumber() const ;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * Sets the label provider used for the plots.
@@ -150,10 +180,14 @@ public:
 	 * \see IPlot.h
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std::shared_ptr<LabelProvider> getLabelProvider() const;
 =======
 	std::shared_ptr<LabelProvider> getLabelProvider() const ;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	std::shared_ptr<LabelProvider> getLabelProvider() const ;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * Method that enables the rendering of the legend.
@@ -166,10 +200,14 @@ public:
 	 * \see IPlot.h
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std::string getLegend() const;
 =======
 	std::string getLegend() const ;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	std::string getLegend() const ;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * Method that enables the log scale.

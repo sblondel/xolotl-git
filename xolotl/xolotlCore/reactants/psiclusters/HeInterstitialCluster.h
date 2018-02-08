@@ -4,9 +4,13 @@
 // Includes
 #include "PSICluster.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 #include "../../xolotlPerf/HandlerRegistryFactory.h"
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+#include "../../xolotlPerf/HandlerRegistryFactory.h"
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <string>
 #include <map>
 
@@ -14,10 +18,14 @@ namespace xolotlCore {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  A cluster composed of helium and intersititial.
 =======
  *  A cluster composed of helium and vacancies
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+ *  A cluster composed of helium and vacancies
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  */
 class HeInterstitialCluster : public PSICluster {
 
@@ -30,6 +38,7 @@ private:
 	int numI;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 =======
@@ -40,6 +49,10 @@ private:
 	//! The helium cluster of size 1
 	PSICluster * heCluster;
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+	//! The helium cluster of size 1
+	PSICluster * heCluster;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	//! The vacancy cluster of size 1
 	PSICluster * vCluster;
@@ -58,15 +71,21 @@ private:
 	double f4 = 0.0;
 
 	/**
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * The default constructor is private because PSIClusters must always be
 	 * initialized with a size.
 	 */
 	HeInterstitialCluster() :
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PSICluster()
 	{ numHe = 0; numI = 0; }
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		PSICluster(1)
 	{ numHe = 1; numI = 1; }
 
@@ -84,7 +103,10 @@ protected:
 	 */
 	virtual void getDissociationPartialDerivatives(std::vector<double> & partials, double temperature) const;
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 public:
 
@@ -95,18 +117,22 @@ public:
 	 * species as its values. The names of the species must be one of
 	 * {He,I}.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *
 	 * @param numHe The number of helium atoms in this cluster
 	 * @param numI The number of interstitial defect in this cluster
 	 * @param registry The performance handler registry
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 */
 	HeInterstitialCluster(int numHe, int numI,
 			std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
 
 	/**
 	 * Copy constructor
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *
 	 * @param other the reactant to be copied
@@ -131,6 +157,8 @@ public:
 	 */
 	virtual bool isMixed() const {return true;}
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @param other the reactant to be copied
 	 */
 	HeInterstitialCluster(const HeInterstitialCluster &other);
@@ -197,7 +225,10 @@ protected:
 	 * the element at the position of the second reactant is 1, otherwise 0.
 	 */
 	void createDissociationConnectivity();
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 };
 //end class HeInterstitialCluster
 

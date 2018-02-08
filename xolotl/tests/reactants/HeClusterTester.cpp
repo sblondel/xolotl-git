@@ -21,11 +21,15 @@ using namespace xolotlCore;
 using namespace testUtils;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry =
 		std::make_shared<xolotlPerf::DummyHandlerRegistry>();
 =======
 static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry = std::make_shared<xolotlPerf::DummyHandlerRegistry>();
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry = std::make_shared<xolotlPerf::DummyHandlerRegistry>();
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 /**
  * This suite is responsible for testing the HeCluster.
@@ -37,6 +41,7 @@ BOOST_AUTO_TEST_SUITE(HeCluster_testSuite)
  * its connectivity to other clusters.
  */
 BOOST_AUTO_TEST_CASE(checkConnectivity) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	shared_ptr<ReactionNetwork> network = getSimplePSIReactionNetwork();
 
@@ -76,6 +81,8 @@ BOOST_AUTO_TEST_CASE(checkConnectivity) {
 
 	return;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	
 	shared_ptr<ReactionNetwork> network = getSimpleReactionNetwork();
 	auto props = network->getProperties();
@@ -129,7 +136,10 @@ BOOST_AUTO_TEST_CASE(checkConnectivity) {
 			BOOST_REQUIRE_EQUAL(reactionConnectivity[i], connectivityExpected[i]);
 		}
 	}
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 /**
@@ -137,6 +147,7 @@ BOOST_AUTO_TEST_CASE(checkConnectivity) {
  */
 BOOST_AUTO_TEST_CASE(checkFluxCalculations) {
 	// Local Declarations
+<<<<<<< HEAD
 <<<<<<< HEAD
 	auto network = getSimplePSIReactionNetwork();
 
@@ -208,6 +219,8 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
 
 	return;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	shared_ptr<ReactionNetwork> network = getSimpleReactionNetwork();
 
 	// Get an He cluster with compostion 1,0,0.
@@ -240,13 +253,17 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
 			  << "   -Combination Flux: " << cluster->getCombinationFlux(1000.0) << "\n"
 			  << "   -Dissociation Flux: " << cluster->getDissociationFlux(1000.0) << "\n");
 	BOOST_REQUIRE_CLOSE(-43623893263., flux, 10);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 /**
  * This operation checks the reaction radius for HeCluster.
  */
 BOOST_AUTO_TEST_CASE(checkReactionRadius) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// Create a helium cluster
 	shared_ptr<HeCluster> cluster;
@@ -267,6 +284,8 @@ BOOST_AUTO_TEST_CASE(checkReactionRadius) {
 }
 
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	vector<shared_ptr<HeCluster>> clusters;
 	shared_ptr<HeCluster> cluster;
@@ -282,5 +301,8 @@ BOOST_AUTO_TEST_CASE(checkReactionRadius) {
 }
 
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 BOOST_AUTO_TEST_SUITE_END()

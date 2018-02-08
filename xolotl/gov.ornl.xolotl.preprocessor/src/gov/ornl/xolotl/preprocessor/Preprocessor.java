@@ -5,8 +5,11 @@ package gov.ornl.xolotl.preprocessor;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 import java.io.IOException;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
@@ -14,12 +17,16 @@ import java.util.ArrayList;
 import java.util.Properties;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Merged the recent changes made in the preprocessor_branch to the HDF5_branch.  CLJ 20140625
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
+<<<<<<< HEAD
 import uk.co.flamingpenguin.jewel.cli.*;
 import ncsa.hdf.hdf5lib.H5;
 import ncsa.hdf.hdf5lib.HDF5Constants;
@@ -31,6 +38,10 @@ import java.util.ArrayList;
 import ncsa.hdf.hdf5lib.H5;
 import ncsa.hdf.hdf5lib.HDF5Constants;
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+import ncsa.hdf.hdf5lib.H5;
+import ncsa.hdf.hdf5lib.HDF5Constants;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 /**
  * This class generates a valid Xolotl input file with each line representing a
@@ -41,26 +52,36 @@ import ncsa.hdf.hdf5lib.HDF5Constants;
  * Each element is:
  * 
 <<<<<<< HEAD
+<<<<<<< HEAD
  * nHe - The number of helium atoms in the cluster.
  * 
  * nXe - The number of xenon atoms in the cluster.
 =======
  * nHe - The number of Helium atoms in the cluster.
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+ * nHe - The number of Helium atoms in the cluster.
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  * 
  * nV - The number of vacancies in the cluster.
  * 
  * nI - The number of interstitials in the cluster.
  * 
 <<<<<<< HEAD
+<<<<<<< HEAD
  * E_f - The formation energy of the cluster
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  * E_He - The binding energy of the cluster with He_1.
  * 
  * E_V - The binding energy of the cluster with V_1.
  * 
  * E_I - The binding energy of the cluster with I_1.
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  * 
  * E_migration - The migration energy with which the cluster diffuses.
  * 
@@ -70,20 +91,27 @@ import ncsa.hdf.hdf5lib.HDF5Constants;
  * All energies are in eV and all diffusion factors are in nm^2/s.
  * 
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The preprocessor generates 2067 clusters with its default configuration.
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  * The preprocessor generates 2067 clusters with its default configuration. If
  * only the maximum number of vacancies is changed it generates a number of
  * clusters equal to
  * 
  * maxI + maxHe + 2053 + (maxV - 29) + 2(maxV - 29)(30 + maxV)
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  * 
  * @author Jay Jay Billings
  * 
  */
 public class Preprocessor {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// The maximum size of a helium cluster in the network.
 	private int maxHe;
@@ -112,6 +140,8 @@ public class Preprocessor {
 	// The diffusion factor for a single vacancy.
 	private double vOneDiffusionFactor = 1.8e+12;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// The maximum size of a Helium cluster in the network.
 	private int maxHe = 8;
 
@@ -131,22 +161,30 @@ public class Preprocessor {
 
 	// The diffusion factor for a single vacancy.
 	private double vOneDiffusionFactor = 1800.0;
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// The migration energy for a single vacancy.
 	private double vOneMigrationEnergy = 1.30;
 
 	// The maximum size of an interstitial cluster in the network.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private int maxI;
 =======
 	private int maxI = 6;
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+	private int maxI = 6;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// The maximum size of a mobile interstitial cluster.
 	private int maxIDiffusionSize = 5;
 
 	// The diffusion coefficients for single species interstitial clusters.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	private double[] iDiffusionFactors = { 0.0, 8.8e+10, 8.0e+10, 3.9e+10, 2.0e+10, 1.0e+10 };
 
@@ -278,6 +316,8 @@ public class Preprocessor {
 		return petscString.toString();
 	}
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	private double[] iDiffusionFactors = { 0.0, 88.0, 80.0, 39.0, 20.0, 10.0 };
 
 	// The migration energies for single species interstitial clusters.
@@ -300,7 +340,10 @@ public class Preprocessor {
 	 * different clusters.
 	 */
 	private BindingEnergyEngine bindingEnergyEngine = new BindingEnergyEngine();
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * The list of parameters that will be passed to Xolotl
@@ -402,6 +445,7 @@ public class Preprocessor {
 	 */
 	public Preprocessor(Arguments args) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Set the maximum size of a helium cluster in the network.
 		maxHe = args.getMaxHeSize();
 		// Check to make sure the user entered an appropriate value
@@ -480,6 +524,8 @@ public class Preprocessor {
 		}
 =======
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 		// Set the parameter options that will be passed to Xolotl
 		xolotlParams.setProperty("networkFile", args.getNetworkFile());
@@ -508,6 +554,7 @@ public class Preprocessor {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * This operation generates all helium clusters in the network.
 	 * 
 	 * @return A list of clusters configured to satisfy the bounds and composed
@@ -515,6 +562,8 @@ public class Preprocessor {
 	 */
 	private ArrayList<Cluster> generateHe() {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * This operation generates all Helium clusters in the network.
 	 * 
 	 * @return A list of clusters configured to satisfy the bounds and composed
@@ -522,7 +571,10 @@ public class Preprocessor {
 	 */
 	private ArrayList<Cluster> generateHe() {
 
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Local Declarations
 		ArrayList<Cluster> clusterList = new ArrayList<Cluster>();
 
@@ -532,20 +584,28 @@ public class Preprocessor {
 			Cluster tmpCluster = new Cluster();
 			tmpCluster.nHe = i + 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tmpCluster.E_f = formationEnergyEngine.getHeFormationEnergy(i + 1);
 =======
 			tmpCluster.E_He = bindingEnergyEngine.getHeBindingEnergy(i + 1);
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+			tmpCluster.E_He = bindingEnergyEngine.getHeBindingEnergy(i + 1);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 			// Add the cluster to the list
 			clusterList.add(tmpCluster);
 		}
 
 		// Configure the diffusion parameters.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (int i = 0; i < Math.min(maxHeDiffusionSize, maxHe); i++) {
 =======
 		for (int i = 0; i < maxHeDiffusionSize; i++) {
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+		for (int i = 0; i < maxHeDiffusionSize; i++) {
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 			Cluster tmpCluster = clusterList.get(i);
 			tmpCluster.D_0 = heDiffusionFactors[i + 1];
 			tmpCluster.E_m = heMigrationEnergies[i + 1];
@@ -555,6 +615,7 @@ public class Preprocessor {
 	}
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * This operation generates all xenon clusters in the network.
 	 * 
@@ -593,12 +654,17 @@ public class Preprocessor {
 	 * @param heSize
 	 *            The number of helium atoms in the cluster
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * This operation creates an HeV cluster with the specified size. It
 	 * configures the binding energies on its own.
 	 * 
 	 * @param heSize
 	 *            The number of Helium atoms in the cluster
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @param vSize
 	 *            The number of vacancies in the cluster
 	 * @return The cluster.
@@ -609,6 +675,7 @@ public class Preprocessor {
 		cluster.nHe = heSize;
 		cluster.nV = vSize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Separate the case where it is simply a V cluster
 		if (heSize == 0) {
 			cluster.E_f = formationEnergyEngine.getVFormationEnergy(vSize);
@@ -616,12 +683,17 @@ public class Preprocessor {
 			cluster.E_f = formationEnergyEngine.getHeVFormationEnergy(heSize, vSize);
 		}
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Treat everything like a mixed cluster and let the
 		// BindingEnergyEngine delegate for single species clusters.
 		cluster.E_He = bindingEnergyEngine.getHeVtoHeBindingEnergy(heSize,
 				vSize);
 		cluster.E_V = bindingEnergyEngine.getHeVtoVBindingEnergy(heSize, vSize);
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 		return cluster;
 	}
@@ -633,6 +705,7 @@ public class Preprocessor {
 	 *         solely of V and HeV clusters.
 	 */
 	private ArrayList<Cluster> generateHeV() {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// Local Declarations
 		ArrayList<Cluster> clusterList = new ArrayList<Cluster>();
@@ -695,6 +768,8 @@ public class Preprocessor {
 					clusterList.add(makeHeVCluster(j, i));
 				}
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 		// Local Declarations
 		ArrayList<Cluster> clusterList = new ArrayList<Cluster>();
@@ -716,12 +791,16 @@ public class Preprocessor {
 			for (int j = 0; j <= i * 4; j++) {
 				// Add the cluster to the list
 				clusterList.add(makeHeVCluster(j, i));
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 			}
 		}
 
 		// Set V_1 diffusion parameters. V_1 is the first in the list, so it is
 		// straightforward to set it.
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (maxV > 0) {
 			clusterList.get(0).D_0 = vOneDiffusionFactor;
@@ -731,6 +810,10 @@ public class Preprocessor {
 		clusterList.get(0).D_0 = vOneDiffusionFactor;
 		clusterList.get(0).E_m = vOneMigrationEnergy;
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+		clusterList.get(0).D_0 = vOneDiffusionFactor;
+		clusterList.get(0).E_m = vOneMigrationEnergy;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 		return clusterList;
 	};
@@ -743,9 +826,13 @@ public class Preprocessor {
 	 */
 	private ArrayList<Cluster> generateInterstitials() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Local Declarations
 		ArrayList<Cluster> clusterList = new ArrayList<Cluster>();
 
@@ -755,20 +842,28 @@ public class Preprocessor {
 			Cluster tmpCluster = new Cluster();
 			tmpCluster.nI = i + 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tmpCluster.E_f = formationEnergyEngine.getIFormationEnergy(i + 1);
 =======
 			tmpCluster.E_I = bindingEnergyEngine.getIBindingEnergy(i + 1);
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+			tmpCluster.E_I = bindingEnergyEngine.getIBindingEnergy(i + 1);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 			// Add the cluster to the list
 			clusterList.add(tmpCluster);
 		}
 
 		// Configure the diffusion parameters.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (int i = 0; i < Math.min(maxIDiffusionSize, maxI); i++) {
 =======
 		for (int i = 0; i < maxIDiffusionSize; i++) {
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+		for (int i = 0; i < maxIDiffusionSize; i++) {
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 			Cluster tmpCluster = clusterList.get(i);
 			tmpCluster.D_0 = iDiffusionFactors[i + 1];
 			tmpCluster.E_m = iMigrationEnergies[i + 1];
@@ -776,21 +871,28 @@ public class Preprocessor {
 
 		return clusterList;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 =======
 	};
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+	};
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation generates the initial conditions based on the defaults and
 	 * the incoming command line arguments.
 	 * 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @return The list of clusters created by the preprocessor based on its
 	 *         arguments and settings.
 	 */
 	public ArrayList<Cluster> generateNetwork() {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @param args
 	 *            The arguments read from the command line
 	 * @return The list of clusters created by the preprocessor based on its
@@ -798,7 +900,10 @@ public class Preprocessor {
 	 */
 	public ArrayList<Cluster> generateNetwork(String[] args) {
 
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Create the list of clusters
 		ArrayList<Cluster> clusterList = new ArrayList<Cluster>();
 
@@ -807,16 +912,22 @@ public class Preprocessor {
 		clusterList.addAll(generateHe());
 		clusterList.addAll(generateHeV());
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clusterList.addAll(generateXe());
 =======
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 		return clusterList;
 	}
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	/**
 	 * This operation generates the parameters needed to run Xolotl.
 	 * 
@@ -850,7 +961,10 @@ public class Preprocessor {
 		return defaultParameters;
 	}
 
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	/**
 	 * This operation writes the parameters file that is needed to run Xolotl.
 	 * 
@@ -861,9 +975,13 @@ public class Preprocessor {
 	 */
 	public void writeParameterFile(String parameterFile, Properties parameters) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		try {
 			// Create the file containing the parameters
 			FileOutputStream paramsFile = new FileOutputStream(parameterFile);
@@ -872,10 +990,13 @@ public class Preprocessor {
 			// the file to the project root folder
 			parameters.store(paramsFile, null);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// Flush the parameters to the intended stream
 			paramsFile.flush();
 =======
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 			// Close the parameter file
 			paramsFile.close();
 
@@ -894,9 +1015,13 @@ public class Preprocessor {
 	 */
 	public Properties loadParameterFile(String parameterFile) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Local declarations
 		Properties inProperties = new Properties();
 
@@ -911,18 +1036,23 @@ public class Preprocessor {
 		} catch (IOException io) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 			System.err.println("Error loading parameter file.");
 =======
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 =======
 			System.out.println("Error loading file.");
 >>>>>>> Merged the recent changes made in the preprocessor_branch to the HDF5_branch.  CLJ 20140625
+=======
+			System.out.println("Error loading file.");
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 			io.printStackTrace();
 		}
 		return inProperties;
 	}
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * This operation creates the HDF5 file needed by Xolotl
 	 * 
@@ -1009,6 +1139,8 @@ public class Preprocessor {
 			// Close everything
 			status = H5.H5Gclose(headerGroupId);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * This operation generates the grid needed to write the concentrations.
 	 * 
 	 * @param dimension
@@ -1052,6 +1184,7 @@ public class Preprocessor {
 					HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT);
 
 			// Close the HDF5 file
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 			status = H5.H5Fclose(fileId);
 		} catch (Exception e) {
@@ -1371,6 +1504,9 @@ public class Preprocessor {
 			status = H5.H5Gclose(newConcSubGroupId);
 			status = H5.H5Fclose(fileId);
 
+=======
+			status = H5.H5Fclose(fileId);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		} catch (Exception e) {
 			// Complain
 			e.printStackTrace();
@@ -1380,6 +1516,7 @@ public class Preprocessor {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * This operation copies the surface position information from the already
 	 * existing file to the concentration subgroup of the newly created file
 	 * 
@@ -1804,6 +1941,8 @@ public class Preprocessor {
 			// Complain
 			e.printStackTrace();
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * This operation writes the header in the HDF5 file
 	 * 
 	 * @param name
@@ -1848,7 +1987,10 @@ public class Preprocessor {
 			// Close everything
 			status = H5.H5Gclose(headerGroupId);
 			status = H5.H5Fclose(fileId);
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		} catch (Exception e) {
 			// Complain
 			e.printStackTrace();
@@ -1867,6 +2009,7 @@ public class Preprocessor {
 	 */
 	public void writeNetwork(String name, ArrayList<Cluster> clusters) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		try {
 			// Open the HDF5 file
 			int fileId = H5.H5Fopen(name, HDF5Constants.H5F_ACC_RDWR, HDF5Constants.H5P_DEFAULT);
@@ -1879,6 +2022,8 @@ public class Preprocessor {
 			int networkSize = clusters.size();
 			double[][] networkArray = new double[networkSize][6];
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// The status of the previous HDF5 operation
 		int status;
 
@@ -1895,13 +2040,17 @@ public class Preprocessor {
 			// Create the array that will store the network
 			int networkSize = clusters.size();
 			double[][] networkArray = new double[networkSize][8];
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 			int id = 0;
 			// Loop on the clusters
 			for (Cluster cluster : clusters) {
 				// Store the composition
 				networkArray[id][0] = cluster.nHe;
+<<<<<<< HEAD
 <<<<<<< HEAD
 				if (maxXe > 0)
 					networkArray[id][0] = cluster.nXe;
@@ -1917,6 +2066,8 @@ public class Preprocessor {
 				// Store the diffusion factor
 				networkArray[id][5] = cluster.D_0;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 				networkArray[id][1] = cluster.nV;
 				networkArray[id][2] = cluster.nI;
 
@@ -1930,7 +2081,10 @@ public class Preprocessor {
 
 				// Store the diffusion factor
 				networkArray[id][7] = cluster.D_0;
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 				// increment the id number
 				id++;
@@ -1939,6 +2093,7 @@ public class Preprocessor {
 			// Create the dataspace for the network with dimension dims
 			long[] dims = new long[2];
 			dims[0] = networkSize;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			dims[1] = 6;
 			int networkDataSpaceId = H5.H5Screate_simple(2, dims, null);
@@ -1969,6 +2124,8 @@ public class Preprocessor {
 			// Complain
 			e.printStackTrace();
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 			dims[1] = 8;
 			int networkSId = H5.H5Screate_simple(2, dims, null);
 
@@ -1999,7 +2156,10 @@ public class Preprocessor {
 			status = H5.H5Dclose(datasetId);
 			status = H5.H5Gclose(networkGroupId);
 			status = H5.H5Fclose(fileId);
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		} catch (Exception e) {
 			// Complain
 			e.printStackTrace();
@@ -2008,9 +2168,13 @@ public class Preprocessor {
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
 =======
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
 }
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+}
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7

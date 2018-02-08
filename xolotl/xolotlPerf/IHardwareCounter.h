@@ -2,15 +2,19 @@
 #define IHARDWARECOUNTER_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "mpi.h"
 #include <vector>
 #include <limits.h>
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include "../xolotlCore/IIdentifiable.h"
 
 using namespace std;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 namespace xolotlPerf {
 
@@ -97,6 +101,8 @@ public:
 			IHardwareCounter::CounterSpec cs) const = 0;
 };
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 namespace xolotlPerf{
 
 /**
@@ -125,7 +131,10 @@ public:
 	virtual std::vector<std::string> getHardwareQuantities() const = 0;
 
 };  //end class IHardwareCounter
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 }  //end namespace xolotlPerf
 

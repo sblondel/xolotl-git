@@ -9,15 +9,21 @@ using namespace xolotlCore;
 HeVCluster::HeVCluster(int numHe, int numV,
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PSICluster(registry), numHe(numHe), numV(numV) {
 =======
 		PSICluster(1, registry), numHe(numHe), numV(numV) {
 
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+		PSICluster(1, registry), numHe(numHe), numV(numV) {
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Set the cluster size as the sum of
 	// the number of Helium and Vacancies
 	size = numHe + numV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	// Update the composition map
@@ -53,6 +59,8 @@ HeVCluster::HeVCluster(HeVCluster &other) :
 
 =======
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Update the composition map
 	compositionMap[heType] = numHe;
 	compositionMap[vType] = numV;
@@ -357,7 +365,10 @@ void HeVCluster::getDissociationPartialDerivatives(
 
 	// This cluster cannot dissociate into a smaller HeV cluster and an
 	// interstitial, so there is no partial derivative term for that case.
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	return;
 }

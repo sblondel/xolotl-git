@@ -14,6 +14,7 @@ using namespace xolotlViz;
 #define W_HEIGHT 1024
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SeriesPlot::SeriesPlot(const std::string& name) :
 		Plot(name), plotDataProviders(
 				std::make_shared<std::vector<std::shared_ptr<IDataProvider> > >()) {
@@ -21,36 +22,51 @@ SeriesPlot::SeriesPlot(const std::string& name) :
 SeriesPlot::SeriesPlot(std::string name) : Plot(name) {
 	plotDataProviders = std::make_shared< std::vector< std::shared_ptr<IDataProvider> > > ();
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+SeriesPlot::SeriesPlot(std::string name) : Plot(name) {
+	plotDataProviders = std::make_shared< std::vector< std::shared_ptr<IDataProvider> > > ();
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 SeriesPlot::~SeriesPlot() {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void SeriesPlot::render(const std::string& fileName) {
 
 	// Check if the label provider is set
 	if (!plotLabelProvider) {
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 void SeriesPlot::render(std::string fileName) {
 
 	// Check if the label provider is set
 	if (!plotLabelProvider){
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		std::cout << "The LabelProvider is not set!!" << std::endl;
 		return;
 	}
 
 	// Check if the data provider is set
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (plotDataProviders->empty()) {
 =======
 	if (plotDataProviders->empty()){
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	if (plotDataProviders->empty()){
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		std::cout << "No DataProvider!!" << std::endl;
 		return;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// Create an offscreen render surface
 	eavlRenderSurface *surface = new eavlRenderSurfaceOSMesa;
@@ -154,6 +170,8 @@ void SeriesPlot::render(std::string fileName) {
 	// Save the final buffer as an image
 	window->SaveWindowAsPNM(fileName);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
     // Create an offscreen render surface
     eavlRenderSurface *surface = new eavlRenderSurfaceOSMesa;
 
@@ -244,16 +262,23 @@ void SeriesPlot::render(std::string fileName) {
     char fn[25];
     sprintf(fn, (fileName).c_str());
     window->SaveWindowAsPNM(fn);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	return;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void SeriesPlot::addDataProvider(std::shared_ptr<IDataProvider> dataProvider) {
 =======
 void SeriesPlot::addDataProvider(std::shared_ptr<IDataProvider> dataProvider){
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+void SeriesPlot::addDataProvider(std::shared_ptr<IDataProvider> dataProvider){
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	plotDataProviders->push_back(dataProvider);
 	return;
 }

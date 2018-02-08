@@ -24,6 +24,7 @@ static const double pi = 3.1415926535897932;
 //! Lattice Parameter. Equal to 3.17 Angstroms, taken from Becquart et. al.
 //! Journal of Nuclear Materials 403 (2010) 75–88. Given in units here of nm.
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const double tungstenLatticeConstant = 0.31700000000000000;
 
 //! Lattice Parameter. Given in units here of nm.
@@ -54,6 +55,9 @@ static const std::string PSISuperType = "PSISuper";
 =======
 static const double latticeConstant = 0.31700000000000000;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+static const double latticeConstant = 0.31700000000000000;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 /**
  * Statically defined type names. This are used to optimize the lookup

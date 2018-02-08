@@ -13,6 +13,7 @@ file(GLOB HEADERS *.h)
 file(GLOB SRC *.cpp)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #Include the MPI directories
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore)
 include_directories(${CMAKE_SOURCE_DIR}/xolotlCore/reactants)
@@ -23,6 +24,8 @@ include_directories(${HDF5_INCLUDE_DIR})
 #Add a library to hold the IO code (mostly MPI)
 add_library(${LIBRARY_NAME} STATIC ${SRC})
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 # Find HDF5
 FIND_PACKAGE(HDF5 REQUIRED)
 IF (HDF5_FOUND)
@@ -40,11 +43,15 @@ include_directories(${MPI_INCLUDE_PATH})
 
 #Add a library to hold the IO code (mostly MPI)
 <<<<<<< HEAD
+<<<<<<< HEAD
 add_library(${LIBRARY_NAME} SHARED ${SRC})
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
 add_library(${LIBRARY_NAME} STATIC ${SRC})
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+add_library(${LIBRARY_NAME} STATIC ${SRC})
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 target_link_libraries(${LIBRARY_NAME} ${MPI_LIBRARIES} ${HDF5_LIBRARIES})
 
 #Install the xolotl header files

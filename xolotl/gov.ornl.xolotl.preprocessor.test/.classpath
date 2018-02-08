@@ -5,11 +5,15 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="/gov.ornl.xolotl.preprocessor/deps/jewelcli-0.7.6.jar" sourcepath="/gov.ornl.xolotl.preprocessor/deps"/>
 =======
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 =======
 	<classpathentry kind="lib" path="/gov.ornl.xolotl.preprocessor/deps/jewelcli-0.7.6.jar" sourcepath="/gov.ornl.xolotl.preprocessor/deps"/>
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+	<classpathentry kind="lib" path="/gov.ornl.xolotl.preprocessor/deps/jewelcli-0.7.6.jar" sourcepath="/gov.ornl.xolotl.preprocessor/deps"/>
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	<classpathentry kind="output" path="bin"/>
 </classpath>

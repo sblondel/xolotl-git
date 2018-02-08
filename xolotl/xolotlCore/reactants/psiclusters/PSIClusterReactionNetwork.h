@@ -3,10 +3,14 @@
 
 // Includes
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#include <xolotlPerf.h>
 =======
 //#include "xolotlPerf/HandlerRegistryFactory.h"
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+//#include "xolotlPerf/HandlerRegistryFactory.h"
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <string>
 #include <vector>
 #include <memory>
@@ -14,16 +18,23 @@
 #include <unordered_map>
 #include <ReactionNetwork.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 #include <PSICluster.h>
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+#include <PSICluster.h>
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
 #include <Constants.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 // Override the hash operation for the composition maps used by the
 // PSIClusterReactionNetwork to store reactants.
 namespace std {
@@ -38,7 +49,10 @@ public:
 };
 }
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 namespace xolotlCore {
 
 /**
@@ -58,6 +72,7 @@ class PSIClusterReactionNetwork: public ReactionNetwork {
 private:
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * The map of single-species clusters, indexed by a string representation
 	 * of a map that contains the name of the reactant and its size.
@@ -113,6 +128,8 @@ private:
 	 */
 	int maxHeIClusterSize;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * The map of single-species clusters, indexed by a map that contains the
 	 * name of the reactant and its size.
 	 */
@@ -157,11 +174,15 @@ private:
 	 * maintained by the getAll() operation.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std::shared_ptr<std::vector<std::shared_ptr<Reactant> > > allReactants;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
 	std::shared_ptr<std::vector<Reactant *>> allReactants;
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+	std::shared_ptr<std::vector<Reactant *>> allReactants;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation sets the default values of the properties table and names
@@ -170,6 +191,7 @@ private:
 	void setDefaultPropsAndNames();
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Calculate the dissociation constant of the first cluster with respect to
 	 * the single-species cluster of the same type based on the current clusters
@@ -183,6 +205,8 @@ private:
 	/**
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * The Constructor
 	 */
 	PSIClusterReactionNetwork();
@@ -191,6 +215,7 @@ public:
 
 	/**
 	 * The Constructor
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *
 	 * @param registry The performance handler registry
@@ -202,18 +227,24 @@ public:
 	 * The copy constructor.
 	 *
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 */
 	PSIClusterReactionNetwork(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
 
 	/**
 	 * The copy constructor
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @param other
 	 */
 	PSIClusterReactionNetwork(const PSIClusterReactionNetwork &other);
 
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	 * Computes the full reaction connectivity matrix for this network.
@@ -233,6 +264,8 @@ public:
 	/**
 =======
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * This operation sets the temperature at which the reactants currently
 	 * exists. It calls setTemperature() on each reactant.
 	 *
@@ -246,14 +279,18 @@ public:
 	/**
 	 * This operation returns the temperature at which the cluster currently exists.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *
 =======
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @return The temperature.
 	 */
 	virtual double getTemperature() const;
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * This operation returns a reactant with the given type and size if it
 	 * exists in the network or null if not.
@@ -272,6 +309,8 @@ public:
 =======
 =======
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * This operation returns a reactant with the given name and size if it
 	 * exists in the network or null if not.
 	 * @param type the type of the reactant
@@ -284,6 +323,7 @@ public:
 	/**
 	 * This operation returns a compound reactant with the given name and size
 	 * if it exists in the network or null if not.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @param rName the name of the compound reactant
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
@@ -303,26 +343,35 @@ public:
 	 *
 =======
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @param type the type of the compound reactant
 	 * @param sizes an array containing the sizes of each piece of the reactant.
 	 * For PSIClusters, this array must be ordered in size by He, V and I. This
 	 * array must contain an entry for He, V and I, even if only He and V or He
 	 * and I are contained in the mixed-species cluster.
+<<<<<<< HEAD
 	 * @return A pointer to the compound reactant
 	 */
 	IReactant * getSuper(const std::string& type,
 			const std::vector<int>& sizes) const;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @return A shared pointer to the compound reactant
 	 */
 	Reactant * getCompound(const std::string type,
 			const std::vector<int> sizes) const;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation returns all reactants in the network without regard for
 	 * their composition or whether they are compound reactants. The list may
 	 * or may not be ordered and the decision is left to implementers.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *
 	 * @return The list of all of the reactants in the network
@@ -337,19 +386,28 @@ public:
 =======
 	const std::shared_ptr<std::vector<Reactant *>> & getAll() const;
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+	 * @return The list of all of the reactants in the network
+	 */
+	const std::shared_ptr<std::vector<Reactant *>> & getAll() const;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation returns all reactants in the network with the given name.
 	 * The list may or may not be ordered and the decision is left to
 	 * implementers.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @param name The reactant or compound reactant name
 	 * @return The list of all of the reactants in the network or null if the
 	 * name is invalid.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	std::vector<IReactant *> getAll(const std::string& name) const;
@@ -359,6 +417,9 @@ public:
 =======
 	std::vector<Reactant *> getAll(std::string name) const;
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+	std::vector<Reactant *> getAll(std::string name) const;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation adds a reactant or a compound reactant to the network.
@@ -368,6 +429,7 @@ public:
 	 * entirely before running.
 	 *
 	 * This operation sets the id of the reactant to one that is specific
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * to this network. Do not share reactants across networks! This id is
 	 * guaranteed to be between 1 and n, including both, for n reactants in
@@ -392,6 +454,8 @@ public:
 	 * This operation sets the id of the reactant to one that is specific
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * to this network. Do not share Reactants across networks! This id is
 	 * guaranteed to be between 1 and n, including both, for n reactants in
 	 * the network.
@@ -400,6 +464,7 @@ public:
 	 * not recognize it as a type of reactant that it cares about (including
 	 * adding null). This operation throws an exception of type std::string
 	 * if the reactant is  already in the network.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *
 	 * @param reactant The reactant that should be added to the network.
@@ -554,6 +619,8 @@ public:
 	int getMaxHeIClusterSize() const {
 		return maxHeIClusterSize;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @param reactant The reactant that should be added to the network.
 	 */
 	void add(std::shared_ptr<Reactant> reactant);
@@ -647,7 +714,10 @@ public:
 		composition[1] = std::max(0,numV*!hasNegativeElement);
 		composition[2] = std::max(0,numI*!hasNegativeElement);
 		return composition;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 };
 

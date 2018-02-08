@@ -4,9 +4,13 @@
 // Includes
 #include "PSICluster.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 #include "../../xolotlPerf/HandlerRegistryFactory.h"
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+#include "../../xolotlPerf/HandlerRegistryFactory.h"
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 namespace xolotlCore {
 
@@ -23,10 +27,14 @@ private:
 	 */
 	InterstitialCluster() :
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PSICluster() {}
 =======
 		PSICluster(1) {}
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+		PSICluster(1) {}
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 public:
 
@@ -34,17 +42,21 @@ public:
 	 * The constructor. All InterstitialClusters must be initialized with
 	 * a size.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *
 	 * @param nI The number of interstitial defect in this cluster
 	 * @param registry The performance handler registry
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 */
 	InterstitialCluster(int nI, std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
 
 	/**
 	 * The Destructor
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	~InterstitialCluster() {}
 
@@ -55,6 +67,8 @@ public:
 		return std::shared_ptr<IReactant> (new InterstitialCluster(*this));
 	}
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	~InterstitialCluster();
 
 	/**
@@ -73,7 +87,10 @@ protected:
 	 * of the second reactant is 1, otherwise 0.
 	 */
 	void createReactionConnectivity();
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 };
 //end class InterstitialCluster

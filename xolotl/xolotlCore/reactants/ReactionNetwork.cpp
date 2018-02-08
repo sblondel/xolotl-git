@@ -1,5 +1,6 @@
 #include "ReactionNetwork.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <xolotlPerf.h>
 #include <iostream>
 #include <cassert>
@@ -84,6 +85,8 @@ void ReactionNetwork::fillConcentrationsArray(double * concentrations) {
 	int size = reactants->size();
 	int id = -1;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include "Reactant.h"
 #include "xolotlPerf/HandlerRegistryFactory.h"
 #include <iostream>
@@ -146,7 +149,10 @@ void ReactionNetwork::fillConcentrationsArray(double * concentrations) {
 	auto reactants = getAll();
 	int size = reactants->size();
 	int id = 1;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Fill the array
 	for (int i = 0; i < size; i++) {
@@ -157,6 +163,7 @@ void ReactionNetwork::fillConcentrationsArray(double * concentrations) {
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void ReactionNetwork::updateConcentrationsFromArray(double * concentrations) {
 	// Local Declarations
@@ -295,6 +302,8 @@ std::shared_ptr<DissociationReaction> ReactionNetwork::addDissociationReaction(
 }
 
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 /**
  * This operation updates the concentrations for all Reactants in the
  * network from an array.
@@ -321,8 +330,11 @@ void ReactionNetwork::updateConcentrationsFromArray(double * concentrations) {
 	return;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 
 void ReactionNetwork::askReactantsToReleaseNetwork(void) {
@@ -338,4 +350,7 @@ void ReactionNetwork::askReactantsToReleaseNetwork(void) {
 }
 
 
+<<<<<<< HEAD
 >>>>>>> Pulling "break circular dependencies of network and reactant objects" into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7

@@ -2,14 +2,18 @@ package gov.ornl.xolotl.preprocessor;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 import uk.co.flamingpenguin.jewel.cli.Option;
 
 /**
  * This interface creates command line options for the parameters that are
  * needed to run Xolotl. If the options are not specified via the command line,
  * then the default values are used.
+<<<<<<< HEAD
 <<<<<<< HEAD
  */
 public interface Arguments {
@@ -720,6 +724,8 @@ public interface Arguments {
 }
 =======
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  * 
  * Each Option is constructed with a name (longName), a default value, and a
  * help description. E.g.
@@ -731,7 +737,10 @@ public interface Arguments {
  *                            value is used.
  * 
  */
+<<<<<<< HEAD
 >>>>>>> Merged the preprocessor branch into the HDF5 branch. SB 20140624
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 public interface Arguments {
 
 	@Option(longName = "material", // defaultValue = "W",
@@ -813,4 +822,7 @@ public interface Arguments {
 	boolean getHelp();
 
 }
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7

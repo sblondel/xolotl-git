@@ -1,6 +1,7 @@
 #include "PSIClusterReactionNetwork.h"
 #include "PSICluster.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "PSISuperCluster.h"
 #include <xolotlPerf.h>
 #include <Constants.h>
@@ -36,6 +37,8 @@ void PSIClusterReactionNetwork::setDefaultPropsAndNames() {
 	maxHeVClusterSize = 0;
 	maxHeIClusterSize = 0;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <HandlerRegistryFactory.h>
 #include <iostream>
 #include <sstream>
@@ -72,17 +75,24 @@ void PSIClusterReactionNetwork::setDefaultPropsAndNames() {
 	(*properties)["maxIClusterSize"] = "0";
 	(*properties)["maxHeVClusterSize"] = "0";
 	(*properties)["maxHeIClusterSize"] = "0";
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Initialize the current and last size to 0
 	networkSize = 0;
 	// Set the reactant names
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	names.push_back(heType);
 	names.push_back(vType);
 	names.push_back(iType);
 	// Set the compound reactant names
+<<<<<<< HEAD
 	compoundNames.push_back(heVType);
 	compoundNames.push_back(heIType);
 	compoundNames.push_back(PSISuperType);
@@ -104,6 +114,8 @@ void PSIClusterReactionNetwork::setDefaultPropsAndNames() {
 	names.push_back(iType);
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 	// Set the compound reactant names
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	compoundNames.push_back("HeV");
 	compoundNames.push_back("HeI");
 
@@ -113,7 +125,10 @@ void PSIClusterReactionNetwork::setDefaultPropsAndNames() {
 	clusterTypeMap[iType] = iVector;
 	clusterTypeMap["HeV"] = heVVector;
 	clusterTypeMap["HeI"] = heIVector;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Setup the vector to hold all of the reactants
 	allReactants = make_shared<std::vector<Reactant *>>();
@@ -122,6 +137,7 @@ void PSIClusterReactionNetwork::setDefaultPropsAndNames() {
 }
 
 PSIClusterReactionNetwork::PSIClusterReactionNetwork() :
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		ReactionNetwork() {
@@ -133,12 +149,17 @@ PSIClusterReactionNetwork::PSIClusterReactionNetwork() :
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+		ReactionNetwork() {
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Setup the properties map and the name lists
 	setDefaultPropsAndNames();
 
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 PSIClusterReactionNetwork::PSIClusterReactionNetwork(
@@ -154,12 +175,19 @@ PSIClusterReactionNetwork::PSIClusterReactionNetwork(
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+PSIClusterReactionNetwork::PSIClusterReactionNetwork(
+		std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
+		ReactionNetwork(registry) {
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Setup the properties map and the name lists
 	setDefaultPropsAndNames();
 
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 PSIClusterReactionNetwork::PSIClusterReactionNetwork(
@@ -172,6 +200,8 @@ PSIClusterReactionNetwork::PSIClusterReactionNetwork(
 
 =======
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 PSIClusterReactionNetwork::PSIClusterReactionNetwork(
 		const PSIClusterReactionNetwork &other) :
 		ReactionNetwork(other) {
@@ -183,11 +213,15 @@ PSIClusterReactionNetwork::PSIClusterReactionNetwork(
 	names = other.getNames();
 	// Copy the compound names
 	compoundNames = other.getCompoundNames();
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Reset the properties table so that it can be properly updated when the
 	// network is filled.
 	setDefaultPropsAndNames();
 	// Get all of the reactants from the other network and add them to this one
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	// Load the single-species clusters. Calling getAll() will not work because
@@ -198,6 +232,11 @@ PSIClusterReactionNetwork::PSIClusterReactionNetwork(
 	// it is not const.
 	std::vector<std::shared_ptr<Reactant> > reactants;
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+	// Load the single-species clusters. Calling getAll() will not work because
+	// it is not const.
+	std::vector<std::shared_ptr<Reactant> > reactants;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	for (auto it = other.singleSpeciesMap.begin();
 			it != other.singleSpeciesMap.end(); ++it) {
 		reactants.push_back(it->second);
@@ -207,6 +246,7 @@ PSIClusterReactionNetwork::PSIClusterReactionNetwork(
 			it != other.mixedSpeciesMap.end(); ++it) {
 		reactants.push_back(it->second);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// Load the super-species clusters
 	for (auto it = other.superSpeciesMap.begin();
@@ -904,6 +944,10 @@ std::vector<IReactant *> PSIClusterReactionNetwork::getAll(
 	for (int i = 0; i < reactants.size(); i++) {
 		add(reactants[i]->clone());
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+	for (int i = 0; i < reactants.size(); i++) {
+		add(reactants[i]->clone());
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 
 }
@@ -1039,17 +1083,22 @@ std::vector<Reactant *> PSIClusterReactionNetwork::getAll(
 		int vecSize = storedReactants->size();
 		for (int i = 0; i < vecSize; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			reactants->push_back(storedReactants->at(i));
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
 			reactants.push_back(storedReactants->at(i).get());
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+			reactants.push_back(storedReactants->at(i).get());
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		}
 	}
 
 	return reactants;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void PSIClusterReactionNetwork::add(std::shared_ptr<IReactant> reactant) {
 	// Local Declarations
@@ -1370,6 +1419,8 @@ void PSIClusterReactionNetwork::getDiagonalFill(int *diagFill) {
 		// Update the map
 		dFillMap[id] = columnIds;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 /**
  * This operation adds a reactant or a compound reactant to the network.
  * @param reactant The reactant that should be added to the network.
@@ -1432,8 +1483,11 @@ void PSIClusterReactionNetwork::add(std::shared_ptr<Reactant> reactant) {
 			throw errStream.str();
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		// Increment the number of total clusters of this type
 		int numClusters = std::stoi(properties->at(numClusterKey));
 		numClusters++;
@@ -1452,6 +1506,7 @@ void PSIClusterReactionNetwork::add(std::shared_ptr<Reactant> reactant) {
 		clusters->push_back(reactant);
 		// Add the pointer to the list of all clusters
 		allReactants->push_back(reactant.get());
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 	}
 
@@ -1660,6 +1715,13 @@ void PSIClusterReactionNetwork::computeAllFluxes(double *updatedConcOffset) {
 		reactantIndex = superCluster->getVMomentumId() - 1;
 		updatedConcOffset[reactantIndex] += flux;
 =======
+=======
+	}
+
+	return;
+}
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 /**
  * This operation returns the names of the reactants in the network.
  * @return A vector with one each for each of the distinct reactant types
@@ -1713,12 +1775,16 @@ void PSIClusterReactionNetwork::setProperty(std::string key,
 			&& key != "maxHeIClusterSize") {
 		// Add the property if it made it through that!
 		(*properties)[key] = value;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void PSIClusterReactionNetwork::computeAllPartials(double *vals, int *indices,
 		int *size) {
@@ -1834,12 +1900,17 @@ void PSIClusterReactionNetwork::computeAllPartials(double *vals, int *indices,
 
 	return;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 /**
  * This operation returns the size or number of reactants in the network.
  * @return The number of reactants in the network
  */int PSIClusterReactionNetwork::size() {
 	return networkSize;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 

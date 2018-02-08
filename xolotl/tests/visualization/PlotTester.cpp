@@ -82,10 +82,14 @@ BOOST_AUTO_TEST_CASE(checkDataProvider) {
 
 	// Loop on all the points in dataPoints
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (unsigned int i = 0; i < dataPoints->size(); i++) {
 =======
 	for (int i = 0; i < dataPoints->size(); i++) {
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	for (int i = 0; i < dataPoints->size(); i++) {
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 		// Check that all the fields are the same
 		BOOST_REQUIRE_EQUAL(dataPoints->at(i).value, myPoints->at(i).value);

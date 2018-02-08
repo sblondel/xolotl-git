@@ -3,6 +3,7 @@
 
 // Includes
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "IReactant.h"
 #include <math.h>
 #include <sstream>
@@ -13,6 +14,8 @@ class IHandlerRegistry;
 class IEventCounter;
 }
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <string>
 #include <vector>
 #include <memory>
@@ -23,11 +26,15 @@ namespace xolotlPerf {
 	class IHandlerRegistry;
     class IEventCounter;
 };
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 namespace xolotlCore {
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * A reactant is a general reacting body in a reaction network. It represents
  * any body whose population can change with time due to reactions of any type.
@@ -35,17 +42,23 @@ namespace xolotlCore {
  * Reactants inherently know the other reactants with which they interact. They
  * declare their interactions with other reactants in the network after it is
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  * A Reactant is a general reacting body in a reaction network. It represents
  * any body whose population can change with time due to reactions of any type.
  *
  * Reactants inherently know the other Reactants with which they interact. They
  * declare their interactions with other Reactants in the network after it is
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  * set (setReactionNetwork) via the getConnectivity() operation. "Connectivity"
  * indicates whether two Reacants interact, via any mechanism, in an abstract
  * sense (as if they were nodes connected by an edge on a network graph).
  *
  * This is an abstract base class that only provides direct support for
+<<<<<<< HEAD
 <<<<<<< HEAD
  * manipulating the concentration, etc. It should be subclassed to add
  * functionality for calculate fluxes and computing connectivity.
@@ -183,6 +196,8 @@ protected:
 
     
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  * manipulate the concentration, etc. It should be subclassed to add
  * functionality for calculate fluxes and computing connectivity.
  */
@@ -228,7 +243,10 @@ protected:
      */
     std::shared_ptr<xolotlPerf::IHandlerRegistry> handlerRegistry;
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	/**
 	 * The constructor.
 	 */
@@ -240,15 +258,20 @@ public:
 	 * The constructor.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param registry The performance handler registry to use
 =======
 	 * @param registry  The performance handler registry to use
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	 * @param registry  The performance handler registry to use
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 */
 	Reactant(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
 
 	/**
 	 * The copy constructor. All reactants MUST be deep copied.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *
 	 * @param other The reactant to copy
@@ -259,10 +282,16 @@ public:
 	 */
 	Reactant(const Reactant &other);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	 * @param other The reactant to copy
+	 */
+	Reactant(const Reactant &other);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * The destructor
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	virtual ~Reactant() {
 	}
@@ -338,6 +367,8 @@ public:
         return concentration;
     }
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	virtual ~Reactant();
 
 	/**
@@ -383,7 +414,10 @@ public:
 	 * @param deltaConc the change in concentration
 	 */
 	void decreaseConcentration(double deltaConc);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation sets the concentration of the reactant to the
@@ -392,22 +426,29 @@ public:
 	 * @param conc The new concentation
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void setConcentration(double conc) {
         concentration = conc;
     }
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	void setConcentration(double conc);
 
 	/**
 	 * This operation sets the concentration of the reactant to zero.
 	 */
 	void zero();
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation returns the total flux of this reactant in the
 	 * current network.
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @return The total change in flux for this reactant due to all
 	 * reactions
@@ -416,12 +457,17 @@ public:
         return 0.0;
     }
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @param temperature The temperature at which to calculate the Diffusion Coefficient
 	 * @return The total change in flux for this reactant due to all
 	 * reactions
 	 */
 	virtual double getTotalFlux(const double temperature);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation sets the collection of other reactants that make up
@@ -430,6 +476,7 @@ public:
 	 * @param network The reaction network of which this reactant is a part
 	 */
 	virtual void setReactionNetwork(
+<<<<<<< HEAD
 <<<<<<< HEAD
 			std::shared_ptr<IReactionNetwork> reactionNetwork) {
         network = reactionNetwork;
@@ -481,6 +528,8 @@ public:
 	 * between this reactant and other reactants in the network.
 	 * "Connectivity" indicates whether two reactants interact, via any
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 			std::shared_ptr<ReactionNetwork> reactionNetwork);
 
 
@@ -500,11 +549,15 @@ public:
 	 * This operation returns a list that represents the connectivity
 	 * between this Reactant and other Reactants in the network.
 	 * "Connectivity" indicates whether two Reactants interact, via any
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * mechanism, in an abstract sense (as if they were nodes connected by
 	 * an edge on a network graph).
 	 *
 	 * @return An array of ones and zeros that indicate whether or not this
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * reactant interacts via any mechanism with another reactant. A "1" at
 	 * the i-th entry in this array indicates that the reactant interacts
@@ -514,20 +567,30 @@ public:
 	 * the i-th entry in this array indicates that the Reactant interacts
 	 * with the i-th Reactant in the ReactionNetwork and a "0" indicates
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	 * Reactant interacts via any mechanism with another Reactant. A "1" at
+	 * the i-th entry in this array indicates that the Reactant interacts
+	 * with the i-th Reactant in the ReactionNetwork and a "0" indicates
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * that it does not.
 	 */
 	virtual std::vector<int> getConnectivity() const;
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * This operation returns the list of partial derivatives of this reactant
 =======
 	 * This operation returns the list of partial derivatives of this Reactant
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	 * This operation returns the list of partial derivatives of this Reactant
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * with respect to all other reactants in the network. The combined lists
 	 * of partial derivatives from all of the reactants in the network can be
 	 * used to form, for example, a Jacobian.
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @return the partial derivatives for this reactant where index zero
 	 * corresponds to the first reactant in the list returned by the
@@ -602,6 +665,8 @@ public:
         return compString;
     }
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @param the temperature at which the reactions are occurring
 	 * @return the partial derivatives for this reactant where index zero
 	 * corresponds to the first reactant in the list returned by the
@@ -654,12 +719,16 @@ public:
 	 * elements and values indicating the amount of the element present.
 	 */
 	virtual const std::map<std::string, int> & getComposition() const;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation sets the id of the reactant, The id is zero by default
 	 * and clients, most likely the ReactionNetwork, are expected to set the
 	 * id as needed.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *
 	 * @param nId The new id for this reactant
@@ -876,6 +945,8 @@ public:
 			const std::map<std::string, int>& composition);
 
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	 * @param nId The new id for this reactant
 	 */
 	void setId(int nId) {
@@ -890,8 +961,11 @@ public:
 		return id;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	/**
 	 * This operation sets the temperature at which the reactant currently
@@ -920,10 +994,14 @@ public:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
 =======
 
 >>>>>>> Pulling "break circular dependencies of network and reactant objects" into the HDF5 branch. SB 20140624
+=======
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 };
 
 } // end namespace xolotlCore

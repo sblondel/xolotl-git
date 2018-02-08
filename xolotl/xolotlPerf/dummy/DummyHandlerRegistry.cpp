@@ -1,6 +1,7 @@
 #include "DummyHandlerRegistry.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 namespace xolotlPerf {
 
 // Obtain a Timer by name.
@@ -20,6 +21,8 @@ std::shared_ptr<IEventCounter> DummyHandlerRegistry::getEventCounter(
 	// an object with this name and return that object?
 	return std::make_shared < DummyEventCounter > (name);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 namespace xolotlPerf
 {
 
@@ -42,11 +45,15 @@ DummyHandlerRegistry::getEventCounter( std::string name )
     // TODO do we need to check whether client has already created
     // an object with this name and return that object?
     return std::make_shared<DummyEventCounter>( name );
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 // Obtain a HardwareCounter object by name and by the
 // counter data it collects.
+<<<<<<< HEAD
 <<<<<<< HEAD
 std::shared_ptr<IHardwareCounter> DummyHandlerRegistry::getHardwareCounter(
 		const std::string& name, const IHardwareCounter::SpecType& ctrSpec) {
@@ -74,6 +81,8 @@ void DummyHandlerRegistry::reportStatistics(std::ostream&,
 
 } // namespace xolotlPerf
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 std::shared_ptr<IHardwareCounter>
 DummyHandlerRegistry::getHardwareCounter( std::string name, 
                                         std::vector<HardwareQuantities> hwq )
@@ -96,5 +105,8 @@ void DummyHandlerRegistry::dump( int rank) const
 }
 
 };  // end namespace xolotlPerf
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 

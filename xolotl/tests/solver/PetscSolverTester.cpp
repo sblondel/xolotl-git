@@ -7,13 +7,17 @@
 #include <typeinfo>
 #include <limits>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <string.h>
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <PSIClusterNetworkLoader.h>
 #include <PSIClusterReactionNetwork.h>
 #include <PetscSolver.h>
 #include <XolotlConfig.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <xolotlPerf.h>
 #include <DummyHandlerRegistry.h>
@@ -31,12 +35,16 @@
 =======
 #include <DummyHandlerRegistry.h>
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+#include <DummyHandlerRegistry.h>
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 using namespace std;
 using namespace xolotlCore;
 
 /**
  * The test suite configuration
+<<<<<<< HEAD
 <<<<<<< HEAD
  */
 BOOST_AUTO_TEST_SUITE (PetscSolverTester_testSuite)
@@ -625,6 +633,8 @@ BOOST_AUTO_TEST_CASE(checkPetscSolver2DHandler) {
 //}
 
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
  */BOOST_AUTO_TEST_SUITE (PetscSolverTester_testSuite)
 
 /**
@@ -654,5 +664,8 @@ BOOST_AUTO_TEST_CASE(checkDOFConversion) {
 
 	BOOST_TEST_MESSAGE("PetscSolverTester Message: Network loaded");
 }
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 BOOST_AUTO_TEST_SUITE_END()

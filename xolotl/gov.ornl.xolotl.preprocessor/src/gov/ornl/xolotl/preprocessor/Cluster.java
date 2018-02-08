@@ -13,6 +13,7 @@ package gov.ornl.xolotl.preprocessor;
 public class Cluster {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// The number of helium atoms in the cluster. Default value is 0.
 	public int nHe = 0;
 
@@ -24,6 +25,11 @@ public class Cluster {
 	public int nHe = 0;
 
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+	// The number of Helium atoms in the cluster. Default value is 0.
+	public int nHe = 0;
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// The number of vacancies in the cluster. Default value is 0.
 	public int nV = 0;
 
@@ -31,9 +37,12 @@ public class Cluster {
 	public int nI = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// The formation energy of this cluster
 	public double E_f = 0.0;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// The binding energy of the cluster with He_1. Default value is infinity so
 	// that the cluster does not dissociate.
 	public double E_He = Double.POSITIVE_INFINITY;
@@ -45,7 +54,10 @@ public class Cluster {
 	// The binding energy of the cluster with I_1. Default value is infinity so
 	// that the cluster does not dissociate.
 	public double E_I = Double.POSITIVE_INFINITY;
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// The migration energy with which the cluster diffuses. Default value is
 	// infinity so that the cluster is immobile.
@@ -57,7 +69,10 @@ public class Cluster {
 	public double D_0 = 0.0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	/**
 	 * This operation returns the cluster as a string of the form
 	 * 
@@ -79,5 +94,8 @@ public class Cluster {
 				+ " " + EIAsString + " " + EMAsString + " " + D_0;
 	}
 
+<<<<<<< HEAD
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }

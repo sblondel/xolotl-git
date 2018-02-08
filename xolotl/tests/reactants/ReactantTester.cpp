@@ -1,21 +1,31 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 /*
  * PSIClusterTester.cpp
  *
  *  Created on: May 6, 2013
  *      Author: Jay Jay Billings
  */
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE Regression
 
 #include <boost/test/included/unit_test.hpp>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <Reactant.h>
 =======
 #include <PSICluster.h>
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+#include <PSICluster.h>
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include "SimpleReactionNetwork.h"
 #include <memory>
 #include <typeinfo>
@@ -27,16 +37,21 @@ using namespace xolotlCore;
 using namespace testUtils;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry =
 		std::make_shared<xolotlPerf::DummyHandlerRegistry>();
 =======
 static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry = std::make_shared<xolotlPerf::DummyHandlerRegistry>();
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry = std::make_shared<xolotlPerf::DummyHandlerRegistry>();
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 /**
  * This suite is responsible for testing the Reactant.
  */BOOST_AUTO_TEST_SUITE(Reactant_testSuite)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 BOOST_AUTO_TEST_CASE(checkTemperature) {
 	// Create a reactant
@@ -130,6 +145,8 @@ BOOST_AUTO_TEST_CASE(checkConcentration) {
 
 	return;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 /**
  * This operation checks the ability to set the temperature
  */
@@ -211,11 +228,15 @@ BOOST_AUTO_TEST_CASE(checkComposition) {
 	// Make sure the base class getTotalFlux returns 0 for now
 	BOOST_REQUIRE_EQUAL(0.0, reactant.getTotalFlux(0.0));
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 BOOST_AUTO_TEST_CASE(checkIsConnected) {
 	// Create a reaction network containing only clusters with maximum size 2
+<<<<<<< HEAD
 <<<<<<< HEAD
 	shared_ptr<ReactionNetwork> network = getSimplePSIReactionNetwork(2);
 
@@ -229,6 +250,8 @@ BOOST_AUTO_TEST_CASE(checkIsConnected) {
 			{ 1, 0, 1, 0, 1, 0, 1, 0 }, // HeV
 			{ 1, 0, 1, 0, 1, 0, 0, 1 }  // HeI
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	shared_ptr<ReactionNetwork> network = getSimpleReactionNetwork(2);
 
 	// Check the connectivity matrix (8 * 8)
@@ -241,67 +264,91 @@ BOOST_AUTO_TEST_CASE(checkIsConnected) {
 			{0, 0, 1, 0, 1, 1, 0, 0}, // I_2
 			{0, 0, 0, 0, 0, 0, 1, 0}, // HeV
 			{0, 0, 0, 0, 0, 0, 0, 1}  // HeI
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	};
 
 	// Check He
 	auto reactantConnectivity = network->get("He", 1)->getConnectivity();
 	for (int j = 0; j < 8; j++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BOOST_REQUIRE_EQUAL(connectivityExpected[0][j],
 				reactantConnectivity[j]);
 =======
 		BOOST_REQUIRE_EQUAL(connectivityExpected[0][j],reactantConnectivity[j]);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+		BOOST_REQUIRE_EQUAL(connectivityExpected[0][j],reactantConnectivity[j]);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 
 	// Check He_2
 	reactantConnectivity = network->get("He", 2)->getConnectivity();
 	for (int j = 0; j < 8; j++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BOOST_REQUIRE_EQUAL(connectivityExpected[1][j],
 				reactantConnectivity[j]);
 =======
 		BOOST_REQUIRE_EQUAL(connectivityExpected[1][j],reactantConnectivity[j]);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+		BOOST_REQUIRE_EQUAL(connectivityExpected[1][j],reactantConnectivity[j]);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 
 	// Check V
 	reactantConnectivity = network->get("V", 1)->getConnectivity();
 	for (int j = 0; j < 8; j++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BOOST_REQUIRE_EQUAL(connectivityExpected[2][j],
 				reactantConnectivity[j]);
 =======
 		BOOST_REQUIRE_EQUAL(connectivityExpected[2][j],reactantConnectivity[j]);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+		BOOST_REQUIRE_EQUAL(connectivityExpected[2][j],reactantConnectivity[j]);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 
 	// Check V_2
 	reactantConnectivity = network->get("V", 2)->getConnectivity();
 	for (int j = 0; j < 8; j++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BOOST_REQUIRE_EQUAL(connectivityExpected[3][j],
 				reactantConnectivity[j]);
 =======
 		BOOST_REQUIRE_EQUAL(connectivityExpected[3][j],reactantConnectivity[j]);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+		BOOST_REQUIRE_EQUAL(connectivityExpected[3][j],reactantConnectivity[j]);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 
 	// Check I
 	reactantConnectivity = network->get("I", 1)->getConnectivity();
 	for (int j = 0; j < 8; j++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BOOST_REQUIRE_EQUAL(connectivityExpected[4][j],
 				reactantConnectivity[j]);
 =======
 		BOOST_REQUIRE_EQUAL(connectivityExpected[4][j],reactantConnectivity[j]);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+		BOOST_REQUIRE_EQUAL(connectivityExpected[4][j],reactantConnectivity[j]);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 
 	// Check I_2
 	reactantConnectivity = network->get("I", 2)->getConnectivity();
 	for (int j = 0; j < 8; j++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		BOOST_REQUIRE_EQUAL(connectivityExpected[5][j],
 				reactantConnectivity[j]);
@@ -315,6 +362,8 @@ BOOST_AUTO_TEST_CASE(checkIsConnected) {
 		BOOST_REQUIRE_EQUAL(connectivityExpected[6][j],
 				reactantConnectivity[j]);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		BOOST_REQUIRE_EQUAL(connectivityExpected[5][j],reactantConnectivity[j]);
 	}
 
@@ -323,11 +372,15 @@ BOOST_AUTO_TEST_CASE(checkIsConnected) {
 	reactantConnectivity = network->getCompound("HeV", compositionVector)->getConnectivity();
 	for (int j = 0; j < 8; j++) {
 		BOOST_REQUIRE_EQUAL(connectivityExpected[6][j],reactantConnectivity[j]);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 
 	// Check HeI
 	compositionVector = {1,0,1};
+<<<<<<< HEAD
 <<<<<<< HEAD
 	reactantConnectivity =
 			network->getCompound("HeI", compositionVector)->getConnectivity();
@@ -339,12 +392,20 @@ BOOST_AUTO_TEST_CASE(checkIsConnected) {
 	for (int j = 0; j < 8; j++) {
 		BOOST_REQUIRE_EQUAL(connectivityExpected[7][j],reactantConnectivity[j]);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	reactantConnectivity = network->getCompound("HeI", compositionVector)->getConnectivity();
+	for (int j = 0; j < 8; j++) {
+		BOOST_REQUIRE_EQUAL(connectivityExpected[7][j],reactantConnectivity[j]);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	}
 
 	return;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 BOOST_AUTO_TEST_SUITE_END()

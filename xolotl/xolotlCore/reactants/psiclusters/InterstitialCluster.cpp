@@ -5,6 +5,7 @@
 using namespace xolotlCore;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 InterstitialCluster::InterstitialCluster(int nI,
 		std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
 		PSICluster(registry) {
@@ -26,6 +27,8 @@ InterstitialCluster::InterstitialCluster(int nI,
 	double termOne = 1.15 * (sqrt(3.0) / 4.0)
 			* xolotlCore::tungstenLatticeConstant;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 InterstitialCluster::InterstitialCluster(int nI, std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
 		PSICluster(nI, registry) {
 
@@ -43,13 +46,19 @@ InterstitialCluster::InterstitialCluster(int nI, std::shared_ptr<xolotlPerf::IHa
 	double EightPi = 8.0 * xolotlCore::pi;
 	double aCubed = pow(xolotlCore::latticeConstant, 3.0);
 	double termOne = 1.15 * (sqrt(3.0) / 4.0) * xolotlCore::latticeConstant;
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	double termTwo = pow((3.0 / EightPi) * aCubed * size, (1.0 / 3.0));
 	double termThree = pow((3.0 / EightPi) * aCubed, (1.0 / 3.0));
 	reactionRadius = termOne + termTwo - termThree;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }
 
 InterstitialCluster::~InterstitialCluster() {
@@ -167,6 +176,9 @@ void InterstitialCluster::createReactionConnectivity() {
 		combineClusters(reactants,maxHeIClusterSize,"HeI");
 	}
 
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	return;
 }

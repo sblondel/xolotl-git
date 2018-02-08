@@ -2,6 +2,7 @@
 #include "Reactant.h"
 #include "ReactionNetwork.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <xolotlPerf.h>
 #include <iostream>
 #include <math.h>
@@ -11,11 +12,16 @@
 #include "xolotlPerf/HandlerRegistryFactory.h"
 #include <iostream>
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+#include "xolotlPerf/HandlerRegistryFactory.h"
+#include <iostream>
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 // Namespaces
 using namespace xolotlCore;
 
 Reactant::Reactant() :
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		concentration(0.0), id(0), xeMomId(0), heMomId(0), vMomId(0), temperature(
@@ -141,6 +147,9 @@ void Reactant::setMigrationEnergy(const double energy) {
 =======
 		concentration(0.0), name(""), id(0), temperature(0.0) {
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+		concentration(0.0), name(""), id(0), temperature(0.0) {
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Temporary definition used to specify the type of performance handler registry
 	// that will be used (standard or dummy).  Currently, the handler registry is set via
@@ -277,4 +286,7 @@ const std::map<std::string, int> & Reactant::getComposition() const {
 	// Return the composition map
 	return compositionMap;
 }
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7

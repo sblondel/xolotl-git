@@ -1,5 +1,6 @@
 #include "HDF5Utils.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <PSICluster.h>
 #include <iostream>
 #include <sstream>
@@ -131,6 +132,8 @@ void HDF5Utils::fillNetwork(const std::string& fileName) {
 	// Close the from file
 	status = H5Fclose(fromFileId);
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 #include <iostream>
 #include <sstream>
 #include <hdf5.h>
@@ -172,6 +175,7 @@ void HDF5Utils::initializeFile(std::string fileName, int networkSize,
 	H5P_DEFAULT, H5P_DEFAULT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Create the dataspace for the concentrations with dimension dim
 	hsize_t dim[1];
 	dim[0] = networkSize;
@@ -187,6 +191,8 @@ void HDF5Utils::initializeFile(std::string fileName, int networkSize,
 		std::stringstream datasetName;
 		datasetName << "position_" << i;
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Create, write, and close the last written time step attribute
 	int lastTimeStep = -1;
 	hid_t lastSId = H5Screate(H5S_SCALAR);
@@ -195,7 +201,10 @@ void HDF5Utils::initializeFile(std::string fileName, int networkSize,
 			H5P_DEFAULT, H5P_DEFAULT);
 	status = H5Awrite(lastAId, H5T_STD_I32LE, &lastTimeStep);
 	status = H5Aclose(lastAId);
+<<<<<<< HEAD
 >>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	return;
 }
@@ -216,6 +225,7 @@ void HDF5Utils::openFile(std::string fileName) {
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -267,6 +277,9 @@ void HDF5Utils::fillHeader(int physicalDim, int refinement, double time,
 =======
 void HDF5Utils::fillHeader(int physicalDim, int refinement) {
 >>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
+=======
+void HDF5Utils::fillHeader(int physicalDim, int refinement) {
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Create, write, and close the physicalDim attribute
 	hid_t dimSId = H5Screate(H5S_SCALAR);
 	hid_t dimAId = H5Acreate2(headerGroupId, "physicalDim", H5T_STD_I32LE,
@@ -283,6 +296,7 @@ void HDF5Utils::fillHeader(int physicalDim, int refinement) {
 	status = H5Awrite(refineAId, H5T_STD_I32LE, &refinement);
 	status = H5Aclose(refineAId);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// Create, write, and close the absolute time attribute
 	hid_t timeSId = H5Screate(H5S_SCALAR);
@@ -399,6 +413,13 @@ void HDF5Utils::fillNetwork(std::shared_ptr<PSIClusterReactionNetwork> network) 
 void HDF5Utils::fillNetwork(
 		std::shared_ptr<PSIClusterReactionNetwork> network) {
 >>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
+=======
+	return;
+}
+
+void HDF5Utils::fillNetwork(
+		std::shared_ptr<PSIClusterReactionNetwork> network) {
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Create the array that will store the network
 	int networkSize = network->size();
 	double networkArray[networkSize][8];
@@ -456,11 +477,15 @@ void HDF5Utils::fillNetwork(
 	status = H5Sclose(networkSizeSId);
 	status = H5Aclose(networkSizeAId);
 	status = H5Dclose(datasetId);
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -533,6 +558,9 @@ void HDF5Utils::addConcentrationSubGroup(int timeStep, int networkSize, int grid
 =======
 void HDF5Utils::addConcentrationSubGroup(int timeStep, int networkSize,
 >>>>>>> Optimizing the way of storing the concentrations in the HDF5 file. Now only store the id and values for the concentrations above 1e-16. SB 20140617
+=======
+void HDF5Utils::addConcentrationSubGroup(int timeStep, int networkSize,
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 		double time, double deltaTime) {
 	// Set the name of the sub group
 	std::stringstream subGroupName;
@@ -573,6 +601,7 @@ void HDF5Utils::addConcentrationSubGroup(int timeStep, int networkSize,
 	// HDF5 screaming).
 	plistId = H5Pcreate(H5P_DATASET_XFER);
 	status = H5Pset_dxpl_mpio(plistId, H5FD_MPIO_COLLECTIVE);
+<<<<<<< HEAD
 >>>>>>> Modifying the way HDF5 files are written and read: append a concentration group at each time step instead of a new file, and read from the concentration only if the group exists in the file. Adding a stride to write HDF5 file only every "stride" time step. Updating the associated steps. SB 20140616
 
 	return;
@@ -598,10 +627,13 @@ void HDF5Utils::addConcentrationDataset(int size, int i, int j, int k) {
 	// Close everything
 	status = H5Sclose(concDataspaceId);
 	status = H5Dclose(datasetId);
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 void HDF5Utils::fillConcentrations(
@@ -638,6 +670,8 @@ void HDF5Utils::fillConcentrations(double * concArray, int index,
 		double position) {
 >>>>>>> HDF5 handles the writing of the file in parallel instead of the Petsc monitor. SB 20140523
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 void HDF5Utils::addConcentrationDataset(int index, int size) {
 	// Set the dataset name
 	std::stringstream datasetName;
@@ -684,7 +718,10 @@ void HDF5Utils::fillConcentrations(std::vector<std::vector<double> > concVector,
 		concArray[i][1] = concVector.at(i).at(1);
 	}
 
+<<<<<<< HEAD
 >>>>>>> Optimizing the way of storing the concentrations in the HDF5 file. Now only store the id and values for the concentrations above 1e-16. SB 20140617
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Set the dataset name
 	std::stringstream datasetName;
 	datasetName << "position_" << index;
@@ -699,11 +736,14 @@ void HDF5Utils::fillConcentrations(std::vector<std::vector<double> > concVector,
 
 	// Close everything
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = H5Sclose(posSId);
 	status = H5Aclose(posAId);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
 >>>>>>> Optimizing the way of storing the concentrations in the HDF5 file. Now only store the id and values for the concentrations above 1e-16. SB 20140617
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	status = H5Dclose(datasetId);
 
 	return;
@@ -713,11 +753,16 @@ void HDF5Utils::finalizeFile() {
 	// Close everything
 	status = H5Gclose(headerGroupId);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = H5Gclose(concentrationGroupId);
 =======
 	status = H5Gclose(networkGroupId);
 	status = H5Gclose(concGroupId);
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	status = H5Gclose(networkGroupId);
+	status = H5Gclose(concGroupId);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	status = H5Fclose(fileId);
 
 	return;
@@ -725,16 +770,24 @@ void HDF5Utils::finalizeFile() {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 void HDF5Utils::closeFile() {
 	// Close everything
 	status = H5Pclose(plistId);
 	status = H5Gclose(subConcGroupId);
+<<<<<<< HEAD
 	status = H5Gclose(concentrationGroupId);
+=======
+	status = H5Gclose(concGroupId);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	status = H5Fclose(fileId);
 
 	return;
 }
 
+<<<<<<< HEAD
 void HDF5Utils::readHeader(const std::string& fileName, int &nx, double &hx,
 		int &ny, double &hy, int &nz, double &hz) {
 	// Set up file access property list with parallel I/O access
@@ -746,10 +799,23 @@ void HDF5Utils::readHeader(const std::string& fileName, int &nx, double &hx,
 
 	// Close the property list
 	status = H5Pclose(propertyListId);
+=======
+void HDF5Utils::readHeader(std::string fileName, int & physicalDim) {
+	// Set up file access property list with parallel I/O access
+	plistId = H5Pcreate(H5P_FILE_ACCESS);
+	H5Pset_fapl_mpio(plistId, MPI_COMM_WORLD, MPI_INFO_NULL);
+
+	// Open the given HDF5 file with read only access
+	fileId = H5Fopen(fileName.c_str(), H5F_ACC_RDONLY, plistId);
+
+	// Close the property list
+	status = H5Pclose(plistId);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Open the header group
 	hid_t groupId = H5Gopen(fileId, "/headerGroup", H5P_DEFAULT);
 
+<<<<<<< HEAD
 	// Open and read the nx attribute
 	hid_t attributeId = H5Aopen(groupId, "nx", H5P_DEFAULT);
 	status = H5Aread(attributeId, H5T_STD_I32LE, &nx);
@@ -776,6 +842,12 @@ void HDF5Utils::readHeader(const std::string& fileName, int &nx, double &hx,
 	attributeId = H5Aopen(groupId, "hz", H5P_DEFAULT);
 	status = H5Aread(attributeId, H5T_IEEE_F64LE, &hz);
 	status = H5Aclose(attributeId);
+=======
+	// Open and read the physicalDim attribute
+	hid_t physicalDimAId = H5Aopen(groupId, "physicalDim", H5P_DEFAULT);
+	status = H5Aread(physicalDimAId, H5T_STD_I32LE, &physicalDim);
+	status = H5Aclose(physicalDimAId);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Close everything
 	status = H5Gclose(groupId);
@@ -785,16 +857,22 @@ void HDF5Utils::readHeader(const std::string& fileName, int &nx, double &hx,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool HDF5Utils::hasConcentrationGroup(const std::string& fileName,
 		int &lastTimeStep) {
 =======
 bool HDF5Utils::hasConcentrationGroup(std::string fileName,
 		int & lastTimeStep) {
 >>>>>>> Optimizing the way of storing the concentrations in the HDF5 file. Now only store the id and values for the concentrations above 1e-16. SB 20140617
+=======
+bool HDF5Utils::hasConcentrationGroup(std::string fileName,
+		int & lastTimeStep) {
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Initialize the boolean to return
 	bool hasGroup = true;
 
 	// Set up file access property list with parallel I/O access
+<<<<<<< HEAD
 	propertyListId = H5Pcreate(H5P_FILE_ACCESS);
 	H5Pset_fapl_mpio(propertyListId, MPI_COMM_WORLD, MPI_INFO_NULL);
 
@@ -827,6 +905,30 @@ bool HDF5Utils::hasConcentrationGroup(std::string fileName,
 		status = H5Aclose(lastAttributeId);
 
 		status = H5Gclose(concentrationGroupId);
+=======
+	plistId = H5Pcreate(H5P_FILE_ACCESS);
+	H5Pset_fapl_mpio(plistId, MPI_COMM_WORLD, MPI_INFO_NULL);
+
+	// Open the given HDF5 file with read only access
+	fileId = H5Fopen(fileName.c_str(), H5F_ACC_RDONLY, plistId);
+
+	// Close the property list
+	status = H5Pclose(plistId);
+
+	// Check the group
+	bool groupExist = H5Lexists(fileId, "/concentrationsGroup", H5P_DEFAULT);
+	// If the group exist
+	if (groupExist) {
+		// Open the concentration group
+		concGroupId = H5Gopen(fileId, "/concentrationsGroup", H5P_DEFAULT);
+
+		// Open and read the lastTimeStep attribute
+		hid_t lastAId = H5Aopen(concGroupId, "lastTimeStep", H5P_DEFAULT);
+		status = H5Aread(lastAId, H5T_STD_I32LE, &lastTimeStep);
+		status = H5Aclose(lastAId);
+
+		status = H5Gclose(concGroupId);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 		// if lastTimeStep is still negative the group is not valid
 		if (lastTimeStep < 0)
@@ -836,11 +938,14 @@ bool HDF5Utils::hasConcentrationGroup(std::string fileName,
 	else
 		hasGroup = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	// Close everything
 	status = H5Fclose(fileId);
 =======
 >>>>>>> Optimizing the way of storing the concentrations in the HDF5 file. Now only store the id and values for the concentrations above 1e-16. SB 20140617
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Close everything
 	status = H5Fclose(fileId);
@@ -848,6 +953,7 @@ bool HDF5Utils::hasConcentrationGroup(std::string fileName,
 	return hasGroup;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void HDF5Utils::readTimes(const std::string& fileName, int lastTimeStep,
 		double &time, double &deltaTime) {
@@ -864,6 +970,19 @@ void HDF5Utils::readTimes(std::string fileName, int lastTimeStep, double & time,
 
 	// Close the property list
 	status = H5Pclose(propertyListId);
+=======
+void HDF5Utils::readTimes(std::string fileName, int lastTimeStep, double & time,
+		double & deltaTime) {
+	// Set up file access property list with parallel I/O access
+	plistId = H5Pcreate(H5P_FILE_ACCESS);
+	H5Pset_fapl_mpio(plistId, MPI_COMM_WORLD, MPI_INFO_NULL);
+
+	// Open the given HDF5 file with read only access
+	fileId = H5Fopen(fileName.c_str(), H5F_ACC_RDONLY, plistId);
+
+	// Close the property list
+	status = H5Pclose(plistId);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Set the name of the sub group
 	std::stringstream subGroupName;
@@ -873,6 +992,7 @@ void HDF5Utils::readTimes(std::string fileName, int lastTimeStep, double & time,
 	subConcGroupId = H5Gopen(fileId, subGroupName.str().c_str(), H5P_DEFAULT);
 
 	// Open and read the absoluteTime attribute
+<<<<<<< HEAD
 	hid_t attributeId = H5Aopen(subConcGroupId, "absoluteTime", H5P_DEFAULT);
 	status = H5Aread(attributeId, H5T_IEEE_F64LE, &time);
 	status = H5Aclose(attributeId);
@@ -881,6 +1001,16 @@ void HDF5Utils::readTimes(std::string fileName, int lastTimeStep, double & time,
 	attributeId = H5Aopen(subConcGroupId, "deltaTime", H5P_DEFAULT);
 	status = H5Aread(attributeId, H5T_IEEE_F64LE, &deltaTime);
 	status = H5Aclose(attributeId);
+=======
+	hid_t timeAId = H5Aopen(subConcGroupId, "absoluteTime", H5P_DEFAULT);
+	status = H5Aread(timeAId, H5T_IEEE_F64LE, &time);
+	status = H5Aclose(timeAId);
+
+	// Open and read the deltaTime attribute
+	hid_t deltaTimeAId = H5Aopen(subConcGroupId, "deltaTime", H5P_DEFAULT);
+	status = H5Aread(deltaTimeAId, H5T_IEEE_F64LE, &deltaTime);
+	status = H5Aclose(deltaTimeAId);
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 	// Close everything
 	status = H5Gclose(subConcGroupId);
@@ -889,6 +1019,7 @@ void HDF5Utils::readTimes(std::string fileName, int lastTimeStep, double & time,
 	return;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 double HDF5Utils::readPreviousTime(const std::string& fileName,
@@ -1667,6 +1798,63 @@ std::vector< std::vector<double> > HDF5Utils::readGridPoint(std::string fileName
 	H5Pset_fapl_mpio(plistId, MPI_COMM_WORLD, MPI_INFO_NULL);
 
 >>>>>>> Adding the property list to read HDF5 files in parallel. SB 20140602
+=======
+std::vector<std::vector<double> > HDF5Utils::readNetwork(std::string fileName) {
+	// Set up file access property list with parallel I/O access
+	plistId = H5Pcreate(H5P_FILE_ACCESS);
+	H5Pset_fapl_mpio(plistId, MPI_COMM_WORLD, MPI_INFO_NULL);
+
+	// Open the given HDF5 file with read only access
+	fileId = H5Fopen(fileName.c_str(), H5F_ACC_RDONLY, plistId);
+
+	// Close the property list
+	status = H5Pclose(plistId);
+
+	// Open the dataset
+	hid_t datasetId = H5Dopen(fileId, "/networkGroup/network", H5P_DEFAULT);
+
+	// Open and read the networkSize attribute
+	hid_t networkSizeAId = H5Aopen(datasetId, "networkSize", H5P_DEFAULT);
+	int networkSize = 0;
+	status = H5Aread(networkSizeAId, H5T_STD_I32LE, &networkSize);
+	status = H5Aclose(networkSizeAId);
+
+	// Create the array that will receive the network
+	double networkArray[networkSize][8];
+
+	// Read the data set
+	status = H5Dread(datasetId, H5T_IEEE_F64LE, H5S_ALL, H5S_ALL, H5P_DEFAULT,
+			&networkArray);
+
+	// Fill the vector to return with the dataset
+	std::vector<std::vector<double> > networkVector;
+	// Loop on the size of the network
+	for (int i = 0; i < networkSize; i++) {
+		// Create the line to give to the vector
+		std::vector<double> line;
+		for (int j = 0; j < 8; j++) {
+			line.push_back(networkArray[i][j]);
+		}
+		networkVector.push_back(line);
+	}
+
+	// Close everything
+	status = H5Dclose(datasetId);
+	status = H5Fclose(fileId);
+
+	return networkVector;
+}
+
+std::vector< std::vector<double> > HDF5Utils::readGridPoint(std::string fileName,
+		int lastTimeStep, int i) {
+	// Create te vector to return
+	std::vector< std::vector<double> > toReturn;
+
+	// Set up file access property list with parallel I/O access
+	plistId = H5Pcreate(H5P_FILE_ACCESS);
+	H5Pset_fapl_mpio(plistId, MPI_COMM_WORLD, MPI_INFO_NULL);
+
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	// Open the given HDF5 file with read only access
 	fileId = H5Fopen(fileName.c_str(), H5F_ACC_RDONLY, plistId);
 
@@ -1718,9 +1906,13 @@ std::vector< std::vector<double> > HDF5Utils::readGridPoint(std::string fileName
 	status = H5Fclose(fileId);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
 =======
 	return toReturn;
 >>>>>>> Optimizing the way of storing the concentrations in the HDF5 file. Now only store the id and values for the concentrations above 1e-16. SB 20140617
+=======
+	return toReturn;
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 }

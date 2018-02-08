@@ -73,6 +73,7 @@ find_path (PETSC_DIR include/petsc.h
   PATHS
   # Debian paths
 <<<<<<< HEAD
+<<<<<<< HEAD
   /usr/lib/petscdir/3.5.1 /usr/lib/petscdir/3.5
   /usr/lib/petscdir/3.4.2 /usr/lib/petscdir/3.4
   /usr/lib/petscdir/3.3 /usr/lib/petscdir/3.2 /usr/lib/petscdir/3.1
@@ -84,6 +85,11 @@ find_path (PETSC_DIR include/petsc.h
   /usr/lib/petscdir/3.3 /usr/lib/petscdir/3.2 /usr/lib/petscdir/3.1
   /usr/lib/petscdir/3.0.0 /usr/lib/petscdir/2.3.3 /usr/lib/petscdir/2.3.2
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+  /usr/lib/petscdir/3.4
+  /usr/lib/petscdir/3.3 /usr/lib/petscdir/3.2 /usr/lib/petscdir/3.1
+  /usr/lib/petscdir/3.0.0 /usr/lib/petscdir/2.3.3 /usr/lib/petscdir/2.3.2
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
   $ENV{HOME}/petsc
   DOC "PETSc Directory")
 
@@ -99,18 +105,24 @@ if (PETSC_DIR AND NOT PETSC_ARCH)
     if (NOT PETSC_ARCH)
       find_path (petscconf petscconf.h
 <<<<<<< HEAD
+<<<<<<< HEAD
         HINTS ${PETSC_DIR}
         PATH_SUFFIXES ${arch}/include bmake/${arch}
         NO_DEFAULT_PATH)
       if (petscconf)
         set (PETSC_ARCH "${arch}" CACHE STRING "PETSc build architecture")
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	HINTS ${PETSC_DIR}
 	PATH_SUFFIXES ${arch}/include bmake/${arch}
 	NO_DEFAULT_PATH)
       if (petscconf)
 	set (PETSC_ARCH "${arch}" CACHE STRING "PETSc build architecture")
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
       endif (petscconf)
     endif (NOT PETSC_ARCH)
   endforeach (arch)
@@ -127,6 +139,7 @@ find_package_multipass (PETSc petsc_config_current
 # Determine whether the PETSc layout is old-style (through 2.3.3) or
 # new-style (>= 3.0.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 if (EXISTS "${PETSC_DIR}/${PETSC_ARCH}/lib/petsc/conf/petscvariables") # > 3.5
   set (petsc_conf_rules "${PETSC_DIR}/lib/petsc/conf/rules")
   set (petsc_conf_variables "${PETSC_DIR}/lib/petsc/conf/variables")
@@ -137,6 +150,9 @@ elseif (EXISTS "${PETSC_DIR}/${PETSC_ARCH}/include/petscconf.h")   # > 2.3.3
 =======
 if (EXISTS "${PETSC_DIR}/${PETSC_ARCH}/include/petscconf.h")   # > 2.3.3
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+if (EXISTS "${PETSC_DIR}/${PETSC_ARCH}/include/petscconf.h")   # > 2.3.3
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
   set (petsc_conf_rules "${PETSC_DIR}/conf/rules")
   set (petsc_conf_variables "${PETSC_DIR}/conf/variables")
 elseif (EXISTS "${PETSC_DIR}/bmake/${PETSC_ARCH}/petscconf.h") # <= 2.3.3
@@ -164,10 +180,14 @@ include ${petsc_conf_rules}
 include ${petsc_conf_variables}
 show :
 <<<<<<< HEAD
+<<<<<<< HEAD
 \t-@echo -n \${\${VARIABLE}}
 =======
 	-@echo -n \${\${VARIABLE}}
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	-@echo -n \${\${VARIABLE}}
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 ")
 
   macro (PETSC_GET_VARIABLE name var)
@@ -184,9 +204,12 @@ show :
   petsc_get_variable (PCC_FLAGS                petsc_cc_flags)
   petsc_get_variable (MPIEXEC                  petsc_mpiexec)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
   # We are done with the temporary Makefile, calling PETSC_GET_VARIABLE after this point is invalid!
   file (REMOVE ${petsc_config_makefile})
 
@@ -276,10 +299,14 @@ show :
       set (_PETSC_TSDestroy "TSDestroy(ts)")
     endif ()
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
     
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+    
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
     set(_PETSC_TEST_SOURCE "
 static const char help[] = \"PETSc test program.\";
 #include <petscts.h>
@@ -299,10 +326,14 @@ int main(int argc,char *argv[]) {
     if (${${runs}})
       set (PETSC_EXECUTABLE_RUNS "YES" CACHE BOOL
 <<<<<<< HEAD
+<<<<<<< HEAD
         "Can the system successfully run a PETSc executable?  This variable can be manually set to \"YES\" to force CMake to accept a given PETSc configuration, but this will almost always result in a broken build.  If you change PETSC_DIR, PETSC_ARCH, or PETSC_CURRENT you would have to reset this variable." FORCE)
 =======
 	"Can the system successfully run a PETSc executable?  This variable can be manually set to \"YES\" to force CMake to accept a given PETSc configuration, but this will almost always result in a broken build.  If you change PETSC_DIR, PETSC_ARCH, or PETSC_CURRENT you would have to reset this variable." FORCE)
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+	"Can the system successfully run a PETSc executable?  This variable can be manually set to \"YES\" to force CMake to accept a given PETSc configuration, but this will almost always result in a broken build.  If you change PETSC_DIR, PETSC_ARCH, or PETSC_CURRENT you would have to reset this variable." FORCE)
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
     endif (${${runs}})
   endmacro (PETSC_TEST_RUNS)
 
@@ -317,10 +348,14 @@ int main(int argc,char *argv[]) {
     message (STATUS "Minimal PETSc includes and libraries work.  This probably means we are building with shared libs.")
     set (petsc_includes_needed "${petsc_includes_minimal}")
 <<<<<<< HEAD
+<<<<<<< HEAD
   else (petsc_works_minimal)     # Minimal includes fail, see if just adding full includes fixes it
 =======
   else (petsc_works_minimal)	# Minimal includes fail, see if just adding full includes fixes it
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+  else (petsc_works_minimal)	# Minimal includes fail, see if just adding full includes fixes it
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
     petsc_test_runs ("${petsc_includes_all}" "${PETSC_LIBRARIES_TS}" petsc_works_allincludes)
     if (petsc_works_allincludes) # It does, we just need all the includes (
       message (STATUS "PETSc requires extra include paths, but links correctly with only interface libraries.  This is an unexpected configuration (but it seems to work fine).")
@@ -328,6 +363,7 @@ int main(int argc,char *argv[]) {
     else (petsc_works_allincludes) # We are going to need to link the external libs explicitly
       resolve_libraries (petsc_libraries_external "${petsc_libs_external}")
       foreach (pkg SYS VEC MAT DM KSP SNES TS ALL)
+<<<<<<< HEAD
 <<<<<<< HEAD
         list (APPEND PETSC_LIBRARIES_${pkg}  ${petsc_libraries_external})
       endforeach (pkg)
@@ -345,6 +381,8 @@ int main(int argc,char *argv[]) {
           message (STATUS "PETSc could not be used, maybe the install is broken.")
         endif (petsc_works_all)
 =======
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 	list (APPEND PETSC_LIBRARIES_${pkg}  ${petsc_libraries_external})
       endforeach (pkg)
       petsc_test_runs ("${petsc_includes_minimal}" "${PETSC_LIBRARIES_TS}" petsc_works_alllibraries)
@@ -360,7 +398,10 @@ int main(int argc,char *argv[]) {
 	else (petsc_works_all) # We fail anyways
 	  message (STATUS "PETSc could not be used, maybe the install is broken.")
 	endif (petsc_works_all)
+<<<<<<< HEAD
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
       endif (petsc_works_alllibraries)
     endif (petsc_works_allincludes)
   endif (petsc_works_minimal)

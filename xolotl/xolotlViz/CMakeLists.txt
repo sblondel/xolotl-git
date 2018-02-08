@@ -12,9 +12,13 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/labelprovider)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/dummy)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 # Find EAVL
 FIND_PACKAGE(EAVL)
@@ -34,10 +38,15 @@ if(EAVL_FOUND AND MESA_FOUND)
     message(STATUS "Mesa libraries = ${MESA_LIBRARIES}")
     
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
     include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+    
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/standard)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/standard/plot)
     include_directories(${EAVL_INCLUDE_DIRS})
@@ -67,6 +76,7 @@ endif(EAVL_FOUND AND MESA_FOUND)
 #Add the library
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 add_library(${LIBRARY_NAME} STATIC ${SRC})
 =======
 add_library(${LIBRARY_NAME} SHARED ${SRC})
@@ -74,6 +84,9 @@ add_library(${LIBRARY_NAME} SHARED ${SRC})
 =======
 add_library(${LIBRARY_NAME} STATIC ${SRC})
 >>>>>>> Pulling the trunk into the HDF5 branch to make it easier to merge back later. SB 20140618
+=======
+add_library(${LIBRARY_NAME} STATIC ${SRC})
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 message('${SRC}')
 message('${HEADERS}')
 target_link_libraries(${LIBRARY_NAME} ${MAYBE_EAVL_MESA})
@@ -86,10 +99,14 @@ install(TARGETS ${LIBRARY_NAME} DESTINATION lib)
 # Note: must do this after all the other checks, or else the 
 # contents of the generated file won't take the check results into account.
 <<<<<<< HEAD
+<<<<<<< HEAD
 configure_file( "${CMAKE_SOURCE_DIR}/xolotlFactory/vizHandler/XolotlConfigViz.h.in" "${CMAKE_BINARY_DIR}/xolotlFactory/XolotlConfigViz.h" )
 =======
 configure_file( "${CMAKE_CURRENT_SOURCE_DIR}/XolotlConfigViz.h.in" "${CMAKE_CURRENT_BINARY_DIR}/XolotlConfigViz.h" )
 >>>>>>> Branch that is taking an HDF5 file as an input file. SB 20140520
+=======
+configure_file( "${CMAKE_CURRENT_SOURCE_DIR}/XolotlConfigViz.h.in" "${CMAKE_CURRENT_BINARY_DIR}/XolotlConfigViz.h" )
+>>>>>>> 25158eb3dae5d6f4f75d40ecf0714480753961f7
 
 
 
