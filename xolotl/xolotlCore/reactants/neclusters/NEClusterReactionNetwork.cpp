@@ -114,7 +114,12 @@ NEClusterReactionNetwork::NEClusterReactionNetwork(
 double NEClusterReactionNetwork::calculateDissociationConstant(
 		DissociationReaction * reaction) const {
 	// If the dissociations are not allowed
+<<<<<<< HEAD
 	if (!dissociationsEnabled) return 0.0;
+=======
+	if (!dissociationsEnabled)
+		return 0.0;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// Compute the atomic volume
 	double atomicVolume = 0.5 * xolotlCore::uraniumDioxydeLatticeConstant
@@ -210,16 +215,27 @@ IReactant * NEClusterReactionNetwork::get(const std::string& type,
 		const int size) const {
 	// Local Declarations
 	static std::map<std::string, int> composition = { { xeType, 0 },
+<<<<<<< HEAD
 			{ vType, 0 }, { iType, 0 }, { heType, 0 } };
+=======
+			{ vType, 0 }, { iType, 0 }, { heType, 0 }, { dType, 0 },
+			{ tType, 0 } };
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	std::shared_ptr<IReactant> retReactant;
 
 	// Setup the composition map to default values because it is static
 	composition[xeType] = 0;
+<<<<<<< HEAD
 	composition[vType] = 0;
 	composition[iType] = 0;
 
 	// Only pull the reactant if the name and size are valid
 	if ((type == xeType || type == vType || type == iType) && size >= 1) {
+=======
+
+	// Only pull the reactant if the name and size are valid
+	if (type == xeType && size >= 1) {
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 		composition[type] = size;
 		//std::string encodedName = NECluster::encodeCompositionAsName(composition);
 		// Make sure the reactant is in the map
@@ -234,6 +250,7 @@ IReactant * NEClusterReactionNetwork::get(const std::string& type,
 
 IReactant * NEClusterReactionNetwork::getCompound(const std::string& type,
 		const std::vector<int>& sizes) const {
+<<<<<<< HEAD
 	// Local Declarations
 	static std::map<std::string, int> composition = { { xeType, 0 },
 			{ vType, 0 }, { iType, 0 }, { heType, 0 } };
@@ -258,19 +275,30 @@ IReactant * NEClusterReactionNetwork::getCompound(const std::string& type,
 	}
 
 	return retReactant.get();
+=======
+	return nullptr;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 }
 
 IReactant * NEClusterReactionNetwork::getSuper(const std::string& type,
 		const int size) const {
 	// Local Declarations
 	static std::map<std::string, int> composition = { { xeType, 0 },
+<<<<<<< HEAD
 			{ vType, 0 }, { iType, 0 }, { heType, 0 } };
+=======
+			{ vType, 0 }, { iType, 0 }, { heType, 0 }, { dType, 0 },
+			{ tType, 0 } };
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	std::shared_ptr<IReactant> retReactant;
 
 	// Setup the composition map to default values
 	composition[xeType] = 0;
+<<<<<<< HEAD
 	composition[vType] = 0;
 	composition[iType] = 0;
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// Only pull the reactant if the name and size are valid.
 	if (type == NESuperType && size >= 1) {
@@ -295,8 +323,12 @@ std::vector<IReactant *> NEClusterReactionNetwork::getAll(
 	std::vector<IReactant *> reactants;
 
 	// Only pull the reactants if the name is valid
+<<<<<<< HEAD
 	if (name == xeType || name == vType || name == iType || name == xeVType
 			|| name == xeIType || name == NESuperType) {
+=======
+	if (name == xeType || name == NESuperType) {
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 		std::shared_ptr<std::vector<std::shared_ptr<IReactant>> > storedReactants =
 				clusterTypeMap.at(name);
 		int vecSize = storedReactants->size();
@@ -310,7 +342,11 @@ std::vector<IReactant *> NEClusterReactionNetwork::getAll(
 
 void NEClusterReactionNetwork::add(std::shared_ptr<IReactant> reactant) {
 	// Local Declarations
+<<<<<<< HEAD
 	int numXe = 0, numV = 0, numI = 0;
+=======
+	int numXe = 0;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	bool isMixed = false;
 	int* numClusters = nullptr;
 	int* maxClusterSize = nullptr;
@@ -323,6 +359,7 @@ void NEClusterReactionNetwork::add(std::shared_ptr<IReactant> reactant) {
 
 		// Get the species sizes
 		numXe = composition.at(xeType);
+<<<<<<< HEAD
 		numV = composition.at(vType);
 		numI = composition.at(iType);
 
@@ -344,6 +381,11 @@ void NEClusterReactionNetwork::add(std::shared_ptr<IReactant> reactant) {
 				maxClusterSize = &maxXeIClusterSize;
 			}
 		} else if (!isMixed && singleSpeciesMap.count(compStr) == 0) {
+=======
+
+		// Add the reactant if it is not already there
+		if (singleSpeciesMap.count(compStr) == 0) {
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 			/// Put the reactant in its map
 			singleSpeciesMap[compStr] = reactant;
 
@@ -351,25 +393,37 @@ void NEClusterReactionNetwork::add(std::shared_ptr<IReactant> reactant) {
 			if (numXe > 0) {
 				numClusters = &numXeClusters;
 				maxClusterSize = &maxXeClusterSize;
+<<<<<<< HEAD
 			} else if (numV > 0) {
 				numClusters = &numVClusters;
 				maxClusterSize = &maxVClusterSize;
 			} else {
 				numClusters = &numIClusters;
 				maxClusterSize = &maxIClusterSize;
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 			}
 		} else {
 			std::stringstream errStream;
 			errStream << "NEClusterReactionNetwork Message: "
+<<<<<<< HEAD
 					<< "Duplicate Reactant (Xe=" << numXe << ",V=" << numV
 					<< ",I=" << numI << ") not added!" << std::endl;
+=======
+					<< "Duplicate Reactant (Xe=" << numXe << ") not added!"
+					<< std::endl;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 			throw errStream.str();
 		}
 
 		// Increment the number of total clusters of this type
 		(*numClusters)++;
 		// Increment the max cluster size key
+<<<<<<< HEAD
 		int clusterSize = numXe + numV + numI;
+=======
+		int clusterSize = numXe;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 		(*maxClusterSize) = std::max(clusterSize, *maxClusterSize);
 		// Update the size
 		++networkSize;
@@ -388,7 +442,11 @@ void NEClusterReactionNetwork::add(std::shared_ptr<IReactant> reactant) {
 
 void NEClusterReactionNetwork::addSuper(std::shared_ptr<IReactant> reactant) {
 	// Local Declarations
+<<<<<<< HEAD
 	int numXe = 0, numV = 0, numI = 0;
+=======
+	int numXe = 0;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	bool isMixed = false;
 	int* numClusters = nullptr;
 
@@ -398,6 +456,7 @@ void NEClusterReactionNetwork::addSuper(std::shared_ptr<IReactant> reactant) {
 		auto composition = reactant->getComposition();
 		// Get the species sizes
 		numXe = composition.at(xeType);
+<<<<<<< HEAD
 		numV = composition.at(vType);
 		numI = composition.at(iType);
 		// Determine if the cluster is a compound. If there is more than one
@@ -408,6 +467,12 @@ void NEClusterReactionNetwork::addSuper(std::shared_ptr<IReactant> reactant) {
 		// Add the compound or regular reactant.
 		std::string compStr = reactant->getCompositionString();
 		if (!isMixed && superSpeciesMap.count(compStr) == 0) {
+=======
+		// Only add the element if we don't already have it
+		// Add the compound or regular reactant.
+		std::string compStr = reactant->getCompositionString();
+		if (superSpeciesMap.count(compStr) == 0) {
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 			// Put the compound in its map
 			superSpeciesMap[compStr] = reactant;
 			// Set the key
@@ -415,8 +480,13 @@ void NEClusterReactionNetwork::addSuper(std::shared_ptr<IReactant> reactant) {
 		} else {
 			std::stringstream errStream;
 			errStream << "NEClusterReactionNetwork Message: "
+<<<<<<< HEAD
 					<< "Duplicate Super Reactant (Xe=" << numXe << ",V=" << numV
 					<< ",I=" << numI << ") not added!" << std::endl;
+=======
+					<< "Duplicate Super Reactant (Xe=" << numXe
+					<< ") not added!" << std::endl;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 			throw errStream.str();
 		}
 
@@ -628,8 +698,11 @@ void NEClusterReactionNetwork::computeRateConstants() {
 		// Set it in the reaction
 		(*iter)->kConstant = rate;
 
+<<<<<<< HEAD
 //		std::cout << (*iter)->first->getName() << " + " << (*iter)->second->getName() << std::endl;
 
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 		// Check if the rate is the biggest one up to now
 		if (rate > biggestProductionRate)
 			biggestProductionRate = rate;

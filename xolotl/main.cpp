@@ -79,7 +79,12 @@ std::shared_ptr<xolotlSolver::PetscSolver> setUpSolver(
 		std::shared_ptr<xolotlSolver::ISolverHandler> solvHandler,
 		Options &options) {
 	// Initialize the solver handler
+<<<<<<< HEAD
 	solvHandler->initializeHandlers(material, tempHandler, networkHandler, options);
+=======
+	solvHandler->initializeHandlers(material, tempHandler, networkHandler,
+			options);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// Setup the solver
 	auto solverInitTimer = handlerRegistry->getTimer("initSolver");
@@ -117,6 +122,10 @@ int main(int argc, char **argv) {
 
 	// Local Declarations
 	int rank;
+<<<<<<< HEAD
+=======
+	int ret = EXIT_SUCCESS;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// Check the command line arguments.
 	// Skip the executable name before parsing
@@ -158,12 +167,24 @@ int main(int argc, char **argv) {
 		auto material = initMaterial(opts);
 		// Set up the temperature infrastructure
 		bool tempInitOK = initTemp(opts);
+<<<<<<< HEAD
 		if (!tempInitOK)
 			return EXIT_FAILURE;
 		// Set up the visualization infrastructure.
 		bool vizInitOK = initViz(opts.useVizStandardHandlers());
 		if (!vizInitOK)
 			return EXIT_FAILURE;
+=======
+		if (!tempInitOK) {
+			throw std::runtime_error("Unable to initialize temperature.");
+		}
+		// Set up the visualization infrastructure.
+		bool vizInitOK = initViz(opts.useVizStandardHandlers());
+		if (!vizInitOK) {
+			throw std::runtime_error(
+					"Unable to initialize visualization infrastructure.");
+		}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 		// Access the temperature handler registry to get the temperature
 		auto tempHandler = xolotlFactory::getTemperatureHandler();
@@ -176,13 +197,25 @@ int main(int argc, char **argv) {
 
 		// Initialize and get the solver handler
 		bool dimOK = xolotlFactory::initializeDimension(opts);
+<<<<<<< HEAD
 		if (!dimOK)
 			return EXIT_FAILURE;
+=======
+		if (!dimOK) {
+			throw std::runtime_error(
+					"Unable to initialize dimension from inputs.");
+		}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 		auto solvHandler = xolotlFactory::getSolverHandler();
 
 		// Create the network handler factory
 		auto networkFactory =
+<<<<<<< HEAD
 					xolotlFactory::IReactionHandlerFactory::createNetworkFactory(opts.getMaterial());
+=======
+				xolotlFactory::IReactionHandlerFactory::createNetworkFactory(
+						opts.getMaterial());
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 		// Setup and load the network
 		auto networkLoadTimer = handlerRegistry->getTimer("loadNetwork");
@@ -194,8 +227,13 @@ int main(int argc, char **argv) {
 		auto networkHandler = networkFactory->getNetworkHandler();
 
 		// Setup the solver
+<<<<<<< HEAD
 		auto solver = setUpSolver(handlerRegistry, material, tempHandler, networkHandler,
 				solvHandler, opts);
+=======
+		auto solver = setUpSolver(handlerRegistry, material, tempHandler,
+				networkHandler, solvHandler, opts);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 		// Launch the PetscSolver
 		launchPetscSolver(solver, handlerRegistry);
@@ -222,15 +260,27 @@ int main(int argc, char **argv) {
 	} catch (const std::exception& e) {
 		std::cerr << e.what() << std::endl;
 		std::cerr << "Aborting." << std::endl;
+<<<<<<< HEAD
 		return EXIT_FAILURE;
 	} catch (const std::string& error) {
 		std::cout << error << std::endl;
 		std::cout << "Aborting." << std::endl;
 		return EXIT_FAILURE;
+=======
+		ret = EXIT_FAILURE;
+	} catch (const std::string& error) {
+		std::cout << error << std::endl;
+		std::cout << "Aborting." << std::endl;
+		ret = EXIT_FAILURE;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	}
 
 	// finalize our use of MPI
 	MPI_Finalize();
 
+<<<<<<< HEAD
 	return EXIT_SUCCESS;
+=======
+	return ret;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 }

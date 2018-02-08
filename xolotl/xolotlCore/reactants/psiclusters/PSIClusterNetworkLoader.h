@@ -55,7 +55,11 @@ namespace xolotlCore {
  * > numMixedClusters - The number of mixed-species clusters of all sizes in the
  * network.
  */
+<<<<<<< HEAD
 class PSIClusterNetworkLoader : public NetworkLoader {
+=======
+class PSIClusterNetworkLoader: public NetworkLoader {
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 protected:
 
@@ -77,7 +81,12 @@ protected:
 	/**
 	 * Private nullary constructor.
 	 */
+<<<<<<< HEAD
 	PSIClusterNetworkLoader() {}
+=======
+	PSIClusterNetworkLoader() {
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation creates a singles-species cluster of helium, vacancies or
@@ -87,9 +96,18 @@ protected:
 	 * @param numHe The number of helium atoms
 	 * @param numV The number of atomic vacancies
 	 * @param numI The number of interstitial defects
+<<<<<<< HEAD
 	 * @return The new cluster
 	 */
 	std::shared_ptr<PSICluster> createPSICluster(int numHe, int numV, int numI);
+=======
+	 * @param numD The number of deuterium atoms
+	 * @param numT The number of tritium atoms
+	 * @return The new cluster
+	 */
+	std::shared_ptr<PSICluster> createPSICluster(int numHe, int numV, int numI,
+			int numD, int numT);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 public:
 
@@ -99,7 +117,12 @@ public:
 	 *
 	 * @param registry The performance handler registry
 	 */
+<<<<<<< HEAD
 	PSIClusterNetworkLoader(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
+=======
+	PSIClusterNetworkLoader(
+			std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * An alternative constructor provided for convenience.
@@ -114,7 +137,12 @@ public:
 	/**
 	 * Destructor
 	 */
+<<<<<<< HEAD
 	virtual ~PSIClusterNetworkLoader() {}
+=======
+	virtual ~PSIClusterNetworkLoader() {
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation will load the reaction network from the inputstream in
@@ -137,21 +165,39 @@ public:
 	 *
 	 * @param min The value for the size
 	 */
+<<<<<<< HEAD
 	void setVMin (int min) {vMin = min;}
+=======
+	void setVMin(int min) {
+		vMin = min;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation will set the helium width for the grouping scheme.
 	 *
 	 * @param w The value of the width
 	 */
+<<<<<<< HEAD
 	void setHeWidth (int w) {heSectionWidth = w;}
+=======
+	void setHeWidth(int w) {
+		heSectionWidth = w;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation will set the vacancy width for the grouping scheme.
 	 *
 	 * @param w The value of the width
 	 */
+<<<<<<< HEAD
 	void setVWidth (int w) {vSectionWidth = w;}
+=======
+	void setVWidth(int w) {
+		vSectionWidth = w;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 };
 
 } /* namespace xolotlCore */

@@ -26,7 +26,11 @@ static std::shared_ptr<xolotlPerf::IHandlerRegistry> registry =
 BOOST_AUTO_TEST_SUITE(HeVCluster_testSuite)
 
 BOOST_AUTO_TEST_CASE(getSpeciesSize) {
+<<<<<<< HEAD
 	HeVCluster cluster(4, 5, registry);
+=======
+	HeVCluster cluster(0, 0, 4, 5, registry);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// Get the composition back
 	auto composition = cluster.getComposition();
@@ -52,7 +56,11 @@ BOOST_AUTO_TEST_CASE(checkConnectivity) {
 	// Check the reaction connectivity of the HeV cluster
 	// with 3He and 2V
 	// Get the connectivity array from the reactant
+<<<<<<< HEAD
 	vector<int> composition = { 3, 2, 0 };
+=======
+	vector<int> composition = { 3, -2 };
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	auto reactant = (PSICluster *) network->getCompound("HeV", composition);
 
 	// Check the type name
@@ -95,8 +103,13 @@ BOOST_AUTO_TEST_CASE(checkTotalFlux) {
 	// Local Declarations
 	auto network = getSimplePSIReactionNetwork();
 
+<<<<<<< HEAD
 	// Get an HeV cluster with compostion 2,1,0.
 	vector<int> composition = { 2, 1, 0 };
+=======
+	// Get an HeV cluster with compostion 2,-1.
+	vector<int> composition = { 2, -1 };
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	auto cluster = (PSICluster *) network->getCompound("HeV", composition);
 	// Get one that it combines with (He)
 	auto secondCluster = (PSICluster *) network->get("He", 1);
@@ -137,8 +150,13 @@ BOOST_AUTO_TEST_CASE(checkPartialDerivatives) {
 	// Get the simple reaction network
 	auto network = getSimplePSIReactionNetwork(3);
 
+<<<<<<< HEAD
 	// Get an HeV cluster with compostion 2,1,0.
 	vector<int> composition = { 2, 1, 0 };
+=======
+	// Get an HeV cluster with compostion 2,-1.
+	vector<int> composition = { 2,-1 };
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	auto cluster = (PSICluster *) network->getCompound("HeV", composition);
 	// Set the diffusion factor and migration energy based on the
 	// values from the tungsten benchmark for this problem.
@@ -177,7 +195,11 @@ BOOST_AUTO_TEST_CASE(checkReactionRadius) {
 
 	// Check all the values
 	for (int i = 1; i <= 5; i++) {
+<<<<<<< HEAD
 		cluster = shared_ptr<HeVCluster>(new HeVCluster(1, i, registry));
+=======
+		cluster = shared_ptr<HeVCluster>(new HeVCluster(0, 0, 1, i, registry));
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 		BOOST_REQUIRE_CLOSE(expectedRadii[i - 1], cluster->getReactionRadius(),
 				0.000001);
 	}

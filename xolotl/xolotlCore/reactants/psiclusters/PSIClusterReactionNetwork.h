@@ -62,6 +62,19 @@ private:
 	int numHeClusters;
 
 	/**
+<<<<<<< HEAD
+=======
+	 * Number of deuterium clusters in our network.
+	 */
+	int numDClusters;
+
+	/**
+	 * Number of tritium clusters in our network.
+	 */
+	int numTClusters;
+
+	/**
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	 * Number of HeV clusters in our network.
 	 */
 	int numHeVClusters;
@@ -77,6 +90,19 @@ private:
 	int maxHeClusterSize;
 
 	/**
+<<<<<<< HEAD
+=======
+	 * Maximum size of deuterium clusters in our network.
+	 */
+	int maxDClusterSize;
+
+	/**
+	 * Maximum size of tritium clusters in our network.
+	 */
+	int maxTClusterSize;
+
+	/**
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	 * Maximum size of HeV clusters in our network.
 	 */
 	int maxHeVClusterSize;
@@ -372,6 +398,23 @@ public:
 	}
 
 	/**
+<<<<<<< HEAD
+=======
+	 * Number of D clusters in our network.
+	 */
+	int getNumDClusters() const {
+		return numDClusters;
+	}
+
+	/**
+	 * Number of T clusters in our network.
+	 */
+	int getNumTClusters() const {
+		return numTClusters;
+	}
+
+	/**
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	 * Number of HeV clusters in our network.
 	 */
 	int getNumHeVClusters() const {
@@ -393,6 +436,23 @@ public:
 	}
 
 	/**
+<<<<<<< HEAD
+=======
+	 * Maximum size of D clusters in our network.
+	 */
+	int getMaxDClusterSize() const {
+		return maxDClusterSize;
+	}
+
+	/**
+	 * Maximum size of T clusters in our network.
+	 */
+	int getMaxTClusterSize() const {
+		return maxTClusterSize;
+	}
+
+	/**
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	 * Maximum size of HeV clusters in our network.
 	 */
 	int getMaxHeVClusterSize() const {

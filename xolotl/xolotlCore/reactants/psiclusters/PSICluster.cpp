@@ -129,10 +129,17 @@ void PSICluster::optimizeReactions() {
 
 				// Remove the reaction from the vector
 				itBis = reactingPairs.erase(itBis);
+<<<<<<< HEAD
 			}
 			else {
 				// Check the distance
 				if (std::distance(it, itBis) > 1) break;
+=======
+			} else {
+				// Check the distance
+				if (std::distance(it, itBis) > 1)
+					break;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 				itBis++;
 			}
 		}
@@ -162,10 +169,17 @@ void PSICluster::optimizeReactions() {
 
 				// Remove the reaction from the vector
 				itBis = combiningReactants.erase(itBis);
+<<<<<<< HEAD
 			}
 			else {
 				// Check the distance
 				if (std::distance(it, itBis) > 1) break;
+=======
+			} else {
+				// Check the distance
+				if (std::distance(it, itBis) > 1)
+					break;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 				itBis++;
 			}
 		}
@@ -195,10 +209,17 @@ void PSICluster::optimizeReactions() {
 
 				// Remove the reaction from the vector
 				itBis = dissociatingPairs.erase(itBis);
+<<<<<<< HEAD
 			}
 			else {
 				// Check the distance
 				if (std::distance(it, itBis) > 1) break;
+=======
+			} else {
+				// Check the distance
+				if (std::distance(it, itBis) > 1)
+					break;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 				itBis++;
 			}
 		}
@@ -227,10 +248,17 @@ void PSICluster::optimizeReactions() {
 
 				// Remove the reaction from the vector
 				itBis = emissionPairs.erase(itBis);
+<<<<<<< HEAD
 			}
 			else {
 				// Check the distance
 				if (std::distance(it, itBis) > 1) break;
+=======
+			} else {
+				// Check the distance
+				if (std::distance(it, itBis) > 1)
+					break;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 				itBis++;
 			}
 		}
@@ -333,6 +361,7 @@ void PSICluster::setReactionNetwork(
 	return;
 }
 
+<<<<<<< HEAD
 double PSICluster::getHeMomentum() const {
 	return 0.0;
 }
@@ -351,6 +380,8 @@ double PSICluster::getTotalFlux() {
 	return prodFlux - combFlux + dissFlux - emissFlux;
 }
 
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 double PSICluster::getDissociationFlux() const {
 	// Initial declarations
 	int nPairs = 0;

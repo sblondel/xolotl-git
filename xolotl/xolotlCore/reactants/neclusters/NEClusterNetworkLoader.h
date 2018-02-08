@@ -73,11 +73,17 @@ protected:
 	 * clusters for that type.
 	 *
 	 * @param numXe The number of helium atoms
+<<<<<<< HEAD
 	 * @param numV The number of atomic vacancies
 	 * @param numI The number of interstitial defects
 	 * @return The new cluster
 	 */
 	std::shared_ptr<NECluster> createNECluster(int numXe, int numV, int numI);
+=======
+	 * @return The new cluster
+	 */
+	std::shared_ptr<NECluster> createNECluster(int numXe);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 public:
 

@@ -31,6 +31,7 @@ namespace xolotlCore {
 class Reactant: public IReactant {
 
 private:
+<<<<<<< HEAD
     /**
      * A string description of our type/composition map that can
      * be used for quick comparisons.
@@ -38,6 +39,15 @@ private:
      * Note: must be kept consistent with contents of compositionMap.
      */
     mutable std::string compString;
+=======
+	/**
+	 * A string description of our type/composition map that can
+	 * be used for quick comparisons.
+	 * Computed on demand by getCompositionString() and cached.
+	 * Note: must be kept consistent with contents of compositionMap.
+	 */
+	mutable std::string compString;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 protected:
 
@@ -159,7 +169,10 @@ protected:
 	 */
 	void recomputeDiffusionCoefficient(double temp);
 
+<<<<<<< HEAD
     
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	/**
 	 * The constructor.
 	 */
@@ -253,7 +266,14 @@ public:
 	 * @return The concentration of this reactant
 	 */
 	virtual double getConcentration(double distA = 0.0,
+<<<<<<< HEAD
 			double distB = 0.0) const;
+=======
+			double distB = 0.0) const {
+
+		return concentration;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation sets the concentration of the reactant to the
@@ -261,7 +281,13 @@ public:
 	 *
 	 * @param conc The new concentation
 	 */
+<<<<<<< HEAD
 	void setConcentration(double conc);
+=======
+	void setConcentration(double conc) {
+		concentration = conc;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation returns the total flux of this reactant in the
@@ -270,7 +296,13 @@ public:
 	 * @return The total change in flux for this reactant due to all
 	 * reactions
 	 */
+<<<<<<< HEAD
 	virtual double getTotalFlux();
+=======
+	virtual double getTotalFlux() {
+		return 0.0;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation sets the collection of other reactants that make up
@@ -279,7 +311,13 @@ public:
 	 * @param network The reaction network of which this reactant is a part
 	 */
 	virtual void setReactionNetwork(
+<<<<<<< HEAD
 			std::shared_ptr<IReactionNetwork> reactionNetwork);
+=======
+			std::shared_ptr<IReactionNetwork> reactionNetwork) {
+		network = reactionNetwork;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * Release the reaction network object.
@@ -288,7 +326,13 @@ public:
 	 * by the program, and is done to break dependence cycles that would
 	 * otherwise keep the network and reactant objects from being destroyed.
 	 */
+<<<<<<< HEAD
 	void releaseReactionNetwork();
+=======
+	void releaseReactionNetwork() {
+		network.reset();
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation signifies that the reactant with reactant Id should be
@@ -297,7 +341,13 @@ public:
 	 * @param id The integer id of the reactant that is connected
 	 * to this reactant
 	 */
+<<<<<<< HEAD
 	void setReactionConnectivity(int id);
+=======
+	void setReactionConnectivity(int id) {
+		reactionConnectivitySet.insert(id);
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation signifies that the reactant with reactant Id should be
@@ -306,7 +356,13 @@ public:
 	 * @param id The integer id of the reactant that is connected
 	 * to this reactant
 	 */
+<<<<<<< HEAD
 	void setDissociationConnectivity(int id);
+=======
+	void setDissociationConnectivity(int id) {
+		dissociationConnectivitySet.insert(id);
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation reset the connectivity sets based on the information
@@ -341,7 +397,13 @@ public:
 	 * corresponds to the first reactant in the list returned by the
 	 * ReactionNetwork::getAll() operation.
 	 */
+<<<<<<< HEAD
 	virtual std::vector<double> getPartialDerivatives() const;
+=======
+	virtual std::vector<double> getPartialDerivatives() const {
+		return std::vector<double>(network->getDOF(), 0.0);
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation works as getPartialDerivatives above, but instead of
@@ -357,14 +419,26 @@ public:
 	 * the list returned by the ReactionNetwork::getAll() operation. The size of
 	 * the vector should be equal to ReactionNetwork::size().
 	 */
+<<<<<<< HEAD
 	virtual void getPartialDerivatives(std::vector<double> & partials) const;
+=======
+	virtual void getPartialDerivatives(std::vector<double> & partials) const {
+		// nothing to do.
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation returns the name of the reactant.
 	 *
 	 * @return The name
 	 */
+<<<<<<< HEAD
 	const std::string getName() const;
+=======
+	const std::string getName() const {
+		return name;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation returns the reactant's type. It is up to subclasses to
@@ -372,7 +446,13 @@ public:
 	 *
 	 * @return The type of this reactant as a string
 	 */
+<<<<<<< HEAD
 	std::string getType() const;
+=======
+	std::string getType() const {
+		return typeName;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation returns the composition of this reactant. This map is empty
@@ -381,7 +461,13 @@ public:
 	 * @return The composition returned as a map with keys naming distinct
 	 * elements and values indicating the amount of the element present.
 	 */
+<<<<<<< HEAD
 	virtual const std::map<std::string, int> & getComposition() const;
+=======
+	virtual const std::map<std::string, int> & getComposition() const {
+		return compositionMap;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * Get a string containing the canonical representation of the
@@ -393,7 +479,16 @@ public:
 	 * @return A string containing the canonical representation of our
 	 * composition.
 	 */
+<<<<<<< HEAD
 	virtual std::string getCompositionString() const;
+=======
+	virtual std::string getCompositionString() const {
+		if (compString.empty()) {
+			compString = toCanonicalString(getType(), compositionMap);
+		}
+		return compString;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation sets the id of the reactant, The id is zero by default
@@ -402,56 +497,104 @@ public:
 	 *
 	 * @param nId The new id for this reactant
 	 */
+<<<<<<< HEAD
 	void setId(int nId);
+=======
+	void setId(int nId) {
+		id = nId;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation returns the id for this reactant.
 	 *
 	 * @return The id
 	 */
+<<<<<<< HEAD
 	int getId() const;
+=======
+	int getId() const {
+		return id;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation sets the id of the xenon momentum of the reactant.
 	 *
 	 * @param nId The new id for this momentum
 	 */
+<<<<<<< HEAD
 	void setXeMomentumId(int nId);
+=======
+	void setXeMomentumId(int nId) {
+		xeMomId = nId;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation returns the id for this reactant xenon momentum.
 	 *
 	 * @return The id
 	 */
+<<<<<<< HEAD
 	int getXeMomentumId() const;
+=======
+	int getXeMomentumId() const {
+		return xeMomId;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation sets the id of the helium momentum of the reactant.
 	 *
 	 * @param nId The new id for this momentum
 	 */
+<<<<<<< HEAD
 	void setHeMomentumId(int nId);
+=======
+	void setHeMomentumId(int nId) {
+		heMomId = nId;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation returns the id for this reactant helium momentum.
 	 *
 	 * @return The id
 	 */
+<<<<<<< HEAD
 	int getHeMomentumId() const;
+=======
+	int getHeMomentumId() const {
+		return heMomId;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation sets the id of the vacancy momentum of the reactant.
 	 *
 	 * @param nId The new id for this momentum
 	 */
+<<<<<<< HEAD
 	void setVMomentumId(int nId);
+=======
+	void setVMomentumId(int nId) {
+		vMomId = nId;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation returns the id for this reactant vacancy momentum.
 	 *
 	 * @return The id
 	 */
+<<<<<<< HEAD
 	int getVMomentumId() const;
+=======
+	int getVMomentumId() const {
+		return vMomId;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation sets the temperature at which the reactant currently
@@ -474,7 +617,13 @@ public:
 	 *
 	 * @return The temperature.
 	 */
+<<<<<<< HEAD
 	double getTemperature() const;
+=======
+	double getTemperature() const {
+		return temperature;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation returns the total size of the reactant.
@@ -482,21 +631,39 @@ public:
 	 * @return The total size of this reactant including the contributions
 	 * from all species types
 	 */
+<<<<<<< HEAD
 	int getSize() const;
+=======
+	int getSize() const {
+		return size;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation retrieves the formation energy for this reactant.
 	 *
 	 * @return The value of the formation energy
 	 */
+<<<<<<< HEAD
 	double getFormationEnergy() const;
+=======
+	double getFormationEnergy() const {
+		return formationEnergy;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation sets the formation energy for this reactant.
 	 *
 	 * @param energy The formation energy
 	 */
+<<<<<<< HEAD
 	void setFormationEnergy(double energy);
+=======
+	void setFormationEnergy(double energy) {
+		formationEnergy = energy;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation retrieves the diffusion factor, D_0, that is used to
@@ -504,7 +671,13 @@ public:
 	 *
 	 * @return The diffusion factor of this reactant
 	 */
+<<<<<<< HEAD
 	double getDiffusionFactor() const;
+=======
+	double getDiffusionFactor() const {
+		return diffusionFactor;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation sets the diffusion factor, D_0, that is used to calculate
@@ -520,7 +693,13 @@ public:
 	 *
 	 * @return The diffusion coefficient
 	 */
+<<<<<<< HEAD
 	double getDiffusionCoefficient() const;
+=======
+	double getDiffusionCoefficient() const {
+		return diffusionCoefficient;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation sets the migration energy for this reactant.
@@ -534,7 +713,13 @@ public:
 	 *
 	 * @return the migration energy
 	 */
+<<<<<<< HEAD
 	double getMigrationEnergy() const;
+=======
+	double getMigrationEnergy() const {
+		return migrationEnergy;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation returns the reaction radius for the
@@ -542,7 +727,13 @@ public:
 	 *
 	 * @return The reaction radius
 	 */
+<<<<<<< HEAD
 	double getReactionRadius() const;
+=======
+	double getReactionRadius() const {
+		return reactionRadius;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation returns the sum of combination rate and emission rate

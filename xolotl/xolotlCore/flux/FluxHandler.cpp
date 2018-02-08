@@ -10,11 +10,16 @@
 namespace xolotlCore {
 
 FluxHandler::FluxHandler() :
+<<<<<<< HEAD
 		fluence(0.0),
 		fluxAmplitude(0.0),
 		fluxIndex(-1),
 		useTimeProfile(false),
 		normFactor(0.0){
+=======
+		fluence(0.0), fluxAmplitude(0.0), fluxIndex(-1), useTimeProfile(false), normFactor(
+				0.0) {
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	return;
 }
 
@@ -23,7 +28,12 @@ void FluxHandler::initializeFluxHandler(IReactionNetwork *network,
 	// Set the grid
 	xGrid = grid;
 
+<<<<<<< HEAD
 	if (xGrid.size() == 0) return;
+=======
+	if (xGrid.size() == 0)
+		return;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// Compute the norm factor because the fit function has an
 	// arbitrary amplitude
@@ -35,13 +45,22 @@ void FluxHandler::initializeFluxHandler(IReactionNetwork *network,
 		double x = xGrid[i] - xGrid[surfacePos];
 
 		// Add the the value of the function times the step size
+<<<<<<< HEAD
 		normFactor += FitFunction(x) * (xGrid[i] - xGrid[i-1]);
+=======
+		normFactor += FitFunction(x) * (xGrid[i] - xGrid[i - 1]);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	}
 
 	// Factor the incident flux will be multiplied by to get
 	// the wanted intensity
 	double fluxNormalized = 0.0;
+<<<<<<< HEAD
 	if (normFactor > 0.0) fluxNormalized = fluxAmplitude / normFactor;
+=======
+	if (normFactor > 0.0)
+		fluxNormalized = fluxAmplitude / normFactor;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// Clear the flux vector
 	incidentFluxVec.clear();
@@ -68,7 +87,12 @@ void FluxHandler::initializeFluxHandler(IReactionNetwork *network,
 void FluxHandler::recomputeFluxHandler(int surfacePos) {
 	// Factor the incident flux will be multiplied by
 	double fluxNormalized = 0.0;
+<<<<<<< HEAD
 	if (normFactor > 0.0) fluxNormalized = fluxAmplitude / normFactor;
+=======
+	if (normFactor > 0.0)
+		fluxNormalized = fluxAmplitude / normFactor;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// Starts a i = surfacePos + 1 because the first values were already put in the vector
 	for (int i = surfacePos + 1; i < xGrid.size() - 1; i++) {
@@ -120,8 +144,15 @@ double FluxHandler::getProfileAmplitude(double currentTime) const {
 	// Else loop to determine the interval the time falls in
 	// i.e. time[k] < time < time[k + 1]
 	for (unsigned int k = 0; k < time.size() - 1; k++) {
+<<<<<<< HEAD
 		if (currentTime < time[k]) continue;
 		if (currentTime > time[k + 1]) continue;
+=======
+		if (currentTime < time[k])
+			continue;
+		if (currentTime > time[k + 1])
+			continue;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 		// Compute the amplitude following a linear interpolation between
 		// the two stored values
@@ -134,7 +165,12 @@ double FluxHandler::getProfileAmplitude(double currentTime) const {
 	return f;
 }
 
+<<<<<<< HEAD
 void FluxHandler::computeIncidentFlux(double currentTime, double *updatedConcOffset, int xi, int surfacePos) {
+=======
+void FluxHandler::computeIncidentFlux(double currentTime,
+		double *updatedConcOffset, int xi, int surfacePos) {
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	// Recompute the flux vector if a time profile is used
 	if (useTimeProfile) {
 		fluxAmplitude = getProfileAmplitude(currentTime);

@@ -1,8 +1,12 @@
 // Includes
 #include "HeCluster.h"
+<<<<<<< HEAD
 #include "PSIClusterReactionNetwork.h"
 #include <Constants.h>
 #include <iostream>
+=======
+#include <Constants.h>
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 using namespace xolotlCore;
 

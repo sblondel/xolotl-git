@@ -8,6 +8,11 @@
 #include "PSIClusterNetworkLoader.h"
 #include <TokenizedLineReader.h>
 #include <HeCluster.h>
+<<<<<<< HEAD
+=======
+#include <DCluster.h>
+#include <TCluster.h>
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 #include <VCluster.h>
 #include <InterstitialCluster.h>
 #include <HeVCluster.h>
@@ -32,16 +37,26 @@ static inline double convertStrToDouble(const std::string& inString) {
 }
 
 std::shared_ptr<PSICluster> PSIClusterNetworkLoader::createPSICluster(int numHe,
+<<<<<<< HEAD
 		int numV, int numI) {
+=======
+		int numV, int numI, int numD, int numT) {
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	// Local Declarations
 	std::shared_ptr<PSICluster> cluster;
 
 	// Determine the type of the cluster given the number of each species.
 	// Create a new cluster by that type and specify the names of the
 	// property keys.
+<<<<<<< HEAD
 	if (numHe > 0 && numV > 0) {
 		// Create a new HeVCluster
 		cluster = std::make_shared<HeVCluster>(numHe, numV, handlerRegistry);
+=======
+	if ((numHe > 0 || numT > 0 || numD > 0) && numV > 0) {
+		// Create a new HeVCluster
+		cluster = std::make_shared<HeVCluster>(numT, numD, numHe, numV, handlerRegistry);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	} else if (numHe > 0 && numI > 0) {
 		throw std::string("HeliumInterstitialCluster is not yet implemented.");
 		// FIXME! Add code to add it to the list
@@ -54,6 +69,15 @@ std::shared_ptr<PSICluster> PSIClusterNetworkLoader::createPSICluster(int numHe,
 	} else if (numI > 0) {
 		// Create a new ICluster
 		cluster = std::make_shared<InterstitialCluster>(numI, handlerRegistry);
+<<<<<<< HEAD
+=======
+	} else if (numD > 0) {
+		// Create a new DCluster
+		cluster = std::make_shared<DCluster>(numD, handlerRegistry);
+	} else if (numT > 0) {
+		// Create a new TCluster
+		cluster = std::make_shared<TCluster>(numT, handlerRegistry);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	}
 
 	return cluster;
@@ -95,7 +119,11 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::load() {
 
 	std::string error(
 			"PSIClusterNetworkLoader Exception: Insufficient or erroneous data.");
+<<<<<<< HEAD
 	int numHe = 0, numV = 0, numI = 0;
+=======
+	int numHe = 0, numV = 0, numI = 0, numW = 0, numD = 0, numT = 0;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	double formationEnergy = 0.0, migrationEnergy = 0.0;
 	double diffusionFactor = 0.0;
 	std::vector<std::shared_ptr<Reactant> > reactants;
@@ -109,12 +137,17 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::load() {
 		loadedLine = reader.loadLine();
 		while (loadedLine.size() > 0) {
 			// Check the size of the loaded line
+<<<<<<< HEAD
 			if (loadedLine.size() < 6)
+=======
+			if (loadedLine.size() != 7)
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 				// And notify the calling function if the size is insufficient
 				throw error;
 			// Load the sizes
 			if (loadedLine[0][0] != '#') {
 				numHe = std::stoi(loadedLine[0]);
+<<<<<<< HEAD
 				numV = std::stoi(loadedLine[1]);
 				numI = std::stoi(loadedLine[2]);
 				// Create the cluster
@@ -123,6 +156,20 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::load() {
 				formationEnergy = convertStrToDouble(loadedLine[3]);
 				migrationEnergy = convertStrToDouble(loadedLine[4]);
 				diffusionFactor = convertStrToDouble(loadedLine[5]);
+=======
+				numW = std::stoi(loadedLine[1]);
+				numV = -numW * (numW < 0);
+				numI = numW * (numW > 0);
+				numD = std::stoi(loadedLine[2]);
+				numT = std::stoi(loadedLine[3]);
+				// Create the cluster
+				auto nextCluster = createPSICluster(numHe, numV, numI, numD,
+						numT);
+				// Load the energies
+				formationEnergy = convertStrToDouble(loadedLine[4]);
+				migrationEnergy = convertStrToDouble(loadedLine[5]);
+				diffusionFactor = convertStrToDouble(loadedLine[6]);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 				// Set the formation energy
 				nextCluster->setFormationEnergy(formationEnergy);
 				// Set the diffusion factor and migration energy
@@ -179,9 +226,14 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 
 	// Take care of the clusters near the stability line
 	// First get the biggest He cluster for the smaller V cluster
+<<<<<<< HEAD
 	std::vector<int> compositionVector = { previousBiggestHe, vMin - 1, 0 };
 	cluster = (PSICluster *) network->getCompound(heVType,
 			compositionVector);
+=======
+	std::vector<int> compositionVector = { previousBiggestHe, -(vMin - 1) };
+	cluster = (PSICluster *) network->getCompound(heVType, compositionVector);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	while (cluster) {
 		previousBiggestHe++;
 		compositionVector[0] = previousBiggestHe;
@@ -192,7 +244,11 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 	for (int k = vMin; k <= network->getAll(vType).size(); k++) {
 		// Update the composition vector
 		compositionVector[0] = previousBiggestHe;
+<<<<<<< HEAD
 		compositionVector[1] = k;
+=======
+		compositionVector[1] = -k;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 		cluster = (PSICluster *) network->getCompound(heVType,
 				compositionVector);
 		// While loop on the helium content because we don't know the upper bound
@@ -253,14 +309,23 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 		// Loop on the helium groups
 		for (int j = 0; j < nHeGroup; j++) {
 			// To check if the group is full
+<<<<<<< HEAD
 			int heLow = previousBiggestHe, heHigh = -1, vLow =
 					network->getAll(vType).size(), vHigh = -1;
+=======
+			int heLow = previousBiggestHe, heHigh = -1, vLow = network->getAll(
+					vType).size(), vHigh = -1;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 			// Loop within the group
 			for (int n = vIndex; n < vIndex + vWidth; n++) {
 				for (int m = heIndex; m < heIndex + heWidth; m++) {
 					// Get the corresponding cluster
+<<<<<<< HEAD
 					std::vector<int> compositionVector = { m, n, 0 };
+=======
+					std::vector<int> compositionVector = { m, -n };
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 					// Get the product of the same type as the second reactant
 					cluster = (PSICluster *) network->getCompound(heVType,
 							compositionVector);
@@ -380,7 +445,11 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 				if (composition[vType] >= vMin) {
 					// It has to be replaced by a super cluster
 					std::vector<int> compositionVector = { composition[heType],
+<<<<<<< HEAD
 							composition[vType], 0 };
+=======
+							-composition[vType] };
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 					newCluster =
 							superGroupMap[clusterGroupMap[compositionVector]];
 					react[l].first = newCluster;
@@ -399,7 +468,11 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 				if (composition[vType] >= vMin) {
 					// It has to be replaced by a super cluster
 					std::vector<int> compositionVector = { composition[heType],
+<<<<<<< HEAD
 							composition[vType], 0 };
+=======
+							-composition[vType] };
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 					newCluster =
 							superGroupMap[clusterGroupMap[compositionVector]];
 					react[l].second = newCluster;
@@ -421,7 +494,11 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 				if (composition[vType] >= vMin) {
 					// It has to be replaced by a super cluster
 					std::vector<int> compositionVector = { composition[heType],
+<<<<<<< HEAD
 							composition[vType], 0 };
+=======
+							-composition[vType] };
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 					newCluster =
 							superGroupMap[clusterGroupMap[compositionVector]];
 					combi[l].combining = newCluster;
@@ -443,7 +520,11 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 				if (composition[vType] >= vMin) {
 					// It has to be replaced by a super cluster
 					std::vector<int> compositionVector = { composition[heType],
+<<<<<<< HEAD
 							composition[vType], 0 };
+=======
+							-composition[vType] };
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 					newCluster =
 							superGroupMap[clusterGroupMap[compositionVector]];
 					disso[l].first = newCluster;
@@ -462,7 +543,11 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 				if (composition[vType] >= vMin) {
 					// It has to be replaced by a super cluster
 					std::vector<int> compositionVector = { composition[heType],
+<<<<<<< HEAD
 							composition[vType], 0 };
+=======
+							-composition[vType] };
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 					newCluster =
 							superGroupMap[clusterGroupMap[compositionVector]];
 					disso[l].second = newCluster;
@@ -484,7 +569,11 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 				if (composition[vType] >= vMin) {
 					// It has to be replaced by a super cluster
 					std::vector<int> compositionVector = { composition[heType],
+<<<<<<< HEAD
 							composition[vType], 0 };
+=======
+							-composition[vType] };
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 					newCluster =
 							superGroupMap[clusterGroupMap[compositionVector]];
 					emi[l].first = newCluster;
@@ -503,7 +592,11 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 				if (composition[vType] >= vMin) {
 					// It has to be replaced by a super cluster
 					std::vector<int> compositionVector = { composition[heType],
+<<<<<<< HEAD
 							composition[vType], 0 };
+=======
+							-composition[vType] };
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 					newCluster =
 							superGroupMap[clusterGroupMap[compositionVector]];
 					emi[l].second = newCluster;

@@ -37,7 +37,11 @@ BOOST_AUTO_TEST_CASE(checkComposition) {
 	Reactant reactant(registry);
 
 	// Check its default composition
+<<<<<<< HEAD
 	BOOST_REQUIRE_EQUAL(4U, reactant.getComposition().size());
+=======
+	BOOST_REQUIRE_EQUAL(6U, reactant.getComposition().size());
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	return;
 }
@@ -171,7 +175,11 @@ BOOST_AUTO_TEST_CASE(checkIsConnected) {
 	}
 
 	// Check HeV
+<<<<<<< HEAD
 	std::vector<int> compositionVector = { 1, 1, 0 };
+=======
+	std::vector<int> compositionVector = { 1, -1 };
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	reactantConnectivity =
 			network->getCompound("HeV", compositionVector)->getConnectivity();
 	for (int j = 0; j < 8; j++) {
@@ -180,7 +188,11 @@ BOOST_AUTO_TEST_CASE(checkIsConnected) {
 	}
 
 	// Check HeI
+<<<<<<< HEAD
 	compositionVector = {1,0,1};
+=======
+	compositionVector = {1, 1};
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	reactantConnectivity =
 			network->getCompound("HeI", compositionVector)->getConnectivity();
 	for (int j = 0; j < 8; j++) {

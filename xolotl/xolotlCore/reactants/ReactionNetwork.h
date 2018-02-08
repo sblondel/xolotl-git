@@ -90,6 +90,7 @@ protected:
 	/**
 	 * All known production reactions in the network.
 	 */
+<<<<<<< HEAD
     std::vector<std::shared_ptr<ProductionReaction> > allProductionReactions;
 
     /**
@@ -97,10 +98,20 @@ protected:
      * identifying known reactions.
      */
     std::map<ProductionReaction::KeyType, std::shared_ptr<ProductionReaction> > productionReactionMap;
+=======
+	std::vector<std::shared_ptr<ProductionReaction> > allProductionReactions;
+
+	/**
+	 * Map of known ProductionReactions for quickly
+	 * identifying known reactions.
+	 */
+	std::map<ProductionReaction::KeyType, std::shared_ptr<ProductionReaction> > productionReactionMap;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * All known dissociation reactions in the network.
 	 */
+<<<<<<< HEAD
     std::vector<std::shared_ptr<DissociationReaction> > allDissociationReactions;
 
     /**
@@ -108,6 +119,16 @@ protected:
      * identifying known reactions.
      */
     std::map<DissociationReaction::KeyType, std::shared_ptr<DissociationReaction> > dissociationReactionMap;
+=======
+	std::vector<std::shared_ptr<DissociationReaction> > allDissociationReactions;
+
+	/**
+	 * Map of known DissociationReactions for quickly
+	 * identifying known reactions.
+	 */
+	std::map<DissociationReaction::KeyType,
+			std::shared_ptr<DissociationReaction> > dissociationReactionMap;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * A map for storing the dfill configuration and accelerating the formation of

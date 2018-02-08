@@ -118,7 +118,12 @@ public:
 	 * This operation computes the flux due to incoming particles at a given grid point.
 	 * \see IFluxHandler.h
 	 */
+<<<<<<< HEAD
 	virtual void computeIncidentFlux(double currentTime, double *updatedConcOffset, int xi, int surfacePos);
+=======
+	virtual void computeIncidentFlux(double currentTime,
+			double *updatedConcOffset, int xi, int surfacePos);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation increments the fluence at the current time step.

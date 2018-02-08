@@ -58,7 +58,11 @@ BOOST_AUTO_TEST_CASE(checkAdvection) {
 	BOOST_REQUIRE_EQUAL(advectionHandler.isPointOnSink(pos1), true);
 
 	// Check the total number of advecting clusters
+<<<<<<< HEAD
 	BOOST_REQUIRE_EQUAL(advectionHandler.getNumberOfAdvecting(), 6);
+=======
+	BOOST_REQUIRE_EQUAL(advectionHandler.getNumberOfAdvecting(), 7);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// Set the size parameters
 	double hx = 1.0;
@@ -115,7 +119,11 @@ BOOST_AUTO_TEST_CASE(checkAdvection) {
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[3], -3.34501e+11, 0.01);
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[4], -4.82155e+11, 0.01);
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[5], -1.87392e+10, 0.01);
+<<<<<<< HEAD
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[6], 0.0, 0.01); // Does not advect
+=======
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[6], -5.48117e+09, 0.01);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[7], 0.0, 0.01); // Does not advect
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[8], 0.0, 0.01); // Does not advect
 
@@ -138,6 +146,10 @@ BOOST_AUTO_TEST_CASE(checkAdvection) {
 	BOOST_REQUIRE_EQUAL(indices[3], 3);
 	BOOST_REQUIRE_EQUAL(indices[4], 4);
 	BOOST_REQUIRE_EQUAL(indices[5], 5);
+<<<<<<< HEAD
+=======
+	BOOST_REQUIRE_EQUAL(indices[6], 6);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// Check values
 	BOOST_REQUIRE_CLOSE(val[0], -1.20606e+08, 0.01);

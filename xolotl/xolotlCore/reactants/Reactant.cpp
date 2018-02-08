@@ -21,6 +21,11 @@ Reactant::Reactant() :
 	compositionMap[heType] = 0;
 	compositionMap[vType] = 0;
 	compositionMap[iType] = 0;
+<<<<<<< HEAD
+=======
+	compositionMap[dType] = 0;
+	compositionMap[tType] = 0;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 }
 
 Reactant::Reactant(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
@@ -34,6 +39,11 @@ Reactant::Reactant(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
 	compositionMap[heType] = 0;
 	compositionMap[vType] = 0;
 	compositionMap[iType] = 0;
+<<<<<<< HEAD
+=======
+	compositionMap[dType] = 0;
+	compositionMap[tType] = 0;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 }
 
 Reactant::Reactant(Reactant &other) :
@@ -52,6 +62,11 @@ Reactant::Reactant(Reactant &other) :
 	compositionMap[heType] = other.compositionMap[heType];
 	compositionMap[vType] = other.compositionMap[vType];
 	compositionMap[iType] = other.compositionMap[iType];
+<<<<<<< HEAD
+=======
+	compositionMap[dType] = other.compositionMap[dType];
+	compositionMap[tType] = other.compositionMap[tType];
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 }
 
 void Reactant::recomputeDiffusionCoefficient(double temp) {
@@ -69,6 +84,7 @@ void Reactant::recomputeDiffusionCoefficient(double temp) {
 	return;
 }
 
+<<<<<<< HEAD
 double Reactant::getConcentration(double distA, double distB) const {
 	return concentration;
 }
@@ -110,6 +126,8 @@ void Reactant::setDissociationConnectivity(int id) {
 	return;
 }
 
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 std::vector<int> Reactant::getConnectivity() const {
 	// The connectivity array by default is filled with
 	// zeros.
@@ -122,6 +140,7 @@ std::vector<int> Reactant::getConnectivity() const {
 	return connectivity;
 }
 
+<<<<<<< HEAD
 std::vector<double> Reactant::getPartialDerivatives() const {
 	// The partial derivatives array by default is filled with
 	// zeros.
@@ -149,6 +168,8 @@ const std::map<std::string, int> & Reactant::getComposition() const {
 	return compositionMap;
 }
 
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 std::string Reactant::toCanonicalString(std::string type,
 		const std::map<std::string, int>& composition) {
 
@@ -170,6 +191,7 @@ std::string Reactant::toCanonicalString(std::string type,
 	return ostr.str();
 }
 
+<<<<<<< HEAD
 
 std::string Reactant::getCompositionString() const {
 
@@ -223,6 +245,8 @@ int Reactant::getVMomentumId() const {
 	return vMomId;
 }
 
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 void Reactant::setTemperature(double temp) {
 	temperature = temp;
 
@@ -230,6 +254,7 @@ void Reactant::setTemperature(double temp) {
 	recomputeDiffusionCoefficient(temp);
 }
 
+<<<<<<< HEAD
 double Reactant::getTemperature() const {
 	return temperature;
 }
@@ -254,6 +279,8 @@ double Reactant::getDiffusionFactor() const {
 	return diffusionFactor;
 }
 
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 void Reactant::setDiffusionFactor(const double factor) {
 	// Set the diffusion factor
 	diffusionFactor = factor;
@@ -263,6 +290,7 @@ void Reactant::setDiffusionFactor(const double factor) {
 	return;
 }
 
+<<<<<<< HEAD
 double Reactant::getDiffusionCoefficient() const {
 	return diffusionCoefficient;
 }
@@ -272,6 +300,8 @@ double Reactant::getMigrationEnergy() const {
 	return migrationEnergy;
 }
 
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 void Reactant::setMigrationEnergy(const double energy) {
 	// Set the migration energy
 	migrationEnergy = energy;
@@ -280,7 +310,10 @@ void Reactant::setMigrationEnergy(const double energy) {
 
 	return;
 }
+<<<<<<< HEAD
 
 double Reactant::getReactionRadius() const {
 	return reactionRadius; // Computed by subclasses in constructors.
 }
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d

@@ -222,7 +222,11 @@ void HDF5Utils::writeSurface2D(int timeStep, std::vector<int> iSurface,
 	hid_t datasetId = H5Dcreate2(subConcGroupId, "iSurface", H5T_STD_I32LE,
 			dataspaceId, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
 
+<<<<<<< HEAD
 	// Write networkArray in the dataset
+=======
+	// Write surface array in the dataset
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	status = H5Dwrite(datasetId, H5T_STD_I32LE, H5S_ALL, H5S_ALL,
 	H5P_DEFAULT, &indexArray);
 
@@ -239,7 +243,11 @@ void HDF5Utils::writeSurface2D(int timeStep, std::vector<int> iSurface,
 	datasetId = H5Dcreate2(subConcGroupId, "nInterstitial", H5T_IEEE_F64LE,
 			dataspaceId, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
 
+<<<<<<< HEAD
 	// Write networkArray in the dataset
+=======
+	// Write quantityArray in the dataset
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	status = H5Dwrite(datasetId, H5T_IEEE_F64LE, H5S_ALL, H5S_ALL,
 	H5P_DEFAULT, &quantityArray);
 
@@ -255,7 +263,11 @@ void HDF5Utils::writeSurface2D(int timeStep, std::vector<int> iSurface,
 	datasetId = H5Dcreate2(subConcGroupId, "previousIFlux", H5T_IEEE_F64LE,
 			dataspaceId, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
 
+<<<<<<< HEAD
 	// Write networkArray in the dataset
+=======
+	// Write quantityArray in the dataset
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	status = H5Dwrite(datasetId, H5T_IEEE_F64LE, H5S_ALL, H5S_ALL,
 	H5P_DEFAULT, &quantityArray);
 
@@ -1013,6 +1025,7 @@ std::vector<std::vector<double> > HDF5Utils::readNetwork(const std::string& file
 	// Open the dataset
 	hid_t datasetId = H5Dopen(fileId, "/networkGroup/network", H5P_DEFAULT);
 
+<<<<<<< HEAD
 	// Open and read the networkSize attribute
 	hid_t networkSizeAttributeId = H5Aopen(datasetId, "networkSize", H5P_DEFAULT);
 	int networkSize = 0;
@@ -1021,6 +1034,16 @@ std::vector<std::vector<double> > HDF5Utils::readNetwork(const std::string& file
 
 	// Create the array that will receive the network
 	double *networkArray = new double[networkSize*6];
+=======
+	// Get the dimensions of the dataset
+	hsize_t dims[2];
+	// Get the dataspace object
+	hid_t dataspaceId = H5Dget_space(datasetId);
+	status = H5Sget_simple_extent_dims(dataspaceId, dims, NULL);
+
+	// Create the array that will receive the network
+	double *networkArray = new double[dims[0]*dims[1]];
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// Read the data set
 	status = H5Dread(datasetId, H5T_IEEE_F64LE, H5S_ALL, H5S_ALL, H5P_DEFAULT,
@@ -1029,11 +1052,19 @@ std::vector<std::vector<double> > HDF5Utils::readNetwork(const std::string& file
 	// Fill the vector to return with the dataset
 	std::vector<std::vector<double> > networkVector;
 	// Loop on the size of the network
+<<<<<<< HEAD
 	for (int i = 0; i < networkSize; i++) {
 		// Create the line to give to the vector
 		std::vector<double> line;
 		for (int j = 0; j < 6; j++) {
 			line.push_back(networkArray[i * 6 + j]);
+=======
+	for (int i = 0; i < dims[0]; i++) {
+		// Create the line to give to the vector
+		std::vector<double> line;
+		for (int j = 0; j < dims[1]; j++) {
+			line.push_back(networkArray[i * dims[1] + j]);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 		}
 		networkVector.push_back(line);
 	}

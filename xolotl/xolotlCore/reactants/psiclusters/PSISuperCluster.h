@@ -268,7 +268,13 @@ public:
 	 *
 	 * @return A copy of this reactant
 	 */
+<<<<<<< HEAD
 	virtual std::shared_ptr<IReactant> clone();
+=======
+	virtual std::shared_ptr<IReactant> clone() {
+		return std::make_shared<PSISuperCluster>(*this);
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * Sets the collection of other clusters that make up
@@ -303,21 +309,39 @@ public:
 	 * @param distV The vacancy distance in the group
 	 * @return The concentration of this reactant
 	 */
+<<<<<<< HEAD
 	double getConcentration(double distHe, double distV) const;
+=======
+	double getConcentration(double distHe, double distV) const {
+		return l0 + (distHe * l1He) + (distV * l1V);
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation returns the first helium momentum.
 	 *
 	 * @return The momentum
 	 */
+<<<<<<< HEAD
 	double getHeMomentum() const;
+=======
+	double getHeMomentum() const {
+		return l1He;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation returns the first vacancy momentum.
 	 *
 	 * @return The momentum
 	 */
+<<<<<<< HEAD
 	double getVMomentum() const;
+=======
+	double getVMomentum() const {
+		return l1V;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation returns the current total concentration of clusters in the group.
@@ -346,7 +370,14 @@ public:
 	 * @param he The number of helium
 	 * @return The distance to the mean number of helium in the group
 	 */
+<<<<<<< HEAD
 	double getHeDistance(int he) const;
+=======
+	double getHeDistance(int he) const {
+		return (sectionHeWidth == 1) ?
+				0.0 : 2.0 * (he - numHe) / (sectionHeWidth - 1.0);
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation returns the distance to the mean.
@@ -354,7 +385,14 @@ public:
 	 * @param he The number of vacancy
 	 * @return The distance to the mean number of vacancy in the group
 	 */
+<<<<<<< HEAD
 	double getVDistance(int v) const;
+=======
+	double getVDistance(int v) const {
+		return (sectionVWidth == 1) ?
+				0.0 : 2.0 * (v - numV) / (sectionVWidth - 1.0);
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * Calculate the dispersion of the group.
@@ -401,7 +439,20 @@ public:
 	 * @return The total change in flux for this cluster due to all
 	 * reactions
 	 */
+<<<<<<< HEAD
 	double getTotalFlux();
+=======
+	double getTotalFlux() {
+
+		// Initialize the fluxes
+		heMomentumFlux = 0.0;
+		vMomentumFlux = 0.0;
+
+		// Compute the fluxes.
+		return getProductionFlux() - getCombinationFlux()
+				+ getDissociationFlux() - getEmissionFlux();
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	/**
 	 * This operation returns the total change in this cluster due to

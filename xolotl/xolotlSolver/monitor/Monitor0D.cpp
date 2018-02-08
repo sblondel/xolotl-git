@@ -65,7 +65,11 @@ PetscErrorCode startStop0D(TS ts, PetscInt timestep, PetscReal time,
 	PetscFunctionBeginUser;
 
 	// Don't do anything if it is not on the stride
+<<<<<<< HEAD
 	if ((int) (time / hdf5Stride0D) == hdf5Previous0D)
+=======
+	if ((int) ((time + time / 1000.0) / hdf5Stride0D) == hdf5Previous0D)
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 		PetscFunctionReturn(0);
 
 	// Update the previous time
@@ -266,9 +270,15 @@ PetscErrorCode monitorMeanSize0D(TS ts, PetscInt timestep, PetscReal time,
 
 	PetscFunctionBeginUser;
 
+<<<<<<< HEAD
 	// Don't do anything if it is not on the stride
 	if (timestep % 10 != 0)
 		PetscFunctionReturn(0);
+=======
+//	// Don't do anything if it is not on the stride
+//	if (timestep % 10 != 0)
+//		PetscFunctionReturn(0);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// Get the da from ts
 	DM da;
@@ -285,6 +295,10 @@ PetscErrorCode monitorMeanSize0D(TS ts, PetscInt timestep, PetscReal time,
 	// Get the network
 	auto network = solverHandler->getNetwork();
 	int dof = network->getDOF();
+<<<<<<< HEAD
+=======
+	auto reactants = network->getAll();
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// Get all the super clusters
 	auto superClusters = network->getAll(PSISuperType);
@@ -292,7 +306,11 @@ PetscErrorCode monitorMeanSize0D(TS ts, PetscInt timestep, PetscReal time,
 	// Create the output file
 	std::ofstream outputFile;
 	std::stringstream name;
+<<<<<<< HEAD
 	name << "voidDiam_" << timestep << ".dat";
+=======
+	name << "hydrogen_" << timestep << ".dat";
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	outputFile.open(name.str());
 
 	double constantMulti = xolotlCore::pi
@@ -301,6 +319,7 @@ PetscErrorCode monitorMeanSize0D(TS ts, PetscInt timestep, PetscReal time,
 	// Get the pointer to the beginning of the solution data for this grid point
 	gridPointSolution = solutionArray[0];
 
+<<<<<<< HEAD
 //			for (int i = 0; i < dof; i++) {
 //				std::cout << i << " " << gridPointSolution[i] << std::endl;
 //			}
@@ -318,6 +337,28 @@ PetscErrorCode monitorMeanSize0D(TS ts, PetscInt timestep, PetscReal time,
 						* radii0D[i] * radii0D[i] << std::endl;
 	}
 
+=======
+	for (int i = 0; i < dof - 1; i++) {
+		auto cluster = reactants->at(i);
+		auto comp = cluster->getComposition();
+		outputFile << comp[tType] << " " << comp[dType] << " " << comp[heType] << " " << comp[vType] << " "
+				<< gridPointSolution[i] << std::endl;
+	}
+
+//	// Update the concentration in the network
+//	network->updateConcentrationsFromArray(gridPointSolution);
+//
+//	// Initialize the total helium and concentration before looping
+//	double concTot = 0.0, heliumTot = 0.0;
+//
+//	// Loop on all the indices to compute the mean
+//	for (int i = 0; i < indices0D.size(); i++) {
+//		outputFile << 2.0 * radii0D[i] << " "
+//				<< gridPointSolution[indices0D[i]] * constantMulti * 4.0
+//						* radii0D[i] * radii0D[i] << std::endl;
+//	}
+
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 //	// Loop on the super clusters
 //	for (int l = 0; l < superClusters.size(); l++) {
 //		// Get the super cluster
@@ -419,7 +460,12 @@ PetscErrorCode setupPetsc0DMonitor(TS ts) {
 		xolotlCore::HDF5Utils::fillHeader(Mx, 0.0);
 
 		// Save the network in the HDF5 file
+<<<<<<< HEAD
 		xolotlCore::HDF5Utils::fillNetwork(solverHandler->getNetworkName());
+=======
+		if (!solverHandler->getNetworkName().empty())
+			xolotlCore::HDF5Utils::fillNetwork(solverHandler->getNetworkName());
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 		// Finalize the HDF5 file
 		xolotlCore::HDF5Utils::finalizeFile();
