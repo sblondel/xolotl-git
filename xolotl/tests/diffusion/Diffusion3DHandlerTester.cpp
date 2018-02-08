@@ -5,6 +5,10 @@
 #include <Diffusion3DHandler.h>
 #include <HDF5NetworkLoader.h>
 #include <XolotlConfig.h>
+<<<<<<< HEAD
+=======
+#include <Options.h>
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 #include <DummyHandlerRegistry.h>
 #include <mpi.h>
 
@@ -36,8 +40,15 @@ BOOST_AUTO_TEST_CASE(checkDiffusion) {
 	// Give the filename to the network loader
 	loader.setFilename(filename);
 
+<<<<<<< HEAD
 	// Load the network
 	auto network = loader.load().get();
+=======
+	// Create the options needed to load the network
+	Options opts;
+	// Load the network
+	auto network = loader.load(opts);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	// Get its size
 	const int dof = network->getDOF();
 
@@ -58,7 +69,11 @@ BOOST_AUTO_TEST_CASE(checkDiffusion) {
 	int *ofill = &mat[0];
 
 	// Initialize it
+<<<<<<< HEAD
 	diffusionHandler.initializeOFill(network, ofill);
+=======
+	diffusionHandler.initializeOFill(*network, ofill);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	diffusionHandler.initializeDiffusionGrid(advectionHandlers, grid, 3, 1.0, 3,
 			1.0);
 
@@ -83,11 +98,15 @@ BOOST_AUTO_TEST_CASE(checkDiffusion) {
 	}
 
 	// Set the temperature to 1000K to initialize the diffusion coefficients
+<<<<<<< HEAD
 	auto reactants = network->getAll();
 	for (int i = 0; i < dof - 1; i++) {
 		auto cluster = (PSICluster *) reactants->at(i);
 		cluster->setTemperature(1000.0);
 	}
+=======
+	network->setTemperature(1000.0);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Get pointers
 	double *conc = &concentration[0];
@@ -113,7 +132,11 @@ BOOST_AUTO_TEST_CASE(checkDiffusion) {
 	concVector[6] = conc + 22 * dof; // back
 
 	// Compute the diffusion at this grid point
+<<<<<<< HEAD
 	diffusionHandler.computeDiffusion(network, concVector, updatedConcOffset,
+=======
+	diffusionHandler.computeDiffusion(*network, concVector, updatedConcOffset,
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			hx, hx, 1, sy, 1, sz, 1);
 
 	// Check the new values of updatedConcOffset
@@ -136,7 +159,11 @@ BOOST_AUTO_TEST_CASE(checkDiffusion) {
 	double *valPointer = &val[0];
 
 	// Compute the partial derivatives for the diffusion a the grid point 1
+<<<<<<< HEAD
 	diffusionHandler.computePartialsForDiffusion(network, valPointer,
+=======
+	diffusionHandler.computePartialsForDiffusion(*network, valPointer,
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			indicesPointer, hx, hx, 1, sy, 1, sz, 1);
 
 	// Check the values for the indices

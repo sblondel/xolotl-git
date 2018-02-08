@@ -39,6 +39,7 @@ private:
 	double wTotalDepth;
 
 	/**
+<<<<<<< HEAD
 	 * The index of the V cluster.
 	 */
 	int vDefectIndex;
@@ -49,6 +50,8 @@ private:
 	int iDefectIndex;
 
 	/**
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	 * The reduction factor between He and W redeposition.
 	 */
 	double reductionFactor;
@@ -117,8 +120,13 @@ public:
 					0.0), A14(0.0), A15(0.0), B0(0.0), B1(0.0), B2(0.0), B3(
 					0.0), B4(0.0), B5(0.0), B6(0.0), B7(0.0), B8(0.0), B9(0.0), B10(
 					0.0), B11(0.0), B12(0.0), B13(0.0), B14(0.0), B15(0.0), heTotalDepth(
+<<<<<<< HEAD
 					0.0), wTotalDepth(0.0), vDefectIndex(-1), iDefectIndex(-1), reductionFactor(
 					0.0), wNormFactor(0.0) {
+=======
+					0.0), wTotalDepth(0.0), reductionFactor(0.0), wNormFactor(
+					0.0) {
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	}
 
 	/**
@@ -131,7 +139,11 @@ public:
 	 * Compute and store the incident flux values at each grid point.
 	 * \see IFluxHandler.h
 	 */
+<<<<<<< HEAD
 	void initializeFluxHandler(IReactionNetwork *network, int surfacePos,
+=======
+	void initializeFluxHandler(const IReactionNetwork& network, int surfacePos,
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			std::vector<double> grid) {
 		// Read the parameter file
 		std::ifstream paramFile;
@@ -251,17 +263,28 @@ public:
 		incidentWFluxVec.push_back(0.0);
 
 		// Set the flux index corresponding the the single helium cluster here
+<<<<<<< HEAD
 		auto fluxCluster = network->get(heType, 1);
+=======
+		auto fluxCluster = network.get(Species::He, 1);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		// Check that the helium cluster is present in the network
 		if (!fluxCluster) {
 			throw std::string(
 					"\nThe single helium cluster is not present in the network, "
 							"cannot use the flux option!");
 		}
+<<<<<<< HEAD
 		fluxIndex = fluxCluster->getId() - 1;
 
 //		// Set the V index corresponding the the single vacancy cluster here
 //		auto vCluster = network->get(vType, 1);
+=======
+		fluxIndices.push_back(fluxCluster->getId() - 1);
+
+//		// Set the V index corresponding the the single vacancy cluster here
+//		auto vCluster = network.get(Species::V, 1);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 //		// Check that the V cluster is present in the network
 //		if (!vCluster) {
 //			throw std::string(
@@ -271,14 +294,22 @@ public:
 //		vDefectIndex = vCluster->getId() - 1;
 //
 		// Set the I index corresponding the the single interstitial cluster here
+<<<<<<< HEAD
 		auto iCluster = network->get(iType, 1);
+=======
+		auto iCluster = network.get(Species::I, 1);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		// Check that the V cluster is present in the network
 		if (!iCluster) {
 			throw std::string(
 					"\nThe single interstitial cluster is not present in the network, "
 							"cannot use the flux option!");
 		}
+<<<<<<< HEAD
 		iDefectIndex = iCluster->getId() - 1;
+=======
+		fluxIndices.push_back(iCluster->getId() - 1);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 		// Prints both incident vectors in a file
 		int procId;
@@ -310,9 +341,15 @@ public:
 		}
 
 		// Update the concentration array
+<<<<<<< HEAD
 		updatedConcOffset[fluxIndex] += incidentFluxVec[xi - surfacePos];
 //		updatedConcOffset[vDefectIndex] += incidentFluxVec[xi - surfacePos] * 4.25e-7;
 		updatedConcOffset[iDefectIndex] += incidentWFluxVec[xi - surfacePos];
+=======
+		updatedConcOffset[fluxIndices[0]] += incidentFluxVec[xi - surfacePos]; // He
+//		updatedConcOffset[fluxIndices[1]] += incidentFluxVec[xi - surfacePos] * 4.25e-7;
+		updatedConcOffset[fluxIndices[1]] += incidentWFluxVec[xi - surfacePos]; // I
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 		return;
 	}

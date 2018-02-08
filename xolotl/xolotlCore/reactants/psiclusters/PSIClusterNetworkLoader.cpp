@@ -5,6 +5,7 @@
  *      Author: jaybilly
  */
 
+<<<<<<< HEAD
 #include "PSIClusterNetworkLoader.h"
 #include <TokenizedLineReader.h>
 #include <HeCluster.h>
@@ -15,6 +16,21 @@
 // #include <HeInterstitialCluster.h>
 #include <xolotlPerf.h>
 #include <MathUtils.h>
+=======
+#include <fstream>
+#include "PSIClusterNetworkLoader.h"
+#include <TokenizedLineReader.h>
+#include <PSIHeCluster.h>
+#include <PSIVCluster.h>
+#include <PSIInterstitialCluster.h>
+#include <PSIHeVCluster.h>
+#include <PSISuperCluster.h>
+// #include <PSIHeInterstitialCluster.h>
+#include <PSIClusterReactionNetwork.h>
+#include <xolotlPerf.h>
+#include <MathUtils.h>
+#include <cassert>
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 using namespace xolotlCore;
 
@@ -31,22 +47,35 @@ static inline double convertStrToDouble(const std::string& inString) {
 			strtod(inString.c_str(), NULL);
 }
 
+<<<<<<< HEAD
 std::shared_ptr<PSICluster> PSIClusterNetworkLoader::createPSICluster(int numHe,
 		int numV, int numI) {
 	// Local Declarations
 	std::shared_ptr<PSICluster> cluster;
+=======
+std::unique_ptr<PSICluster> PSIClusterNetworkLoader::createPSICluster(int numHe,
+		int numV, int numI, IReactionNetwork& network) const {
+
+	// Local Declarations
+	PSICluster* cluster = nullptr;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Determine the type of the cluster given the number of each species.
 	// Create a new cluster by that type and specify the names of the
 	// property keys.
 	if (numHe > 0 && numV > 0) {
 		// Create a new HeVCluster
+<<<<<<< HEAD
 		cluster = std::make_shared<HeVCluster>(numHe, numV, handlerRegistry);
+=======
+		cluster = new PSIHeVCluster(numHe, numV, network, handlerRegistry);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	} else if (numHe > 0 && numI > 0) {
 		throw std::string("HeliumInterstitialCluster is not yet implemented.");
 		// FIXME! Add code to add it to the list
 	} else if (numHe > 0) {
 		// Create a new HeCluster
+<<<<<<< HEAD
 		cluster = std::make_shared<HeCluster>(numHe, handlerRegistry);
 	} else if (numV > 0) {
 		// Create a new VCluster
@@ -77,6 +106,44 @@ void PSIClusterNetworkLoader::pushPSICluster(
 		network->add(cluster);
 		// Add it to the list so that we can set the network later
 		reactants.push_back(cluster);
+=======
+		cluster = new PSIHeCluster(numHe, network, handlerRegistry);
+	} else if (numV > 0) {
+		// Create a new VCluster
+		cluster = new PSIVCluster(numV, network, handlerRegistry);
+	} else if (numI > 0) {
+		// Create a new ICluster
+		cluster = new PSIInterstitialCluster(numI, network, handlerRegistry);
+	}
+	assert(cluster != nullptr);
+
+	// TODO Once we have widespread C++14 support, use std::make_unique
+	// instead of two steps (and two memory allocations).
+	return std::unique_ptr<PSICluster>(cluster);
+}
+
+void PSIClusterNetworkLoader::pushPSICluster(
+		std::unique_ptr<PSIClusterReactionNetwork> & network,
+		std::vector<std::reference_wrapper<Reactant> > & reactants,
+		std::unique_ptr<PSICluster> & cluster) {
+	// Check if we want dummy reactions
+	if (dummyReactions) {
+		// Create a dummy cluster (Reactant) from the existing cluster
+		auto dummyCluster = std::unique_ptr<Reactant>(new Reactant(*cluster));
+		// Save access to it so we can trigger updates after
+		// we add all to the network.
+		reactants.emplace_back(*dummyCluster);
+
+		// Give the cluster to the network
+		network->add(std::move(dummyCluster));
+	} else {
+		// Save access to it so we can trigger updates after
+		// we add all to the network.
+		reactants.emplace_back(*cluster);
+
+		// Give the cluster to the network
+		network->add(std::move(cluster));
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	}
 
 	return;
@@ -91,6 +158,12 @@ PSIClusterNetworkLoader::PSIClusterNetworkLoader(
 	vMin = 1000000;
 	heSectionWidth = 1;
 	vSectionWidth = 1;
+<<<<<<< HEAD
+=======
+	maxHe = -1;
+	maxI = -1;
+	maxV = -1;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	return;
 }
@@ -105,23 +178,45 @@ PSIClusterNetworkLoader::PSIClusterNetworkLoader(
 	vMin = 1000000;
 	heSectionWidth = 1;
 	vSectionWidth = 1;
+<<<<<<< HEAD
+=======
+	maxHe = -1;
+	maxI = -1;
+	maxV = -1;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	return;
 }
 
+<<<<<<< HEAD
 std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::load() {
 	// Local Declarations
 	TokenizedLineReader<std::string> reader;
 	std::vector<std::string> loadedLine;
 	std::shared_ptr<PSIClusterReactionNetwork> network = std::make_shared<
 			PSIClusterReactionNetwork>(handlerRegistry);
+=======
+std::unique_ptr<IReactionNetwork> PSIClusterNetworkLoader::load(
+		const IOptions& options) {
+	// Local Declarations
+	TokenizedLineReader<std::string> reader;
+	std::vector<std::string> loadedLine;
+
+	// TODO Once we have C++14, use std::make_unique.
+	std::unique_ptr<PSIClusterReactionNetwork> network(
+			new PSIClusterReactionNetwork(handlerRegistry));
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	std::string error(
 			"PSIClusterNetworkLoader Exception: Insufficient or erroneous data.");
 	int numHe = 0, numV = 0, numI = 0;
 	double formationEnergy = 0.0, migrationEnergy = 0.0;
 	double diffusionFactor = 0.0;
+<<<<<<< HEAD
 	std::vector<std::shared_ptr<Reactant> > reactants;
+=======
+	std::vector<std::reference_wrapper<Reactant> > reactants;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Load the network if the stream is available
 	if (networkStream != NULL) {
@@ -140,6 +235,7 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::load() {
 				numHe = std::stoi(loadedLine[0]);
 				numV = std::stoi(loadedLine[1]);
 				numI = std::stoi(loadedLine[2]);
+<<<<<<< HEAD
 				// Create the cluster
 				auto nextCluster = createPSICluster(numHe, numV, numI);
 				// Load the energies
@@ -154,12 +250,38 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::load() {
 
 				// Push the cluster
 				pushPSICluster(network, reactants, nextCluster);
+=======
+
+				// If the cluster is big enough to be grouped
+				if (numV >= vMin && numHe > 0) {
+					// Created the coordinates and store them
+					auto pair = std::make_pair(numHe, numV);
+					heVList.emplace(pair);
+				} else {
+					// Create the cluster
+					auto nextCluster = createPSICluster(numHe, numV, numI,
+							*network);
+					// Load the energies
+					formationEnergy = convertStrToDouble(loadedLine[3]);
+					migrationEnergy = convertStrToDouble(loadedLine[4]);
+					diffusionFactor = convertStrToDouble(loadedLine[5]);
+					// Set the formation energy
+					nextCluster->setFormationEnergy(formationEnergy);
+					// Set the diffusion factor and migration energy
+					nextCluster->setMigrationEnergy(migrationEnergy);
+					nextCluster->setDiffusionFactor(diffusionFactor);
+
+					// Save it in the network
+					pushPSICluster(network, reactants, nextCluster);
+				}
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			}
 
 			// Load the next line
 			loadedLine = reader.loadLine();
 		}
 
+<<<<<<< HEAD
 		// Set the network for all of the reactants. This MUST be done manually.
 		for (auto currCluster : reactants) {
 			currCluster->setReactionNetwork(network);
@@ -182,14 +304,62 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 		IOptions &options) {
 	// Initial declarations
 	int maxI = options.getMaxI(), maxHe = options.getMaxImpurity(), maxV =
+=======
+		// Update reactants now that they are in network.
+		for (IReactant& currCluster : reactants) {
+			currCluster.updateFromNetwork();
+		}
+	}
+
+	// Check if we want dummy reactions
+	if (!dummyReactions) {
+		// Apply sectional grouping
+		applySectionalGrouping(*network);
+	}
+
+	// Create the reactions
+	network->createReactionConnectivity();
+
+	// Recompute Ids and network size
+	network->reinitializeNetwork();
+
+//	// Dump the network we've created, if desired.
+//	int rank;
+//	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+//	if (rank == 0) {
+//		// Dump the network we've created for comparison with baseline.
+//		std::ofstream networkStream(netDebugOpts.second);
+//		network->dumpTo(networkStream);
+//	}
+
+	// Need to use move() because return type uses smart pointer to base class,
+	// not derived class that we created.
+	// Some C++11 compilers accept it without the move, but apparently
+	// that is not correct behavior until C++14.
+	return std::move(network);
+}
+
+std::unique_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
+		const IOptions &options) {
+	// Initial declarations
+	maxI = options.getMaxI(), maxHe = options.getMaxImpurity(), maxV =
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			options.getMaxV();
 	bool usePhaseCut = options.usePhaseCut();
 	int numHe = 0, numV = 0, numI = 0;
 	double formationEnergy = 0.0, migrationEnergy = 0.0;
 	double diffusionFactor = 0.0;
+<<<<<<< HEAD
 	std::shared_ptr<PSIClusterReactionNetwork> network = std::make_shared<
 			PSIClusterReactionNetwork>(handlerRegistry);
 	std::vector<std::shared_ptr<Reactant> > reactants;
+=======
+
+	// Once we have C++14, use std::make_unique.
+	std::unique_ptr<PSIClusterReactionNetwork> network(
+			new PSIClusterReactionNetwork(handlerRegistry));
+	std::vector<std::reference_wrapper<Reactant> > reactants;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// I formation energies in eV
 	std::vector<double> iFormationEnergies = { 10.0, 18.5, 27.0, 35.0, 42.5,
@@ -232,7 +402,11 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 		// Set the composition
 		numI = i;
 		// Create the cluster
+<<<<<<< HEAD
 		auto nextCluster = createPSICluster(numHe, numV, numI);
+=======
+		auto nextCluster = createPSICluster(numHe, numV, numI, *network);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 		// Set the other attributes
 		if (i <= iFormationEnergies.size())
@@ -248,7 +422,11 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 					std::numeric_limits<double>::infinity());
 		}
 
+<<<<<<< HEAD
 		// Push the cluster
+=======
+		// Save it in the network
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		pushPSICluster(network, reactants, nextCluster);
 	}
 
@@ -260,7 +438,11 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 		// Set the composition
 		numHe = i;
 		// Create the cluster
+<<<<<<< HEAD
 		auto nextCluster = createPSICluster(numHe, numV, numI);
+=======
+		auto nextCluster = createPSICluster(numHe, numV, numI, *network);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 		// Set the other attributes
 		if (i <= heFormationEnergies.size())
@@ -277,7 +459,11 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 					std::numeric_limits<double>::infinity());
 		}
 
+<<<<<<< HEAD
 		// Push the cluster
+=======
+		// Save it in the network
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		pushPSICluster(network, reactants, nextCluster);
 	}
 
@@ -291,7 +477,11 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 		for (int i = 1; i <= maxV && i <= maxHePerV.size(); ++i) {
 			// Create the V cluster
 			numV = i;
+<<<<<<< HEAD
 			auto nextCluster = createPSICluster(numHe, numV, numI);
+=======
+			auto nextCluster = createPSICluster(numHe, numV, numI, *network);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 			// Set its other attributes
 			if (i <= vFormationEnergies.size())
@@ -307,7 +497,11 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 						std::numeric_limits<double>::infinity());
 			}
 
+<<<<<<< HEAD
 			// Push the cluster
+=======
+			// Save it in the network
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			pushPSICluster(network, reactants, nextCluster);
 
 			// For V < 12 loop on all the possible helium numbers up to
@@ -316,7 +510,11 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 				for (int j = 1; j <= maxHePerV[i - 1]; j++) {
 					numHe = j;
 					// Create the cluster
+<<<<<<< HEAD
 					nextCluster = createPSICluster(numHe, numV, numI);
+=======
+					nextCluster = createPSICluster(numHe, numV, numI, *network);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 					// Set its attributes
 					nextCluster->setFormationEnergy(
 							getHeVFormationEnergy(j, i));
@@ -324,7 +522,11 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 					nextCluster->setMigrationEnergy(
 							std::numeric_limits<double>::infinity());
 
+<<<<<<< HEAD
 					// Push the cluster
+=======
+					// Save it in the network
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 					pushPSICluster(network, reactants, nextCluster);
 				}
 			}
@@ -333,7 +535,11 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 				for (int j = maxHePerV[i - 2] + 1; j <= maxHePerV[i - 1]; j++) {
 					numHe = j;
 					// Create the cluster
+<<<<<<< HEAD
 					nextCluster = createPSICluster(numHe, numV, numI);
+=======
+					nextCluster = createPSICluster(numHe, numV, numI, *network);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 					// Set its attributes
 					nextCluster->setFormationEnergy(
 							getHeVFormationEnergy(j, i));
@@ -341,7 +547,11 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 					nextCluster->setMigrationEnergy(
 							std::numeric_limits<double>::infinity());
 
+<<<<<<< HEAD
 					// Push the cluster
+=======
+					// Save it in the network
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 					pushPSICluster(network, reactants, nextCluster);
 				}
 			}
@@ -356,7 +566,11 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 		for (int i = maxHePerV.size() + 1; i <= maxV; i++) {
 			// Create the V cluster
 			numV = i;
+<<<<<<< HEAD
 			auto nextCluster = createPSICluster(numHe, numV, numI);
+=======
+			auto nextCluster = createPSICluster(numHe, numV, numI, *network);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 			// Set its other attributes
 			if (i <= vFormationEnergies.size())
@@ -372,21 +586,33 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 						std::numeric_limits<double>::infinity());
 			}
 
+<<<<<<< HEAD
 			// Push the cluster
+=======
+			// Save it in the network
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			pushPSICluster(network, reactants, nextCluster);
 
 			// Loop on the helium number
 			for (int j = (i * 4) - 3; j <= i * 4; j++) {
 				numHe = j;
 				// Create the cluster
+<<<<<<< HEAD
 				nextCluster = createPSICluster(numHe, numV, numI);
+=======
+				nextCluster = createPSICluster(numHe, numV, numI, *network);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 				// Set its attributes
 				nextCluster->setFormationEnergy(getHeVFormationEnergy(j, i));
 				nextCluster->setDiffusionFactor(0.0);
 				nextCluster->setMigrationEnergy(
 						std::numeric_limits<double>::infinity());
 
+<<<<<<< HEAD
 				// Push the cluster
+=======
+				// Save it in the network
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 				pushPSICluster(network, reactants, nextCluster);
 			}
 
@@ -402,7 +628,11 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 		for (int i = 1; i <= maxV && i <= maxHePerV.size(); ++i) {
 			// Create the V cluster
 			numV = i;
+<<<<<<< HEAD
 			auto nextCluster = createPSICluster(numHe, numV, numI);
+=======
+			auto nextCluster = createPSICluster(numHe, numV, numI, *network);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 			// Set its other attributes
 			if (i <= vFormationEnergies.size())
@@ -418,12 +648,17 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 						std::numeric_limits<double>::infinity());
 			}
 
+<<<<<<< HEAD
 			// Push the cluster
+=======
+			// Save it in the network
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			pushPSICluster(network, reactants, nextCluster);
 
 			// Loop on the helium number
 			for (int j = 1; j <= maxHePerV[i - 1]; j++) {
 				numHe = j;
+<<<<<<< HEAD
 				// Create the cluster
 				nextCluster = createPSICluster(numHe, numV, numI);
 				// Set its attributes
@@ -434,6 +669,27 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 
 				// Push the cluster
 				pushPSICluster(network, reactants, nextCluster);
+=======
+
+				// If the cluster is big enough to be grouped
+				if (numV >= vMin) {
+					// Created the coordinates and store them
+					auto pair = std::make_pair(numHe, numV);
+					heVList.emplace(pair);
+				} else {
+					// Create the cluster
+					nextCluster = createPSICluster(numHe, numV, numI, *network);
+					// Set its attributes
+					nextCluster->setFormationEnergy(
+							getHeVFormationEnergy(j, i));
+					nextCluster->setDiffusionFactor(0.0);
+					nextCluster->setMigrationEnergy(
+							std::numeric_limits<double>::infinity());
+
+					// Save it in the network
+					pushPSICluster(network, reactants, nextCluster);
+				}
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			}
 
 			// Reset the helium composition
@@ -445,7 +701,11 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 		for (int i = maxHePerV.size() + 1; i <= maxV; i++) {
 			// Create the V cluster
 			numV = i;
+<<<<<<< HEAD
 			auto nextCluster = createPSICluster(numHe, numV, numI);
+=======
+			auto nextCluster = createPSICluster(numHe, numV, numI, *network);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 			// Set its other attributes
 			if (i <= vFormationEnergies.size())
@@ -461,12 +721,17 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 						std::numeric_limits<double>::infinity());
 			}
 
+<<<<<<< HEAD
 			// Push the cluster
+=======
+			// Save it in the network
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			pushPSICluster(network, reactants, nextCluster);
 
 			// Loop on the helium number
 			for (int j = 1; j <= i * 4; j++) {
 				numHe = j;
+<<<<<<< HEAD
 				// Create the cluster
 				nextCluster = createPSICluster(numHe, numV, numI);
 				// Set its attributes
@@ -477,6 +742,27 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 
 				// Push the cluster
 				pushPSICluster(network, reactants, nextCluster);
+=======
+
+				// If the cluster is big enough to be grouped
+				if (numV >= vMin) {
+					// Created the coordinates and store them
+					auto pair = std::make_pair(numHe, numV);
+					heVList.emplace(pair);
+				} else {
+					// Create the cluster
+					nextCluster = createPSICluster(numHe, numV, numI, *network);
+					// Set its attributes
+					nextCluster->setFormationEnergy(
+							getHeVFormationEnergy(j, i));
+					nextCluster->setDiffusionFactor(0.0);
+					nextCluster->setMigrationEnergy(
+							std::numeric_limits<double>::infinity());
+
+					// Save it in the network
+					pushPSICluster(network, reactants, nextCluster);
+				}
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			}
 
 			// Reset the helium composition
@@ -484,6 +770,7 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 		}
 	}
 
+<<<<<<< HEAD
 	// Set the network for all of the reactants. This MUST be done manually.
 	for (auto currCluster : reactants) {
 		currCluster->setReactionNetwork(network);
@@ -499,6 +786,39 @@ std::shared_ptr<IReactionNetwork> PSIClusterNetworkLoader::generate(
 	}
 
 	return network;
+=======
+	// Update reactants now that they are in network.
+	for (IReactant& currCluster : reactants) {
+		currCluster.updateFromNetwork();
+	}
+
+	// Check if we want dummy reactions
+	if (!dummyReactions) {
+		// Apply sectional grouping
+		applySectionalGrouping(*network);
+	}
+
+	// Create the reactions
+	network->createReactionConnectivity();
+
+	// Recompute Ids and network size
+	network->reinitializeNetwork();
+
+//	// Dump the network we've created, if desired.
+//	int rank;
+//	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+//	if (rank == 0) {
+//		// Dump the network we've created for comparison with baseline.
+//		std::ofstream networkStream(netDebugOpts.second);
+//		network->dumpTo(networkStream);
+//	}
+
+	// Need to use move() because return type uses smart pointer to base class,
+	// not derived class that we created.
+	// Some C++11 compilers accept it without the move, but apparently
+	// that is not correct behavior until C++14.
+	return std::move(network);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 }
 
 double PSIClusterNetworkLoader::getHeVFormationEnergy(int numHe, int numV) {
@@ -598,6 +918,7 @@ double PSIClusterNetworkLoader::getHeVFormationEnergy(int numHe, int numV) {
 }
 
 void PSIClusterNetworkLoader::applySectionalGrouping(
+<<<<<<< HEAD
 		std::shared_ptr<IReactionNetwork> network) {
 	// Get the HeV cluster map
 	auto heVMap = network->getAll(heVType);
@@ -637,10 +958,57 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 				compositionVector);
 		// While loop on the helium content because we don't know the upper bound
 		while (cluster) {
+=======
+		PSIClusterReactionNetwork& network) {
+	// Initialize variables for the loop
+	int count = 0, heIndex = 1, vIndex = vMin, heWidth = heSectionWidth,
+			vWidth = vSectionWidth, previousBiggestHe = 1, vMax =
+					network.getMaxClusterSize(ReactantType::V), heMax = -1;
+	double heSize = 0.0, vSize = 0.0;
+	// Create a temporary vector for the loop to store which clusters go in which super cluster
+	std::set<std::pair<int, int> > tempVector;
+
+	// Find the biggest helium in the pairs
+	for (auto pair : heVList) {
+		if (pair.first > heMax)
+			heMax = pair.first;
+	}
+
+	// Take care of the clusters near the stability line
+	// First get the biggest He cluster for the smaller V cluster
+	IReactant::Composition comp;
+	comp[toCompIdx(Species::He)] = previousBiggestHe;
+	comp[toCompIdx(Species::V)] = vMin - 1;
+	auto cluster = network.get(ReactantType::HeV, comp);
+	while (cluster) {
+		previousBiggestHe++;
+		comp[toCompIdx(Species::He)] = previousBiggestHe;
+		cluster = network.get(ReactantType::HeV, comp);
+	}
+
+	// Loop on the vacancy groups
+	for (int k = vMin; k <= vMax; k++) {
+		int heLow = previousBiggestHe, heHigh = -1, vLow = vMax, vHigh = -1;
+		// Update the composition vector
+		auto pair = std::make_pair(previousBiggestHe, k);
+		// While loop on the helium content because we don't know the upper bound
+		while (heVList.find(pair) != heVList.end()) {
+			// Will be used to know the actual widths of the group
+			if (previousBiggestHe < heLow)
+				heLow = previousBiggestHe;
+			if (previousBiggestHe > heHigh)
+				heHigh = previousBiggestHe;
+			if (k < vLow)
+				vLow = k;
+			if (k > vHigh)
+				vHigh = k;
+
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			// Increment the counter
 			count++;
 
 			// Add this cluster to the temporary vector
+<<<<<<< HEAD
 			tempVector.push_back(cluster);
 			heSize += (double) previousBiggestHe;
 			vSize += (double) k;
@@ -657,6 +1025,21 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 
 			// Skip the last one
 			if (previousBiggestHe == vMax * 4) cluster = nullptr;
+=======
+			tempVector.emplace(pair);
+			heSize += (double) previousBiggestHe;
+			vSize += (double) k;
+			// Remove the pair from the set because we don't need it anymore
+			heVList.erase(pair);
+
+			// Get the next cluster
+			previousBiggestHe++;
+			pair.first = previousBiggestHe;
+
+			// Skip the last one (only works assuming the clusters follow He/V = 4)
+			if (previousBiggestHe == heMax)
+				break;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		}
 
 		// Check if there were clusters in this group
@@ -666,6 +1049,7 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 		// Average all values
 		heSize = heSize / (double) count;
 		vSize = vSize / (double) count;
+<<<<<<< HEAD
 		radius = radius / (double) count;
 		energy = energy / (double) count;
 		// Create the cluster
@@ -683,12 +1067,39 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 
 		// Reinitialize everything
 		heSize = 0.0, vSize = 0.0, radius = 0.0, energy = 0.0;
+=======
+
+		// Create the cluster
+		PSISuperCluster* rawSuperCluster = new PSISuperCluster(heSize, vSize,
+				count, heHigh - heLow + 1, vHigh - vLow + 1, network,
+				handlerRegistry);
+		auto superCluster = std::unique_ptr<PSISuperCluster>(rawSuperCluster);
+		// Save access to the cluster so we can trigger updates
+		// after we give it to the network.
+		auto& scref = *superCluster;
+		// Give the cluster to the network.
+		network.add(std::move(superCluster));
+		// Trigger cluster updates now it is in the network.
+		scref.updateFromNetwork();
+		// Set the HeV vector
+		scref.setHeVVector(tempVector);
+
+//		std::cout << "super: " << rawSuperCluster->getName() << " " << count
+//				<< " 1" << std::endl;
+
+		// Reinitialize everything
+		heSize = 0.0, vSize = 0.0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		count = 0;
 		tempVector.clear();
 	}
 
 	// Get the number of groups in the helium and vacancy directions
+<<<<<<< HEAD
 	int nVGroup = (network->getAll(vType).size() - vMin) / vSectionWidth + 1;
+=======
+	int nVGroup = (vMax - vMin) / vSectionWidth + 1;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	int nHeGroup = previousBiggestHe / heSectionWidth + 1;
 
 	// Loop on the vacancy groups
@@ -696,12 +1107,17 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 		// Loop on the helium groups
 		for (int j = 0; j < nHeGroup; j++) {
 			// To check if the group is full
+<<<<<<< HEAD
 			int heLow = previousBiggestHe, heHigh = -1, vLow = network->getAll(
 					vType).size(), vHigh = -1;
+=======
+			int heLow = previousBiggestHe, heHigh = -1, vLow = vMax, vHigh = -1;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 			// Loop within the group
 			for (int n = vIndex; n < vIndex + vWidth; n++) {
 				for (int m = heIndex; m < heIndex + heWidth; m++) {
+<<<<<<< HEAD
 //					// Skip the biggest one
 //					if (n == vMax && m == vMax * 4) continue;
 
@@ -718,6 +1134,11 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 					// Verify it was not already used
 					if (clusterGroupMap.find(compositionVector)
 							!= clusterGroupMap.end())
+=======
+					// Check if the corresponding coordinates are in the heVList set
+					auto pair = std::make_pair(m, n);
+					if (heVList.find(pair) == heVList.end())
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 						continue;
 
 					// Will be used to know if the group was full
@@ -733,6 +1154,7 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 					// Increment the counter
 					count++;
 
+<<<<<<< HEAD
 					// Add this cluster to the temporary vector
 					tempVector.push_back(cluster);
 					heSize += (double) m;
@@ -741,6 +1163,14 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 					energy += cluster->getFormationEnergy();
 					// Keep the information of the group
 					clusterGroupMap[compositionVector] = std::make_pair(j, k);
+=======
+					// Add this cluster coordinates to the temporary vector
+					tempVector.emplace(pair);
+					heSize += (double) m;
+					vSize += (double) n;
+					// Remove the pair from the set because we don't need it anymore
+					heVList.erase(pair);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 				}
 			}
 
@@ -756,6 +1186,7 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 			// Average all values
 			heSize = heSize / (double) count;
 			vSize = vSize / (double) count;
+<<<<<<< HEAD
 			radius = radius / (double) count;
 			energy = energy / (double) count;
 			// Create the super cluster
@@ -787,6 +1218,41 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 
 			// Reinitialize everything
 			heSize = 0.0, vSize = 0.0, radius = 0.0, energy = 0.0;
+=======
+			// Create the super cluster
+			PSISuperCluster* rawSuperCluster = nullptr;
+			if (count == heWidth * vWidth) {
+				// Everything is fine, the cluster is full
+				rawSuperCluster = new PSISuperCluster(heSize, vSize, count,
+						heWidth, vWidth, network, handlerRegistry);
+
+//				std::cout << "normal: " << rawSuperCluster->getName() << " "
+//						<< heWidth << " " << vWidth << std::endl;
+			} else {
+				// The cluster is smaller than we thought because we are at the edge
+				rawSuperCluster = new PSISuperCluster(heSize, vSize, count,
+						heHigh - heLow + 1, vHigh - vLow + 1, network,
+						handlerRegistry);
+
+//				std::cout << "irregular: " << rawSuperCluster->getName() << " "
+//						<< heHigh - heLow + 1 << " " << vHigh - vLow + 1
+//						<< std::endl;
+			}
+			auto superCluster = std::unique_ptr<PSISuperCluster>(
+					rawSuperCluster);
+			// Save access to the cluster so we can trigger updates
+			// after we give it to the network.
+			auto& scref = *superCluster;
+			// Give the cluster to the network.
+			network.add(std::move(superCluster));
+			// Trigger cluster updates now it is in the network.
+			scref.updateFromNetwork();
+			// Set the HeV vector
+			scref.setHeVVector(tempVector);
+
+			// Reinitialize everything
+			heSize = 0.0, vSize = 0.0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 			count = 0;
 			tempVector.clear();
 			// Reinitialize the group indices for the helium direction
@@ -803,6 +1269,7 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 		heIndex = 1;
 	}
 
+<<<<<<< HEAD
 	// Initialize variables for the loop
 	PSISuperCluster * newCluster;
 	// Loop on all the reactants to update the pairs vector with super clusters
@@ -994,5 +1461,7 @@ void PSIClusterNetworkLoader::applySectionalGrouping(
 	// Recompute Ids and network size and redefine the connectivities
 	network->reinitializeNetwork();
 
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	return;
 }

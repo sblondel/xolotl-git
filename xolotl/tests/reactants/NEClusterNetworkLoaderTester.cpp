@@ -39,10 +39,18 @@ BOOST_AUTO_TEST_CASE(checkLoad) {
 	// Give the filename to the network loader
 	loader.setFilename(filename);
 
+<<<<<<< HEAD
 	// Load the network
 	auto network = loader.load();
 	auto neNetwork = std::dynamic_pointer_cast<NEClusterReactionNetwork>(
 			network);
+=======
+	// Create the options needed to load the network
+	Options opts;
+	// Load the network
+	auto network = loader.load(opts);
+	auto neNetwork = (NEClusterReactionNetwork*) network.get();
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Get the size of the network
 	int networkSize = network->size();
@@ -50,6 +58,7 @@ BOOST_AUTO_TEST_CASE(checkLoad) {
 	BOOST_REQUIRE_EQUAL(networkSize, 3);
 
 	// Check the properties
+<<<<<<< HEAD
 	BOOST_REQUIRE_EQUAL(neNetwork->getMaxXeClusterSize(), 3);
 	BOOST_REQUIRE_EQUAL(neNetwork->getMaxVClusterSize(), 0);
 	BOOST_REQUIRE_EQUAL(neNetwork->getMaxIClusterSize(), 0);
@@ -58,11 +67,18 @@ BOOST_AUTO_TEST_CASE(checkLoad) {
 	BOOST_REQUIRE_EQUAL(neNetwork->getNumVClusters(), 0);
 	BOOST_REQUIRE_EQUAL(neNetwork->getNumIClusters(), 0);
 	BOOST_REQUIRE_EQUAL(neNetwork->getNumSuperClusters(), 0);
+=======
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::Xe), 3);
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::V), 0);
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::I), 0);
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::XeV), 0);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Get all the reactants
 	auto reactants = network->getAll();
 
 	// Get the first one of the network
+<<<<<<< HEAD
 	auto reactant = (NECluster *) reactants->at(0);
 	// Check the composition
 	auto composition = reactant->getComposition();
@@ -91,6 +107,36 @@ BOOST_AUTO_TEST_CASE(checkLoad) {
 	BOOST_REQUIRE_EQUAL(formationEnergy, 17.15);
 	// Check the diffusion factor
 	diffusionFactor = reactant->getDiffusionFactor();
+=======
+	IReactant& reactant = reactants.at(0);
+	// Check the composition
+	auto composition = reactant.getComposition();
+	BOOST_REQUIRE_EQUAL(composition[toCompIdx(Species::Xe)], 1);
+	BOOST_REQUIRE_EQUAL(composition[toCompIdx(Species::V)], 0);
+	BOOST_REQUIRE_EQUAL(composition[toCompIdx(Species::I)], 0);
+	// Check the formation energy
+	auto formationEnergy = reactant.getFormationEnergy();
+	BOOST_REQUIRE_EQUAL(formationEnergy, 7.0);
+	// Check the migration energy
+	auto migrationEnergy = reactant.getMigrationEnergy();
+	BOOST_REQUIRE_EQUAL(migrationEnergy, 0.0);
+	// Check the diffusion factor
+	auto diffusionFactor = reactant.getDiffusionFactor();
+	BOOST_REQUIRE_EQUAL(diffusionFactor, 5.0e-3);
+
+	// Get the last reactant of the network
+	IReactant& reactant2 = reactants.at(2);
+	// Check the composition
+	composition = reactant2.getComposition();
+	BOOST_REQUIRE_EQUAL(composition[toCompIdx(Species::Xe)], 3);
+	BOOST_REQUIRE_EQUAL(composition[toCompIdx(Species::V)], 0);
+	BOOST_REQUIRE_EQUAL(composition[toCompIdx(Species::I)], 0);
+	// Check the formation energy
+	formationEnergy = reactant2.getFormationEnergy();
+	BOOST_REQUIRE_EQUAL(formationEnergy, 17.15);
+	// Check the diffusion factor
+	diffusionFactor = reactant2.getDiffusionFactor();
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	BOOST_REQUIRE_CLOSE(diffusionFactor, 0.0, 1.0e-16);
 
 	return;
@@ -131,6 +177,7 @@ BOOST_AUTO_TEST_CASE(checkGenerate) {
 	BOOST_REQUIRE_EQUAL(networkSize, 100);
 
 	// Check the properties
+<<<<<<< HEAD
 	auto neNetwork = std::dynamic_pointer_cast<NEClusterReactionNetwork>(
 			network);
 	// Check the properties
@@ -142,6 +189,14 @@ BOOST_AUTO_TEST_CASE(checkGenerate) {
 	BOOST_REQUIRE_EQUAL(neNetwork->getNumVClusters(), 0);
 	BOOST_REQUIRE_EQUAL(neNetwork->getNumIClusters(), 0);
 	BOOST_REQUIRE_EQUAL(neNetwork->getNumSuperClusters(), 0);
+=======
+	auto neNetwork = (NEClusterReactionNetwork*) network.get();
+	// Check the properties
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::Xe), 100);
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::V), 0);
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::I), 0);
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::XeV), 0);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Remove the created file
 	std::string tempFile = "param.txt";
@@ -169,8 +224,15 @@ BOOST_AUTO_TEST_CASE(checkApplySectional) {
 	loader.setXeMin(2);
 	loader.setWidth(2);
 
+<<<<<<< HEAD
 	// Load the network
 	auto network = loader.load();
+=======
+	// Create the options needed to load the network
+	Options opts;
+	// Load the network
+	auto network = loader.load(opts);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Get the size of the network
 	int networkSize = network->size();
@@ -183,6 +245,7 @@ BOOST_AUTO_TEST_CASE(checkApplySectional) {
 	BOOST_REQUIRE_EQUAL(dof, 4);
 
 	// Check the properties
+<<<<<<< HEAD
 	auto neNetwork = std::dynamic_pointer_cast<NEClusterReactionNetwork>(
 			network);
 	BOOST_REQUIRE_EQUAL(neNetwork->getMaxXeClusterSize(), 3);
@@ -193,6 +256,13 @@ BOOST_AUTO_TEST_CASE(checkApplySectional) {
 	BOOST_REQUIRE_EQUAL(neNetwork->getNumVClusters(), 0);
 	BOOST_REQUIRE_EQUAL(neNetwork->getNumIClusters(), 0);
 	BOOST_REQUIRE_EQUAL(neNetwork->getNumSuperClusters(), 1);
+=======
+	auto neNetwork = (NEClusterReactionNetwork*) network.get();
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::Xe), 3);
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::V), 0);
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::I), 0);
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::XeV), 0);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	// Finalize MPI
 	MPI_Finalize();

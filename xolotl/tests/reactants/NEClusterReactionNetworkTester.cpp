@@ -4,7 +4,11 @@
 #include <boost/test/included/unit_test.hpp>
 #include <NECluster.h>
 #include "SimpleReactionNetwork.h"
+<<<<<<< HEAD
 #include <XeCluster.h>
+=======
+#include <NEXeCluster.h>
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 #include <xolotlPerf.h>
 
 using namespace std;
@@ -23,19 +27,34 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 	// Create the network
 	auto neNetwork = make_shared<NEClusterReactionNetwork>(registry);
 
+<<<<<<< HEAD
 	// Add a few Xe NEClusters
 	auto xeCluster = make_shared<XeCluster>(10, registry);
 	neNetwork->add(xeCluster);
 
 	// Check the network, Xe first
 	auto retXeCluster = (NECluster *) neNetwork->get("Xe", 10);
+=======
+	// Add a Xe NECluster
+	auto xeCluster = std::unique_ptr<NEXeCluster>(
+			new NEXeCluster(10, *(neNetwork.get()), registry));
+	neNetwork->add(std::move(xeCluster));
+
+	// Check the network, Xe first
+	auto retXeCluster = (NECluster *) neNetwork->get(Species::Xe, 10);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	BOOST_REQUIRE(retXeCluster);
 	BOOST_REQUIRE_EQUAL("Xe_10", retXeCluster->getName());
 	BOOST_REQUIRE_EQUAL(10, retXeCluster->getSize());
 
 	// Check the getter for all reactants
+<<<<<<< HEAD
 	auto clusters = neNetwork->getAll();
 	BOOST_REQUIRE_EQUAL(1U, clusters->size());
+=======
+	auto& clusters = neNetwork->getAll();
+	BOOST_REQUIRE_EQUAL(1U, clusters.size());
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	// Check the size of the network
 	BOOST_REQUIRE_EQUAL(1, neNetwork->size());
 
@@ -44,10 +63,17 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 	BOOST_REQUIRE(id > 0 && id <= 1);
 
 	// Try adding a duplicate Xe and catch the exception
+<<<<<<< HEAD
 	shared_ptr<XeCluster> duplicateCluster = std::make_shared<XeCluster>(10,
 			registry);
 	try {
 		neNetwork->add(duplicateCluster);
+=======
+	auto duplicateCluster = std::unique_ptr<NEXeCluster>(
+			new NEXeCluster(10, *(neNetwork.get()), registry));
+	try {
+		neNetwork->add(std::move(duplicateCluster));
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		BOOST_FAIL(
 				"Test failed because adding a duplicate" << " to the network was allowed.");
 	} catch (const std::string& /* e */) {
@@ -55,12 +81,22 @@ BOOST_AUTO_TEST_CASE(checkReactants) {
 	}
 
 	// Make sure that everything was added
+<<<<<<< HEAD
 	auto reactants = neNetwork->getAll();
 	BOOST_REQUIRE_EQUAL(1U, reactants->size());
 
 	// Try changing the temperature and make sure it works
 	neNetwork->setTemperature(1000.0);
 	BOOST_REQUIRE_CLOSE(1000.0, reactants->at(0)->getTemperature(), 0.0001);
+=======
+	auto& reactants = neNetwork->getAll();
+	BOOST_REQUIRE_EQUAL(1U, reactants.size());
+
+	// Try changing the temperature and make sure it works
+	neNetwork->setTemperature(1000.0);
+	IReactant& reactant = reactants.at(0);
+	BOOST_REQUIRE_CLOSE(1000.0, reactant.getTemperature(), 0.0001);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	return;
 }
@@ -69,6 +105,7 @@ BOOST_AUTO_TEST_CASE(checkProperties) {
 	// Create the network
 	auto neNetwork = make_shared<NEClusterReactionNetwork>(registry);
 
+<<<<<<< HEAD
 	// Access network "properties."
 	auto numXeClusters = neNetwork->getNumXeClusters();
 	auto numVClusters = neNetwork->getNumVClusters();
@@ -104,6 +141,21 @@ BOOST_AUTO_TEST_CASE(checkProperties) {
 	// Check the properties again
 	BOOST_REQUIRE_EQUAL(1, numXeClusters);
 	BOOST_REQUIRE_EQUAL(5, maxXeClusterSize);
+=======
+	// Check the properties
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::Xe), 0);
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::V), 0);
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::I), 0);
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::XeV), 0);
+
+	// Add a cluster
+	auto xeCluster = std::unique_ptr<NEXeCluster>(
+			new NEXeCluster(5, *(neNetwork.get()), registry));
+	neNetwork->add(std::move(xeCluster));
+
+	// Check the properties again
+	BOOST_REQUIRE_EQUAL(neNetwork->getMaxClusterSize(ReactantType::Xe), 5);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	return;
 }
@@ -112,6 +164,7 @@ BOOST_AUTO_TEST_CASE(checkNames) {
 	// Create the network
 	auto neNetwork = make_shared<NEClusterReactionNetwork>(registry);
 
+<<<<<<< HEAD
 	// Check the names of the regular cluster types. Use a simple counting
 	// system to look over the list since there is no way to check exact
 	// containment with a vector.
@@ -175,6 +228,28 @@ BOOST_AUTO_TEST_CASE(checkCopying) {
 
 	// Check the size of the network
 	BOOST_REQUIRE_EQUAL(1, networkCopy.size());
+=======
+	// Check the names of all cluster types. Use a simple counting
+	// system to look over the list.
+	auto names = neNetwork->getKnownReactantTypes();
+	unsigned int marker = 0;
+	for (auto name : names) {
+		if (name == ReactantType::Xe)
+			++marker;
+		else if (name == ReactantType::V)
+			++marker;
+		else if (name == ReactantType::I)
+			++marker;
+		else if (name == ReactantType::NESuper)
+			++marker;
+		else if (name == ReactantType::XeV)
+			++marker;
+		else if (name == ReactantType::XeI)
+			++marker;
+	}
+	BOOST_REQUIRE_EQUAL(6U, marker);
+	BOOST_REQUIRE_EQUAL(marker, names.size());
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	return;
 }
@@ -210,7 +285,12 @@ BOOST_AUTO_TEST_CASE(checkArrayOperations) {
 	network->updateConcentrationsFromArray(concentrations);
 	auto reactants = network->getAll();
 	for (int i = 0; i < size; i++) {
+<<<<<<< HEAD
 		BOOST_REQUIRE_CLOSE(1.0, reactants->at(0)->getConcentration(), 1.0e-15);
+=======
+		IReactant& reactant = reactants.at(i);
+		BOOST_REQUIRE_CLOSE(1.0, reactant.getConcentration(), 1.0e-15);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	}
 
 	// Clear memory
@@ -219,6 +299,7 @@ BOOST_AUTO_TEST_CASE(checkArrayOperations) {
 	return;
 }
 
+<<<<<<< HEAD
 BOOST_AUTO_TEST_CASE(checkRefCounts) {
 	// Obtain a network to work with.
 	// This network was built programmatically.
@@ -255,4 +336,6 @@ BOOST_AUTO_TEST_CASE(checkRefCounts) {
 	return;
 }
 
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 BOOST_AUTO_TEST_SUITE_END()

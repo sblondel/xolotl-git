@@ -2,9 +2,16 @@
 #define NECLUSTER_H
 
 // Includes
+<<<<<<< HEAD
 #include <Reactant.h>
 #include <math.h>
 #include <sstream>
+=======
+#include <memory>
+#include <sstream>
+#include <cassert>
+#include <Reactant.h>
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 namespace xolotlPerf {
 class ITimer;
@@ -27,7 +34,11 @@ namespace xolotlCore {
  *
  * As a rule, it is possible to access directly some of the private members of
  * this class (id, concentration, reactionRadius, diffusionCoefficient, size,
+<<<<<<< HEAD
  * typeName) instead of using the "get" functions for performance reasons. In
+=======
+ * type) instead of using the "get" functions for performance reasons. In
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
  * order to change these values the "set" functions must still be used.
  */
 class NECluster: public Reactant {
@@ -35,6 +46,29 @@ class NECluster: public Reactant {
 protected:
 
 	/**
+<<<<<<< HEAD
+=======
+	 * This operation returns a set that contains only the entries of the
+	 * reaction connectivity array that are non-zero.
+	 *
+	 * @return The set of connected reactants. Each entry in the set is the id
+	 * of a connected cluster for forward reactions.
+	 */
+	std::set<int> getReactionConnectivitySet() const;
+
+	/**
+	 * This operation returns a set that contains only the entries of the
+	 * dissociation connectivity array that are non-zero.
+	 *
+	 * @return The set of connected reactants. Each entry in the set is the id
+	 * of a connected cluster for dissociation reactions
+	 */
+	const std::set<int> & getDissociationConnectivitySet() const;
+
+public:
+
+	/**
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	 * This is a protected class that is used to implement the flux calculations
 	 * for two body reactions or dissociation.
 	 *
@@ -68,11 +102,23 @@ protected:
 		/**
 		 * The reaction/dissociation pointer to the list
 		 */
+<<<<<<< HEAD
 		std::shared_ptr<Reaction> reaction;
 
 		//! The constructor
 		ClusterPair(NECluster * firstPtr, NECluster * secondPtr) :
 				first(firstPtr), second(secondPtr), reaction(nullptr), firstDistance(
+=======
+		// NB: we use a reference_wrapper because we assign
+		// this after constructing the object.
+		// TODO why can't we add this when we construct the object?
+		std::reference_wrapper<Reaction> reaction;
+
+		//! The constructor
+		ClusterPair(Reaction& _reaction, NECluster * firstPtr,
+				NECluster * secondPtr) :
+				reaction(_reaction), first(firstPtr), second(secondPtr), firstDistance(
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 						0.0), secondDistance(0.0) {
 		}
 	};
@@ -91,12 +137,28 @@ protected:
 		/**
 		 * The combining cluster
 		 */
+<<<<<<< HEAD
 		NECluster * combining;
+=======
+		// We use a reference wrapper because we may need to reassign
+		// the original combining reactant to a super cluster after
+		// construction.
+		std::reference_wrapper<NECluster> combining;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 		/**
 		 * The reaction pointer to the list
 		 */
+<<<<<<< HEAD
 		std::shared_ptr<Reaction> reaction;
+=======
+		// We use a reference wrapper here because it allows NESuperCluster
+		// to edit vectors of CombiningClusters in place when grouping
+		// into superclusters.
+		// TODO can't this be done similar to what we're doing in PSI
+		// to avoid the need for the reference wrappers?
+		std::reference_wrapper<Reaction> reaction;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 		/**
 		 * The cluster distance in the group (0.0 for non-super clusters)
@@ -104,12 +166,18 @@ protected:
 		double distance;
 
 		//! The constructor
+<<<<<<< HEAD
 		CombiningCluster(NECluster * ptr) :
 				combining(ptr), reaction(nullptr), distance(0.0) {
+=======
+		CombiningCluster(Reaction& _reaction, NECluster& _comb) :
+				combining(_comb), reaction(_reaction), distance(0.0) {
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		}
 	};
 
 	/**
+<<<<<<< HEAD
 
 	 * This operation returns a set that contains only the entries of the
 	 * reaction connectivity array that are non-zero.
@@ -136,6 +204,8 @@ protected:
 public:
 
 	/**
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	 * A vector of ClusterPairs that represents reacting pairs of clusters
 	 * that produce this cluster. This vector should be populated early in the
 	 * cluster's lifecycle by subclasses. In the standard Xolotl clusters,
@@ -171,6 +241,7 @@ public:
 	std::vector<ClusterPair> emissionPairs;
 
 	/**
+<<<<<<< HEAD
 	 * The default constructor
 	 *
 	 * @param registry The performance handler registry
@@ -183,6 +254,29 @@ public:
 	 * @param other The cluster to copy
 	 */
 	NECluster(NECluster &other);
+=======
+	 * Default constructor, deleted because we require info to construct.
+	 */
+	NECluster() = delete;
+
+	/**
+	 * The default constructor
+	 *
+	 * @param _network The network to which we wil belong.
+	 * @param _registry The performance handler registry.
+	 * @param _name Our name.
+	 */
+	NECluster(IReactionNetwork& _network,
+			std::shared_ptr<xolotlPerf::IHandlerRegistry> _registry,
+			const std::string& _name = "NECluster") :
+			Reactant(_network, _registry, _name) {
+	}
+
+	/**
+	 * Copy constructor, deleted to prevent use.
+	 */
+	NECluster(NECluster &other) = delete;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * The destructor
@@ -191,6 +285,7 @@ public:
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Returns a reactant created using the copy constructor
 	 */
 	virtual std::shared_ptr<IReactant> clone() {
@@ -237,11 +332,166 @@ public:
 	 * @param reaction The reaction where this cluster emits.
 	 */
 	void createEmission(std::shared_ptr<DissociationReaction> reaction);
+=======
+	 * Update reactant using other reactants in its network.
+	 */
+	virtual void updateFromNetwork() override;
+
+	/**
+	 * Note that we result from the given reaction.
+	 * Assumes the reaction is already in our network.
+	 *
+	 * \see Reactant.h
+	 */
+	void resultFrom(ProductionReaction& reaction, int a = 0, int b = 0, int c =
+			0, int d = 0) override;
+
+	/**
+	 * Note that we result from the given reaction involving a super cluster.
+	 * Assumes the reaction is already in the network.
+	 *
+	 * \see Reactant.h
+	 */
+	void resultFrom(ProductionReaction& reaction,
+			const std::vector<PendingProductionReactionInfo>& prInfos)
+					override {
+		// TODO Should not be called for NE reaction network yet,
+		// but required to be defined.
+		assert(false);
+	}
+
+	/**
+	 * Note that we result from the given reaction involving a super cluster.
+	 * Assumes the reaction is already in the network.
+	 *
+	 * \see Reactant.h
+	 */
+	void resultFrom(ProductionReaction& reaction, IReactant& product) override {
+		// TODO Should not be called for NE reaction network yet,
+		// but required to be defined.
+		assert(false);
+	}
+
+	/**
+	 * Note that we combine with another cluster in a production reaction.
+	 * Assumes that the reaction is already in our network.
+	 *
+	 * \see Reactant.h
+	 */
+	void participateIn(ProductionReaction& reaction, int a = 0, int b = 0)
+			override;
+
+	/**
+	 * Note that we combine with another cluster in a production reaction
+	 * involving a super cluster.
+	 * Assumes that the reaction is already in our network.
+	 *
+	 * \see Reactant.h
+	 */
+	void participateIn(ProductionReaction& reaction,
+			const std::vector<PendingProductionReactionInfo>& prInfos)
+					override {
+		// TODO Should not be called for NE reaction network yet,
+		// but required to be defined.
+		assert(false);
+	}
+
+	/**
+	 * Note that we combine with another cluster in a production reaction
+	 * involving a super cluster.
+	 * Assumes that the reaction is already in our network.
+	 *
+	 * \see Reactant.h
+	 */
+	void participateIn(ProductionReaction& reaction, IReactant& product)
+			override {
+		// TODO Should not be called for NE reaction network yet,
+		// but required to be defined.
+		assert(false);
+	}
+
+	/**
+	 * Note that we combine with another cluster in a dissociation reaction.
+	 * Assumes the reaction is already in our network.
+	 *
+	 * \see Reactant.h
+	 */
+	void participateIn(DissociationReaction& reaction, int a = 0, int b = 0,
+			int c = 0, int d = 0) override;
+
+	/**
+	 * Note that we combine with another cluster in a dissociation reaction
+	 * involving a super cluster.
+	 * Assumes the reaction is already in our network.
+	 *
+	 * \see Reactant.h
+	 */
+	void participateIn(DissociationReaction& reaction,
+			const std::vector<PendingProductionReactionInfo>& prInfos)
+					override {
+		// TODO Should not be called for NE reaction network yet,
+		// but required to be defined.
+		assert(false);
+	}
+
+	/**
+	 * Note that we combine with another cluster in a dissociation reaction
+	 * involving a super cluster.
+	 * Assumes the reaction is already in our network.
+	 *
+	 * \see Reactant.h
+	 */
+	void participateIn(DissociationReaction& reaction, IReactant& disso)
+			override {
+		// TODO Should not be called for NE reaction network yet,
+		// but required to be defined.
+		assert(false);
+	}
+
+	/**
+	 * Note that we emit from the given reaction.
+	 * Assumes the reaction is already in our network.
+	 *
+	 * \see Reactant.h
+	 */
+	void emitFrom(DissociationReaction& reaction, int a = 0, int b = 0, int c =
+			0, int d = 0) override;
+
+	/**
+	 * Note that we emit from the given reaction involving a super cluster.
+	 * Assumes the reaction is already in our network.
+	 *
+	 * \see Reactant.h
+	 */
+	void emitFrom(DissociationReaction& reaction,
+			const std::vector<PendingProductionReactionInfo>& prInfos)
+					override {
+		// TODO Should not be called for NE reaction network yet,
+		// but required to be defined.
+		assert(false);
+	}
+
+	/**
+	 * Note that we emit from the given reaction involving a super cluster.
+	 * Assumes the reaction is already in our network.
+	 *
+	 * \see Reactant.h
+	 */
+	void emitFrom(DissociationReaction& reaction, IReactant& disso) override {
+		// TODO Should not be called for NE reaction network yet,
+		// but required to be defined.
+		assert(false);
+	}
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Add the reactions to the network lists.
 	 */
+<<<<<<< HEAD
 	virtual void optimizeReactions();
+=======
+	virtual void optimizeReactions() override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation returns the connectivity array for this cluster for
@@ -277,7 +527,11 @@ public:
 	 * @return The total change in flux for this cluster due to all
 	 * reactions
 	 */
+<<<<<<< HEAD
 	virtual double getTotalFlux();
+=======
+	virtual double getTotalFlux() override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation returns the total change in this cluster due to
@@ -321,7 +575,11 @@ public:
 	 * corresponds to the first cluster in the list returned by the
 	 * ReactionNetwork::getAll() operation.
 	 */
+<<<<<<< HEAD
 	virtual std::vector<double> getPartialDerivatives() const;
+=======
+	virtual std::vector<double> getPartialDerivatives() const override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation works as getPartialDerivatives above, but instead of
@@ -336,7 +594,12 @@ public:
 	 * the vector should be equal to ReactionNetwork::size().
 	 *
 	 */
+<<<<<<< HEAD
 	virtual void getPartialDerivatives(std::vector<double> & partials) const;
+=======
+	virtual void getPartialDerivatives(std::vector<double> & partials) const
+			override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation computes the partial derivatives due to production
@@ -386,7 +649,11 @@ public:
 	 * This operation reset the connectivity sets based on the information
 	 * in the production and dissociation vectors.
 	 */
+<<<<<<< HEAD
 	void resetConnectivities();
+=======
+	void resetConnectivities() override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation sets the diffusion factor, D_0, that is used to calculate
@@ -394,14 +661,22 @@ public:
 	 *
 	 * @param factor The diffusion factor
 	 */
+<<<<<<< HEAD
 	void setDiffusionFactor(const double factor);
+=======
+	void setDiffusionFactor(const double factor) override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation sets the migration energy for this reactant.
 	 *
 	 * @param energy The migration energy
 	 */
+<<<<<<< HEAD
 	void setMigrationEnergy(const double energy);
+=======
+	void setMigrationEnergy(const double energy) override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation returns the sum of combination rate and emission rate
@@ -412,7 +687,11 @@ public:
 	 *
 	 * @return The rate
 	 */
+<<<<<<< HEAD
 	double getLeftSideRate() const;
+=======
+	double getLeftSideRate() const override;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation returns a list that represents the connectivity
@@ -427,8 +706,23 @@ public:
 	 * with the i-th cluster in the ReactionNetwork and a "0" indicates
 	 * that it does not.
 	 */
+<<<<<<< HEAD
 	std::vector<int> getConnectivity() const;
 
+=======
+	std::vector<int> getConnectivity() const override;
+
+	/**
+	 * Tell reactant to output a representation of its reaction coefficients
+	 * to the given output stream.
+	 *
+	 * @param os Output stream on which to output coefficients.
+	 */
+	virtual void outputCoefficientsTo(std::ostream& os) const override {
+		// NIY.
+		assert(false);
+	}
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 };
 
 } /* end namespace xolotlCore */

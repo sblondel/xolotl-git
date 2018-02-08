@@ -1,16 +1,28 @@
 #ifndef IREACTIONNETWORK_H
 #define IREACTIONNETWORK_H
 
+<<<<<<< HEAD
 #include "IReactant.h"
 #include "ReactantUtils.h"
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 #include <string>
 #include <vector>
 #include <map>
 #include <memory>
+<<<<<<< HEAD
+=======
+#include "IReactant.h"
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 namespace xolotlCore {
 
 class IReactant;
+<<<<<<< HEAD
+=======
+class ProductionReaction;
+class DissociationReaction;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 /**
  *  This class manages the set of reactants and compound reactants
@@ -20,6 +32,18 @@ class IReactant;
 class IReactionNetwork {
 
 public:
+<<<<<<< HEAD
+=======
+	/**
+	 * Nice name for vector of Reactants.
+	 */
+	using ReactantVector = std::vector<std::reference_wrapper<IReactant> >;
+
+	/**
+	 * Nice name for map of reactants, keyed by their composition.
+	 */
+	using ReactantMap = std::unordered_map<IReactant::Composition, std::unique_ptr<IReactant> >;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * The destructor.
@@ -45,6 +69,7 @@ public:
 	virtual double getTemperature() const = 0;
 
 	/**
+<<<<<<< HEAD
 	 * This operation returns a reactant with the given type and size if it
 	 * exists in the network or null if not.
 	 *
@@ -64,6 +89,32 @@ public:
 	 */
 	virtual IReactant * getCompound(const std::string& type,
 			const std::vector<int>& sizes) const = 0;
+=======
+	 * Retrieve the single-species reactant with the given type and size if it
+	 * exists in the network or null if not.
+	 * Convenience function for get() that takes a
+	 * reactant type and composition.
+	 *
+	 * @param species The reactant's single species.
+	 * @param size The size of the reactant.
+	 * @return A pointer to the reactant, or nullptr if it does not 
+	 * exist in the network.
+	 */
+	virtual IReactant * get(Species species,
+			IReactant::SizeType size) const = 0;
+
+	/**
+	 * Retrieve the reactant with the given type and composition if
+	 * exists in the network.
+	 *
+	 * @param type The type of the reactant
+	 * @param comp The composition of the reactant
+	 * @return A pointer to the reactant of type 'type' and with composition
+	 * 'comp.' nullptr if no such reactant exists.
+	 */
+	virtual IReactant * get(ReactantType type,
+			const IReactant::Composition& comp) const = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation returns all reactants in the network without regard for
@@ -72,7 +123,11 @@ public:
 	 *
 	 * @return The list of all of the reactants in the network
 	 */
+<<<<<<< HEAD
 	virtual const std::shared_ptr<std::vector<IReactant *>> & getAll() const = 0;
+=======
+	virtual const IReactant::RefVector& getAll() const = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation returns all reactants in the network with the given type.
@@ -80,6 +135,7 @@ public:
 	 * implementers.
 	 *
 	 * @param type The reactant or compound reactant type
+<<<<<<< HEAD
 	 * @return The list of all of the reactants in the network or null if the
 	 * type is invalid
 	 */
@@ -103,13 +159,29 @@ public:
 	 * @param reactant The reactant that should be added to the network
 	 */
 	virtual void addSuper(std::shared_ptr<IReactant> reactant) = 0;
+=======
+	 * @return The list of all of the reactants in the network.
+	 */
+	virtual const ReactantMap& getAll(ReactantType type) const = 0;
+
+	/**
+	 * Give the reactant to the network.
+	 *
+	 * @param reactant The reactant that should be added to the network
+	 */
+	virtual void add(std::unique_ptr<IReactant> reactant) = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation removes a group of reactants from the network.
 	 *
 	 * @param reactants The reactants that should be removed.
 	 */
+<<<<<<< HEAD
 	virtual void removeReactants(const std::vector<IReactant*>& reactants) = 0;
+=======
+	virtual void removeReactants(const ReactantVector& reactants) = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation reinitializes the network.
@@ -125,6 +197,7 @@ public:
 	virtual void reinitializeConnectivities() = 0;
 
 	/**
+<<<<<<< HEAD
 	 * This operation returns the names of the reactants in the network.
 	 *
 	 * @return A vector with one entry for each of the distinct reactant types
@@ -142,17 +215,24 @@ public:
 	virtual const std::vector<std::string> & getCompoundNames() const = 0;
 
 	/**
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	 * This operation returns the size or number of reactants in the network.
 	 *
 	 * @return The number of reactants in the network
 	 */
+<<<<<<< HEAD
 	virtual int size() = 0;
+=======
+	virtual int size() const = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation returns the size or number of reactants and momentums in the network.
 	 *
 	 * @return The number of degrees of freedom
 	 */
+<<<<<<< HEAD
 	virtual int getDOF() = 0;
 
 	/**
@@ -172,6 +252,27 @@ public:
 	 */
 	virtual std::shared_ptr<DissociationReaction> addDissociationReaction(
 			std::shared_ptr<DissociationReaction> reaction) = 0;
+=======
+	virtual int getDOF() const = 0;
+
+	/**
+	 * Add a production reaction to the network.
+	 *
+	 * @param reaction The reaction that should be added to the network
+	 * @return The reaction that is now in the network
+	 */
+	virtual ProductionReaction& add(
+			std::unique_ptr<ProductionReaction> reaction) = 0;
+
+	/**
+	 * Add a dissociation reaction to the network.
+	 *
+	 * @param reaction The reaction that should be added to the network
+	 * @return The reaction that is now in the network
+	 */
+	virtual DissociationReaction& add(
+			std::unique_ptr<DissociationReaction> reaction) = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation fills an array of doubles with the concentrations of all
@@ -196,6 +297,7 @@ public:
 	virtual void updateConcentrationsFromArray(double * concentrations) = 0;
 
 	/**
+<<<<<<< HEAD
 	 * Request that all reactants in the network release their
 	 * pointers to the network, to break cycles and allow the
 	 * network and the clusters/reactant objects it contains to
@@ -212,6 +314,8 @@ public:
 	virtual void askReactantsToReleaseNetwork() = 0;
 
 	/**
+=======
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	 * Get the diagonal fill for the Jacobian, corresponding to the reactions.
 	 *
 	 * @param diagFill The pointer to the vector where the connectivity information is kept
@@ -288,6 +392,24 @@ public:
 	 */
 	virtual bool getDissociationsEnabled() const = 0;
 
+<<<<<<< HEAD
+=======
+	/**
+	 * Find maximum cluster size currently in the network
+	 * for the given reactant type.
+	 *
+	 * @param rtype Reactant type of interest.
+	 * @return Maximum size of cluster of type rtype currently in network.
+	 */
+	virtual IReactant::SizeType getMaxClusterSize(ReactantType rtype) const = 0;
+
+	/**
+	 * Dump a representation of the network to the given output stream.
+	 *
+	 * @param os Output stream on which to write network description.
+	 */
+	virtual void dumpTo(std::ostream& os) const = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 };
 
 }

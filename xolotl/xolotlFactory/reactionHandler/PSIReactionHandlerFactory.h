@@ -18,7 +18,11 @@ protected:
 	std::shared_ptr<xolotlCore::INetworkLoader> theNetworkLoaderHandler;
 
 	//! The network handler
+<<<<<<< HEAD
 	std::shared_ptr<xolotlCore::IReactionNetwork> theNetworkHandler;
+=======
+	std::unique_ptr<xolotlCore::IReactionNetwork> theNetworkHandler;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 public:
 
@@ -63,8 +67,14 @@ public:
 			theNetworkLoaderHandler->setDummyReactions();
 		// Load the network
 		if (options.useHDF5())
+<<<<<<< HEAD
 			theNetworkHandler = theNetworkLoaderHandler->load();
 		else theNetworkHandler = theNetworkLoaderHandler->generate(options);
+=======
+			theNetworkHandler = theNetworkLoaderHandler->load(options);
+		else
+			theNetworkHandler = theNetworkLoaderHandler->generate(options);
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 		if (procId == 0) {
 			std::cout << "\nFactory Message: "
@@ -87,8 +97,13 @@ public:
 	 *
 	 * @return The network.
 	 */
+<<<<<<< HEAD
 	std::shared_ptr<xolotlCore::IReactionNetwork> getNetworkHandler() const {
 		return theNetworkHandler;
+=======
+	xolotlCore::IReactionNetwork& getNetworkHandler() const {
+		return *theNetworkHandler;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	}
 
 };

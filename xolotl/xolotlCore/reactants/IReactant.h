@@ -2,15 +2,33 @@
 #define IREACTANT_H
 
 // Includes
+<<<<<<< HEAD
 #include "IReactionNetwork.h"
 #include "ReactantUtils.h"
 #include <memory>
 #include <vector>
 #include <map>
+=======
+#include <memory>
+#include <numeric>
+#include <vector>
+#include <array>
+#include <unordered_map>
+#include <map>
+#include <sstream>
+#include "Species.h"
+#include "ReactantType.h"
+#include "PendingProductionReactionInfo.h"
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 namespace xolotlCore {
 
 class IReactionNetwork;
+<<<<<<< HEAD
+=======
+class ProductionReaction;
+class DissociationReaction;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 /**
  * A reactant is a general reacting body in a reaction network. It represents
@@ -18,7 +36,11 @@ class IReactionNetwork;
  *
  * Reactants inherently know the other reactants with which they interact. They
  * declare their interactions with other reactants in the network after it is
+<<<<<<< HEAD
  * set (setReactionNetwork) via the getConnectivity() operation. "Connectivity"
+=======
+ * set (updateFromNetwork) via the getConnectivity() operation. "Connectivity"
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
  * indicates whether two Reacants interact, via any mechanism, in an abstract
  * sense (as if they were nodes connected by an edge on a network graph).
  *
@@ -29,6 +51,35 @@ class IReactionNetwork;
 class IReactant {
 
 public:
+<<<<<<< HEAD
+=======
+	/**
+	 * A nice name for type of variable holding amount of a species.
+	 */
+	using SizeType = uint32_t;
+
+	/**
+	 * Type of a reactant's composition.
+	 * It is an array of values, one per known Species.
+	 * The array values are ordered according to the integer values of
+	 * the Species enums, so casting a Species value to an int can
+	 * be used to index into the array to get the concentration of
+	 * that Species.
+	 */
+	struct Composition: public std::array<SizeType,
+			static_cast<int>(Species::last) + 1> {
+		Composition() {
+			// By default, initialize all species concentrations to 0.
+			fill(0);
+		}
+	};
+
+	/**
+	 * Nice name for vector of IReactant references.
+	 */
+	using RefVector = std::vector<std::reference_wrapper<IReactant> >;
+	using ConstRefVector = std::vector<std::reference_wrapper<const IReactant> >;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * The destructor
@@ -37,6 +88,7 @@ public:
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Returns a reactant created using the copy constructor
 	 */
 	virtual std::shared_ptr<IReactant> clone() = 0;
@@ -72,6 +124,139 @@ public:
 	 * @param reaction The reaction where this cluster emits.
 	 */
 	virtual void createEmission(std::shared_ptr<DissociationReaction> reaction) = 0;
+=======
+	 * Note that we result from the given reaction.
+	 * Assumes the reaction is already in our network.
+	 *
+	 * @param reaction The reaction creating this cluster.
+	 * @param a Number that can be used by daughter classes.
+	 * @param b Number that can be used by daughter classes.
+	 * @param c Number that can be used by daughter classes.
+	 * @param d Number that can be used by daughter classes.
+	 */
+	virtual void resultFrom(ProductionReaction& reaction, int a = 0, int b = 0,
+			int c = 0, int d = 0) = 0;
+
+	/**
+	 * Note that we result from the given reaction involving a super cluster.
+	 * Assumes the reaction is already in the network.
+	 *
+	 * @param reaction The reaction creating this cluster.
+	 * @param prInfos Production reaction parameters used by derived classes.
+	 */
+	virtual void resultFrom(ProductionReaction& reaction,
+			const std::vector<PendingProductionReactionInfo>& prInfos) = 0;
+
+	/**
+	 * Note that we result from the given reaction involving a super cluster.
+	 * Assumes the reaction is already in the network.
+	 *
+	 * @param reaction The reaction creating this cluster.
+	 * @param product The cluster created by the reaction.
+	 */
+	virtual void resultFrom(ProductionReaction& reaction,
+			IReactant& product) = 0;
+
+	/**
+	 * Note that we combine with another cluster in a production reaction.
+	 * Assumes that the reaction is already in our network.
+	 *
+	 * @param reaction The reaction where this cluster takes part.
+	 * @param a Number that can be used by daughter classes.
+	 * @param b Number that can be used by daughter classes.
+	 */
+	virtual void participateIn(ProductionReaction& reaction, int a = 0, int b =
+			0) = 0;
+
+	/**
+	 * Note that we combine with another cluster in a production reaction
+	 * involving a super cluster.
+	 * Assumes that the reaction is already in our network.
+	 *
+	 * @param reaction The reaction where this cluster takes part.
+	 * @param prInfos Production reaction parameters.
+	 */
+	virtual void participateIn(ProductionReaction& reaction,
+			const std::vector<PendingProductionReactionInfo>& prInfos) = 0;
+
+	/**
+	 * Note that we combine with another cluster in a production reaction
+	 * involving a super cluster.
+	 * Assumes that the reaction is already in our network.
+	 *
+	 * @param reaction The reaction where this cluster takes part.
+	 * @param product The cluster created by the reaction.
+	 */
+	virtual void participateIn(ProductionReaction& reaction,
+			IReactant& product) = 0;
+
+	/**
+	 * Note that we combine with another cluster in a dissociation reaction.
+	 * Assumes the reaction is already inour network.
+	 *
+	 * @param reaction The reaction creating this cluster.
+	 * @param a Number that can be used by daughter classes.
+	 * @param b Number that can be used by daughter classes.
+	 * @param c Number that can be used by daughter classes.
+	 * @param d Number that can be used by daughter classes.
+	 */
+	virtual void participateIn(DissociationReaction& reaction, int a = 0,
+			int b = 0, int c = 0, int d = 0) = 0;
+
+	/**
+	 * Note that we combine with another cluster in a dissociation reaction
+	 * involving a super cluster.
+	 * Assumes the reaction is already inour network.
+	 *
+	 * @param reaction The reaction creating this cluster.
+	 * @param prInfos Production reaction parameters.
+	 */
+	virtual void participateIn(DissociationReaction& reaction,
+			const std::vector<PendingProductionReactionInfo>& prInfos) = 0;
+
+	/**
+	 * Note that we combine with another cluster in a dissociation reaction
+	 * involving a super cluster.
+	 * Assumes the reaction is already inour network.
+	 *
+	 * @param reaction The reaction creating this cluster.
+	 * @param disso The dissociating cluster.
+	 */
+	virtual void participateIn(DissociationReaction& reaction,
+			IReactant& disso) = 0;
+
+	/**
+	 * Note that we emit from the given reaction.
+	 * Assumes the reaction is already in our network.
+	 *
+	 * @param reaction The reaction where this cluster emits.
+	 * @param a Number that can be used by daughter classes.
+	 * @param b Number that can be used by daughter classes.
+	 * @param c Number that can be used by daughter classes.
+	 * @param d Number that can be used by daughter classes.
+	 */
+	virtual void emitFrom(DissociationReaction& reaction, int a = 0, int b = 0,
+			int c = 0, int d = 0) = 0;
+
+	/**
+	 * Note that we emit from the given reaction involving a super cluster.
+	 * Assumes the reaction is already in our network.
+	 *
+	 * @param reaction The reaction where this cluster emits.
+	 * @param prInfos Production reaction parameters.
+	 */
+	virtual void emitFrom(DissociationReaction& reaction,
+			const std::vector<PendingProductionReactionInfo>& prInfos) = 0;
+
+	/**
+	 * Note that we emit from the given reaction involving a super cluster.
+	 * Assumes the reaction is already in our network.
+	 *
+	 * @param reaction The reaction where this cluster emits.
+	 * @param disso The dissociating cluster.
+	 */
+	virtual void emitFrom(DissociationReaction& reaction, IReactant& disso) = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * Add the reactions to the network lists.
@@ -106,6 +291,7 @@ public:
 	virtual double getTotalFlux() = 0;
 
 	/**
+<<<<<<< HEAD
 	 * This operation sets the collection of other reactants that make up
 	 * the reaction network in which this reactant exists.
 	 *
@@ -122,6 +308,11 @@ public:
 	 * otherwise keep the network and reactant objects from being destroyed.
 	 */
 	virtual void releaseReactionNetwork() = 0;
+=======
+	 * Update reactant using other reactants in its network.
+	 */
+	virtual void updateFromNetwork() = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation signifies that the reactant with reactant Id should be
@@ -202,9 +393,15 @@ public:
 	 * This operation returns the reactant's type. It is up to subclasses to
 	 * define exactly what the allowed types may be.
 	 *
+<<<<<<< HEAD
 	 * @return The type of this reactant as a string
 	 */
 	virtual std::string getType() const = 0;
+=======
+	 * @return The type of this reactant.
+	 */
+	virtual ReactantType getType() const = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation returns the composition of this reactant. This map is empty
@@ -213,6 +410,7 @@ public:
 	 * @return The composition returned as a map with keys naming distinct
 	 * elements and values indicating the amount of the element present.
 	 */
+<<<<<<< HEAD
 	virtual const std::map<std::string, int> & getComposition() const = 0;
 
 	/**
@@ -227,6 +425,9 @@ public:
 	 * composition.
 	 */
 	virtual std::string getCompositionString() const = 0;
+=======
+	virtual const Composition & getComposition() const = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation sets the id of the reactant, The id is zero by default
@@ -315,7 +516,11 @@ public:
 	 * @return The total size of this reactant including the contributions
 	 * from all species types
 	 */
+<<<<<<< HEAD
 	virtual int getSize() const = 0;
+=======
+	virtual SizeType getSize() const = 0;
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 	/**
 	 * This operation retrieves the formation energy for this reactant.
@@ -394,8 +599,58 @@ public:
 	 */
 	virtual bool isMixed() const = 0;
 
+<<<<<<< HEAD
 };
 
 } // end namespace xolotlCore
+=======
+	/**
+	 * Tell reactant to output a representation of its reaction coefficients
+	 * to the given output stream.
+	 *
+	 * @param os Output stream on which to output coefficients.
+	 */
+	virtual void outputCoefficientsTo(std::ostream& os) const = 0;
+};
+
+/**
+ * Output basic description of an IReactant's composition to the given output
+ * stream.
+ *
+ * @param os Output stream on which to write description.
+ * @param comp Composition to describe.
+ * @return Output stream after having written description.
+ */
+std::ostream& operator<<(std::ostream& os, const IReactant::Composition& comp);
+
+/**
+ * Output basic description of an IReactant to the given output stream.
+ *
+ * @param os Output stream on which to write description.
+ * @param r Reactant to describe.
+ * @return Output stream after having written description.
+ */
+std::ostream& operator<<(std::ostream& os, const IReactant& r);
+
+}
+ // end namespace xolotlCore
+
+// For an IReactant::Composition to be used as a key in an std::unordered_map,
+// we need to define a hash function for it.
+// Since std::unordered_map uses std::hash on its keys, and because
+// ours is a user-defined type, we add our hash function to the std namespace.
+namespace std {
+
+template<>
+struct hash<xolotlCore::IReactant::Composition> {
+
+size_t operator()(const xolotlCore::IReactant::Composition& comp) const {
+	// This may not be a good hash function - needs to be evaluated
+	// for the compositions Xolotl uses.
+	return std::accumulate(comp.begin(), comp.end(), 0);
+}
+};
+}
+>>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 #endif
