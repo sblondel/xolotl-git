@@ -78,7 +78,11 @@ BOOST_AUTO_TEST_CASE(checkAdvection) {
 	BOOST_REQUIRE_EQUAL(advectionHandler.isPointOnSink(pos1), true);
 
 	// Check the total number of advecting clusters
+<<<<<<< HEAD
 	BOOST_REQUIRE_EQUAL(advectionHandler.getNumberOfAdvecting(), 6);
+=======
+	BOOST_REQUIRE_EQUAL(advectionHandler.getNumberOfAdvecting(), 7);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// Set the size parameters
 	double hx = 1.0;
@@ -141,13 +145,26 @@ BOOST_AUTO_TEST_CASE(checkAdvection) {
 			updatedConcOffset, hx, hx, 1, hy, 1, hz, 1);
 
 	// Check the new values of updatedConcOffset
+<<<<<<< HEAD
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[0], -6.05291e+10, 0.01);
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[1], -5.83683e+10, 0.01);
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[2], -7.40519e+10, 0.01);
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[3], -1.33113e+11, 0.01);
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[4], -1.91296e+11, 0.01);
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[5], -7.41224e+09, 0.01);
+<<<<<<< HEAD
+=======
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[0], -7.47273e+10, 0.01);
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[1], -7.16953e+10, 0.01);
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[2], -9.05259e+10, 0.01);
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[3], -1.61991e+11, 0.01);
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[4], -2.31801e+11, 0.01);
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[5], -8.94518e+09, 0.01);
+>>>>>>> master
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[6], 0.0, 0.01); // Does not advect
+=======
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[6], -2.16140e+09, 0.01);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[7], 0.0, 0.01); // Does not advect
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[8], 0.0, 0.01); // Does not advect
 
@@ -174,6 +191,10 @@ BOOST_AUTO_TEST_CASE(checkAdvection) {
 	BOOST_REQUIRE_EQUAL(indices[3], 3);
 	BOOST_REQUIRE_EQUAL(indices[4], 4);
 	BOOST_REQUIRE_EQUAL(indices[5], 5);
+<<<<<<< HEAD
+=======
+	BOOST_REQUIRE_EQUAL(indices[6], 6);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// Check values
 	BOOST_REQUIRE_CLOSE(val[0], -4.76468e+07, 0.01);

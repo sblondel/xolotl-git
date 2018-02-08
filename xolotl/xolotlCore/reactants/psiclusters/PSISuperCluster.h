@@ -523,9 +523,19 @@ public:
 	 *
 	 * @return A copy of this reactant
 	 */
+<<<<<<< HEAD
+<<<<<<< HEAD
+	virtual std::shared_ptr<IReactant> clone();
+=======
 	virtual std::shared_ptr<IReactant> clone() {
 		return std::make_shared<PSISuperCluster>(*this);
 	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	virtual std::shared_ptr<IReactant> clone() {
+		return std::make_shared<PSISuperCluster>(*this);
+	}
+>>>>>>> master
 
 	/**
 	 * Sets the collection of other clusters that make up
@@ -663,12 +673,21 @@ public:
 	 * @return The concentration of this reactant
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+	double getConcentration(double distHe, double distV) const;
+=======
+	double getConcentration(double distHe, double distV) const {
+		return l0 + (distHe * l1He) + (distV * l1V);
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 	double getConcentration(double distHe, double distV) const {
 =======
 	double getConcentration(double distHe, double distV) const override {
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		return l0 + (distHe * l1He) + (distV * l1V);
 	}
+>>>>>>> master
 
 	/**
 	 * This operation returns the first helium momentum.
@@ -676,12 +695,21 @@ public:
 	 * @return The momentum
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+	double getHeMomentum() const;
+=======
+	double getHeMomentum() const {
+		return l1He;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 	double getHeMomentum() const {
 =======
 	double getHeMomentum() const override {
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		return l1He;
 	}
+>>>>>>> master
 
 	/**
 	 * This operation returns the first vacancy momentum.
@@ -689,12 +717,21 @@ public:
 	 * @return The momentum
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+	double getVMomentum() const;
+=======
+	double getVMomentum() const {
+		return l1V;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 	double getVMomentum() const {
 =======
 	double getVMomentum() const override {
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		return l1V;
 	}
+>>>>>>> master
 
 	/**
 	 * This operation returns the current total concentration of clusters in the group.
@@ -736,6 +773,15 @@ public:
 	 * @return The distance to the mean number of helium in the group
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+	double getHeDistance(int he) const;
+=======
+	double getHeDistance(int he) const {
+		return (sectionHeWidth == 1) ?
+				0.0 : 2.0 * (he - numHe) / (sectionHeWidth - 1.0);
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 	double getHeDistance(int he) const {
 =======
 	double getHeDistance(int he) const override {
@@ -743,6 +789,7 @@ public:
 		return (sectionHeWidth == 1) ?
 				0.0 : 2.0 * (he - numHe) / (sectionHeWidth - 1.0);
 	}
+>>>>>>> master
 
 	/**
 	 * This operation returns the distance to the mean.
@@ -756,11 +803,22 @@ public:
 	 * @param he The number of vacancy
 	 * @return The distance to the mean number of vacancy in the group
 	 */
+<<<<<<< HEAD
+<<<<<<< HEAD
+	double getVDistance(int v) const;
+=======
+	double getVDistance(int v) const {
+		return (sectionVWidth == 1) ?
+				0.0 : 2.0 * (v - numV) / (sectionVWidth - 1.0);
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 	double getVDistance(int v) const override {
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 		return (sectionVWidth == 1) ?
 				0.0 : 2.0 * (v - numV) / (sectionVWidth - 1.0);
 	}
+>>>>>>> master
 
 	/**
 <<<<<<< HEAD
@@ -815,10 +873,16 @@ public:
 	 * reactions
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+	double getTotalFlux();
+=======
+	double getTotalFlux() {
+=======
 	double getTotalFlux() {
 =======
 	double getTotalFlux() override {
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 
 		// Initialize the fluxes
 		heMomentumFlux = 0.0;
@@ -828,6 +892,10 @@ public:
 		return getProductionFlux() - getCombinationFlux()
 				+ getDissociationFlux() - getEmissionFlux();
 	}
+<<<<<<< HEAD
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> master
 
 	/**
 	 * This operation returns the total change in this cluster due to

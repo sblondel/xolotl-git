@@ -133,7 +133,11 @@ public:
 =======
 	virtual void computeIncidentFlux(double currentTime,
 			double *updatedConcOffset, int xi, int surfacePos);
+<<<<<<< HEAD
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 
 	/**
 	 * This operation increments the fluence at the current time step.

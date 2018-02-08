@@ -76,17 +76,38 @@ BOOST_AUTO_TEST_CASE(checkDiffusion) {
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	diffusionHandler.initializeDiffusionGrid(advectionHandlers, grid);
 
+<<<<<<< HEAD
 	// All the clusters diffuse except the 7-th and 8-th one
+=======
+	// All the clusters diffuse except the 8-th one
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	BOOST_REQUIRE_EQUAL(ofill[0], 1);
+<<<<<<< HEAD
+	BOOST_REQUIRE_EQUAL(ofill[10], 1);
+	BOOST_REQUIRE_EQUAL(ofill[20], 1);
+	BOOST_REQUIRE_EQUAL(ofill[30], 1);
+	BOOST_REQUIRE_EQUAL(ofill[40], 1);
+	BOOST_REQUIRE_EQUAL(ofill[50], 1);
+<<<<<<< HEAD
+	BOOST_REQUIRE_EQUAL(ofill[80], 1);
+=======
 	BOOST_REQUIRE_EQUAL(ofill[11], 1);
 	BOOST_REQUIRE_EQUAL(ofill[22], 1);
 	BOOST_REQUIRE_EQUAL(ofill[33], 1);
 	BOOST_REQUIRE_EQUAL(ofill[44], 1);
 	BOOST_REQUIRE_EQUAL(ofill[55], 1);
 	BOOST_REQUIRE_EQUAL(ofill[88], 1);
+>>>>>>> master
 
 	// Check the total number of diffusing clusters
 	BOOST_REQUIRE_EQUAL(diffusionHandler.getNumberOfDiffusing(), 7);
+=======
+	BOOST_REQUIRE_EQUAL(ofill[60], 1);
+	BOOST_REQUIRE_EQUAL(ofill[80], 1);
+
+	// Check the total number of diffusing clusters
+	BOOST_REQUIRE_EQUAL(diffusionHandler.getNumberOfDiffusing(), 8);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// The size parameter in the x direction
 	double hx = 1.0;
@@ -137,13 +158,26 @@ BOOST_AUTO_TEST_CASE(checkDiffusion) {
 			hx, hx, 1);
 
 	// Check the new values of updatedConcOffset
+<<<<<<< HEAD
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[0], 1.0393e+12, 0.01);
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[1], 5.0899e+11, 0.01);
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[2], 2.04785e+11, 0.01);
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[3], 2.70401e+11, 0.01);
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[4], 2.01239e+11, 0.01);
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[5], 4.98404e+09, 0.01);
+<<<<<<< HEAD
+=======
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[0], 1.283e+12, 0.01);
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[1], 6.284e+11, 0.01);
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[2], 2.528e+11, 0.01);
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[3], 3.338e+11, 0.01);
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[4], 2.4844e+11, 0.01);
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[5], 6.153e+09, 0.01);
+>>>>>>> master
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[6], 0.0, 0.01); // Does not diffuse
+=======
+	BOOST_REQUIRE_CLOSE(updatedConcOffset[6], 7.80861e+08, 0.01);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[7], 0.0, 0.01); // Does not diffuse
 	BOOST_REQUIRE_CLOSE(updatedConcOffset[8], 1.0106e+08, 0.01);
 
@@ -170,7 +204,12 @@ BOOST_AUTO_TEST_CASE(checkDiffusion) {
 	BOOST_REQUIRE_EQUAL(indices[3], 3);
 	BOOST_REQUIRE_EQUAL(indices[4], 4);
 	BOOST_REQUIRE_EQUAL(indices[5], 5);
+<<<<<<< HEAD
 	BOOST_REQUIRE_EQUAL(indices[6], 8);
+=======
+	BOOST_REQUIRE_EQUAL(indices[6], 6);
+	BOOST_REQUIRE_EQUAL(indices[7], 8);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	// Check some values
 	BOOST_REQUIRE_CLOSE(val[1], 6.41544e+09, 0.01);

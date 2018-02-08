@@ -57,6 +57,11 @@ static const double uo2HeatCoefficient = 0.0;
 static const std::string heType = "He";
 static const std::string vType = "V";
 static const std::string iType = "I";
+<<<<<<< HEAD
+=======
+static const std::string dType = "D";
+static const std::string tType = "T";
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 static const std::string heVType = "HeV";
 static const std::string heIType = "HeI";
 static const std::string xeType = "Xe";

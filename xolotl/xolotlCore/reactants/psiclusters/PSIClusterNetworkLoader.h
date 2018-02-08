@@ -63,7 +63,15 @@ namespace xolotlCore {
 =======
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
  */
+<<<<<<< HEAD
+<<<<<<< HEAD
+class PSIClusterNetworkLoader : public NetworkLoader {
+=======
 class PSIClusterNetworkLoader: public NetworkLoader {
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+class PSIClusterNetworkLoader: public NetworkLoader {
+>>>>>>> master
 
 protected:
 
@@ -104,6 +112,14 @@ protected:
 <<<<<<< HEAD
 	 * Private nullary constructor.
 	 */
+<<<<<<< HEAD
+<<<<<<< HEAD
+	PSIClusterNetworkLoader() {}
+=======
+	PSIClusterNetworkLoader() {
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 	PSIClusterNetworkLoader() :
 			vMin(1000000), heSectionWidth(1), vSectionWidth(1) {
 =======
@@ -119,6 +135,7 @@ protected:
 					1), vSectionWidth(1) {
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 	}
+>>>>>>> master
 
 	/**
 	 * This operation creates a singles-species cluster of helium, vacancies or
@@ -128,10 +145,20 @@ protected:
 	 * @param numHe The number of helium atoms
 	 * @param numV The number of atomic vacancies
 	 * @param numI The number of interstitial defects
+<<<<<<< HEAD
 	 * @return The new cluster
 	 */
 <<<<<<< HEAD
 	std::shared_ptr<PSICluster> createPSICluster(int numHe, int numV, int numI);
+=======
+<<<<<<< HEAD
+	 * @param numD The number of deuterium atoms
+	 * @param numT The number of tritium atoms
+	 * @return The new cluster
+	 */
+	std::shared_ptr<PSICluster> createPSICluster(int numHe, int numV, int numI,
+			int numD, int numT);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 =======
 	std::unique_ptr<PSICluster> createPSICluster(int numHe, int numV, int numI,
 			IReactionNetwork& network) const;
@@ -165,6 +192,7 @@ protected:
 	 * @return The corresponding formation energy
 	 */
 	double getHeVFormationEnergy(int numHe, int numV);
+>>>>>>> master
 
 public:
 
@@ -174,8 +202,17 @@ public:
 	 *
 	 * @param registry The performance handler registry
 	 */
+<<<<<<< HEAD
+<<<<<<< HEAD
+	PSIClusterNetworkLoader(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
+=======
 	PSIClusterNetworkLoader(
 			std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	PSIClusterNetworkLoader(
+			std::shared_ptr<xolotlPerf::IHandlerRegistry> registry);
+>>>>>>> master
 
 	/**
 	 * An alternative constructor provided for convenience.
@@ -190,8 +227,17 @@ public:
 	/**
 	 * Destructor
 	 */
+<<<<<<< HEAD
+<<<<<<< HEAD
+	virtual ~PSIClusterNetworkLoader() {}
+=======
 	virtual ~PSIClusterNetworkLoader() {
 	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	virtual ~PSIClusterNetworkLoader() {
+	}
+>>>>>>> master
 
 	/**
 	 * This operation will load the reaction network from the inputstream in
@@ -237,27 +283,57 @@ public:
 	 *
 	 * @param min The value for the size
 	 */
+<<<<<<< HEAD
+<<<<<<< HEAD
+	void setVMin (int min) {vMin = min;}
+=======
 	void setVMin(int min) {
 		vMin = min;
 	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	void setVMin(int min) {
+		vMin = min;
+	}
+>>>>>>> master
 
 	/**
 	 * This operation will set the helium width for the grouping scheme.
 	 *
 	 * @param w The value of the width
 	 */
+<<<<<<< HEAD
+<<<<<<< HEAD
+	void setHeWidth (int w) {heSectionWidth = w;}
+=======
 	void setHeWidth(int w) {
 		heSectionWidth = w;
 	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	void setHeWidth(int w) {
+		heSectionWidth = w;
+	}
+>>>>>>> master
 
 	/**
 	 * This operation will set the vacancy width for the grouping scheme.
 	 *
 	 * @param w The value of the width
 	 */
+<<<<<<< HEAD
+<<<<<<< HEAD
+	void setVWidth (int w) {vSectionWidth = w;}
+=======
 	void setVWidth(int w) {
 		vSectionWidth = w;
 	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	void setVWidth(int w) {
+		vSectionWidth = w;
+	}
+>>>>>>> master
 };
 
 } /* namespace xolotlCore */

@@ -25,10 +25,17 @@ BOOST_AUTO_TEST_CASE(checkLoading) {
 	// Local Declarations
 	shared_ptr<stringstream> networkStream(
 			new stringstream(stringstream::in | stringstream::out));
+<<<<<<< HEAD
 	string singleHeString = "1 0 0 6.15 0.999 1.34\n";
 	string singleVString = "0 50 0 3.6 0.888 2.345\n";
 	string singleIString = "0 0 1 5.0 0.7777 3.456\n";
 	string mixedString = "1 50 0 2.49 6.789 4.5678\n";
+=======
+	string singleHeString = "1 0 0 0 6.15 0.999 1.34\n";
+	string singleVString = "0 -50 0 0 3.6 0.888 2.345\n";
+	string singleIString = "0 1 0 0 5.0 0.7777 3.456\n";
+	string mixedString = "1 -50 0 0 2.49 6.789 4.5678\n";
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	// This string is bad because it is one value short
 	string badString = "1 2 3\n";
 	bool caughtFlag = false;
@@ -129,6 +136,9 @@ BOOST_AUTO_TEST_CASE(checkLoading) {
 	composition.push_back(1);
 	composition.push_back(50);
 	composition.push_back(0);
+=======
+	vector<int> composition = {1, -50};
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	auto heVCluster = (PSICluster *) network->getCompound("HeV", composition);
 =======
 	IReactant::Composition composition;

@@ -33,6 +33,15 @@ public class ArgumentsTest {
 			// Check that the default maximum xenon cluster size is 0
 			assertEquals(0, args.getMaxXeSize());
 
+<<<<<<< HEAD
+=======
+			// Check that the default maximum deuterium cluster size is 0
+			assertEquals(0, args.getMaxDSize());
+
+			// Check that the default maximum tritium cluster size is 0
+			assertEquals(0, args.getMaxTSize());
+
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 			// Check that the default maximum vacancy cluster size is 29
 			assertEquals(29, args.getMaxVSize());
 
@@ -52,12 +61,25 @@ public class ArgumentsTest {
 			assertEquals("dummy", args.getVizHandler());
 
 			// Check the default petscArgs
+<<<<<<< HEAD
+<<<<<<< HEAD
+			assertEquals("-ts_final_time 1.0 -ts_dt 1.0e-12 "
+					+ "-ts_max_steps 100 -ts_adapt_dt_max 1.0e-6 -ts_max_snes_failures 200 "
+					+ "-pc_type fieldsplit -pc_fieldsplit_detect_coupling -fieldsplit_0_pc_type sor "
+					+ "-fieldsplit_1_pc_type redundant -ts_monitor -ts_exact_final_time stepover", args.getPetscArgs());
+=======
+=======
+>>>>>>> master
 			assertEquals(
 					"-ts_final_time 1.0 -ts_dt 1.0e-12 "
 							+ "-ts_max_steps 100 -ts_adapt_dt_max 1.0e-6 -ts_max_snes_failures 200 "
 							+ "-pc_type fieldsplit -pc_fieldsplit_detect_coupling -fieldsplit_0_pc_type sor "
 							+ "-fieldsplit_1_pc_type redundant -ts_monitor -ts_exact_final_time stepover",
 					args.getPetscArgs());
+<<<<<<< HEAD
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> master
 
 			// Check that the default networkFile is networkInit.h5
 			assertEquals("networkInit.h5", args.getNetworkFile());
@@ -95,9 +117,18 @@ public class ArgumentsTest {
 			// Check if there is a tempFile argument
 			assertEquals(false, args.isTempFile());
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 			// Check if there is a heat equation argument
 			assertEquals(false, args.isHeat());
 
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+			// Check if there is a heat equation argument
+			assertEquals(false, args.isHeat());
+
+>>>>>>> master
 			// Check if there is an fluxFile argument
 			assertEquals(false, args.isFluxFile());
 
@@ -115,10 +146,19 @@ public class ArgumentsTest {
 
 			// Check if there is a sputtering yield argument
 			assertEquals(false, args.isSputter());
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> master
 
 			// Check if there is a network param argument
 			assertEquals(false, args.isNetParam());
 
+<<<<<<< HEAD
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> master
 		} catch (ArgumentValidationException e) {
 			// Complain and fail
 			e.printStackTrace();
@@ -141,7 +181,20 @@ public class ArgumentsTest {
 		try {
 			// Parse the specified string of arguments
 			args = CliFactory.parseArguments(Arguments.class,
+<<<<<<< HEAD
+<<<<<<< HEAD
+					new String[] { "--maxHeSize", "7", "--maxXeSize", "4", "--maxVSize", "30", "--maxISize", "5", "--phaseCut",
+							"--startTemp", "900", "--perfHandler", "dummy", "--vizHandler", "std", "--petscArgs=-plot",
+							"--networkFile", "net.h5", "--dimensions", "2", "--nxGrid", "50", "--nyGrid", "10",
+							"--nzGrid", "30", "--xStepSize", "0.2", "--yStepSize", "1.5", "--zStepSize", "10.0",
+							"--material", "W111", "--process", "diff", "--tempFile", "temp.dat", "--flux", "5.0e5",
+							"--fluxFile", "flux.dat", "--checkpoint", "xolotlStop.h5", "--initialV", "0.05",
+							"--regularGrid", "yes", "--voidPortion", "60.0", "--grain=Y 3.0", "--sputter", "0.05" });
+=======
+					new String[] { "--maxHeSize", "7", "--maxXeSize", "4", "--maxDSize", "15", "--maxTSize", "10", "--maxVSize", "30", "--maxISize", "5",
+=======
 					new String[] { "--maxHeSize", "7", "--maxXeSize", "4", "--maxVSize", "30", "--maxISize", "5",
+>>>>>>> master
 							"--phaseCut", "--startTemp", "900", "--perfHandler", "dummy", "--vizHandler", "std",
 							"--petscArgs=-plot", "--networkFile", "net.h5", "--dimensions", "2", "--nxGrid", "50",
 							"--nyGrid", "10", "--nzGrid", "30", "--xStepSize", "0.2", "--yStepSize", "1.5",
@@ -149,6 +202,10 @@ public class ArgumentsTest {
 							"--heat=1200.0 1000.0", "--flux", "5.0e5", "--fluxFile", "flux.dat", "--checkpoint",
 							"xolotlStop.h5", "--initialV", "0.05", "--regularGrid", "yes", "--voidPortion", "60.0",
 							"--grain=Y 3.0", "--sputter", "0.05" });
+<<<<<<< HEAD
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> master
 
 			// Check that the maximum Helium cluster size is 7
 			assertEquals(7, args.getMaxHeSize());
@@ -156,6 +213,15 @@ public class ArgumentsTest {
 			// Check that the maximum xenon cluster size is 4
 			assertEquals(4, args.getMaxXeSize());
 
+<<<<<<< HEAD
+=======
+			// Check that the maximum deuterium cluster size is 15
+			assertEquals(4, args.getMaxDSize());
+
+			// Check that the maximum tritium cluster size is 10
+			assertEquals(4, args.getMaxTSize());
+
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 			// Check that the maximum vacancy cluster size is 30
 			assertEquals(30, args.getMaxVSize());
 
@@ -216,12 +282,21 @@ public class ArgumentsTest {
 			// Check that the tempFile argument is temp.dat
 			assertEquals("temp.dat", args.getTempFile());
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> master
 			// Check if there is a heat argument
 			assertEquals(true, args.isHeat());
 
 			// Check that the heat argument is 1200.0 1000.0
 			assertEquals("1200.0 1000.0", args.getTempFile());
 
+<<<<<<< HEAD
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> master
 			// Check if there is an fluxFile argument
 			assertEquals(true, args.isFluxFile());
 
@@ -256,11 +331,26 @@ public class ArgumentsTest {
 			assertEquals(true, args.isGrain());
 
 			// Check if there is a sputtering yield argument
+<<<<<<< HEAD
+<<<<<<< HEAD
+			assertEquals(true, args.issputter());
+
+			// Check its value
+			assertEquals("0.05", args.getSputter());
+=======
 			assertEquals(true, args.isSputter());
 
 			// Check its value
 			assertEquals("0.05", args.getSputter());
 
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+			assertEquals(true, args.isSputter());
+
+			// Check its value
+			assertEquals("0.05", args.getSputter());
+
+>>>>>>> master
 		} catch (ArgumentValidationException e) {
 			// Complain and fail
 			e.printStackTrace();

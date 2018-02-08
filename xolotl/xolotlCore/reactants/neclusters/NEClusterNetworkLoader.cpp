@@ -31,6 +31,9 @@ using namespace xolotlCore;
 <<<<<<< HEAD
 std::shared_ptr<NECluster> NEClusterNetworkLoader::createNECluster(int numXe,
 		int numV, int numI) {
+=======
+std::shared_ptr<NECluster> NEClusterNetworkLoader::createNECluster(int numXe) {
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	// Local Declarations
 	std::shared_ptr<NECluster> cluster;
 =======
@@ -143,7 +146,11 @@ std::unique_ptr<IReactionNetwork> NEClusterNetworkLoader::load(
 	auto networkVector = xolotlCore::HDF5Utils::readNetwork(fileName);
 
 	// Initialization
+<<<<<<< HEAD
 	int numXe = 0, numV = 0, numI = 0;
+=======
+	int numXe = 0;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	double formationEnergy = 0.0, migrationEnergy = 0.0;
 	double diffusionFactor = 0.0;
 <<<<<<< HEAD
@@ -167,6 +174,7 @@ std::unique_ptr<IReactionNetwork> NEClusterNetworkLoader::load(
 
 		// Composition of the cluster
 		numXe = (int) (*lineIt)[0];
+<<<<<<< HEAD
 		numV = (int) (*lineIt)[1];
 		numI = (int) (*lineIt)[2];
 		// Create the cluster
@@ -180,6 +188,15 @@ std::unique_ptr<IReactionNetwork> NEClusterNetworkLoader::load(
 		formationEnergy = (*lineIt)[3];
 		migrationEnergy = (*lineIt)[4];
 		diffusionFactor = (*lineIt)[5];
+=======
+		// Create the cluster
+		auto nextCluster = createNECluster(numXe);
+
+		// Energies
+		formationEnergy = (*lineIt)[1];
+		migrationEnergy = (*lineIt)[2];
+		diffusionFactor = (*lineIt)[3];
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 		// Set the formation energy
 		nextCluster->setFormationEnergy(formationEnergy);

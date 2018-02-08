@@ -1,7 +1,11 @@
 #ifndef W211FITFLUXHANDLER_H
 #define W211FITFLUXHANDLER_H
 
+<<<<<<< HEAD
 #include "FluxHandler.h"
+=======
+#include "PSIFluxHandler.h"
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 #include <cmath>
 
 namespace xolotlCore {
@@ -10,7 +14,11 @@ namespace xolotlCore {
  * This class realizes the IFluxHandler interface to calculate the incident helium flux
  * for a (211) oriented tungsten material.
  */
+<<<<<<< HEAD
 class W211FitFluxHandler: public FluxHandler {
+=======
+class W211FitFluxHandler: public PSIFluxHandler {
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 private:
 
 	/**
@@ -67,6 +75,7 @@ public:
 	}
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
+<<<<<<< HEAD
 	/**
 	 * Compute and store the incident flux values at each grid point.
 	 * \see IFluxHandler.h
@@ -104,6 +113,8 @@ public:
 		return;
 	}
 
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 };
 //end class W211FitFluxHandler
 

@@ -22,6 +22,11 @@ Reactant::Reactant() :
 	compositionMap[heType] = 0;
 	compositionMap[vType] = 0;
 	compositionMap[iType] = 0;
+<<<<<<< HEAD
+=======
+	compositionMap[dType] = 0;
+	compositionMap[tType] = 0;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 }
 
 Reactant::Reactant(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
@@ -35,6 +40,11 @@ Reactant::Reactant(std::shared_ptr<xolotlPerf::IHandlerRegistry> registry) :
 	compositionMap[heType] = 0;
 	compositionMap[vType] = 0;
 	compositionMap[iType] = 0;
+<<<<<<< HEAD
+=======
+	compositionMap[dType] = 0;
+	compositionMap[tType] = 0;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 }
 
 Reactant::Reactant(Reactant &other) :
@@ -53,6 +63,13 @@ Reactant::Reactant(Reactant &other) :
 	compositionMap[heType] = other.compositionMap[heType];
 	compositionMap[vType] = other.compositionMap[vType];
 	compositionMap[iType] = other.compositionMap[iType];
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	compositionMap[dType] = other.compositionMap[dType];
+	compositionMap[tType] = other.compositionMap[tType];
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 =======
 namespace xolotlCore {
 
@@ -66,6 +83,7 @@ Reactant::Reactant(IReactionNetwork& _network,
 				0.0), migrationEnergy(0.0), name(_name), reactionRadius(0.0) {
 
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 }
 
 void Reactant::recomputeDiffusionCoefficient(double temp) {
@@ -83,6 +101,53 @@ void Reactant::recomputeDiffusionCoefficient(double temp) {
 	return;
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+double Reactant::getConcentration(double distA, double distB) const {
+	return concentration;
+}
+
+void Reactant::setConcentration(double conc) {
+	concentration = conc;
+
+	return;
+}
+
+double Reactant::getTotalFlux() {
+	return 0.0;
+}
+
+void Reactant::setReactionNetwork(
+		std::shared_ptr<IReactionNetwork> reactionNetwork) {
+	network = reactionNetwork;
+
+	return;
+}
+
+void Reactant::releaseReactionNetwork() {
+	network.reset();
+
+	return;
+}
+
+void Reactant::setReactionConnectivity(int id) {
+	// Add the cluster to the set.
+	reactionConnectivitySet.insert(id);
+
+	return;
+}
+
+void Reactant::setDissociationConnectivity(int id) {
+	// Add the cluster to the set.
+	dissociationConnectivitySet.insert(id);
+
+	return;
+}
+
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> master
 std::vector<int> Reactant::getConnectivity() const {
 	// The connectivity array by default is filled with
 	// zeros.
@@ -100,6 +165,38 @@ std::vector<int> Reactant::getConnectivity() const {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+std::vector<double> Reactant::getPartialDerivatives() const {
+	// The partial derivatives array by default is filled with
+	// zeros.
+	int length = network->getDOF();
+	std::vector<double> partial_derivatives = std::vector<double>(length, 0.0);
+
+	return partial_derivatives;
+}
+
+void Reactant::getPartialDerivatives(std::vector<double> &) const {
+	// Do nothing.
+	return;
+}
+
+const std::string Reactant::getName() const {
+	return name;
+}
+
+std::string Reactant::getType() const {
+	return typeName;
+}
+
+const std::map<std::string, int> & Reactant::getComposition() const {
+	// Return the composition map
+	return compositionMap;
+}
+
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> master
 std::string Reactant::toCanonicalString(std::string type,
 		const std::map<std::string, int>& composition) {
 
@@ -121,8 +218,67 @@ std::string Reactant::toCanonicalString(std::string type,
 	return ostr.str();
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+std::string Reactant::getCompositionString() const {
+
+	// Return the canonical string representation of our composition.
+    if(compString.empty()) {
+
+        // We have not found our descriptive string yet.
+        // So determine it and cache it.
+        compString = toCanonicalString(getType(), compositionMap);
+    }
+    return compString;
+}
+
+void Reactant::setId(int nId) {
+	id = nId;
+
+	return;
+}
+
+int Reactant::getId() const {
+	return id;
+}
+
+void Reactant::setXeMomentumId(int nId) {
+	xeMomId = nId;
+
+	return;
+}
+
+int Reactant::getXeMomentumId() const {
+	return xeMomId;
+}
+
+void Reactant::setHeMomentumId(int nId) {
+	heMomId = nId;
+
+	return;
+}
+
+int Reactant::getHeMomentumId() const {
+	return heMomId;
+}
+
+void Reactant::setVMomentumId(int nId) {
+	vMomId = nId;
+
+	return;
+}
+
+int Reactant::getVMomentumId() const {
+	return vMomId;
+}
+
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 =======
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 void Reactant::setTemperature(double temp) {
 	temperature = temp;
 
@@ -131,10 +287,20 @@ void Reactant::setTemperature(double temp) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+double Reactant::getTemperature() const {
+	return temperature;
+}
+=======
+>>>>>>> master
 
 
 =======
+<<<<<<< HEAD
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 void Reactant::setDiffusionFactor(const double factor) {
 	// Set the diffusion factor
 	diffusionFactor = factor;
@@ -144,6 +310,21 @@ void Reactant::setDiffusionFactor(const double factor) {
 	return;
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+double Reactant::getDiffusionCoefficient() const {
+	return diffusionCoefficient;
+}
+
+double Reactant::getMigrationEnergy() const {
+	// Return the migration energy
+	return migrationEnergy;
+}
+
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> master
 void Reactant::setMigrationEnergy(const double energy) {
 	// Set the migration energy
 	migrationEnergy = energy;
@@ -152,6 +333,7 @@ void Reactant::setMigrationEnergy(const double energy) {
 
 	return;
 }
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 =======
@@ -178,7 +360,12 @@ operator<<(std::ostream& os, const IReactant& reactant) {
 #endif // defined(USE_ORIG_REACTANT_COMP_STRING)
 	return os;
 }
+<<<<<<< HEAD
+=======
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 
 } // namespace xolotlCore
 
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master

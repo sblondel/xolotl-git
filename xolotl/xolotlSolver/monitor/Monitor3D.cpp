@@ -65,7 +65,15 @@ PetscErrorCode startStop3D(TS ts, PetscInt timestep, PetscReal time,
 	PetscFunctionBeginUser;
 
 	// Don't do anything if it is not on the stride
+<<<<<<< HEAD
+<<<<<<< HEAD
+	if ((int) (time / hdf5Stride3D) == hdf5Previous3D)
+=======
 	if ((int) ((time + time / 1000.0) / hdf5Stride3D) == hdf5Previous3D)
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	if ((int) ((time + time / 1000.0) / hdf5Stride3D) == hdf5Previous3D)
+>>>>>>> master
 		PetscFunctionReturn(0);
 
 	// Update the previous time
@@ -92,9 +100,22 @@ PetscErrorCode startStop3D(TS ts, PetscInt timestep, PetscReal time,
 	ierr = DMDAGetCorners(da, &xs, &ys, &zs, &xm, &ym, &zm);
 	CHKERRQ(ierr);
 	// Get the size of the total grid
+<<<<<<< HEAD
+<<<<<<< HEAD
+	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz,
+	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+	PETSC_IGNORE);
+=======
+	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz, PETSC_IGNORE,
+			PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+			PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz, PETSC_IGNORE,
 	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
 	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE);
+>>>>>>> master
 	CHKERRQ(ierr);
 
 	// Get the solver handler
@@ -203,7 +224,16 @@ PetscErrorCode startStop3D(TS ts, PetscInt timestep, PetscReal time,
 				if (concSize == 0)
 					continue;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+				// All processes must create the dataset
+				xolotlCore::HDF5Utils::addConcentrationDataset(concSize, i, j,
+						k);
+
+				// If it is the locally owned part of the grid
+=======
 				// Transfer the data everywhere from the local grid
+>>>>>>> master
 				if (i >= xs && i < xs + xm && j >= ys && j < ys + ym && k >= zs
 						&& k < zs + zm) {
 					// Loop on all the processes
@@ -234,11 +264,52 @@ PetscErrorCode startStop3D(TS ts, PetscInt timestep, PetscReal time,
 						concVector.push_back(vec);
 					}
 				}
+<<<<<<< HEAD
+=======
+				// Transfer the data everywhere from the local grid
+				if (i >= xs && i < xs + xm && j >= ys && j < ys + ym && k >= zs
+						&& k < zs + zm) {
+					// Loop on all the processes
+					for (int l = 0; l < worldSize; l++) {
+						// Skip its own
+						if (l == procId)
+							continue;
+						// Loop on the size of the vector
+						for (int k = 0; k < concSize; k++) {
+							// Send both information
+							MPI_Send(&concVector[k][0], 1, MPI_DOUBLE, l, 1,
+									PETSC_COMM_WORLD);
+							MPI_Send(&concVector[k][1], 1, MPI_DOUBLE, l, 2,
+									PETSC_COMM_WORLD);
+						}
+					}
+				} else {
+					// Receive the data from the local grid so that all processes have the same data
+					double index = 0, conc = 0;
+					for (int k = 0; k < concSize; k++) {
+						std::vector<double> vec;
+						MPI_Recv(&index, 1, MPI_DOUBLE, MPI_ANY_SOURCE, 1,
+								PETSC_COMM_WORLD,
+								MPI_STATUS_IGNORE);
+						MPI_Recv(&conc, 1, MPI_DOUBLE, MPI_ANY_SOURCE, 2,
+								PETSC_COMM_WORLD,
+								MPI_STATUS_IGNORE);
+						vec.push_back(index);
+						vec.push_back(conc);
+						concVector.push_back(vec);
+					}
+				}
+=======
+>>>>>>> master
 
 				// All processes create the dataset and fill it
 				xolotlCore::HDF5Utils::addConcentrationDataset(concSize, i, j,
 						k);
 				xolotlCore::HDF5Utils::fillConcentrations(concVector, i, j, k);
+<<<<<<< HEAD
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> master
 			}
 		}
 	}
@@ -336,7 +407,15 @@ PetscErrorCode computeHeliumRetention3D(TS ts, PetscInt, PetscReal time,
 			for (PetscInt xi = xs; xi < xs + xm; xi++) {
 
 				// Boundary conditions
+<<<<<<< HEAD
+<<<<<<< HEAD
+				if (xi <= surfacePos || xi == grid.size() - 1)
+=======
+				if (xi <= surfacePos)
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 				if (xi < surfacePos || xi == Mx - 1)
+>>>>>>> master
 					continue;
 
 				// Get the pointer to the beginning of the solution data for
@@ -348,6 +427,14 @@ PetscErrorCode computeHeliumRetention3D(TS ts, PetscInt, PetscReal time,
 				network->updateConcentrationsFromArray(gridPointSolution);
 
 				// Get the total helium concentration at this grid point
+<<<<<<< HEAD
+<<<<<<< HEAD
+				heConcentration += network->getTotalAtomConcentration() * (grid[xi] - grid[xi - 1]) * hy * hz;
+=======
+				heConcentration += network->getTotalAtomConcentration()
+						* (grid[xi] - grid[xi - 1]) * hy * hz;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 				heConcentration += network->getTotalAtomConcentration()
 =======
 				network.updateConcentrationsFromArray(gridPointSolution);
@@ -356,6 +443,7 @@ PetscErrorCode computeHeliumRetention3D(TS ts, PetscInt, PetscReal time,
 				heConcentration += network.getTotalAtomConcentration()
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 						* (grid[xi + 1] - grid[xi]) * hy * hz;
+>>>>>>> master
 			}
 		}
 	}
@@ -374,9 +462,22 @@ PetscErrorCode computeHeliumRetention3D(TS ts, PetscInt, PetscReal time,
 
 		// Get the total size of the grid rescale the concentrations
 		PetscInt Mx, My, Mz;
+<<<<<<< HEAD
+<<<<<<< HEAD
+		ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz,
+		PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+		PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+		PETSC_IGNORE);
+=======
+		ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz, PETSC_IGNORE,
+				PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+				PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 		ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz, PETSC_IGNORE,
 		PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
 		PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE);
+>>>>>>> master
 		CHKERRQ(ierr);
 
 		// Compute the total surface irradiated by the helium flux
@@ -449,9 +550,22 @@ PetscErrorCode monitorSurfaceXY3D(TS ts, PetscInt timestep, PetscReal time,
 	ierr = DMDAGetCorners(da, &xs, &ys, &zs, &xm, &ym, &zm);
 	CHKERRQ(ierr);
 	// Get the size of the total grid
+<<<<<<< HEAD
+<<<<<<< HEAD
+	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz,
+	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+	PETSC_IGNORE);
+=======
+	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz, PETSC_IGNORE,
+			PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+			PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz, PETSC_IGNORE,
 	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
 	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE);
+>>>>>>> master
 	CHKERRQ(ierr);
 
 	// Get the solver handler
@@ -620,9 +734,22 @@ PetscErrorCode monitorSurfaceXZ3D(TS ts, PetscInt timestep, PetscReal time,
 	ierr = DMDAGetCorners(da, &xs, &ys, &zs, &xm, &ym, &zm);
 	CHKERRQ(ierr);
 	// Get the size of the total grid
+<<<<<<< HEAD
+<<<<<<< HEAD
+	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz,
+	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+	PETSC_IGNORE);
+=======
+	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz, PETSC_IGNORE,
+			PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+			PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz, PETSC_IGNORE,
 	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
 	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE);
+>>>>>>> master
 	CHKERRQ(ierr);
 
 	// Get the solver handler
@@ -789,9 +916,22 @@ PetscErrorCode monitorMovingSurface3D(TS ts, PetscInt timestep, PetscReal time,
 	CHKERRQ(ierr);
 
 	// Get the size of the total grid
+<<<<<<< HEAD
+<<<<<<< HEAD
+	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz,
+	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+	PETSC_IGNORE);
+=======
+	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz, PETSC_IGNORE,
+			PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+			PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz, PETSC_IGNORE,
 	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
 	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE);
+>>>>>>> master
 	CHKERRQ(ierr);
 
 	// Get the solver handler
@@ -1063,12 +1203,26 @@ PetscErrorCode monitorMovingSurface3D(TS ts, PetscInt timestep, PetscReal time,
 /**
  * This is a monitoring method that bursts bubbles
  */
+<<<<<<< HEAD
+<<<<<<< HEAD
+PetscErrorCode monitorBursting3D(TS ts, PetscInt, PetscReal time,
+		Vec solution, void *) {
+=======
+PetscErrorCode monitorBursting3D(TS ts, PetscInt, PetscReal time, Vec solution,
+		void *) {
+>>>>>>> master
+	// Initial declarations
+	PetscErrorCode ierr;
+	double ****solutionArray, *gridPointSolution;
+	int xs, xm, xi, ys, ym, yj, zs, zm, zk;
+=======
 PetscErrorCode monitorBursting3D(TS ts, PetscInt, PetscReal time, Vec solution,
 		void *) {
 	// Initial declarations
 	PetscErrorCode ierr;
 	double ****solutionArray, *gridPointSolution;
-	int xs, xm, xi, ys, ym, yj, zs, zm, zk;
+	PetscInt xs, xm, xi, ys, ym, yj, zs, zm, zk;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 
 	PetscFunctionBeginUser;
 
@@ -1078,6 +1232,22 @@ PetscErrorCode monitorBursting3D(TS ts, PetscInt, PetscReal time, Vec solution,
 
 	// Get the da from ts
 	DM da;
+<<<<<<< HEAD
+<<<<<<< HEAD
+	ierr = TSGetDM(ts, &da);CHKERRQ(ierr);
+=======
+	ierr = TSGetDM(ts, &da);
+	CHKERRQ(ierr);
+>>>>>>> master
+
+	// Get the solutionArray
+	ierr = DMDAVecGetArrayDOF(da, solution, &solutionArray);
+	CHKERRQ(ierr);
+
+	// Get the corners of the grid
+<<<<<<< HEAD
+	ierr = DMDAGetCorners(da, &xs, &ys, &zs, &xm, &ym, &zm);CHKERRQ(ierr);
+=======
 	ierr = TSGetDM(ts, &da);
 	CHKERRQ(ierr);
 
@@ -1088,6 +1258,11 @@ PetscErrorCode monitorBursting3D(TS ts, PetscInt, PetscReal time, Vec solution,
 	// Get the corners of the grid
 	ierr = DMDAGetCorners(da, &xs, &ys, &zs, &xm, &ym, &zm);
 	CHKERRQ(ierr);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	ierr = DMDAGetCorners(da, &xs, &ys, &zs, &xm, &ym, &zm);
+	CHKERRQ(ierr);
+>>>>>>> master
 
 	// Get the solver handler
 <<<<<<< HEAD
@@ -1132,7 +1307,15 @@ PetscErrorCode monitorBursting3D(TS ts, PetscInt, PetscReal time, Vec solution,
 	double dt = time - previousTime;
 
 	// Compute the prefactor for the probability (arbitrary)
+<<<<<<< HEAD
+<<<<<<< HEAD
+	double prefactor = fluxAmplitude * dt * 0.05;
+=======
 	double prefactor = fluxAmplitude * dt * 0.1;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	double prefactor = fluxAmplitude * dt * 0.1;
+>>>>>>> master
 
 	// Loop on the grid
 	for (zk = zs; zk < zs + zm; zk++) {
@@ -1146,8 +1329,17 @@ PetscErrorCode monitorBursting3D(TS ts, PetscInt, PetscReal time, Vec solution,
 
 			for (xi = xs; xi < xs + xm; xi++) {
 				// Skip everything before the surface
+<<<<<<< HEAD
+<<<<<<< HEAD
+				if (xi <= surfacePos) continue;
+=======
+				if (xi <= surfacePos)
+					continue;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 				if (xi < surfacePos)
 					continue;
+>>>>>>> master
 
 				// Get the pointer to the beginning of the solution data for this grid point
 				gridPointSolution = solutionArray[zk][yj][xi];
@@ -1169,7 +1361,21 @@ PetscErrorCode monitorBursting3D(TS ts, PetscInt, PetscReal time, Vec solution,
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
 
 				// Compute the radius of the bubble from the number of helium
+<<<<<<< HEAD
+<<<<<<< HEAD
+				double nV = heDensity * (grid[xi] - grid[xi-1]) * hy * hz / 4.0;
+				double radius = (sqrt(3.0) / 4.0) * xolotlCore::tungstenLatticeConstant
+						+ pow(
+								(3.0 * pow(xolotlCore::tungstenLatticeConstant, 3.0) * nV)
+										/ (8.0 * xolotlCore::pi), (1.0 / 3.0))
+						- pow(
+								(3.0 * pow(xolotlCore::tungstenLatticeConstant, 3.0))
+										/ (8.0 * xolotlCore::pi), (1.0 / 3.0));
+=======
+				double nV = heDensity * (grid[xi] - grid[xi - 1]) * hy * hz
+=======
 				double nV = heDensity * (grid[xi + 1] - grid[xi]) * hy * hz
+>>>>>>> master
 						/ 4.0;
 				double radius =
 						(sqrt(3.0) / 4.0) * xolotlCore::tungstenLatticeConstant
@@ -1187,10 +1393,28 @@ PetscErrorCode monitorBursting3D(TS ts, PetscInt, PetscReal time, Vec solution,
 														3.0))
 												/ (8.0 * xolotlCore::pi),
 										(1.0 / 3.0));
+<<<<<<< HEAD
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> master
 
 				// Check if it should burst
 				bool burst = false;
 				// If the radius is larger than the distance to the surface, burst
+<<<<<<< HEAD
+<<<<<<< HEAD
+				if (radius > distance) burst = true;
+=======
+				if (radius > distance)
+					burst = true;
+>>>>>>> master
+				// Add randomness
+				double prob = prefactor
+						* (1.0 - (distance - radius) / distance);
+				double test = (double) rand() / (double) RAND_MAX;
+<<<<<<< HEAD
+				if (prob > test) burst = true;
+=======
 				if (radius > distance)
 					burst = true;
 				// Add randomness
@@ -1199,13 +1423,28 @@ PetscErrorCode monitorBursting3D(TS ts, PetscInt, PetscReal time, Vec solution,
 				double test = (double) rand() / (double) RAND_MAX;
 				if (prob > test)
 					burst = true;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+				if (prob > test)
+					burst = true;
+>>>>>>> master
 
 				// Burst
 				if (burst) {
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+					std::cout << "bursting at: " << zk << " " << yj << " " << distance << " " << prob << " " << test << std::endl;
+=======
 					std::cout << "bursting at: " << zk << " " << yj << " "
 							<< distance << " " << prob << " " << test
 							<< std::endl;
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+					std::cout << "bursting at: " << zk << " " << yj << " "
+							<< distance << " " << prob << " " << test
+							<< std::endl;
+>>>>>>> master
 
 <<<<<<< HEAD
 					// Get all the helium clusters
@@ -1313,8 +1552,17 @@ PetscErrorCode monitorBursting3D(TS ts, PetscInt, PetscReal time, Vec solution,
 	}
 
 	// Restore the solutionArray
+<<<<<<< HEAD
+<<<<<<< HEAD
+	ierr = DMDAVecRestoreArrayDOF(da, solution, &solutionArray);CHKERRQ(ierr);
+=======
 	ierr = DMDAVecRestoreArrayDOF(da, solution, &solutionArray);
 	CHKERRQ(ierr);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	ierr = DMDAVecRestoreArrayDOF(da, solution, &solutionArray);
+	CHKERRQ(ierr);
+>>>>>>> master
 
 	PetscFunctionReturn(0);
 }
@@ -1394,9 +1642,22 @@ PetscErrorCode setupPetsc3DMonitor(TS ts) {
 
 	// Get the total size of the grid
 	PetscInt Mx, My, Mz;
+<<<<<<< HEAD
+<<<<<<< HEAD
+	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz,
+	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+	PETSC_IGNORE);
+=======
+	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz, PETSC_IGNORE,
+			PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
+			PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 	ierr = DMDAGetInfo(da, PETSC_IGNORE, &Mx, &My, &Mz, PETSC_IGNORE,
 	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE,
 	PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE, PETSC_IGNORE);
+>>>>>>> master
 	CHKERRQ(ierr);
 	checkPetscError(ierr, "setupPetsc3DMonitor: DMDAGetInfo failed.");
 
@@ -1428,18 +1689,50 @@ PetscErrorCode setupPetsc3DMonitor(TS ts) {
 		if (!flag)
 			hdf5Stride3D = 1.0;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+		// Initialize the HDF5 file for all the processes
+		xolotlCore::HDF5Utils::initializeFile(hdf5OutputName3D);
+
+		// Get the solver handler
+		auto solverHandler = PetscSolver::getSolverHandler();
+
+		// Get the physical grid in the x direction
+		auto grid = solverHandler->getXGrid();
+
+		// Setup step size variables
+		double hy = solverHandler->getStepSizeY();
+		double hz = solverHandler->getStepSizeZ();
+
+		// Save the header in the HDF5 file
+		xolotlCore::HDF5Utils::fillHeader(Mx, grid[1] - grid[0], My, hy, Mz,
+				hz);
+
+		// Save the network in the HDF5 file
+		xolotlCore::HDF5Utils::fillNetwork(solverHandler->getNetworkName());
+
+		// Finalize the HDF5 file
+		xolotlCore::HDF5Utils::finalizeFile();
+=======
+		// Don't do anything if both files have the same name
+		if (hdf5OutputName3D != solverHandler->getNetworkName()) {
+=======
 		// Don't do anything if both files have the same name
 <<<<<<< HEAD
 		if (hdf5OutputName3D != solverHandler->getNetworkName()) {
 =======
 		if (hdf5OutputName3D != solverHandler.getNetworkName()) {
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 
 			// Initialize the HDF5 file for all the processes
 			xolotlCore::HDF5Utils::initializeFile(hdf5OutputName3D);
 
 			// Get the solver handler
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
 			auto solverHandler = PetscSolver::getSolverHandler();
 
 			// Get the physical grid in the x direction
@@ -1448,6 +1741,8 @@ PetscErrorCode setupPetsc3DMonitor(TS ts) {
 			// Setup step size variables
 			double hy = solverHandler->getStepSizeY();
 			double hz = solverHandler->getStepSizeZ();
+<<<<<<< HEAD
+=======
 =======
 			auto& solverHandler = PetscSolver::getSolverHandler();
 
@@ -1458,6 +1753,7 @@ PetscErrorCode setupPetsc3DMonitor(TS ts) {
 			double hy = solverHandler.getStepSizeY();
 			double hz = solverHandler.getStepSizeZ();
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 
 			// Save the header in the HDF5 file
 			xolotlCore::HDF5Utils::fillHeader(Mx, grid[1] - grid[0], My, hy, Mz,
@@ -1469,14 +1765,24 @@ PetscErrorCode setupPetsc3DMonitor(TS ts) {
 				xolotlCore::HDF5Utils::fillNetwork(
 						solverHandler->getNetworkName());
 =======
+<<<<<<< HEAD
+			if (!solverHandler->getNetworkName().empty())
+				xolotlCore::HDF5Utils::fillNetwork(
+						solverHandler->getNetworkName());
+=======
 			if (!solverHandler.getNetworkName().empty())
 				xolotlCore::HDF5Utils::fillNetwork(
 						solverHandler.getNetworkName());
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 
 			// Finalize the HDF5 file
 			xolotlCore::HDF5Utils::finalizeFile();
 		}
+<<<<<<< HEAD
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> master
 
 		// startStop3D will be called at each timestep
 		ierr = TSMonitorSet(ts, startStop3D, NULL, NULL);
@@ -1508,13 +1814,24 @@ PetscErrorCode setupPetsc3DMonitor(TS ts) {
 		int tempTimeStep = -2;
 <<<<<<< HEAD
 		std::string networkName = solverHandler->getNetworkName();
+<<<<<<< HEAD
+<<<<<<< HEAD
+		bool hasConcentrations = xolotlCore::HDF5Utils::hasConcentrationGroup(
+				networkName, tempTimeStep);
+=======
+=======
 =======
 		std::string networkName = solverHandler.getNetworkName();
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 		bool hasConcentrations = false;
 		if (!networkName.empty())
 			hasConcentrations = xolotlCore::HDF5Utils::hasConcentrationGroup(
 					networkName, tempTimeStep);
+<<<<<<< HEAD
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> master
 
 		// Get the interstitial information at the surface if concentrations were stored
 		if (hasConcentrations) {
@@ -1545,9 +1862,20 @@ PetscErrorCode setupPetsc3DMonitor(TS ts) {
 		// Set the monitor on the bubble bursting
 		// monitorBursting3D will be called at each timestep
 		ierr = TSMonitorSet(ts, monitorBursting3D, NULL, NULL);
+<<<<<<< HEAD
+<<<<<<< HEAD
+		checkPetscError(ierr, "setupPetsc3DMonitor: TSMonitorSet (monitorBursting3D) failed.");
+		std::srand (time(NULL) + procId);
+=======
 		checkPetscError(ierr,
 				"setupPetsc3DMonitor: TSMonitorSet (monitorBursting3D) failed.");
 		std::srand(time(NULL) + procId);
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+		checkPetscError(ierr,
+				"setupPetsc3DMonitor: TSMonitorSet (monitorBursting3D) failed.");
+		std::srand(time(NULL) + procId);
+>>>>>>> master
 	}
 
 	// Set the monitor to save performance plots (has to be in parallel)
@@ -1588,13 +1916,24 @@ PetscErrorCode setupPetsc3DMonitor(TS ts) {
 		int tempTimeStep = -2;
 <<<<<<< HEAD
 		std::string networkName = solverHandler->getNetworkName();
+<<<<<<< HEAD
+<<<<<<< HEAD
+		bool hasConcentrations = xolotlCore::HDF5Utils::hasConcentrationGroup(
+				networkName, tempTimeStep);
+=======
+=======
 =======
 		std::string networkName = solverHandler.getNetworkName();
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 		bool hasConcentrations = false;
 		if (!networkName.empty())
 			hasConcentrations = xolotlCore::HDF5Utils::hasConcentrationGroup(
 					networkName, tempTimeStep);
+<<<<<<< HEAD
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+>>>>>>> master
 
 		// Get the previous time if concentrations were stored and initialize the fluence
 		if (hasConcentrations) {

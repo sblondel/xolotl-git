@@ -98,9 +98,21 @@ protected:
 
 		//! The constructor
 		ClusterPair(PSICluster * firstPtr, PSICluster * secondPtr) :
+<<<<<<< HEAD
+<<<<<<< HEAD
+				first(firstPtr), second(secondPtr), reaction(
+						nullptr), firstHeDistance(0.0), firstVDistance(
+						0.0), secondHeDistance(0.0), secondVDistance(0.0), multiplicity(1) {
+=======
 				first(firstPtr), second(secondPtr), reaction(nullptr), firstHeDistance(
 						0.0), firstVDistance(0.0), secondHeDistance(0.0), secondVDistance(
 						0.0), multiplicity(1) {
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+				first(firstPtr), second(secondPtr), reaction(nullptr), firstHeDistance(
+						0.0), firstVDistance(0.0), secondHeDistance(0.0), secondVDistance(
+						0.0), multiplicity(1) {
+>>>>>>> master
 		}
 =======
 		PSICluster& second;
@@ -192,6 +204,15 @@ protected:
 
 		//! The constructor
 		CombiningCluster(PSICluster * ptr) :
+<<<<<<< HEAD
+<<<<<<< HEAD
+				combining(ptr), reaction(nullptr), heDistance(
+						0.0), vDistance(0.0), multiplicity(1) {
+=======
+				combining(ptr), reaction(nullptr), heDistance(0.0), vDistance(
+						0.0), multiplicity(1) {
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 				combining(ptr), reaction(nullptr), heDistance(0.0), vDistance(
 						0.0), multiplicity(1) {
 		}
@@ -223,6 +244,7 @@ protected:
 		//! The constructor
 		CombiningCluster(Reaction& _reaction, PSICluster& _comb) :
 				combining(_comb), reaction(_reaction), a0(0.0), a1(0.0), a2(0.0) {
+>>>>>>> master
 		}
 
 		/**
@@ -537,15 +559,34 @@ public:
 	 *
 	 * @return The momentum
 	 */
+<<<<<<< HEAD
+<<<<<<< HEAD
+	virtual double getHeMomentum() const;
+=======
 	virtual double getHeMomentum() const {
 		return 0.0;
 	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
+	virtual double getHeMomentum() const {
+		return 0.0;
+	}
+>>>>>>> master
 
 	/**
 	 * This operation returns the first vacancy momentum.
 	 *
 	 * @return The momentum
 	 */
+<<<<<<< HEAD
+<<<<<<< HEAD
+	virtual double getVMomentum() const;
+=======
+	virtual double getVMomentum() const {
+		return 0.0;
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 	virtual double getVMomentum() const {
 		return 0.0;
 	}
@@ -571,6 +612,7 @@ public:
 		return 0.0;
 	}
 >>>>>>> f34969426039f232c45728e88f3cb03a131ca487
+>>>>>>> master
 
 	/**
 	 * This operation returns the total flux of this cluster in the
@@ -580,6 +622,15 @@ public:
 	 * reactions
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+	virtual double getTotalFlux();
+=======
+	virtual double getTotalFlux() {
+		return getProductionFlux() - getCombinationFlux()
+				+ getDissociationFlux() - getEmissionFlux();
+	}
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
+=======
 	virtual double getTotalFlux() {
 =======
 	virtual double getTotalFlux() override {
@@ -587,6 +638,7 @@ public:
 		return getProductionFlux() - getCombinationFlux()
 				+ getDissociationFlux() - getEmissionFlux();
 	}
+>>>>>>> master
 
 	/**
 	 * This operation returns the total change in this cluster due to

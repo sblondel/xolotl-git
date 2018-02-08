@@ -24,6 +24,15 @@ public class Cluster {
 	// The number of interstitials in the cluster. Default value is 0.
 	public int nI = 0;
 
+<<<<<<< HEAD
+=======
+	// The number of deuterium atoms in the cluster. Default value is 0.
+	public int nD = 0;
+
+	// The number of tritium atoms in the cluster. Default value is 0.
+	public int nT = 0;
+
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 	// The formation energy of this cluster
 	public double E_f = 0.0;
 

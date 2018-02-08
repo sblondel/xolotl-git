@@ -107,6 +107,9 @@ SimplePSIReactionNetwork::SimplePSIReactionNetwork(const int maxClusterSize,
 			// Create a HeVCluster with the current amount of He and V
 <<<<<<< HEAD
 			shared_ptr<HeVCluster> cluster = make_shared<HeVCluster>(numHe,
+=======
+			shared_ptr<HeVCluster> cluster = make_shared<HeVCluster>(0, 0, numHe,
+>>>>>>> 7cf9ae32b097519084e68d78956d40940ee03e3d
 					numV, registry);
 			add(cluster);
 =======
